@@ -42,167 +42,83 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.0.1'
+__version__ = '0.0.2
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
+import bloxone
 import logging
 import os
 import re
-import configparser
 import datetime
 import ipaddress
-import requests
-import urllib.parse
-import sqlite3
 
 # ** Global Vars **
-cspurl = "https://csp.infoblox.com/api"
 
+class b1ddi(bloxone.b1):
 
-# ** Facilitate TIDE Config File for API Key **
+    def on_prem_hosts(self, id="", filter="", tfilter=""):
+        '''
+        Method to retrieve On Prem Hosts
 
-def read_b1_ini(ini_filename):
-    '''
-    Open and parse ini file
+        Parameters:
+            filter (str):   Filter based on data fields
+            tfilter (str):  Tag filter
 
-    Parameters:
-        ini_filename (str): name of inifile
+        Returns:
+           status_code (obj): status code or zero on exception
+           body (str): Raw JSON or "Exception occurred." upon exception
+        '''
 
-    Returns:
-        config (dict): Dictionary of BloxOne configuration elements
-
-    '''
-    # Local Variables
-    cfg = configparser.ConfigParser()
-    config = {}
-    ini_keys = ['url', 'api_version', 'api_key']
-
-    # Attempt to read api_key from ini file
-    try:
-        cfg.read(ini_filename)
-    except configparser.Error as err:
-        logging.error(err)
-
-    # Look for TIDE section
-    if 'BloxOne' in cfg:
-        for key in ini_keys:
-            # Check for key in BloxOne section
-            if key in cfg['BloxOne']:
-                config[key] = cfg['BloxOne'][key].strip("'\"")
-                logging.debug('Key {} found in {}: {}'.format(key, ini_filename, config[key]))
-            else:
-                logging.warn('Key {} not found in BloxOne section.'.format(key))
-                config[key] = ''
-    else:
-        logging.warn('No BloxOne Section in config file: {}'.format(ini_filename))
-        config['api_key'] = ''
-
-    return config
-
-
-class b1:
-    def __init__(self, cfg_file='config.ini'):
-        self.cfg = {}
-        self.cfg = read_b1_ini(cfg_file)
+        # Start build of URL
+        url = self.host_url + '/on_prem_hosts'
         
+        # if id:
+            # url = url + ''
+        if filter:
+            url = url + '?_filter=' + filter
+        if filter and tfilter:
+            url = url + '&_tfilter=' + tfilter
+        elif tfilter:
+            url = url + '?_tfilter=' + tfilter
+
+        # Call BloxOne API
+        status_code, body = self.apiget(url)
+
+        # Return response code and body text
+        return status_code, body
 
 
-# ** On Prem Functions **
+    def ip_space(self, id="", filter="", tfilter=""):
+        '''
+        Method to retrieve On Prem Hosts
 
-def querytide(datatype, query, apikey, format="", rlimit=""):
-    '''
-    Query Infoblox TIDE for all available threat data
+        Parameters:
+            filter (str):   Filter based on data fields
+            tfilter (str):  Tag filter
 
-    Parameters:
-        datatype (str): "host", "ip" or "url"
-        query (str): query data
-        apikey (str): TIDE API Key (string)
-        format (str): data format
-        rlimit (int): record limit
+        Returns:
+           status_code (obj): status code or zero on exception
+           body (str): Raw JSON or "Exception occurred." upon exception
+        '''
 
-    Returns:
-       response.status_code (obj): status code or zero on exception
-       response.text (str): Raw JSON or "Exception occurred." upon exception
+        # Start build of URL
+        url = self.ipam_url + '/ip_space'
+        
+        if id:
+            url = url + '/' + id
+        if filter:
+            url = url + '?_filter=' + filter
+        if filter and tfilter:
+            url = url + '&_tfilter=' + tfilter
+        elif tfilter:
+            url = url + '?_tfilter=' + tfilter
+        
+        print(url)
 
-    '''
-    headers = {'content-type': "application/json"}
-    url = tideurl+"/data/threats/"+datatype+"?"+datatype+"="+query
-    if format:
-        url = url+"&data_format="+format
-    if rlimit:
-        url = url+"&rlimit="+rlimit
+        # Call BloxOne API
+        status_code, body = self.apiget(url)
 
-    # Call TIDE API
-    try:
-        response = requests.request("GET",
-                                    url,
-                                    headers=headers,
-                                    auth=requests.auth.HTTPBasicAuth(apikey,
-                                                                     ''))
-    # Catch exceptions
-    except requests.exceptions.RequestException as e:
-        logging.error(e)
-        return 0, "Exception occured."
-
-    # Return response code and body text
-    return response.status_code, response.text
-
-
-def tideactivefeed(datatype,
-                   apikey,
-                   profile="",
-                   threatclass="",
-                   threatproperty="",
-                   format="",
-                   rlimit=""):
-    '''
-    Bulk "active" threat intel download from Infoblox TIDE state tables
-    for specified datatype.
-
-    Parameters:
-        datatype (str): "host", "ip" or "url"
-        apikey (str): TIDE API Key (string)
-        profile (str, optional): Data provider
-        threatclass (str, optional): tide data class
-        threatproperty (str, optional): tide data property
-        format (str, optional): data format
-        rlimit (int, optional): record limit
-
-    Returns:
-       response.status_code (obj): status code or zero on exception
-       response.text (str): Raw JSON or "Exception occurred." upon exception
-
-    '''
-    # Build Headers
-    headers = {'content-type': "application/json"}
-    # Build URL
-    url = tideurl+"/data/threats/state/"+datatype
-    if profile or threatclass or format or rlimit:
-        url = url+"?"
-    if profile:
-        url = url+"&profile="+profile
-    if threatclass:
-        url = url+"&class="+threatclass
-    if threatproperty:
-        url = url+"&property="+threatproperty
-    if format:
-        url = url+"&data_format="+format
-    if rlimit:
-        url = url+"&rlimit="+rlimit
-
-    # Call TIDE API
-    try:
-        response = requests.request("GET",
-                                    url,
-                                    headers=headers,
-                                    auth=requests.auth.HTTPBasicAuth(apikey,
-                                                                     ''))
-    # Catch exceptions
-    except requests.exceptions.RequestException as e:
-        logging.error(e)
-        return 0, "Exception occured."
-
-    # Return response code and body text
-    return response.status_code, response.text
+        # Return response code and body text
+        return status_code, body
 

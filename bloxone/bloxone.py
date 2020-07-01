@@ -42,7 +42,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -107,6 +107,10 @@ class b1:
     '''
 
     def __init__(self, cfg_file='config.ini'):
+        '''
+        Read ini file and set attributes
+        '''
+
         self.cfg = {}
 
         # Read ini file
@@ -127,16 +131,7 @@ class b1:
         return
 
 
-    def on_prem_hosts(self, filter="", tfilter=""):
-        
-        url = self.host_url + '/on_prem_hosts'
-        
-        if filter:
-            url = url + '?_tfilter=' + filter
-        if tfilter:
-            url = url + '?_tfilter=' + tfilter
-        
-        print(url)
+    def apiget(self, url):    
      # Call BloxOne API
         try:
             response = requests.request("GET",
@@ -151,101 +146,54 @@ class b1:
         return response.status_code, response.text
 
 
-# ** On Prem Functions **
+    def apipost(self, url, body):    
+     # Call BloxOne API
+        try:
+            response = requests.request("POST",
+                                        url,
+                                        headers=self.headers,
+                                        data=body)
+        # Catch exceptions
+        except requests.exceptions.RequestException as e:
+            logging.error(e)
+            return 0, "Exception occured."
 
-def querytide(datatype, query, apikey, format="", rlimit=""):
-    '''
-    Query Infoblox TIDE for all available threat data
+        # Return response code and body text
+        return response.status_code, response.text
 
-    Parameters:
-        datatype (str): "host", "ip" or "url"
-        query (str): query data
-        apikey (str): TIDE API Key (string)
-        format (str): data format
-        rlimit (int): record limit
+ 
+'''
+__To Do__
 
-    Returns:
-       response.status_code (obj): status code or zero on exception
-       response.text (str): Raw JSON or "Exception occurred." upon exception
+    def apiput(self, url, body):    
+     # Call BloxOne API
+        try:
+            response = requests.request("PUT",
+                                        url,
+                                        headers=self.headers,
+                                        body)
+        # Catch exceptions
+        except requests.exceptions.RequestException as e:
+            logging.error(e)
+            return 0, "Exception occured."
 
-    '''
-    headers = {'content-type': "application/json"}
-    url = tideurl+"/data/threats/"+datatype+"?"+datatype+"="+query
-    if format:
-        url = url+"&data_format="+format
-    if rlimit:
-        url = url+"&rlimit="+rlimit
+        # Return response code and body text
+        return response.status_code, response.text
 
-    # Call TIDE API
-    try:
-        response = requests.request("GET",
-                                    url,
-                                    headers=headers,
-                                    auth=requests.auth.HTTPBasicAuth(apikey,
-                                                                     ''))
-    # Catch exceptions
-    except requests.exceptions.RequestException as e:
-        logging.error(e)
-        return 0, "Exception occured."
+ 
+    def apipatch(self, url, body):    
+     # Call BloxOne API
+        try:
+            response = requests.request("PATCH",
+                                        url,
+                                        headers=self.headers,
+                                        body)
+        # Catch exceptions
+        except requests.exceptions.RequestException as e:
+            logging.error(e)
+            return 0, "Exception occured."
 
-    # Return response code and body text
-    return response.status_code, response.text
+        # Return response code and body text
+        return response.status_code, response.text
 
-
-def tideactivefeed(datatype,
-                   apikey,
-                   profile="",
-                   threatclass="",
-                   threatproperty="",
-                   format="",
-                   rlimit=""):
-    '''
-    Bulk "active" threat intel download from Infoblox TIDE state tables
-    for specified datatype.
-
-    Parameters:
-        datatype (str): "host", "ip" or "url"
-        apikey (str): TIDE API Key (string)
-        profile (str, optional): Data provider
-        threatclass (str, optional): tide data class
-        threatproperty (str, optional): tide data property
-        format (str, optional): data format
-        rlimit (int, optional): record limit
-
-    Returns:
-       response.status_code (obj): status code or zero on exception
-       response.text (str): Raw JSON or "Exception occurred." upon exception
-
-    '''
-    # Build Headers
-    headers = {'content-type': "application/json"}
-    # Build URL
-    url = tideurl+"/data/threats/state/"+datatype
-    if profile or threatclass or format or rlimit:
-        url = url+"?"
-    if profile:
-        url = url+"&profile="+profile
-    if threatclass:
-        url = url+"&class="+threatclass
-    if threatproperty:
-        url = url+"&property="+threatproperty
-    if format:
-        url = url+"&data_format="+format
-    if rlimit:
-        url = url+"&rlimit="+rlimit
-
-    # Call TIDE API
-    try:
-        response = requests.request("GET",
-                                    url,
-                                    headers=headers,
-                                    auth=requests.auth.HTTPBasicAuth(apikey,
-                                                                     ''))
-    # Catch exceptions
-    except requests.exceptions.RequestException as e:
-        logging.error(e)
-        return 0, "Exception occured."
-
-    # Return response code and body text
-    return response.status_code, response.text
-
+''' 
