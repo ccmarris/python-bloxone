@@ -42,7 +42,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.0.2
+__version__ = '0.0.5'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -57,68 +57,327 @@ import ipaddress
 
 class b1ddi(bloxone.b1):
 
-    def on_prem_hosts(self, id="", filter="", tfilter=""):
+    # *** IPAM ***
+
+    def _ip_space(self, id="", body="", **params):
         '''
-        Method to retrieve On Prem Hosts
+        Method to retrieve IP Spaces
 
         Parameters:
-            filter (str):   Filter based on data fields
-            tfilter (str):  Tag filter
+            **params (dict): Generic API parameters
 
         Returns:
-           status_code (obj): status code or zero on exception
-           body (str): Raw JSON or "Exception occurred." upon exception
+           response (obj): Requests response object
         '''
-
-        # Start build of URL
-        url = self.host_url + '/on_prem_hosts'
-        
-        # if id:
-            # url = url + ''
-        if filter:
-            url = url + '?_filter=' + filter
-        if filter and tfilter:
-            url = url + '&_tfilter=' + tfilter
-        elif tfilter:
-            url = url + '?_tfilter=' + tfilter
-
-        # Call BloxOne API
-        status_code, body = self.apiget(url)
-
-        # Return response code and body text
-        return status_code, body
-
-
-    def ip_space(self, id="", filter="", tfilter=""):
-        '''
-        Method to retrieve On Prem Hosts
-
-        Parameters:
-            filter (str):   Filter based on data fields
-            tfilter (str):  Tag filter
-
-        Returns:
-           status_code (obj): status code or zero on exception
-           body (str): Raw JSON or "Exception occurred." upon exception
-        '''
-
-        # Start build of URL
+        # Build URL
         url = self.ipam_url + '/ip_space'
+        url = self._use_obj_id(url,id=id)
+        url = self._add_params(url, params)
         
-        if id:
-            url = url + '/' + id
-        if filter:
-            url = url + '?_filter=' + filter
-        if filter and tfilter:
-            url = url + '&_tfilter=' + tfilter
-        elif tfilter:
-            url = url + '?_tfilter=' + tfilter
+        if body:
+            response = "Hello"
+        else:
+            # Call BloxOne API GET Method
+            response = self._apiget(url)
         
-        print(url)
+        
+        # Return response code and response text
+        return response
+    
 
-        # Call BloxOne API
-        status_code, body = self.apiget(url)
+    def get_ip_space(self, id="", **params):
+        '''
+        Method to retrieve IP Spaces
 
-        # Return response code and body text
-        return status_code, body
+        Parameters:
+            **params (dict): Generic API parameters
+
+        Returns:
+           response (obj): Requests response object
+        '''
+        return self._ip_space(id,params)
+
+
+    def create_ip_space(self):
+        '''
+        Method to create IP Space
+
+        Parameters:
+            **params (dict): Generic API parameters
+
+        Returns:
+        create_ip_space = self.ip_space(body="hello")
+        '''
+        return self._ip_space(id,params)
+
+
+    def address_block(self, id="", nextip=False, **params):
+        '''
+        Method to retrieve address block
+
+        Parameters:
+            id (str):       BloxOne object id
+            nextip (bool):  Get nextavailableip for obj
+                            ignored if id not specified
+            **params (dict): Generic API parameters
+
+        Returns:
+           response (obj): Requests response object
+        '''
+        # Build URL
+        url = self.ipam_url + '/address_block'
+        url = self._use_obj_id(url,id=id)
+        url = self._add_params(url, params)
+        
+        # Call BloxOne API GET Method
+        response, response = self._apiget(url)
+        
+        # Return response code and response text
+        return response
+
+
+    def subnet(self, id="", nextip=False, **params):
+        '''
+        Method to retrieve subnets
+
+        Parameters:
+            id (str):       BloxOne object id
+            nextip (bool):  Get nextavailableip for obj
+                            ignored if id not specified
+            **params (dict): Generic API parameters
+
+        Returns:
+           response (obj): Requests response object
+        '''
+        # Build URL
+        url = self.ipam_url + '/subnet'
+        url = self._use_obj_id(url,id=id)
+        url = self._add_params(url, params)
+        
+        # Call BloxOne API GET Method
+        response, response = self._apiget(url)
+        
+        # Return response code and response text
+        return response, response
+
+    # *** DHCP ***
+
+    def dhcp_range(self, id="", nextip=False, **params):
+        '''
+        Method to retrieve DHCP Ranges
+
+        Parameters:
+            id (str):       BloxOne object id
+            nextip (bool):  Get nextavailableip for obj
+                            ignored if id not specified
+            **params (dict): Generic API parameters
+
+        Returns:
+           response (obj): Requests response object
+        '''
+        # Build URL
+        url = self.ipam_url + '/range'
+        url = self._use_obj_id(url,id=id)
+        url = self._add_params(url, params)
+        
+        # Call BloxOne API GET Method
+        response, response = self._apiget(url)
+        
+        # Return response code and response text
+        return response, response
+
+
+    def leases(self, **params):
+        '''
+        Method to retrieve Leases
+
+        Parameters:
+            **params (dict): Generic API parameters
+
+        Returns:
+           response (obj): Requests response object
+        '''
+        # Build URL
+        url = self.dhcp_url + '/lease'
+        url = self._add_params(url, params)
+        
+        # Call BloxOne API GET Method
+        response, response = self._apiget(url)
+        
+        # Return response code and response text
+        return response, response
+
+
+    # *** DNS ***
+    
+    def dns_views(self, id="", **params):
+        '''
+        Method to retrieve DNS Views
+
+        Parameters:
+            id (str):       BloxOne object id
+            nextip (bool):  Get nextavailableip for obj
+                            ignored if id not specified
+            **params (dict): Generic API parameters
+
+        Returns:
+           response (obj): Requests response object
+        '''
+        # Build URL
+        url = self.dns_url + '/view'
+        url = self._use_obj_id(url,id=id)
+        url = self._add_params(url, params)
+        
+        # Call BloxOne API GET Method
+        response, response = self._apiget(url)
+        
+        # Return response code and response text
+        return response, response
+
+
+    def auth_zones(self, id="", **params):
+        '''
+        Method to retrieve DNS Zones
+
+        Parameters:
+            id (str):       BloxOne object id
+            nextip (bool):  Get nextavailableip for obj
+                            ignored if id not specified
+            **params (dict): Generic API parameters
+
+        Returns:
+           response (obj): Requests response object
+        '''
+        # Build URL
+        url = self.dns_url + '/auth_zone'
+        url = self._use_obj_id(url,id=id)
+        url = self._add_params(url, params)
+        
+        # Call BloxOne API GET Method
+        response, response = self._apiget(url)
+        
+        # Return response code and response text
+        return response, response
+
+
+    def dns_servers(self, id="", **params):
+        '''
+        Method to retrieve DNS servers
+
+        Parameters:
+            id (str):       BloxOne object id
+            nextip (bool):  Get nextavailableip for obj
+                            ignored if id not specified
+            **params (dict): Generic API parameters
+
+        Returns:
+           response (obj): Requests response object
+        '''
+        # Build URL
+        url = self.dns_url + '/server'
+        url = self._use_obj_id(url,id=id)
+        url = self._add_params(url, params)
+        
+        # Call BloxOne API GET Method
+        response, response = self._apiget(url)
+        
+        # Return response code and response text
+        return response, response
+
+
+    def auth_nsg(self, id="", **params):
+        '''
+        Method to retrieve DNS Nameserver Groups
+
+        Parameters:
+            id (str):       BloxOne object id
+            nextip (bool):  Get nextavailableip for obj
+                            ignored if id not specified
+            **params (dict): Generic API parameters
+
+        Returns:
+           response (obj): Requests response object
+        '''
+        # Build URL
+        url = self.dns_url + '/auth_nsg'
+        url = self._use_obj_id(url,id=id)
+        url = self._add_params(url, params)
+        
+        # Call BloxOne API GET Method
+        response, response = self._apiget(url)
+        
+        # Return response code and response text
+        return response, response
+
+
+    def forward_zone(self, id="", **params):
+        '''
+        Method to retrieve DNS Zones
+
+        Parameters:
+            id (str):       BloxOne object id
+            nextip (bool):  Get nextavailableip for obj
+                            ignored if id not specified
+            **params (dict): Generic API parameters
+
+        Returns:
+           response (obj): Requests response object
+        '''
+        # Build URL
+        url = self.dns_url + '/auth_zone'
+        url = self._use_obj_id(url,id=id)
+        url = self._add_params(url, params)
+        
+        # Call BloxOne API GET Method
+        response, response = self._apiget(url)
+        
+        # Return response code and response text
+        return response, response
+
+    def forward_nsg(self, id="", **params):
+        '''
+        Method to retrieve DNS Zones
+
+        Parameters:
+            id (str):       BloxOne object id
+            nextip (bool):  Get nextavailableip for obj
+                            ignored if id not specified
+            **params (dict): Generic API parameters
+
+        Returns:
+           response (obj): Requests response object
+        '''
+        # Build URL
+        url = self.dns_url + '/auth_zone'
+        url = self._use_obj_id(url,id=id)
+        url = self._add_params(url, params)
+        
+        # Call BloxOne API GET Method
+        response, response = self._apiget(url)
+        
+        # Return response code and response text
+        return response, response
+    # Undocumented DNS Calls
+
+    def zones_in_view(self, viewname="", viewid="", **params):
+        '''
+        Method to retrieve Zones in specified view
+
+        Parameters:
+            viewname (str): BloxOne object id
+            viewid (str):   BloxOne object id
+            **params (dict): Generic API parameters
+
+        Returns:
+           response (obj): Requests response object
+        '''
+        # Build URL
+        url = self.dns_url + '/zone_child'
+        url = self._add_params(url, params)
+        
+        # Call BloxOne API GET Method
+        response, response = self._apiget(url)
+        
+        # Return response code and response text
+        return response, response
 

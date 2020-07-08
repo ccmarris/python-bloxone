@@ -42,7 +42,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.0.2'
+__version__ = '0.0.5'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -54,7 +54,6 @@ import datetime
 import ipaddress
 import requests
 import urllib.parse
-import sqlite3
 
 # ** Global Vars **
 cspurl = "https://csp.infoblox.com/api"
@@ -109,6 +108,10 @@ class b1:
     def __init__(self, cfg_file='config.ini'):
         '''
         Read ini file and set attributes
+
+        Parametrers:
+            cfg_file (str): Override default ini filename
+
         '''
 
         self.cfg = {}
@@ -131,7 +134,22 @@ class b1:
         return
 
 
-    def apiget(self, url):    
+    def _add_params(self, url, params):
+        # Add params to API call URL
+        if len(params):
+            first_param = True
+            for param in params.keys():
+               if first_param:
+                   url = url + '?'
+                   first_param = False
+               else:
+                   url = url + '&'
+               url = url + param + '=' + params[param]
+        
+        return url
+
+
+    def _apiget(self, url):    
      # Call BloxOne API
         try:
             response = requests.request("GET",
@@ -143,10 +161,11 @@ class b1:
             return 0, "Exception occured."
 
         # Return response code and body text
-        return response.status_code, response.text
+        # return response.status_code, response.text
+        return response
 
 
-    def apipost(self, url, body):    
+    def _apipost(self, url, body):    
      # Call BloxOne API
         try:
             response = requests.request("POST",
@@ -159,11 +178,26 @@ class b1:
             return 0, "Exception occured."
 
         # Return response code and body text
-        return response.status_code, response.text
+        return response
 
  
-'''
-__To Do__
+    def _apidelete(self, url):    
+     # Call BloxOne API
+        try:
+            response = requests.request("DELETE",
+                                        url,
+                                        headers=self.headers)
+        # Catch exceptions
+        except requests.exceptions.RequestException as e:
+            logging.error(e)
+            return 0, "Exception occured."
+
+        # Return response code and body text
+        return response
+
+
+    '''
+    __To Do__
 
     def apiput(self, url, body):    
      # Call BloxOne API
@@ -181,7 +215,7 @@ __To Do__
         return response.status_code, response.text
 
  
-    def apipatch(self, url, body):    
+    def _apipatch(self, url, body):    
      # Call BloxOne API
         try:
             response = requests.request("PATCH",
@@ -194,6 +228,52 @@ __To Do__
             return 0, "Exception occured."
 
         # Return response code and body text
-        return response.status_code, response.text
+        return response
 
-''' 
+    '''
+
+    def _use_obj_id(self, url, id="", nextip=False):
+        '''
+        Update URL for use with object id
+        
+        Parameters:
+            id (str): Bloxone Object id
+            nextip (bool): use nextavailableip
+
+        Returns:
+            url (str): Updated url
+        '''
+        # Check for id and next available IP
+        if id:
+            url = url + '/' + id
+            if nextip:
+                url = url + '/nextavailableip'
+        
+        return url
+
+
+    # *** Platform API Requests *** 
+
+    def on_prem_hosts(self, **params):
+        '''
+        Method to retrieve On Prem Hosts
+        (undocumented)
+
+        Parameters:
+            **params (dict): Generic API parameters
+
+        Returns:
+           status_code (obj): status code or zero on exception
+           body (str): Raw JSON or "Exception occurred." upon exception
+        '''
+
+        # Build URL
+        url = self.host_url + '/on_prem_hosts'
+        url = self._add_params(url, params)
+        
+        # Call BloxOne API
+        response = self._apiget(url)
+
+        # Return response code and body text
+        return response 
+
