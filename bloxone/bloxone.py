@@ -42,7 +42,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.0.5'
+__version__ = '0.1.1'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -102,7 +102,7 @@ def read_b1_ini(ini_filename):
 
 class b1:
     '''
-    Class to simplify access to the BloxOne APIs
+    Parent Class to simplify access to the BloxOne APIs
     '''
 
     def __init__(self, cfg_file='config.ini'):
@@ -120,21 +120,27 @@ class b1:
         self.cfg = read_b1_ini(cfg_file)
 
         # Define generic header
+        self.api_key = self.cfg['api_key']
         self.headers = ( {'content-type': 'application/json',
-                        'Authorization': 'Token ' + self.cfg['api_key']} )
+                        'Authorization': 'Token ' + self.api_key} )
         
         # Create base URLs
         # self.ep_url = self.cfg['url'] + '/api/host_app/' + self.cfg['api_version']
         # self.fw_url = self.cfg['url'] + '/api/host_app/' + self.cfg['api_version']
-        self.host_url = self.cfg['url'] + '/api/host_app/' + self.cfg['api_version']
-        self.dns_url = self.cfg['url'] + '/api/ddi/' + self.cfg['api_version'] + '/dns'
-        self.ipam_url = self.cfg['url'] + '/api/ddi/' + self.cfg['api_version'] + '/ipam'
-        self.dhcp_url = self.cfg['url'] + '/api/ddi/' + self.cfg['api_version'] +'/dhcp'
+        self.base_url = self.cfg['url']
+        self.api_version = self.cfg['api_version']
+        self.ddi_url = self.base_url + '/api/ddi/' + self.api_version
+        self.host_url = self.base_url + '/api/host_app/' + self.cfg['api_version']
 
+        self.dns_url = self.base_url + '/api/ddi/' + self.cfg['api_version'] + '/dns'
+        self.ipam_url = self.base_url + '/api/ddi/' + self.cfg['api_version'] + '/ipam'
+        self.dhcp_url = self.base_url + '/api/ddi/' + self.cfg['api_version'] +'/dhcp'
+
+        self.code_ok = [ ]
         return
 
 
-    def _add_params(self, url, params):
+    def _add_params(self, url, **params):
         # Add params to API call URL
         if len(params):
             first_param = True
@@ -158,7 +164,8 @@ class b1:
         # Catch exceptions
         except requests.exceptions.RequestException as e:
             logging.error(e)
-            return 0, "Exception occured."
+            logging.debug("url: {}".format(url))
+            raise
 
         # Return response code and body text
         # return response.status_code, response.text
@@ -175,7 +182,9 @@ class b1:
         # Catch exceptions
         except requests.exceptions.RequestException as e:
             logging.error(e)
-            return 0, "Exception occured."
+            logging.debug("url: {}".format(url))
+            logging.debug("body: {}".format(body))
+            raise
 
         # Return response code and body text
         return response
@@ -190,7 +199,8 @@ class b1:
         # Catch exceptions
         except requests.exceptions.RequestException as e:
             logging.error(e)
-            return 0, "Exception occured."
+            logging.debug("url: {}".format(url))
+            raise
 
         # Return response code and body text
         return response
@@ -209,7 +219,9 @@ class b1:
         # Catch exceptions
         except requests.exceptions.RequestException as e:
             logging.error(e)
-            return 0, "Exception occured."
+            logging.debug("url: {}".format(url))
+            logging.debug("body: {}".format(body))
+            raise
 
         # Return response code and body text
         return response.status_code, response.text
@@ -225,14 +237,16 @@ class b1:
         # Catch exceptions
         except requests.exceptions.RequestException as e:
             logging.error(e)
-            return 0, "Exception occured."
+            logging.debug("url: {}".format(url))
+            logging.debug("body: {}".format(body))
+            raise
 
         # Return response code and body text
         return response
 
     '''
 
-    def _use_obj_id(self, url, id="", nextip=False):
+    def _use_obj_id(self, url, id="", action=""):
         '''
         Update URL for use with object id
         
@@ -246,11 +260,41 @@ class b1:
         # Check for id and next available IP
         if id:
             url = url + '/' + id
-            if nextip:
-                url = url + '/nextavailableip'
+            if action:
+                url = url + '/' + action
+        else:
+            if action:
+                logging.debug("Action {} not supported without " 
+                              "a specified ovject id.")
         
         return url
 
+
+class b1platform(b1):
+    '''
+    Class to simplify access to the BloxOne Platform APIs
+    '''
+
+    def get(self, objpath, id="", action="", **params):
+        '''
+        Generic get object wrapper for platform calls
+
+        Parameters:
+            objpath (str):  Swagger object path
+            id (str):       Optional Object ID
+            action (str):   Optional object action, e.g. "nextavailableip"
+        '''
+
+        # Build url
+        url = self.host_url + objpath
+        url = self._use_obj_id(url,id=id)
+        url = self._add_params(url, **params)
+        logging.debug("URL: {}".format(url))
+
+        response = self._apiget(url)
+
+        return response
+        
 
     # *** Platform API Requests *** 
 
@@ -267,13 +311,9 @@ class b1:
            body (str): Raw JSON or "Exception occurred." upon exception
         '''
 
-        # Build URL
-        url = self.host_url + '/on_prem_hosts'
-        url = self._add_params(url, params)
-        
         # Call BloxOne API
-        response = self._apiget(url)
+        response = self.get('/on_prem_hosts', **params)
 
-        # Return response code and body text
+        # Return response object
         return response 
 

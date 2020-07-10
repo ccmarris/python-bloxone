@@ -203,7 +203,7 @@ def check_on_prem(b1ddi, username):
 # *** Main ***
 args = parseargs()
 username = args.username
-outputfile = args.output
+# outputfile = args.output
 inifile = args.config
 debug = args.debug
 

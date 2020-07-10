@@ -42,12 +42,13 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.0.5'
+__version__ = '0.1.1'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
 import bloxone
 import logging
+import json
 import os
 import re
 import datetime
@@ -57,33 +58,67 @@ import ipaddress
 
 class b1ddi(bloxone.b1):
 
-    # *** IPAM ***
-
-    def _ip_space(self, id="", body="", **params):
+    # Generic Methods
+    def get(self, objpath, id="", action="", **params):
         '''
-        Method to retrieve IP Spaces
+        Generic get object wrapper dor ddi objects
 
         Parameters:
-            **params (dict): Generic API parameters
-
-        Returns:
-           response (obj): Requests response object
+            objpath (str):  Swagger object path
+            id (str):       Optional Object ID
+            action (str):   Optional object action, e.g. "nextavailableip"
         '''
-        # Build URL
-        url = self.ipam_url + '/ip_space'
+        # Build url
+        url = self.ddi_url + objpath
         url = self._use_obj_id(url,id=id)
-        url = self._add_params(url, params)
-        
-        if body:
-            response = "Hello"
-        else:
-            # Call BloxOne API GET Method
-            response = self._apiget(url)
-        
-        
-        # Return response code and response text
+        url = self._add_params(url, **params)
+        logging.debug("URL: {}".format(url))
+
+        response = self._apiget(url)
+
         return response
-    
+
+
+    def get_id(self, objpath, *, key="", value=""):
+        '''
+        '''
+        # Local Variables
+        id=""
+
+        # Build url
+        url = self.ddi_url + objpath
+        url = url + '?_fields=' + key + ',id'
+
+        # Make API Call
+        response = self._apiget(url)
+
+        # Process response
+        if response.status_code == requests.codes.ok:
+            objs = json.loads(response.text)
+            # Look for results
+            if "results" in objs.keys():
+                for obj in objs['results']:
+                    if obj[key] == value:
+                        id = obj['id']
+                if not id:
+                    logging.debug("Key {} with value {} not found."
+                                  .format(key,value))
+            else:
+                id = ""
+                logging.debug("No results found.")
+        else:
+            id=""
+            logging.debug("HTTP Error occured. {}".format(repsonse.status_code))
+        logging.debug("id: {}".format(id)) 
+
+        return id
+
+
+    def create(self, objpath):
+        return
+
+    # *** Helper Methods ***
+    # *** IPAM ***
 
     def get_ip_space(self, id="", **params):
         '''
@@ -95,10 +130,10 @@ class b1ddi(bloxone.b1):
         Returns:
            response (obj): Requests response object
         '''
-        return self._ip_space(id,params)
+        return self.get('/ipam/ip_space', id=id, **params)
 
 
-    def create_ip_space(self):
+    def create_ip_space(self, **params):
         '''
         Method to create IP Space
 
@@ -108,10 +143,10 @@ class b1ddi(bloxone.b1):
         Returns:
         create_ip_space = self.ip_space(body="hello")
         '''
-        return self._ip_space(id,params)
+        return self.create(id, **params)
 
 
-    def address_block(self, id="", nextip=False, **params):
+    def get_address_block(self, id="", action="", **params):
         '''
         Method to retrieve address block
 
@@ -124,19 +159,12 @@ class b1ddi(bloxone.b1):
         Returns:
            response (obj): Requests response object
         '''
-        # Build URL
-        url = self.ipam_url + '/address_block'
-        url = self._use_obj_id(url,id=id)
-        url = self._add_params(url, params)
-        
+
         # Call BloxOne API GET Method
-        response, response = self._apiget(url)
-        
-        # Return response code and response text
-        return response
+        return self.get('/ipam/address_block', id=id, action=action, **params)
 
 
-    def subnet(self, id="", nextip=False, **params):
+    def get_subnet(self, id="", action="", **params):
         '''
         Method to retrieve subnets
 
@@ -149,20 +177,13 @@ class b1ddi(bloxone.b1):
         Returns:
            response (obj): Requests response object
         '''
-        # Build URL
-        url = self.ipam_url + '/subnet'
-        url = self._use_obj_id(url,id=id)
-        url = self._add_params(url, params)
         
         # Call BloxOne API GET Method
-        response, response = self._apiget(url)
-        
-        # Return response code and response text
-        return response, response
+        return self.get('/ipam/subnet', id=id, action=action, **params)
 
     # *** DHCP ***
 
-    def dhcp_range(self, id="", nextip=False, **params):
+    def get_range(self, id="", action="", **params):
         '''
         Method to retrieve DHCP Ranges
 
@@ -175,19 +196,12 @@ class b1ddi(bloxone.b1):
         Returns:
            response (obj): Requests response object
         '''
-        # Build URL
-        url = self.ipam_url + '/range'
-        url = self._use_obj_id(url,id=id)
-        url = self._add_params(url, params)
         
         # Call BloxOne API GET Method
-        response, response = self._apiget(url)
-        
-        # Return response code and response text
-        return response, response
+        return self.get('/ipam/range', id=id, action=action, **params)
 
 
-    def leases(self, **params):
+    def get_lease(self, **params):
         '''
         Method to retrieve Leases
 
@@ -197,20 +211,14 @@ class b1ddi(bloxone.b1):
         Returns:
            response (obj): Requests response object
         '''
-        # Build URL
-        url = self.dhcp_url + '/lease'
-        url = self._add_params(url, params)
         
         # Call BloxOne API GET Method
-        response, response = self._apiget(url)
-        
-        # Return response code and response text
-        return response, response
+        return self.get('/dhcp/lease', **params)
 
 
     # *** DNS ***
     
-    def dns_views(self, id="", **params):
+    def get_dns_views(self, id="", **params):
         '''
         Method to retrieve DNS Views
 
@@ -223,19 +231,12 @@ class b1ddi(bloxone.b1):
         Returns:
            response (obj): Requests response object
         '''
-        # Build URL
-        url = self.dns_url + '/view'
-        url = self._use_obj_id(url,id=id)
-        url = self._add_params(url, params)
-        
+
         # Call BloxOne API GET Method
-        response, response = self._apiget(url)
-        
-        # Return response code and response text
-        return response, response
+        return self.get('/dns/view', id=id, **params)
 
 
-    def auth_zones(self, id="", **params):
+    def get_auth_zones(self, id="", **params):
         '''
         Method to retrieve DNS Zones
 
@@ -248,19 +249,11 @@ class b1ddi(bloxone.b1):
         Returns:
            response (obj): Requests response object
         '''
-        # Build URL
-        url = self.dns_url + '/auth_zone'
-        url = self._use_obj_id(url,id=id)
-        url = self._add_params(url, params)
         
         # Call BloxOne API GET Method
-        response, response = self._apiget(url)
-        
-        # Return response code and response text
-        return response, response
+        return self.get('/dns/auth_zone', id=id, **params)
 
-
-    def dns_servers(self, id="", **params):
+    def get_dns_servers(self, id="", **params):
         '''
         Method to retrieve DNS servers
 
@@ -273,19 +266,12 @@ class b1ddi(bloxone.b1):
         Returns:
            response (obj): Requests response object
         '''
-        # Build URL
-        url = self.dns_url + '/server'
-        url = self._use_obj_id(url,id=id)
-        url = self._add_params(url, params)
         
         # Call BloxOne API GET Method
-        response, response = self._apiget(url)
-        
-        # Return response code and response text
-        return response, response
+        return self.get('/dns/dns_servers', id=id, **params)
 
 
-    def auth_nsg(self, id="", **params):
+    def get_auth_nsg(self, id="", **params):
         '''
         Method to retrieve DNS Nameserver Groups
 
@@ -298,19 +284,12 @@ class b1ddi(bloxone.b1):
         Returns:
            response (obj): Requests response object
         '''
-        # Build URL
-        url = self.dns_url + '/auth_nsg'
-        url = self._use_obj_id(url,id=id)
-        url = self._add_params(url, params)
-        
+
         # Call BloxOne API GET Method
-        response, response = self._apiget(url)
-        
-        # Return response code and response text
-        return response, response
+        return self.get('/dns/auth_nsg', id=id, **params)
 
 
-    def forward_zone(self, id="", **params):
+    def get_forward_zone(self, id="", **params):
         '''
         Method to retrieve DNS Zones
 
@@ -323,18 +302,11 @@ class b1ddi(bloxone.b1):
         Returns:
            response (obj): Requests response object
         '''
-        # Build URL
-        url = self.dns_url + '/auth_zone'
-        url = self._use_obj_id(url,id=id)
-        url = self._add_params(url, params)
         
         # Call BloxOne API GET Method
-        response, response = self._apiget(url)
-        
-        # Return response code and response text
-        return response, response
+        return self.get('/dns/auth_nsg', id=id, **params)
 
-    def forward_nsg(self, id="", **params):
+    def get_forward_nsg(self, id="", **params):
         '''
         Method to retrieve DNS Zones
 
@@ -347,37 +319,48 @@ class b1ddi(bloxone.b1):
         Returns:
            response (obj): Requests response object
         '''
-        # Build URL
-        url = self.dns_url + '/auth_zone'
-        url = self._use_obj_id(url,id=id)
-        url = self._add_params(url, params)
         
         # Call BloxOne API GET Method
-        response, response = self._apiget(url)
-        
-        # Return response code and response text
-        return response, response
-    # Undocumented DNS Calls
+        return self.get('/dns/auth_nsg', id=id, **params)
 
-    def zones_in_view(self, viewname="", viewid="", **params):
+
+    # *** Undocumented DNS Calls ***
+
+    def get_zone_child(self, parent="zone", name="", id="", fields=""):
         '''
         Method to retrieve Zones in specified view
 
         Parameters:
-            viewname (str): BloxOne object id
-            viewid (str):   BloxOne object id
+            name (str): BloxOne object id
+            id (str):   BloxOne object id
             **params (dict): Generic API parameters
 
         Returns:
            response (obj): Requests response object
         '''
+        if name and not id:
+            if parent == "view":
+                id = self.get_id('/dns/view', key="name", value=name)
+                # result = self.get('/dns/view', _fields="name,id")
+                # logging.debug(result.text)
+            elif parent == "zone":
+                id = self.get_id('/dns/auth_zone', key="fqdn", value=name)
+                result = self.get('/dns/auth_zone', _fields="fqdn,id")
+                logging.debug(result.text)
+            objs = json.loads(result.text)
+            if "results" in objs.keys():
+                for obj in objs['results']:
+                    if obj['fqdn'] == name:
+                        id = obj['id']
+            else:
+                id = ""
+            logging.debug("id: {}".format(id)) 
         # Build URL
-        url = self.dns_url + '/zone_child'
-        url = self._add_params(url, params)
+        objpath = '/dns/zone_child' + '?_filter=parent=="' + id + '"'
+        if fields:
+            objpath = objpath + '&_fields=' + fields
+        logging.debug("Objectpath: {}".format(objpath))
         
         # Call BloxOne API GET Method
-        response, response = self._apiget(url)
+        return self.get(objpath)
         
-        # Return response code and response text
-        return response, response
-
