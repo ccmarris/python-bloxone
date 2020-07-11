@@ -42,7 +42,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -61,12 +61,15 @@ class b1ddi(bloxone.b1):
     # Generic Methods
     def get(self, objpath, id="", action="", **params):
         '''
-        Generic get object wrapper dor ddi objects
+        Generic get object wrapper for ddi objects
 
         Parameters:
             objpath (str):  Swagger object path
             id (str):       Optional Object ID
             action (str):   Optional object action, e.g. "nextavailableip"
+        
+        Returns:
+            response (obj): Requests response object
         '''
         # Build url
         url = self.ddi_url + objpath
@@ -79,9 +82,19 @@ class b1ddi(bloxone.b1):
         return response
 
 
-    def get_id(self, objpath, *, key="", value=""):
+    def get_id(self, objpath, *, key="", value="", include_path=False):
         '''
+        Get object id using key/value pair
+
+        Parameters:
+            objpath (str):  Swagger object path
+            key (str):      name of key to match
+            value (str):    value to match
+
+        Returns:
+            id (str):   object id or ""
         '''
+
         # Local Variables
         id=""
 
@@ -93,13 +106,15 @@ class b1ddi(bloxone.b1):
         response = self._apiget(url)
 
         # Process response
-        if response.status_code == requests.codes.ok:
+        if response.status_code in self.return_codes_ok:
             objs = json.loads(response.text)
             # Look for results
             if "results" in objs.keys():
                 for obj in objs['results']:
                     if obj[key] == value:
                         id = obj['id']
+                        if not include_path:
+                            id = id.rsplit('/',1)[1]
                 if not id:
                     logging.debug("Key {} with value {} not found."
                                   .format(key,value))
@@ -108,14 +123,52 @@ class b1ddi(bloxone.b1):
                 logging.debug("No results found.")
         else:
             id=""
-            logging.debug("HTTP Error occured. {}".format(repsonse.status_code))
+            logging.debug("HTTP Error occured. {}".format(response.status_code))
         logging.debug("id: {}".format(id)) 
 
         return id
 
 
-    def create(self, objpath):
-        return
+    def create(self, objpath, body=""):
+        '''
+        Generic create object wrapper for ddi objects
+
+        Parameters:
+            objpath (str):  Swagger object path
+            body (str):     JSON formatted data payload
+
+        Returns:
+            response (obj): Requests response object
+        '''
+        # Build url
+        url = self.ddi_url + objpath
+
+        # Make API Call
+        response = self._apipost(url, body)
+
+        return response
+
+
+    def delete(self, objpath, id=""):
+        '''
+        Generic delete object wrapper for ddi objects
+
+        Parameters:
+            objpath (str):  Swagger object path
+            id (str):       Object id to delete
+
+        Returns:
+            response (obj): Requests response object
+        '''
+        # Build url
+        url = self.ddi_url + objpath
+        url = self._use_obj_id(url,id=id)
+
+        # Make API Call
+        response = self._apidelete(url)
+
+        return response
+
 
     # *** Helper Methods ***
     # *** IPAM ***

@@ -42,7 +42,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -136,7 +136,9 @@ class b1:
         self.ipam_url = self.base_url + '/api/ddi/' + self.cfg['api_version'] + '/ipam'
         self.dhcp_url = self.base_url + '/api/ddi/' + self.cfg['api_version'] +'/dhcp'
 
-        self.code_ok = [ ]
+        # List of successful return codes
+        self.return_codes_ok = [200, 201, 204]
+
         return
 
 
