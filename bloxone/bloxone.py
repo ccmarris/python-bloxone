@@ -42,7 +42,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.1.2'
+__version__ = '0.1.5'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -59,7 +59,7 @@ import urllib.parse
 cspurl = "https://csp.infoblox.com/api"
 
 
-# ** Facilitate TIDE Config File for API Key **
+# ** Facilitate ini file for basic configuration including API Key
 
 def read_b1_ini(ini_filename):
     '''
@@ -102,7 +102,7 @@ def read_b1_ini(ini_filename):
 
 class b1:
     '''
-    Parent Class to simplify access to the BloxOne APIs
+    Parent Class to simplify access to the BloxOne APIs for subclasses
     '''
 
     def __init__(self, cfg_file='config.ini'):
@@ -228,14 +228,15 @@ class b1:
         # Return response code and body text
         return response.status_code, response.text
 
+    '''
  
     def _apipatch(self, url, body):    
-     # Call BloxOne API
+        # Call BloxOne API
         try:
             response = requests.request("PATCH",
                                         url,
                                         headers=self.headers,
-                                        body)
+                                        data=body)
         # Catch exceptions
         except requests.exceptions.RequestException as e:
             logging.error(e)
@@ -246,7 +247,6 @@ class b1:
         # Return response code and body text
         return response
 
-    '''
 
     def _use_obj_id(self, url, id="", action=""):
         '''
@@ -285,6 +285,9 @@ class b1platform(b1):
             objpath (str):  Swagger object path
             id (str):       Optional Object ID
             action (str):   Optional object action, e.g. "nextavailableip"
+
+        Returns:
+            response (obj): Requests response object
         '''
 
         # Build url
@@ -309,8 +312,7 @@ class b1platform(b1):
             **params (dict): Generic API parameters
 
         Returns:
-           status_code (obj): status code or zero on exception
-           body (str): Raw JSON or "Exception occurred." upon exception
+            response (obj): Requests response object
         '''
 
         # Call BloxOne API

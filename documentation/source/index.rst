@@ -1,9 +1,9 @@
-.. ibtidelib documentation master file, created by
+.. bloxone documentation master file, created by
    sphinx-quickstart on Tue Jan 15 12:33:46 2019.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to ibtidelib's documentation!
+Welcome to BloxOne API Wrapper's documentation!
 =====================================
 
 .. toctree::
@@ -14,7 +14,7 @@ Welcome to ibtidelib's documentation!
    license
    requirements
    installation
-   code
+   classes
    version_history
 
 Indices and tables

@@ -2,19 +2,24 @@
 Introduction
 ============
 
-This module forms the functional basis for the demo scripts that form part
-of the Threat Intelligence toolkit whose aim is to provide demonstration scripts 
-for BloxOne ThreatDefense. These can be used for API demonstrations, or help 
-to simplify PoCs for Threat Intelligence, demonstrating the value of TIDE 
-and our threat intel offerings.
+The Infoblox BloxOne suite of applications provides a RESTful API that is
+published using Swagger on https://docs.infoblox.com/apidoc along with other
+Infobnlox APIs.
 
-The module simplifies some of the common TIDE and Dossier API calls, provides 
-some useful data validation and normalisation functions. Functions are also 
-included to use a local sqlite database containing local TIDE data generated [#]_
+This module aims to provide a class hierarchy to simplify access to these
+published APIs, performing the 'heavy lifting' whilst providing full access to
+to their functionality. This is achieved by providing simple wrappers that enable
+you to take the swagger documented object paths, fields and where appropriate 
+JSON body from the documentation and pass them to simple get, create, delete and
+update methods. These methods simply return a :mod:requests response object.
 
-This documentation assumes that you have python3 installed and are familiar with 
-both the Unix command line, files and the use of pip/pip3 to install any 
-appropriate modules.
+In addition, useful utility methods are provided for common tasks such as 
+getting an object id, by defining the object key and value match pair. This is
+combined with several (currently) undocumented API calls.
+
+Some basic configuration, such a base url, API version and API key are read
+from an ini file. An example of which is provided. When instantiating/initialising
+this will read config.ini by default. Alternatively a path can be provided.
 
 
-.. [#] Please see the :mod:`create-threat-intel-db.sh` tool for more details
+

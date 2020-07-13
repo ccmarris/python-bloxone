@@ -19,12 +19,12 @@ sys.path.insert(0, os.path.abspath('../..'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'ibtidelib'
+project = 'Bloxone API Wrapper'
 copyright = '2020, Chris Marrison'
 author = 'Chris Marrison'
 
 # The short X.Y version
-version = '2.6.0'
+version = '0.1.2'
 # The full version, including alpha/beta/rc tags
 release = version
 

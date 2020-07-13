@@ -42,21 +42,21 @@ installer for your system from `python.org <https://python.org>`_.
   (it's normally off by default).
 
 
-Installing :mod:`ibtidelib`
+Installing :mod:`bloxone`
 ====================================
 
-#. Intall ibtidelib as local package
+#. Intall bloxone as local package
 
-:mod:`ibtidelib` has been provided as an installable package using pip.
+:mod:`bloxone` has been provided as an installable package using pip.
 
-In your appropriate python3 environment you can therefore install :mod:`ibtidelib`
+In your appropriate python3 environment you can therefore install :mod:`bloxone`
 using the pip command. For example::
 
-  pip3 install dist/ibtidelib-2.6.0-py3-none-any.whl --user
+  pip3 install dist/bloxone-<version>-py3-none-any.whl --user
 
   or 
 
-  pip3 install dist/ibtidelib-2.6.0.tar.gz --user
+  pip3 install dist/bloxone-<version>.tar.gz --user
 
 .. note::
 
@@ -65,9 +65,9 @@ using the pip command. For example::
 
 
 
-Uninstalling :mod:`ibtidelib`
+Uninstalling :mod:`bloxone`
 ====================================
 
 You can use pip to unintsall the library. For example::
 
-  pip3 uninstall ibtidelib
+  pip3 uninstall bloxone

@@ -2,5 +2,5 @@
 Source Documentation
 ====================
 
-.. automodule:: ibtidelib
+.. automodule:: bloxone.bloxone
    :members:

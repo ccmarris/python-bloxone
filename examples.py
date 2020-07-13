@@ -109,3 +109,8 @@ response.text
 r = b1ddi.create('/ipam/ip_space', body=body)
 r.text
 # '{"result":{"asm_config":{"asm_threshold":90,"enable":true,"enable_notification":true,"forecast_period":14,"growth_factor":20,"growth_type":"percent","history":30,"min_total":10,"min_unused":10,"reenable_date":"1970-01-01T00:00:00Z"},"asm_scope_flag":0,"comment":"","dhcp_config":{"allow_unknown":true,"filters":[],"ignore_list":[],"lease_time":3600},"dhcp_options":[],"id":"ipam/ip_space/edfb2cde-c2fc-11ea-b5c8-3670d2b79356","inheritance_sources":null,"name":"marrison-test","tags":null,"threshold":{"enabled":false,"high":0,"low":0},"utilization":{"abandon_utilization":0,"abandoned":"0","dynamic":"0","free":"0","static":"0","total":"0","used":"0","utilization":0}}}'
+
+>>> r = b1ddi.get_object_by_key('/ipam/ip_space', key="name", value="marrison-lab")
+>>> r.text
+'{"result":{"asm_config":{"asm_threshold":90,"enable":true,"enable_notification":true,"forecast_period":14,"growth_factor":20,"growth_type":"percent","history":30,"min_total":10,"min_unused":10,"reenable_date":"1970-01-01T00:00:00Z"},"asm_scope_flag":0,"comment":"","dhcp_config":{"allow_unknown":true,"filters":[],"ignore_list":[],"lease_time":43200},"dhcp_options":[],"id":"ipam/ip_space/fd388619-b013-11ea-b956-ca543bd8c483","inheritance_sources":null,"name":"marrison-lab","tags":{"Location":"Hampshire, UK","Owner":"marrison"},"threshold":{"enabled":false,"high":0,"low":0},"utilization":{"abandon_utilization":0,"abandoned":"0","dynamic":"40","free":"65491","static":"5","total":"65536","used":"45","utilization":0}}}'
+>>> 

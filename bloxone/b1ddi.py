@@ -42,7 +42,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.1.2'
+__version__ = '0.1.5'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -81,6 +81,70 @@ class b1ddi(bloxone.b1):
 
         return response
 
+
+
+    def create(self, objpath, body=""):
+        '''
+        Generic create object wrapper for ddi objects
+
+        Parameters:
+            objpath (str):  Swagger object path
+            body (str):     JSON formatted data payload
+
+        Returns:
+            response (obj): Requests response object
+        '''
+        # Build url
+        url = self.ddi_url + objpath
+
+        # Make API Call
+        response = self._apipost(url, body)
+
+        return response
+
+
+    def delete(self, objpath, id=""):
+        '''
+        Generic delete object wrapper for ddi objects
+
+        Parameters:
+            objpath (str):  Swagger object path
+            id (str):       Object id to delete
+
+        Returns:
+            response (obj): Requests response object
+        '''
+        # Build url
+        url = self.ddi_url + objpath
+        url = self._use_obj_id(url,id=id)
+
+        # Make API Call
+        response = self._apidelete(url)
+
+        return response
+
+
+    def patch(self, objpath, body=""):
+        '''
+        Generic create object wrapper for ddi objects
+
+        Parameters:
+            objpath (str):  Swagger object path
+            body (str):     JSON formatted data payload
+
+        Returns:
+            response (obj): Requests response object
+        '''
+        # Build url
+        url = self.ddi_url + objpath
+
+        # Make API Call
+        response = self._apipatch(url, body)
+
+        return response
+
+ 
+   # *** Helper Methods ***
 
     def get_id(self, objpath, *, key="", value="", include_path=False):
         '''
@@ -129,49 +193,22 @@ class b1ddi(bloxone.b1):
         return id
 
 
-    def create(self, objpath, body=""):
+    def get_object_by_key(self, objpath, *, key="", value="", include_path=False):
         '''
-        Generic create object wrapper for ddi objects
+        Get object using key/value pair
 
         Parameters:
             objpath (str):  Swagger object path
-            body (str):     JSON formatted data payload
+            key (str):      name of key to match
+            value (str):    value to match
 
         Returns:
-            response (obj): Requests response object
+            id (str):   object id or ""
         '''
-        # Build url
-        url = self.ddi_url + objpath
-
-        # Make API Call
-        response = self._apipost(url, body)
-
-        return response
+        return self.get(objpath, id=self.get_id(objpath, key=key, value=value))
 
 
-    def delete(self, objpath, id=""):
-        '''
-        Generic delete object wrapper for ddi objects
-
-        Parameters:
-            objpath (str):  Swagger object path
-            id (str):       Object id to delete
-
-        Returns:
-            response (obj): Requests response object
-        '''
-        # Build url
-        url = self.ddi_url + objpath
-        url = self._use_obj_id(url,id=id)
-
-        # Make API Call
-        response = self._apidelete(url)
-
-        return response
-
-
-    # *** Helper Methods ***
-    # *** IPAM ***
+    # *** Examples ***
 
     def get_ip_space(self, id="", **params):
         '''
