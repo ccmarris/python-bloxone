@@ -5,16 +5,13 @@
 
  Description:
 
- Requirements:
-   Python3 with re, ipaddress, requests and sqlite3 modules
+ Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Author: Chris Marrison
-
- Date Last Updated: 20200605
+ Date Last Updated: 20200713
 
  Todo:
 
- Copyright (c) 2018 Chris Marrison / Infoblox
+ Copyright (c) 2020 Chris Marrison / Infoblox
 
  Redistribution and use in source and binary forms,
  with or without modification, are permitted provided
@@ -42,18 +39,13 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.1.5'
+__version__ = '0.2.4'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
 import logging
-import os
-import re
 import configparser
-import datetime
-import ipaddress
 import requests
-import urllib.parse
 
 # ** Global Vars **
 cspurl = "https://csp.infoblox.com/api"
@@ -208,16 +200,13 @@ class b1:
         return response
 
 
-    '''
-    __To Do__
-
-    def apiput(self, url, body):    
+    def _apiput(self, url, body):    
      # Call BloxOne API
         try:
             response = requests.request("PUT",
                                         url,
                                         headers=self.headers,
-                                        body)
+                                        data=body)
         # Catch exceptions
         except requests.exceptions.RequestException as e:
             logging.error(e)
@@ -226,9 +215,8 @@ class b1:
             raise
 
         # Return response code and body text
-        return response.status_code, response.text
+        return response
 
-    '''
  
     def _apipatch(self, url, body):    
         # Call BloxOne API
@@ -299,7 +287,68 @@ class b1platform(b1):
         response = self._apiget(url)
 
         return response
+
         
+    def create(self, objpath, body=""):
+        '''
+        Generic create object wrapper for platform objects
+
+        Parameters:
+            objpath (str):  Swagger object path
+            body (str):     JSON formatted data payload
+
+        Returns:
+            response (obj): Requests response object
+        '''
+        # Build url
+        url = self.host_url + objpath
+
+        # Make API Call
+        response = self._apipost(url, body)
+
+        return response
+
+
+    def delete(self, objpath, id=""):
+        '''
+        Generic delete object wrapper for platform objects
+
+        Parameters:
+            objpath (str):  Swagger object path
+            id (str):       Object id to delete
+
+        Returns:
+            response (obj): Requests response object
+        '''
+        # Build url
+        url = self.host_url + objpath
+        url = self._use_obj_id(url, id=id)
+
+        # Make API Call
+        response = self._apidelete(url)
+
+        return response
+
+
+    def update(self, objpath, id="", body=""):
+        '''
+        Generic create object wrapper for ddi objects
+
+        Parameters:
+            objpath (str):  Swagger object path
+            body (str):     JSON formatted data payload
+
+        Returns:
+            response (obj): Requests response object
+        '''
+        # Build url
+        url = self.host_url + objpath
+        url = self._use_obj_id(url, id=id)
+
+        # Make API Call
+        response = self._apiput(url, body)
+
+        return response
 
     # *** Platform API Requests *** 
 

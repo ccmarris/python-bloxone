@@ -42,7 +42,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.0.2'
+__version__ = '0.0.3'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -67,7 +67,7 @@ def parseargs():
     Returns:
         Returns parsed arguments
     '''
-    parse = argparse.ArgumentParser(description='B1DDI Phase 3 Training Assignment')
+    parse = argparse.ArgumentParser(description='b1platform Phase 3 Training Assignment')
     # parse.add_argument('-o', '--output', type=str,
                        # help="Output to <filename>")
     parse.add_argument('-c', '--config', type=str, default='config.ini',
@@ -136,7 +136,7 @@ def open_file(filename):
     return handler
 
 
-def check_on_prem(b1ddi, username):
+def check_on_prem(b1platform, username):
     '''
     Validate on prem hosts
     '''
@@ -149,9 +149,9 @@ def check_on_prem(b1ddi, username):
     report = {}
     correct_tag_count = 0
 
-    # response, results = b1ddi.on_prem_hosts()
-    response, results = b1ddi.on_prem_hosts(_tfilter=tfilter)
-    results = json.loads(results)
+    # response, results = b1platform.on_prem_hosts()
+    response = b1platform.on_prem_hosts(_tfilter=tfilter)
+    results = json.loads(response.text)
 
     if len(results):
         for host in results['result']:
@@ -195,7 +195,7 @@ def check_on_prem(b1ddi, username):
         log.info()
         status = False
 
-    report = { "B1DDI Hosts": status, "Grid": grid }
+    report = { "B1DDI": status, "Grid": grid }
 
     return report
 
@@ -209,8 +209,8 @@ debug = args.debug
 
 setup_logging(debug)
 
-b1ddi = bloxone.b1ddi(inifile)
-status = check_on_prem(b1ddi, username)
+b1platform = bloxone.b1platform(inifile)
+status = check_on_prem(b1platform, username)
 log.info(status)
 
-# b1ddi.dhcp_range(_tfilter='"Owner"="jcanelada"')
+# b1platform.dhcp_range(_tfilter='"Owner"="jcanelada"')

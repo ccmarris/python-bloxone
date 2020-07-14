@@ -5,7 +5,7 @@ with open("README.rst", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="ibtidelib", 
+    name="bloxone", 
     version=__version__,
     author="Chris Marrison",
     author_email="chris@infoblox.com",
