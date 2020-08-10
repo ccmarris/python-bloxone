@@ -7,7 +7,7 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20200713
+ Date Last Updated: 20200807
 
  Todo:
 
@@ -39,13 +39,14 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.2.4'
+__version__ = '0.3.8'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
 import logging
 import configparser
 import requests
+import json
 
 # ** Global Vars **
 cspurl = "https://csp.infoblox.com/api"
@@ -123,6 +124,13 @@ class b1:
         self.api_version = self.cfg['api_version']
         self.ddi_url = self.base_url + '/api/ddi/' + self.api_version
         self.host_url = self.base_url + '/api/host_app/' + self.cfg['api_version']
+        self.anycast_url = self.base_url + '/api/anycast/' + self.cfg['api_version']
+        self.tdc_url = self.base_url + '/api/atcfw/' + self.cfg['api_version']
+        self.tdep_url = self.base_url + '/api/atcep/' + self.cfg['api_version']
+        self.tddfp_url = self.base_url + '/api/atcdfp/' + self.cfg['api_version']
+        self.tdlad_url = self.base_url + '/api/atclad/' + self.cfg['api_version']
+        self.tide_url = self.base_url + '/tide/api' 
+        self.dossier_url = self.base_url + '/tide/api'
 
         self.dns_url = self.base_url + '/api/ddi/' + self.cfg['api_version'] + '/dns'
         self.ipam_url = self.base_url + '/api/ddi/' + self.cfg['api_version'] + '/ipam'
@@ -134,10 +142,9 @@ class b1:
         return
 
 
-    def _add_params(self, url, **params):
+    def _add_params(self, url, first_param=True, **params):
         # Add params to API call URL
         if len(params):
-            first_param = True
             for param in params.keys():
                if first_param:
                    url = url + '?'
@@ -302,6 +309,7 @@ class b1platform(b1):
         '''
         # Build url
         url = self.host_url + objpath
+        logging.debug("URL: {}".format(url))
 
         # Make API Call
         response = self._apipost(url, body)
@@ -323,6 +331,7 @@ class b1platform(b1):
         # Build url
         url = self.host_url + objpath
         url = self._use_obj_id(url, id=id)
+        logging.debug("URL: {}".format(url))
 
         # Make API Call
         response = self._apidelete(url)
@@ -344,11 +353,41 @@ class b1platform(b1):
         # Build url
         url = self.host_url + objpath
         url = self._use_obj_id(url, id=id)
+        logging.debug("URL: {}".format(url))
 
         # Make API Call
         response = self._apiput(url, body)
 
         return response
+
+
+    def get_tags(self, objpath, id=""):
+        '''
+        Get tags for an object id
+
+        Parameters:
+            objpath (str):  Swagger object path
+
+            id (str): id of object
+
+        Returns:
+            tags (dict): Dictionary of current tags
+                         or empty dict if none
+        
+        .. todo::
+            * make generic, however, this requires the below
+            * Lookup dictionary of 'required fields' per object type
+        '''
+        tags = {}
+        response = self.get(objpath, id=id, _fields="tags")
+        if response.status_code in self.return_codes_ok:
+            tags = json.loads(response.text)
+            tags = tags['result']
+        else:
+            tags = {}
+        
+        return tags
+
 
     # *** Platform API Requests *** 
 
@@ -370,3 +409,58 @@ class b1platform(b1):
         # Return response object
         return response 
 
+
+    def oph_add_tag(self, id="", tagname="", tagvalue=""):
+        '''
+        Method to add a tag to an existing On Prem Host
+
+        Parameters:
+            objpath (str):  Swagger object path
+            tagname (str): Name of tag to add
+            tagvalue (str): Value to associate
+
+        Returns:
+            response (obj): Requests response object
+        '''
+        # tags = self.get_tags('/on_prem_hosts', id=id)
+        response = self.get('/on_prem_hosts', id=id, _fields="display_name,tags")
+        if response.status_code in self.return_codes_ok:
+            data = response.json()['result']
+        else:
+            data = {}
+        logging.debug("Existing tags: {}".format(data))
+        # Add new tag to data
+        if tagname:
+            data['tags'].update({tagname: tagvalue})
+            logging.debug("New tags: {}".format(data))
+        # Update object
+        response = self.update('/on_prem_hosts', id=id, body=json.dumps(data))
+
+        return response
+
+
+    def oph_delete_tag(self, id="", tagname=""):
+        '''
+        Method to delete a tag from an existing On Prem Host
+
+        Parameters:
+            objpath (str):  Swagger object path
+            tagname (str): Name of tag to add
+
+        Returns:
+            response (obj): Requests response object
+        '''
+        # tags = self.get_tags('/on_prem_hosts', id=id)
+        response = self.get('/on_prem_hosts', id=id, _fields="display_name,tags")
+        if response.status_code in self.return_codes_ok:
+            data = response.json()['result']
+            logging.debug("Existing tags: {}".format(data))
+            # Delete tag from data
+            if tagname in data['tags'].keys():
+                data['tags'].pop(tagname, True)
+                print(json.dumps(data))
+                logging.debug("New tags: {}".format(data))
+                # Update object
+                response = self.update('/on_prem_hosts', id=id, body=json.dumps(data))
+
+        return response

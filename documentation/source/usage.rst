@@ -10,6 +10,12 @@ There are several classes/subclasses that provide this access. The base
 class is :class:`b1`. This acts as a parent class for the BloxOne Application
 APIs.
 
+The specific API 'trees' are split in to subclasses of :class:`b1`:
+
+    :class:`b1platform`
+    :class:`b1_on_prem_hosts`
+    :class:`b1ddi`
+
 Associated with this are the subclasses :class:`b1platform` that provide access
 to API calls associated with the BloxOne platform itself and :class:`b1ddi` that
 provides access the BloxOne DDI API core methods for *get, create, delete* 
@@ -38,7 +44,7 @@ For BloxOne DDI therefore the basic usage structure for a *get* is::
     if response.status_code in b1ddi.return_codes_ok:
         print(response.text)
     else: 
-        print(response.status_code
+        print(response.status_code)
 
 Similarly for the other core functions. For details around parameters, please
 see the :doc:`class documentation </classes>`
@@ -91,12 +97,13 @@ Examples
 
     # Example with multiple API parameters
     response = b1ddi.get('/ipam/subnet', _tfilter="Owner==marrison",_fields="address")
+    response = b1ddi.get('/ipam/subnet', _tfilter="Owner~mar")
 
     # Get ID from key/value pair
     id = b1ddi.get_id('/dns/auth_zone', key="fqdn", value="home.")
     # 'dns/auth_zone/80b0e234-8d5b-465b-8c98-e9430c5d83a9'
 
-    id = b1ddi.get_id('/ipam/ip_space', key="name", value="marrison_lab")
+    id = b1ddi.get_id('/ipam/ip_space', key="name", value="marrison-lab")
     # 'ipam/ip_space/fd388619-b013-11ea-b956-ca543bd8c483'
 
     r = b1ddi.get_zone_child(parent="zone", name="home.", fields="name,record_type,record_data")

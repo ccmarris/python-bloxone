@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>bloxone.b1ddi &mdash; Bloxone API Wrapper 0.1.2 documentation</title>
+  <title>bloxone.b1ddi &mdash; Bloxone API Wrapper 0.3.9 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.1.2
+                0.3.9
               </div>
             
           
@@ -166,11 +166,11 @@
 
 <span class="sd"> Author: Chris Marrison</span>
 
-<span class="sd"> Date Last Updated: 20200713</span>
+<span class="sd"> Date Last Updated: 20200807</span>
 
 <span class="sd"> Todo:</span>
 
-<span class="sd"> Copyright (c) 2018 Chris Marrison / Infoblox</span>
+<span class="sd"> Copyright (c) 2020 Chris Marrison / Infoblox</span>
 
 <span class="sd"> Redistribution and use in source and binary forms,</span>
 <span class="sd"> with or without modification, are permitted provided</span>
@@ -198,7 +198,7 @@
 
 <span class="sd">------------------------------------------------------------------------</span>
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.2.4&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.3.1&#39;</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison&#39;</span>
 <span class="n">__author_email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
 
@@ -208,10 +208,13 @@
 
 <span class="c1"># ** Global Vars **</span>
 
-<div class="viewcode-block" id="b1ddi"><a class="viewcode-back" href="../../classes.html#bloxone.b1ddi">[docs]</a><span class="k">class</span> <span class="nc">b1ddi</span><span class="p">(</span><span class="n">bloxone</span><span class="o">.</span><span class="n">b1</span><span class="p">):</span>
+<div class="viewcode-block" id="b1ddi"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1ddi">[docs]</a><span class="k">class</span> <span class="nc">b1ddi</span><span class="p">(</span><span class="n">bloxone</span><span class="o">.</span><span class="n">b1</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    BloxOne DDI API Wrapper Class</span>
+<span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="c1"># Generic Methods</span>
-<div class="viewcode-block" id="b1ddi.get"><a class="viewcode-back" href="../../classes.html#bloxone.b1ddi.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+<div class="viewcode-block" id="b1ddi.get"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1ddi.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Generic get object wrapper for ddi objects</span>
 
@@ -235,7 +238,7 @@
 
 
 
-<div class="viewcode-block" id="b1ddi.create"><a class="viewcode-back" href="../../classes.html#bloxone.b1ddi.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="b1ddi.create"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1ddi.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Generic create object wrapper for ddi objects</span>
 
@@ -248,6 +251,7 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c1"># Build url</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddi_url</span> <span class="o">+</span> <span class="n">objpath</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;URL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
 
         <span class="c1"># Make API Call</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apipost</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span>
@@ -255,7 +259,7 @@
         <span class="k">return</span> <span class="n">response</span></div>
 
 
-<div class="viewcode-block" id="b1ddi.delete"><a class="viewcode-back" href="../../classes.html#bloxone.b1ddi.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="b1ddi.delete"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1ddi.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Generic delete object wrapper for ddi objects</span>
 
@@ -269,6 +273,7 @@
         <span class="c1"># Build url</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddi_url</span> <span class="o">+</span> <span class="n">objpath</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_obj_id</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;URL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
 
         <span class="c1"># Make API Call</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apidelete</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
@@ -276,7 +281,7 @@
         <span class="k">return</span> <span class="n">response</span></div>
 
 
-<div class="viewcode-block" id="b1ddi.update"><a class="viewcode-back" href="../../classes.html#bloxone.b1ddi.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="b1ddi.update"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1ddi.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Generic create object wrapper for ddi objects</span>
 
@@ -290,6 +295,7 @@
         <span class="c1"># Build url</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddi_url</span> <span class="o">+</span> <span class="n">objpath</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_obj_id</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;URL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
 
         <span class="c1"># Make API Call</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apipatch</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span>
@@ -299,7 +305,7 @@
  
    <span class="c1"># *** Helper Methods ***</span>
 
-<div class="viewcode-block" id="b1ddi.get_id"><a class="viewcode-back" href="../../classes.html#bloxone.b1ddi.get_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">include_path</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="b1ddi.get_id"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1ddi.get_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">include_path</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Get object id using key/value pair</span>
 
@@ -318,6 +324,7 @@
         <span class="c1"># Build url</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddi_url</span> <span class="o">+</span> <span class="n">objpath</span>
         <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="s1">&#39;?_fields=&#39;</span> <span class="o">+</span> <span class="n">key</span> <span class="o">+</span> <span class="s1">&#39;,id&#39;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;URL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
 
         <span class="c1"># Make API Call</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
@@ -346,7 +353,7 @@
         <span class="k">return</span> <span class="nb">id</span></div>
 
 
-<div class="viewcode-block" id="b1ddi.get_object_by_key"><a class="viewcode-back" href="../../classes.html#bloxone.b1ddi.get_object_by_key">[docs]</a>    <span class="k">def</span> <span class="nf">get_object_by_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">include_path</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="b1ddi.get_object_by_key"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1ddi.get_object_by_key">[docs]</a>    <span class="k">def</span> <span class="nf">get_object_by_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">include_path</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Get object using key/value pair</span>
 
@@ -363,7 +370,7 @@
 
     <span class="c1"># *** Undocumented DNS Calls ***</span>
 
-<div class="viewcode-block" id="b1ddi.get_zone_child"><a class="viewcode-back" href="../../classes.html#bloxone.b1ddi.get_zone_child">[docs]</a>    <span class="k">def</span> <span class="nf">get_zone_child</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="s2">&quot;zone&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="b1ddi.get_zone_child"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1ddi.get_zone_child">[docs]</a>    <span class="k">def</span> <span class="nf">get_zone_child</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="s2">&quot;zone&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Method to retrieve Zones in specified view</span>
 

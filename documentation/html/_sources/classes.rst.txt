@@ -2,11 +2,9 @@
 Classes Documentation
 =====================
 
-.. autoclass:: bloxone.b1
-    :members:
+.. toctree::
+    :maxdepth: 2
 
-.. autoclass:: bloxone.b1platform
-    :members:
-
-.. autoclass:: bloxone.b1ddi
-    :members:
+    bloxone-class
+    b1ddi-class
+    b1td-class

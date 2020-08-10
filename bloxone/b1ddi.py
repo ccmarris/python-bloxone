@@ -9,11 +9,11 @@
 
  Author: Chris Marrison
 
- Date Last Updated: 20200713
+ Date Last Updated: 20200807
 
  Todo:
 
- Copyright (c) 2018 Chris Marrison / Infoblox
+ Copyright (c) 2020 Chris Marrison / Infoblox
 
  Redistribution and use in source and binary forms,
  with or without modification, are permitted provided
@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.2.4'
+__version__ = '0.3.1'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -52,6 +52,9 @@ import json
 # ** Global Vars **
 
 class b1ddi(bloxone.b1):
+    '''
+    BloxOne DDI API Wrapper Class
+    '''
 
     # Generic Methods
     def get(self, objpath, id="", action="", **params):
@@ -91,6 +94,7 @@ class b1ddi(bloxone.b1):
         '''
         # Build url
         url = self.ddi_url + objpath
+        logging.debug("URL: {}".format(url))
 
         # Make API Call
         response = self._apipost(url, body)
@@ -112,6 +116,7 @@ class b1ddi(bloxone.b1):
         # Build url
         url = self.ddi_url + objpath
         url = self._use_obj_id(url,id=id)
+        logging.debug("URL: {}".format(url))
 
         # Make API Call
         response = self._apidelete(url)
@@ -133,6 +138,7 @@ class b1ddi(bloxone.b1):
         # Build url
         url = self.ddi_url + objpath
         url = self._use_obj_id(url, id=id)
+        logging.debug("URL: {}".format(url))
 
         # Make API Call
         response = self._apipatch(url, body)
@@ -161,6 +167,7 @@ class b1ddi(bloxone.b1):
         # Build url
         url = self.ddi_url + objpath
         url = url + '?_fields=' + key + ',id'
+        logging.debug("URL: {}".format(url))
 
         # Make API Call
         response = self._apiget(url)

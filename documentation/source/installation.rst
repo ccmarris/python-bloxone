@@ -6,6 +6,10 @@ Installation
   Please ensure you have Python 3 plus the required modules as defined in the  
   :doc:`requirements` section.
 
+.. note::
+  This was developed under Python 3.8 but may work on earlier versions, but
+  has not been tested. It is unlikely to work in versions prior to 3.6.
+
 .. important::
   Mac users will need the xcode command line utilities installed to use pip3, etc.
   If you need to install these use the command::

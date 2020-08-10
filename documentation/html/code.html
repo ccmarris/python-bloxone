@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Source Documentation &mdash; Bloxone API Wrapper 0.1.2 documentation</title>
+  <title>Source Documentation &mdash; Bloxone API Wrapper 0.3.9 documentation</title>
   
 
   
@@ -36,7 +36,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="ChangeLog" href="version_history.html" />
-    <link rel="prev" title="Classes Documentation" href="classes.html" /> 
+    <link rel="prev" title="b1td Class" href="b1td-class.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.1.2
+                0.3.9
               </div>
             
           
@@ -164,7 +164,7 @@
 <blockquote>
 <div><p>Description:</p>
 <p>Module to provide class hierachy to simplify access to the BloxOne APIs</p>
-<p>Date Last Updated: 20200713</p>
+<p>Date Last Updated: 20200807</p>
 <p>Todo:</p>
 <p>Copyright (c) 2020 Chris Marrison / Infoblox</p>
 <p>Redistribution and use in source and binary forms,
@@ -261,6 +261,37 @@ POSSIBILITY OF SUCH DAMAGE.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="bloxone.bloxone.b1platform.get_tags">
+<code class="sig-name descname">get_tags</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1platform.get_tags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.bloxone.b1platform.get_tags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get tags for an object id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
+<li><p><strong>id</strong> (<em>str</em>) – id of object</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Dictionary of current tags</dt><dd><p>or empty dict if none</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>tags (dict)</p>
+</dd>
+</dl>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<ul class="simple">
+<li><p>make generic, however, this requires the below</p></li>
+<li><p>Lookup dictionary of ‘required fields’ per object type</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py method">
 <dt id="bloxone.bloxone.b1platform.on_prem_hosts">
 <code class="sig-name descname">on_prem_hosts</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">params</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1platform.on_prem_hosts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.bloxone.b1platform.on_prem_hosts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to retrieve On Prem Hosts
@@ -268,6 +299,47 @@ POSSIBILITY OF SUCH DAMAGE.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>**params</strong> (<em>dict</em>) – Generic API parameters</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Requests response object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>response (obj)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="bloxone.bloxone.b1platform.oph_add_tag">
+<code class="sig-name descname">oph_add_tag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">tagname</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">tagvalue</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1platform.oph_add_tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.bloxone.b1platform.oph_add_tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to add a tag to an existing On Prem Host</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
+<li><p><strong>tagname</strong> (<em>str</em>) – Name of tag to add</p></li>
+<li><p><strong>tagvalue</strong> (<em>str</em>) – Value to associate</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Requests response object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>response (obj)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="bloxone.bloxone.b1platform.oph_delete_tag">
+<code class="sig-name descname">oph_delete_tag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">tagname</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1platform.oph_delete_tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.bloxone.b1platform.oph_delete_tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to delete a tag from an existing On Prem Host</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
+<li><p><strong>tagname</strong> (<em>str</em>) – Name of tag to add</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Requests response object</p>
@@ -330,7 +402,7 @@ POSSIBILITY OF SUCH DAMAGE.</p>
         <a href="version_history.html" class="btn btn-neutral float-right" title="ChangeLog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="classes.html" class="btn btn-neutral float-left" title="Classes Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="b1td-class.html" class="btn btn-neutral float-left" title="b1td Class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

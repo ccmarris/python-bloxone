@@ -2,6 +2,9 @@
 ChangeLog
 *********
 
+|   20200810    v0.3.9   Fixed bug in b1td.get method
+|   20200807    v0.3.8   Created b1td class for TIDE API b1td.py
+|   20200714    v0.3.0   Added specific add/delete tags for on_prem_hosts
 |   20200714    v0.2.4   Added create and update methods to b1platform class
 |   20200713    v0.2.1   Renamed patch to update as originally intended 
 |   20200713    v0.2.0   Removed original methods for get_object
