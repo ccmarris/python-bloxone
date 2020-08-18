@@ -2,5 +2,5 @@
 b1td Class
 ==========
 
-.. autoclass:: bloxone.b1ddi
+.. autoclass:: bloxone.b1td
     :members:

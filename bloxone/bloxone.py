@@ -7,7 +7,7 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20200807
+ Date Last Updated: 20200818
 
  Todo:
 
@@ -39,7 +39,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.3.8'
+__version__ = '0.5.2'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -118,8 +118,6 @@ class b1:
                         'Authorization': 'Token ' + self.api_key} )
         
         # Create base URLs
-        # self.ep_url = self.cfg['url'] + '/api/host_app/' + self.cfg['api_version']
-        # self.fw_url = self.cfg['url'] + '/api/host_app/' + self.cfg['api_version']
         self.base_url = self.cfg['url']
         self.api_version = self.cfg['api_version']
         self.ddi_url = self.base_url + '/api/ddi/' + self.api_version
@@ -130,11 +128,7 @@ class b1:
         self.tddfp_url = self.base_url + '/api/atcdfp/' + self.cfg['api_version']
         self.tdlad_url = self.base_url + '/api/atclad/' + self.cfg['api_version']
         self.tide_url = self.base_url + '/tide/api' 
-        self.dossier_url = self.base_url + '/tide/api'
-
-        self.dns_url = self.base_url + '/api/ddi/' + self.cfg['api_version'] + '/dns'
-        self.ipam_url = self.base_url + '/api/ddi/' + self.cfg['api_version'] + '/ipam'
-        self.dhcp_url = self.base_url + '/api/ddi/' + self.cfg['api_version'] +'/dhcp'
+        self.dossier_url = self.base_url + '/dossier/api' # Placeholder
 
         # List of successful return codes
         self.return_codes_ok = [200, 201, 204]
@@ -191,16 +185,18 @@ class b1:
         return response
 
  
-    def _apidelete(self, url):    
+    def _apidelete(self, url, body=""):    
      # Call BloxOne API
         try:
             response = requests.request("DELETE",
                                         url,
-                                        headers=self.headers)
+                                        headers=self.headers,
+                                        data=body)
         # Catch exceptions
         except requests.exceptions.RequestException as e:
             logging.error(e)
-            logging.debug("url: {}".format(url))
+            logging.debug("URL: {}".format(url))
+            logging.debug("BODY: {}".format(body))
             raise
 
         # Return response code and body text

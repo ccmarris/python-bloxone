@@ -1,0 +1,527 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>bloxone.b1td &mdash; Bloxone API Wrapper 0.5.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Bloxone API Wrapper
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.5.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage and Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../classes.html">Classes Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils.html">Additional Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code.html">Source Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../version_history.html">ChangeLog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ackowledgements.html">Authors and acknowledgment</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Bloxone API Wrapper</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>bloxone.b1td</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for bloxone.b1td</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/local/bin/python3</span>
+<span class="c1"># vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">------------------------------------------------------------------------</span>
+
+<span class="sd"> Description:</span>
+
+<span class="sd"> BloxOne DDI API Wrapper Class and Helpers</span>
+
+<span class="sd"> Author: Chris Marrison</span>
+
+<span class="sd"> Date Last Updated: 20200810</span>
+
+<span class="sd"> Todo:</span>
+
+<span class="sd"> Copyright (c) 2020 Chris Marrison / Infoblox</span>
+
+<span class="sd"> Redistribution and use in source and binary forms,</span>
+<span class="sd"> with or without modification, are permitted provided</span>
+<span class="sd"> that the following conditions are met:</span>
+
+<span class="sd"> 1. Redistributions of source code must retain the above copyright</span>
+<span class="sd"> notice, this list of conditions and the following disclaimer.</span>
+
+<span class="sd"> 2. Redistributions in binary form must reproduce the above copyright</span>
+<span class="sd"> notice, this list of conditions and the following disclaimer in the</span>
+<span class="sd"> documentation and/or other materials provided with the distribution.</span>
+
+<span class="sd"> THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</span>
+<span class="sd"> &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</span>
+<span class="sd"> LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS</span>
+<span class="sd"> FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE</span>
+<span class="sd"> COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,</span>
+<span class="sd"> INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,</span>
+<span class="sd"> BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;</span>
+<span class="sd"> LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span>
+<span class="sd"> CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT</span>
+<span class="sd"> LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN</span>
+<span class="sd"> ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
+<span class="sd"> POSSIBILITY OF SUCH DAMAGE.</span>
+
+<span class="sd">------------------------------------------------------------------------</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.5&#39;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison&#39;</span>
+<span class="n">__author_email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
+
+<span class="kn">import</span> <span class="nn">bloxone</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="c1"># ** Global Vars **</span>
+
+<div class="viewcode-block" id="b1td"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td">[docs]</a><span class="k">class</span> <span class="nc">b1td</span><span class="p">(</span><span class="n">bloxone</span><span class="o">.</span><span class="n">b1</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    BloxOne ThreatDefence API Wrapper</span>
+<span class="sd">    Covers TIDE and Dossier</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># Generic Methods</span>
+<div class="viewcode-block" id="b1td.get"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Generic get object wrapper for TIDE data objects</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            objpath (str):  Swagger object path</span>
+<span class="sd">            action (str):   Optional object action</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Build url</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tide_url</span> <span class="o">+</span> <span class="n">objpath</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_params</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;URL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+
+<div class="viewcode-block" id="b1td.post"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.post">[docs]</a>    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Generic create object wrapper for ddi objects</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            objpath (str):  Swagger object path</span>
+<span class="sd">            body (str):     JSON formatted data payload</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Build url</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddi_url</span> <span class="o">+</span> <span class="n">objpath</span>
+
+        <span class="c1"># Make API Call</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apipost</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+   <span class="c1"># *** Helper Methods ***</span>
+
+<div class="viewcode-block" id="b1td.threat_classes"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.threat_classes">[docs]</a>    <span class="k">def</span> <span class="nf">threat_classes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get list of threat classes</span>
+
+<span class="sd">        Parameters:</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="c1"># Local Variables</span>
+        <span class="n">objpath</span> <span class="o">=</span> <span class="s1">&#39;/data/threat_classes&#39;</span>
+
+        <span class="c1"># Build url</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tide_url</span> <span class="o">+</span> <span class="n">objpath</span>
+
+        <span class="c1"># Make API Call</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="b1td.threat_properties"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.threat_properties">[docs]</a>    <span class="k">def</span> <span class="nf">threat_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threatclass</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get list of threat properties</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            threatclass (str): Threat Class</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="c1"># Local Variables</span>
+        <span class="n">objpath</span> <span class="o">=</span> <span class="s1">&#39;/data/properties&#39;</span>
+
+        <span class="c1"># Build url</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tide_url</span> <span class="o">+</span> <span class="n">objpath</span>
+        <span class="k">if</span> <span class="n">threatclass</span><span class="p">:</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="s1">&#39;?class=&#39;</span> <span class="o">+</span> <span class="n">threatclass</span>
+
+        <span class="c1"># Make API Call</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    (Currently not implemented)</span>
+<span class="sd">    def threat_stats(self, period=&quot;daily&quot;, **paramas):</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        Query Infoblox TIDE for threat class stats</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            period (str): one of [&#39;daily&#39;, &#39;weekly&#39;, &#39;monthly&#39;]</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        objpath = &#39;/data/dashboard/&#39;</span>
+
+<span class="sd">        # Build URL</span>
+<span class="sd">        url = self.tide_url + objpath</span>
+<span class="sd">        url = url + period </span>
+<span class="sd">        # url = url + period + &#39;_threats_by_class&#39;</span>
+
+<span class="sd">        # Make API Call</span>
+<span class="sd">        response = self._apiget(url)</span>
+
+<span class="sd">        return response</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="b1td.querytide"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.querytide">[docs]</a>    <span class="k">def</span> <span class="nf">querytide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Query Infoblox TIDE for all avaialble threat data</span>
+<span class="sd">        related to query.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            datatype (str): &quot;host&quot;, &quot;ip&quot; or &quot;url&quot;</span>
+<span class="sd">            query (str): query data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">objpath</span> <span class="o">=</span> <span class="s1">&#39;/data/threats/&#39;</span>
+
+        <span class="c1"># Build URL</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tide_url</span> <span class="o">+</span> <span class="n">objpath</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="n">datatype</span> <span class="o">+</span> <span class="s1">&#39;?&#39;</span> <span class="o">+</span> <span class="n">datatype</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="n">query</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_params</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">first_param</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+
+        <span class="c1"># Make API Call</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+<div class="viewcode-block" id="b1td.querytideactive"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.querytideactive">[docs]</a>    <span class="k">def</span> <span class="nf">querytideactive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Query Infoblox TIDE for &quot;active&quot; threat data</span>
+<span class="sd">        i.e. threat data that has not expired at time of call</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            datatype (str): &quot;host&quot;, &quot;ip&quot; or &quot;url&quot;</span>
+<span class="sd">            query (str): query data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">objpath</span> <span class="o">=</span> <span class="s1">&#39;/data/threats/&#39;</span>
+        <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+
+        <span class="c1"># Build URL</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tide_url</span> <span class="o">+</span> <span class="n">objpath</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="n">datatype</span> <span class="o">+</span> <span class="s1">&#39;?&#39;</span> <span class="o">+</span> <span class="n">datatype</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="n">query</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="s1">&#39;&amp;expiration=&#39;</span> <span class="o">+</span> <span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H:%M:%SZ&#39;</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_params</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">first_param</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+
+        <span class="c1"># Make API Call</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="b1td.querytidestate"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.querytidestate">[docs]</a>    <span class="k">def</span> <span class="nf">querytidestate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Query Infoblox TIDE State Tables for specific query</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            datatype (str): &quot;host&quot;, &quot;ip&quot; or &quot;url&quot;</span>
+<span class="sd">            query (str): query data</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">objpath</span> <span class="o">=</span> <span class="s1">&#39;/data/threats/state/&#39;</span>
+
+        <span class="c1"># Build URL</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tide_url</span> <span class="o">+</span> <span class="n">objpath</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="n">datatype</span> <span class="o">+</span> <span class="s1">&#39;?&#39;</span> <span class="o">+</span> <span class="n">datatype</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="n">query</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_params</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">first_param</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+
+        <span class="c1"># Make API Call</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+<div class="viewcode-block" id="b1td.tideactivefeed"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.tideactivefeed">[docs]</a>    <span class="k">def</span> <span class="nf">tideactivefeed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+                       <span class="n">datatype</span><span class="p">,</span> 
+                       <span class="n">profile</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> 
+                       <span class="n">threatclass</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                       <span class="n">threatproperty</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                       <span class="o">**</span><span class="n">params</span> <span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Bulk &quot;active&quot; threat intel download from Infoblox TIDE state tables</span>
+<span class="sd">        for specified datatype.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            datatype (str): &quot;host&quot;, &quot;ip&quot; or &quot;url&quot;</span>
+<span class="sd">            profile (str, optional): Data provider</span>
+<span class="sd">            threatclass (str, optional): tide data class</span>
+<span class="sd">            threatproperty (str, optional): tide data property</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">objpath</span> <span class="o">=</span> <span class="s1">&#39;/data/threats/state/&#39;</span>
+
+        <span class="c1"># Build URL</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tide_url</span> <span class="o">+</span> <span class="n">objpath</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="n">datatype</span> 
+        <span class="k">if</span> <span class="n">profile</span> <span class="ow">or</span> <span class="n">threatclass</span> <span class="ow">or</span> <span class="n">threatproperty</span><span class="p">:</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="s1">&#39;?&#39;</span>
+            <span class="k">if</span> <span class="n">profile</span><span class="p">:</span>
+                <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="s1">&#39;&amp;profile=&#39;</span> <span class="o">+</span> <span class="n">profile</span>
+            <span class="k">if</span> <span class="n">threatclass</span><span class="p">:</span>
+                <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="s1">&#39;&amp;class=&#39;</span> <span class="o">+</span> <span class="n">threatclass</span>
+            <span class="k">if</span> <span class="n">threatproperty</span><span class="p">:</span>
+                <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="s1">&#39;&amp;property=&#39;</span> <span class="o">+</span> <span class="n">threatproperty</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_params</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">first_param</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> 
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_params</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> 
+
+        <span class="c1"># Make API Call</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div></div>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Not documented and returns Not Implemented</span>
+<span class="sd">    def dossierquery(self, type=&quot;host&quot;, sources=&quot;all&quot;):</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        Simple Dossier Query</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters:</span>
+<span class="sd">            query (str): query data</span>
+<span class="sd">            type (str): &quot;host&quot;, &quot;ip&quot; or &quot;url&quot;</span>
+<span class="sd">            sources (str): set of sources or &quot;all&quot;</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        url = self.dossier_url</span>
+<span class="sd">        # Create body</span>
+<span class="sd">        if sources == &quot;all&quot;:</span>
+<span class="sd">            sources = (&#39;&quot;alexa&quot;,&quot;atp&quot;,&quot;ccb&quot;,&quot;dns&quot;,&quot;gcs&quot;,&quot;geo&quot;,&quot;gsb&quot;,</span>
+<span class="sd">                        &quot;isight&quot;,&quot;malware_analysis&quot;,&quot;ptr&quot;,&quot;pdns&quot;,&quot;rwhois&quot;,</span>
+<span class="sd">                        &quot;whois&quot;,&quot;inforank&quot;&#39;)</span>
+<span class="sd">        else:</span>
+<span class="sd">            sources = &#39;&quot;&#39;+sources+&#39;&quot;&#39;</span>
+
+<span class="sd">        body = (&#39;{&quot;target&quot;: {&quot;one&quot;: {&quot;type&quot;: &quot;&#39;</span>
+<span class="sd">                + type + &#39;&quot;, &quot;target&quot;: &quot;&#39;</span>
+<span class="sd">                + query + &#39;&quot;, &quot;sources&quot;: [&#39;+sources+&#39;] }}}, &quot;</span>
+<span class="sd">                + &quot;options&quot;:{}}&#39;)</span>
+
+<span class="sd">        response = self._apipost(url, body)</span>
+
+<span class="sd">        return response</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Chris Marrison
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

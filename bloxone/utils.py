@@ -307,7 +307,7 @@ def count_labels(fqdn):
 
 def strip_host(fqdn):
     '''
-    Take FQDN and return n label domain
+    Take FQDN and strip first label
     or fqdn if no. of labels is 2 or less
 
     Parameters:

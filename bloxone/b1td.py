@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.1.1'
+__version__ = '0.1.5'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -61,12 +61,11 @@ class b1td(bloxone.b1):
     # Generic Methods
     def get(self, objpath, action="", **params):
         '''
-        Generic get object wrapper for ddi objects
+        Generic get object wrapper for TIDE data objects
 
         Parameters:
             objpath (str):  Swagger object path
-            id (str):       Optional Object ID
-            action (str):   Optional object action, e.g. "nextavailableip"
+            action (str):   Optional object action
         
         Returns:
             response (obj): Requests response object
@@ -82,7 +81,7 @@ class b1td(bloxone.b1):
 
 
 
-    def create(self, objpath, body=""):
+    def post(self, objpath, body=""):
         '''
         Generic create object wrapper for ddi objects
 
@@ -102,48 +101,6 @@ class b1td(bloxone.b1):
         return response
 
 
-    def delete(self, objpath, id=""):
-        '''
-        Generic delete object wrapper for ddi objects
-
-        Parameters:
-            objpath (str):  Swagger object path
-            id (str):       Object id to delete
-
-        Returns:
-            response (obj): Requests response object
-        '''
-        # Build url
-        url = self.ddi_url + objpath
-        url = self._use_obj_id(url,id=id)
-
-        # Make API Call
-        response = self._apidelete(url)
-
-        return response
-
-
-    def update(self, objpath, id="", body=""):
-        '''
-        Generic create object wrapper for ddi objects
-
-        Parameters:
-            objpath (str):  Swagger object path
-            body (str):     JSON formatted data payload
-
-        Returns:
-            response (obj): Requests response object
-        '''
-        # Build url
-        url = self.ddi_url + objpath
-        url = self._use_obj_id(url, id=id)
-
-        # Make API Call
-        response = self._apipatch(url, body)
-
-        return response
-
- 
    # *** Helper Methods ***
 
     def threat_classes(self, **params):

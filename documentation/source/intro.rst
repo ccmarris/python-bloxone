@@ -13,9 +13,10 @@ you to take the swagger documented object paths, fields and where appropriate
 JSON body from the documentation and pass them to simple get, create, delete and
 update methods. These methods simply return a :mod:`requests` response object.
 
-In addition, useful utility methods are provided for common tasks such as 
-getting an object id, by defining the object key and value match pair. This is
-combined with several (currently) undocumented API calls.
+In addition, useful utility methods are provided for common tasks such as
+getting an object id, by defining the object key and value match pair. Or
+getting a threat feed from TIDE. This is combined with several (currently)
+undocumented API calls.
 
 Some basic configuration, such a base url, API version and API key are read
 from an ini file. An example of which is provided. When instantiating/initialising

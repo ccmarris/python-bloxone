@@ -1,0 +1,19 @@
+===========
+b1tdc Usage
+===========
+
+Examples
+--------
+
+.. todo::
+    These examples are placeholders, useful, but actual example set here is on 
+    the todo.
+
+.. code-block:: python
+
+    import bloxone
+    tdc = bloxone.b1tdc('/Users/marrison/configs/emea.ini')
+    tdc.get('/access_codes').json()
+    tdc.get('/cert_download_urls').json()
+    tdc.get('/content_categories').json()
+    tdc.get('/threat_feeds').json()

@@ -8,7 +8,7 @@ Welcome to BloxOne API Wrapper's documentation!
 ===============================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    :caption: Contents:
 
    intro
@@ -17,8 +17,10 @@ Welcome to BloxOne API Wrapper's documentation!
    installation
    usage
    classes
+   utils
    code.rst
    version_history
+   ackowledgements
 
 Indices and tables
 ==================

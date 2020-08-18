@@ -9,7 +9,7 @@
 
  Author: Chris Marrison
 
- Date Last Updated: 20200807
+ Date Last Updated: 20200817
 
  Todo:
 
@@ -209,6 +209,93 @@ class b1ddi(bloxone.b1):
             id (str):   object id or ""
         '''
         return self.get(objpath, id=self.get_id(objpath, key=key, value=value))
+
+
+    def get_tags(self, objpath, id=""):
+        '''
+        Get tags for an object id
+
+        Parameters:
+            objpath (str):  Swagger object path
+
+            id (str): id of object
+
+        Returns:
+            tags (dict): Dictionary of current tags
+                         or empty dict if none
+        
+        .. todo::
+            * make generic, however, this requires the below
+            * Lookup dictionary of 'required fields' per object type
+        '''
+        tags = {}
+        response = self.get(objpath, id=id, _fields="tags")
+        if response.status_code in self.return_codes_ok:
+            tags = json.loads(response.text)
+            tags = tags['result']
+        else:
+            tags = {}
+        
+        return tags
+
+
+    def add_tag(self, objpath, id, tagname="", tagvalue=""):
+        '''
+        Method to add a tag to an existing On Prem Host
+
+        Parameters:
+            objpath (str):  Swagger object path
+            id (str): Object ID
+            tagname (str): Name of tag to add
+            tagvalue (str): Value to associate with tag
+
+        Returns:
+            response (obj): Requests response object
+        '''
+        response = self.get(objpath, id=id)
+        if response.status_code in self.return_codes_ok:
+            data = response.json()['result']
+        else:
+            data = {}
+        logging.debug("Existing tags: {}".format(data['tags']))
+        if data:
+            # Add new tag to data
+            if tagname:
+                data['tags'].update({tagname: tagvalue})
+                logging.debug("New tags: {}".format(data['tags']))
+            # Update object
+            response = self.update('/on_prem_hosts', id=id, body=json.dumps(data))
+        else:
+            logging.debug("No object found")
+
+        return response
+
+
+    def delete_tag(self, id="", tagname=""):
+        '''
+        Method to delete a tag from an existing On Prem Host
+
+        Parameters:
+            objpath (str):  Swagger object path
+            tagname (str): Name of tag to add
+
+        Returns:
+            response (obj): Requests response object
+        '''
+        # tags = self.get_tags('/on_prem_hosts', id=id)
+        response = self.get('/on_prem_hosts', id=id)
+        if response.status_code in self.return_codes_ok:
+            data = response.json()['result']
+            logging.debug("Existing tags: {}".format(data['tags']))
+            # Delete tag from data
+            if tagname in data['tags'].keys():
+                data['tags'].pop(tagname, True)
+                print(json.dumps(data))
+                logging.debug("New tags: {}".format(data['tags']))
+                # Update object
+                response = self.update('/on_prem_hosts', id=id, body=json.dumps(data))
+
+        return response
 
 
     # *** Undocumented DNS Calls ***

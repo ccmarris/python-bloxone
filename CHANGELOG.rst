@@ -2,6 +2,10 @@
 ChangeLog
 *********
 
+|   20200818    v0.5.1   Initial Classes for Threat Defence DFP
+|   20200818    v0.5.0   Initial Classes for Threat Defence (EP, Cloud, LAD)
+|   20200817    v0.4.1   Added tag manipulation to b1ddi
+|   20200810    v0.4.0   Minor changes and improved documentatin
 |   20200810    v0.3.9   Fixed bug in b1td.get method
 |   20200807    v0.3.8   Created b1td class for TIDE API b1td.py
 |   20200714    v0.3.0   Added specific add/delete tags for on_prem_hosts

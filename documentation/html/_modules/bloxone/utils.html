@@ -1,0 +1,573 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>bloxone.utils &mdash; Bloxone API Wrapper 0.5.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Bloxone API Wrapper
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.5.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage and Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../classes.html">Classes Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils.html">Additional Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code.html">Source Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../version_history.html">ChangeLog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ackowledgements.html">Authors and acknowledgment</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Bloxone API Wrapper</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>bloxone.utils</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for bloxone.utils</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/local/bin/python3</span>
+<span class="c1"># vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">------------------------------------------------------------------------</span>
+
+<span class="sd"> Description:</span>
+<span class="sd">    Simple utility functions for data type validation, domain handling,</span>
+<span class="sd">    and data normalisationa specifically with the aim of supporting</span>
+<span class="sd">    queries to TIDE and Dossier.</span>
+
+<span class="sd"> Requirements:</span>
+<span class="sd">   Python3 with re, ipaddress, requests </span>
+
+<span class="sd"> Author: Chris Marrison</span>
+
+<span class="sd"> Date Last Updated: 20200621</span>
+
+<span class="sd"> Todo:</span>
+
+<span class="sd"> Copyright (c) 2018 Chris Marrison / Infoblox</span>
+
+<span class="sd"> Redistribution and use in source and binary forms,</span>
+<span class="sd"> with or without modification, are permitted provided</span>
+<span class="sd"> that the following conditions are met:</span>
+
+<span class="sd"> 1. Redistributions of source code must retain the above copyright</span>
+<span class="sd"> notice, this list of conditions and the following disclaimer.</span>
+
+<span class="sd"> 2. Redistributions in binary form must reproduce the above copyright</span>
+<span class="sd"> notice, this list of conditions and the following disclaimer in the</span>
+<span class="sd"> documentation and/or other materials provided with the distribution.</span>
+
+<span class="sd"> THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</span>
+<span class="sd"> &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</span>
+<span class="sd"> LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS</span>
+<span class="sd"> FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE</span>
+<span class="sd"> COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,</span>
+<span class="sd"> INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,</span>
+<span class="sd"> BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;</span>
+<span class="sd"> LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span>
+<span class="sd"> CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT</span>
+<span class="sd"> LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN</span>
+<span class="sd"> ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
+<span class="sd"> POSSIBILITY OF SUCH DAMAGE.</span>
+
+<span class="sd">------------------------------------------------------------------------</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.0.1&#39;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison&#39;</span>
+<span class="n">__author_email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">configparser</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">ipaddress</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">urllib.parse</span>
+<span class="kn">import</span> <span class="nn">sqlite3</span>
+
+<span class="c1"># ** Global Vars **</span>
+
+
+<span class="c1"># ** Data Validation functions ** #</span>
+
+<div class="viewcode-block" id="data_type"><a class="viewcode-back" href="../../utils.html#bloxone.utils.data_type">[docs]</a><span class="k">def</span> <span class="nf">data_type</span><span class="p">(</span><span class="n">qdata</span><span class="p">,</span> <span class="n">host_regex</span><span class="p">,</span> <span class="n">url_regex</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Validate and determine data type (host, ip or url)</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        qdata (str): data to determine type/validity</span>
+<span class="sd">        host_regex/url_regex (re): pre-compiled regexes</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dtype (str): data type of qdata (&quot;ip&quot;, &quot;host&quot;, or &quot;url&quot;)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">validate_ip</span><span class="p">(</span><span class="n">qdata</span><span class="p">):</span>
+        <span class="n">dtype</span> <span class="o">=</span> <span class="s2">&quot;ip&quot;</span>
+    <span class="k">elif</span> <span class="n">validate_url</span><span class="p">(</span><span class="n">qdata</span><span class="p">,</span> <span class="n">url_regex</span><span class="p">):</span>
+        <span class="n">dtype</span> <span class="o">=</span> <span class="s2">&quot;url&quot;</span>
+    <span class="k">elif</span> <span class="n">validate_fqdn</span><span class="p">(</span><span class="n">qdata</span><span class="p">,</span> <span class="n">host_regex</span><span class="p">):</span>
+        <span class="n">dtype</span> <span class="o">=</span> <span class="s2">&quot;host&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">dtype</span> <span class="o">=</span> <span class="s2">&quot;invalid&quot;</span>
+    <span class="k">return</span> <span class="n">dtype</span></div>
+
+
+<div class="viewcode-block" id="buildregex"><a class="viewcode-back" href="../../utils.html#bloxone.utils.buildregex">[docs]</a><span class="k">def</span> <span class="nf">buildregex</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Pre-compile &#39;standard&#39; regexes as used by data_type and</span>
+<span class="sd">    validate_XXX functions</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        host_regex (re): Compiled regex for hostnames</span>
+<span class="sd">        url_regex (re): Compiled regex for URLs</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># Added _ for support of Microsoft domains</span>
+    <span class="n">host_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;(?!-)[A-Z\d\-\_]{1,63}(?&lt;!-)$&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+    <span class="n">url_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+        <span class="c1"># r&#39;^(?:http|ftp)s?://&#39; # http:// or https://</span>
+        <span class="c1"># http:// or https://</span>
+        <span class="sa">r</span><span class="s1">&#39;^(?:http)s?://&#39;</span>
+        <span class="c1"># domain...</span>
+        <span class="sa">r</span><span class="s1">&#39;(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|&#39;</span>
+        <span class="c1"># localhost...</span>
+        <span class="sa">r</span><span class="s1">&#39;localhost|&#39;</span>
+        <span class="c1"># ...or ipv4</span>
+        <span class="sa">r</span><span class="s1">&#39;\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|&#39;</span>
+        <span class="c1"># ...or ipv6</span>
+        <span class="sa">r</span><span class="s1">&#39;\[?[A-F0-9]*:[A-F0-9:]+\]?)&#39;</span>
+        <span class="c1"># optional port</span>
+        <span class="sa">r</span><span class="s1">&#39;(?::\d+)?&#39;</span>
+        <span class="sa">r</span><span class="s1">&#39;(?:/?|[/?]\S+)$&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">host_regex</span><span class="p">,</span> <span class="n">url_regex</span></div>
+
+
+<div class="viewcode-block" id="validate_fqdn"><a class="viewcode-back" href="../../utils.html#bloxone.utils.validate_fqdn">[docs]</a><span class="k">def</span> <span class="nf">validate_fqdn</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">regex</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Validate input data is a legitmate fqdn</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        hostname (str): fqdn as a string</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: Return True for valid and False otherwise</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hostname</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">255</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">hostname</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">hostname</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">):</span>
+        <span class="c1"># strip exactly one dot from the right, if present</span>
+        <span class="n">hostname</span> <span class="o">=</span> <span class="n">hostname</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span><span class="n">regex</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">hostname</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="validate_ip"><a class="viewcode-back" href="../../utils.html#bloxone.utils.validate_ip">[docs]</a><span class="k">def</span> <span class="nf">validate_ip</span><span class="p">(</span><span class="n">ip</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Validate input data is a valid IP address</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        ip (str): ip address as a string</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: Return True for valid and False otherwise</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">ipaddress</span><span class="o">.</span><span class="n">ip_address</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="validate_url"><a class="viewcode-back" href="../../utils.html#bloxone.utils.validate_url">[docs]</a><span class="k">def</span> <span class="nf">validate_url</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">regex</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Validate input data is a valid URL</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        url (str): string to verify as URL</span>
+<span class="sd">        regex (re): pre-compiled regex obj</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: Return True for valid and False otherwise</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">regex</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<span class="c1"># ** Misc Functions **</span>
+
+<div class="viewcode-block" id="reverse_labels"><a class="viewcode-back" href="../../utils.html#bloxone.utils.reverse_labels">[docs]</a><span class="k">def</span> <span class="nf">reverse_labels</span><span class="p">(</span><span class="n">domain</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Reserve order of domain labels (or any dot separated data, e.g. IP)</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        domain (str): domain.labels</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        rdomain (str): labels.domain</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">rdomain</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">labels</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">rdomain</span><span class="p">:</span>
+            <span class="n">rdomain</span> <span class="o">=</span> <span class="n">rdomain</span><span class="o">+</span><span class="s2">&quot;.&quot;</span><span class="o">+</span><span class="n">l</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rdomain</span> <span class="o">=</span> <span class="n">l</span>
+    <span class="k">return</span> <span class="n">rdomain</span></div>
+
+
+<span class="c1"># ** Data Conversion functions ** #</span>
+
+<div class="viewcode-block" id="convert_url_to_host"><a class="viewcode-back" href="../../utils.html#bloxone.utils.convert_url_to_host">[docs]</a><span class="k">def</span> <span class="nf">convert_url_to_host</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Break down URL and return host element</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        url (str): Validated URL</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        host (str): hostname or ip</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># Break down URL and return host element</span>
+    <span class="n">componants</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="n">componants</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="c1"># Remove port if present</span>
+    <span class="k">if</span> <span class="s2">&quot;:&quot;</span> <span class="ow">in</span> <span class="n">host</span><span class="p">:</span>
+        <span class="n">componants</span> <span class="o">=</span> <span class="n">host</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+        <span class="n">host</span> <span class="o">=</span> <span class="n">componants</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">host</span></div>
+
+
+<div class="viewcode-block" id="normalise"><a class="viewcode-back" href="../../utils.html#bloxone.utils.normalise">[docs]</a><span class="k">def</span> <span class="nf">normalise</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">itype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">www</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Take ip, host or url item process and</span>
+<span class="sd">    return normalise data.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        item (str): item to normalise</span>
+<span class="sd">        itype (str): One of [&quot;host&quot;, &quot;url&quot;, &quot;ip&quot;]</span>
+<span class="sd">        port (bool): stip port number e.g. :8080</span>
+<span class="sd">        www (bool): strip www. from hostname</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        normalised (str): Normalised item or &quot;invalid&quot;</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># Local varlables</span>
+
+    <span class="c1"># Check for itype being set</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">itype</span><span class="p">:</span>
+        <span class="c1"># Build regexes for data_type checking</span>
+        <span class="n">host_regex</span><span class="p">,</span> <span class="n">url_regex</span> <span class="o">=</span> <span class="n">buildregex</span><span class="p">()</span>
+        <span class="n">itype</span> <span class="o">=</span> <span class="n">data_type</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">host_regex</span><span class="p">,</span> <span class="n">url_regex</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">itype</span> <span class="o">!=</span> <span class="s2">&quot;invalid&quot;</span><span class="p">:</span>
+        <span class="c1"># Normalise item</span>
+        <span class="k">if</span> <span class="n">itype</span> <span class="o">==</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span>
+            <span class="c1"># Parse URL</span>
+            <span class="n">parsed_url</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlparse</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="c1"># Strip unneeded elements (protocol, params, query, *port, *www)</span>
+            <span class="k">if</span> <span class="n">port</span><span class="p">:</span>
+                <span class="n">item</span> <span class="o">=</span> <span class="n">parsed_url</span><span class="o">.</span><span class="n">hostname</span> <span class="o">+</span> <span class="n">parsed_url</span><span class="o">.</span><span class="n">path</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">item</span> <span class="o">=</span> <span class="n">parsed_url</span><span class="o">.</span><span class="n">netloc</span> <span class="o">+</span> <span class="n">parsed_url</span><span class="o">.</span><span class="n">path</span>
+
+            <span class="c1"># Remove www if required</span>
+            <span class="k">if</span> <span class="n">www</span> <span class="ow">and</span> <span class="n">item</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;www.&#39;</span><span class="p">):</span>
+                <span class="n">item</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
+
+        <span class="k">elif</span> <span class="n">itype</span> <span class="o">==</span> <span class="s2">&quot;host&quot;</span><span class="p">:</span>
+            <span class="c1"># Remove trailing dot if present</span>
+            <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">):</span>
+                <span class="n">item</span> <span class="o">=</span> <span class="n">item</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="c1"># Remove port if required</span>
+            <span class="k">if</span> <span class="n">port</span> <span class="ow">and</span> <span class="s2">&quot;:&quot;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+                <span class="n">componants</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+                <span class="n">item</span>  <span class="o">=</span> <span class="n">componants</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="c1"># Remove www if required</span>
+            <span class="k">if</span> <span class="n">www</span> <span class="ow">and</span> <span class="n">item</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;www.&#39;</span><span class="p">):</span>
+                <span class="n">item</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
+
+            <span class="c1"># Ensure lower case</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+        <span class="k">elif</span> <span class="n">itype</span> <span class="o">==</span> <span class="s2">&quot;ip&quot;</span><span class="p">:</span>
+            <span class="c1"># Remove port if required</span>
+            <span class="k">if</span> <span class="n">port</span> <span class="ow">and</span> <span class="s2">&quot;:&quot;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">:</span>
+                <span class="n">componants</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+                <span class="n">item</span> <span class="o">=</span> <span class="n">componants</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">normalised</span> <span class="o">=</span> <span class="n">item</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">normalised</span> <span class="o">=</span> <span class="n">itype</span>
+
+    <span class="k">return</span> <span class="n">normalised</span></div>
+
+
+<div class="viewcode-block" id="count_labels"><a class="viewcode-back" href="../../utils.html#bloxone.utils.count_labels">[docs]</a><span class="k">def</span> <span class="nf">count_labels</span><span class="p">(</span><span class="n">fqdn</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Count number of labels in an FQDN</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        fqdn (str): Hostname as fqdn</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        count (int): number of labels</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">fqdn</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">count</span></div>
+
+
+<div class="viewcode-block" id="strip_host"><a class="viewcode-back" href="../../utils.html#bloxone.utils.strip_host">[docs]</a><span class="k">def</span> <span class="nf">strip_host</span><span class="p">(</span><span class="n">fqdn</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Take FQDN and strip first label</span>
+<span class="sd">    or fqdn if no. of labels is 2 or less</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        fqdn (str): Hostname as fqdn</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        domain (str): stripped domain down to two labels</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">domain</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">fqdn</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="n">fqdn</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="n">get_domain</span><span class="p">(</span><span class="n">fqdn</span><span class="p">,</span> <span class="n">no_of_labels</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Alternate code with get_domain</span>
+
+<span class="sd">        host = labels.pop(0)</span>
+<span class="sd">        for label in labels:</span>
+<span class="sd">            domain += label</span>
+<span class="sd">            domain += &quot;.&quot;</span>
+<span class="sd">        domain = domain.rstrip(&quot;.&quot;)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+    <span class="k">return</span> <span class="n">domain</span></div>
+
+
+<div class="viewcode-block" id="get_domain"><a class="viewcode-back" href="../../utils.html#bloxone.utils.get_domain">[docs]</a><span class="k">def</span> <span class="nf">get_domain</span><span class="p">(</span><span class="n">fqdn</span><span class="p">,</span> <span class="n">no_of_labels</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Take FQDN and return n label domain</span>
+<span class="sd">    or fqdn if no. of labels is 2 or less</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        fqdn (str): Hostname as fqdn</span>
+<span class="sd">        no_of_labels (int): Number of labels to return</span>
+<span class="sd">            default = 2</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        domain (str): N label domain name or fqdn</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># Local variables</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">domain</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">fqdn</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">count</span> <span class="o">&lt;=</span> <span class="n">no_of_labels</span><span class="p">:</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="n">fqdn</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">((</span><span class="n">count</span> <span class="o">-</span> <span class="n">no_of_labels</span><span class="p">),</span> <span class="p">(</span><span class="n">count</span><span class="p">)):</span>
+            <span class="n">domain</span> <span class="o">+=</span> <span class="n">labels</span><span class="p">[</span><span class="n">label</span><span class="p">]</span>
+            <span class="n">domain</span> <span class="o">+=</span> <span class="s2">&quot;.&quot;</span> 
+        <span class="c1"># Strip last &quot;.&quot;</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">domain</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Chris Marrison
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
