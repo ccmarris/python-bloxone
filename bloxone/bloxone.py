@@ -7,7 +7,7 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20200818
+ Date Last Updated: 20200820
 
  Todo:
 
@@ -39,7 +39,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.5.2'
+__version__ = '0.5.3'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 

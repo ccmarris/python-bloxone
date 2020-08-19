@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>bloxone.b1ddi &mdash; Bloxone API Wrapper 0.5.2 documentation</title>
+  <title>bloxone.b1ddi &mdash; Bloxone API Wrapper 0.5.3 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.5.2
+                0.5.3
               </div>
             
           
@@ -168,7 +168,7 @@
 
 <span class="sd"> Author: Chris Marrison</span>
 
-<span class="sd"> Date Last Updated: 20200817</span>
+<span class="sd"> Date Last Updated: 20200820</span>
 
 <span class="sd"> Todo:</span>
 
@@ -200,7 +200,7 @@
 
 <span class="sd">------------------------------------------------------------------------</span>
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.3.1&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.3.5&#39;</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison&#39;</span>
 <span class="n">__author_email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
 
@@ -315,21 +315,59 @@
 <span class="sd">            objpath (str):  Swagger object path</span>
 <span class="sd">            key (str):      name of key to match</span>
 <span class="sd">            value (str):    value to match</span>
+<span class="sd">            include_path (bool): Include path to object id</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            id (str):   object id or &quot;&quot;</span>
 <span class="sd">        &#39;&#39;&#39;</span>
 
         <span class="c1"># Local Variables</span>
-        <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-
-        <span class="c1"># Build url</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddi_url</span> <span class="o">+</span> <span class="n">objpath</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="s1">&#39;?_fields=&#39;</span> <span class="o">+</span> <span class="n">key</span> <span class="o">+</span> <span class="s1">&#39;,id&#39;</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;URL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="nb">filter</span> <span class="o">=</span> <span class="n">key</span><span class="o">+</span><span class="s1">&#39;==&quot;&#39;</span><span class="o">+</span><span class="n">value</span><span class="o">+</span><span class="s1">&#39;&quot;&#39;</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="n">key</span> <span class="o">+</span> <span class="s1">&#39;,id&#39;</span>
 
         <span class="c1"># Make API Call</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">objpath</span><span class="p">,</span> <span class="n">_filter</span><span class="o">=</span><span class="nb">filter</span><span class="p">,</span> <span class="n">_fields</span><span class="o">=</span><span class="n">fields</span><span class="p">)</span>
+
+        <span class="c1"># Process response</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+            <span class="c1"># Look for results</span>
+            <span class="k">if</span> <span class="s2">&quot;results&quot;</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="s2">&quot;id&quot;</span> <span class="ow">in</span> <span class="n">obj</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="nb">id</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">include_path</span><span class="p">:</span>
+                        <span class="nb">id</span> <span class="o">=</span> <span class="nb">id</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Key </span><span class="si">{}</span><span class="s2"> with value </span><span class="si">{}</span><span class="s2"> not found.&quot;</span>
+                                  <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">id</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;No results found.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;HTTP Error occured. </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">))</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;id: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">id</span><span class="p">))</span> 
+
+        <span class="k">return</span> <span class="nb">id</span></div>
+
+
+<div class="viewcode-block" id="b1ddi.search_response"><a class="viewcode-back" href="../../b1ddi-class.html#bloxone.b1ddi.search_response">[docs]</a>    <span class="k">def</span> <span class="nf">search_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resposne</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">include_path</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get object id using key/value pair by searching a </span>
+<span class="sd">        Request response object.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            response (obj):     Request response obj</span>
+<span class="sd">            key (str):          name of key to match</span>
+<span class="sd">            value (str):        value to match</span>
+<span class="sd">            include_path (bool): Include path to object id</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            id (str):   object id or &quot;&quot;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
 
         <span class="c1"># Process response</span>
         <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>b1ddi Class &mdash; Bloxone API Wrapper 0.5.2 documentation</title>
+  <title>b1ddi Class &mdash; Bloxone API Wrapper 0.5.3 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.5.2
+                0.5.3
               </div>
             
           
@@ -104,6 +104,7 @@
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Additional Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code.html">Source Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="version_history.html">ChangeLog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ackowledgements.html">Authors and acknowledgment</a></li>
 </ul>
 
             
@@ -289,6 +290,7 @@
 <li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
 <li><p><strong>key</strong> (<em>str</em>) – name of key to match</p></li>
 <li><p><strong>value</strong> (<em>str</em>) – value to match</p></li>
+<li><p><strong>include_path</strong> (<em>bool</em>) – Include path to object id</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -369,6 +371,29 @@
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>response (obj)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="bloxone.b1ddi.search_response">
+<code class="sig-name descname">search_response</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">resposne</span></em>, <em class="sig-param"><span class="n">key</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">value</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">include_path</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.search_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.search_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get object id using key/value pair by searching a
+Request response object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>response</strong> (<em>obj</em>) – Request response obj</p></li>
+<li><p><strong>key</strong> (<em>str</em>) – name of key to match</p></li>
+<li><p><strong>value</strong> (<em>str</em>) – value to match</p></li>
+<li><p><strong>include_path</strong> (<em>bool</em>) – Include path to object id</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>object id or “”</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>id (str)</p>
 </dd>
 </dl>
 </dd></dl>

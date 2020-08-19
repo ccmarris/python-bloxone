@@ -9,7 +9,7 @@
 
  Author: Chris Marrison
 
- Date Last Updated: 20200817
+ Date Last Updated: 20200820
 
  Todo:
 
@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.3.1'
+__version__ = '0.3.5'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -156,21 +156,59 @@ class b1ddi(bloxone.b1):
             objpath (str):  Swagger object path
             key (str):      name of key to match
             value (str):    value to match
+            include_path (bool): Include path to object id
 
         Returns:
             id (str):   object id or ""
         '''
 
         # Local Variables
-        id=""
-
-        # Build url
-        url = self.ddi_url + objpath
-        url = url + '?_fields=' + key + ',id'
-        logging.debug("URL: {}".format(url))
+        id = ""
+        filter = key+'=="'+value+'"'
+        fields = key + ',id'
 
         # Make API Call
-        response = self._apiget(url)
+        response = self.get(objpath, _filter=filter, _fields=fields)
+
+        # Process response
+        if response.status_code in self.return_codes_ok:
+            obj = response.json()
+            # Look for results
+            if "results" in obj.keys():
+                obj = obj['results']
+                if "id" in obj[0].keys():
+                    id = obj[0]['id']
+                    if not include_path:
+                        id = id.rsplit('/',1)[1]
+                else:
+                    logging.debug("Key {} with value {} not found."
+                                  .format(key,value))
+            else:
+                id = ""
+                logging.debug("No results found.")
+        else:
+            id=""
+            logging.debug("HTTP Error occured. {}".format(response.status_code))
+
+        logging.debug("id: {}".format(id)) 
+
+        return id
+
+
+    def search_response(self, resposne, key="", value="", include_path=False):
+        '''
+        Get object id using key/value pair by searching a 
+        Request response object.
+
+        Parameters:
+            response (obj):     Request response obj
+            key (str):          name of key to match
+            value (str):        value to match
+            include_path (bool): Include path to object id
+
+        Returns:
+            id (str):   object id or ""
+        '''
 
         # Process response
         if response.status_code in self.return_codes_ok:
