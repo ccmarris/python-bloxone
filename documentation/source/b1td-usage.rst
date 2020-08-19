@@ -17,15 +17,8 @@ Examples
     t = bloxone.b1td('/Users/marrison/configs/emea.ini')
     t.version
     bloxone.__version__
-
-    import bloxone
-    tdc = bloxone.b1tdc('/Users/marrison/configs/emea.ini')
-    tdc.get('/access_codes').json()
-    tdc.get('/cert_download_urls').json()
-    tdc.get('/content_categories').json()
-    lad = bloxone.b1lad('/Users/marrison/configs/emea.ini')
-    lad = bloxone.b1tdlad('/Users/marrison/configs/emea.ini')
-    lad.get('/lookalike_domains').json()
-    tdc.get('/threat_feeds').json()
-    import readline; print('\n'.join([str(readline.get_history_item(i + 1)) for i in range(readline.get_current_history_length())]))
-    >>> 
+    t.tide_url
+    t.threat_classes().json()
+    t.threat_properties().json()
+    t.threat_properties(threatclass="malwareC2").json()
+    t.threat_properties(threatclass="malwareC2").:wjson()

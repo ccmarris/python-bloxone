@@ -99,6 +99,9 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="b1tdc-usage.html">b1tdc Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="b1tdep-usage.html">b1td Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="b1tddfp-usage.html">b1tddfp Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="b1tdlad-usage.html">b1tdlad Usage</a></li>
 </ul>
 </li>
 </ul>
@@ -189,18 +192,11 @@ the todo.</p>
 <span class="n">t</span> <span class="o">=</span> <span class="n">bloxone</span><span class="o">.</span><span class="n">b1td</span><span class="p">(</span><span class="s1">&#39;/Users/marrison/configs/emea.ini&#39;</span><span class="p">)</span>
 <span class="n">t</span><span class="o">.</span><span class="n">version</span>
 <span class="n">bloxone</span><span class="o">.</span><span class="n">__version__</span>
-
-<span class="kn">import</span> <span class="nn">bloxone</span>
-<span class="n">tdc</span> <span class="o">=</span> <span class="n">bloxone</span><span class="o">.</span><span class="n">b1tdc</span><span class="p">(</span><span class="s1">&#39;/Users/marrison/configs/emea.ini&#39;</span><span class="p">)</span>
-<span class="n">tdc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/access_codes&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-<span class="n">tdc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/cert_download_urls&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-<span class="n">tdc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/content_categories&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-<span class="n">lad</span> <span class="o">=</span> <span class="n">bloxone</span><span class="o">.</span><span class="n">b1lad</span><span class="p">(</span><span class="s1">&#39;/Users/marrison/configs/emea.ini&#39;</span><span class="p">)</span>
-<span class="n">lad</span> <span class="o">=</span> <span class="n">bloxone</span><span class="o">.</span><span class="n">b1tdlad</span><span class="p">(</span><span class="s1">&#39;/Users/marrison/configs/emea.ini&#39;</span><span class="p">)</span>
-<span class="n">lad</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/lookalike_domains&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-<span class="n">tdc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/threat_feeds&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-<span class="kn">import</span> <span class="nn">readline</span><span class="p">;</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">readline</span><span class="o">.</span><span class="n">get_history_item</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">readline</span><span class="o">.</span><span class="n">get_current_history_length</span><span class="p">())]))</span>
-<span class="o">&gt;&gt;&gt;</span>
+<span class="n">t</span><span class="o">.</span><span class="n">tide_url</span>
+<span class="n">t</span><span class="o">.</span><span class="n">threat_classes</span><span class="p">()</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">threat_properties</span><span class="p">()</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">threat_properties</span><span class="p">(</span><span class="n">threatclass</span><span class="o">=</span><span class="s2">&quot;malwareC2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">threat_properties</span><span class="p">(</span><span class="n">threatclass</span><span class="o">=</span><span class="s2">&quot;malwareC2&quot;</span><span class="p">)</span><span class="o">.</span><span class="p">:</span><span class="n">wjson</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
