@@ -12,6 +12,11 @@ setuptools.setup(
     description="BloxOne API Wrapper Module",
     long_description=long_description,
     long_description_content_type="text/x-rst",
+    project_urls={
+        'Documentation': 'https://python-bloxone.readthedocs.io/en/latest/',
+        'Source': 'https://github.com/ccmarris/python-bloxone',
+        'Tracker': 'https://github.com/ccmarris/python-bloxone/issues'
+        },
     url="https://github.com/ccmarris/python-bloxone",
     packages=['bloxone'],
     classifiers=[

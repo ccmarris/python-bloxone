@@ -2,6 +2,7 @@
 ChangeLog
 *********
 
+|   20200821	v0.5.5	 Changes to project_urls for packaging
 |   20200821	v0.5.4	 Fixed fact that documentation wasn't included in package.
 |   20200818    v0.5.3   Streamlined get_id using _filter
 |   20200818    v0.5.1   Initial Classes for Threat Defence DFP
