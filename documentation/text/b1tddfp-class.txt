@@ -1,0 +1,71 @@
+b1tddfp Class
+*************
+
+class bloxone.b1tddfp(cfg_file='config.ini')
+
+   get(objpath, id='', action='', **params)
+
+      Generic get object wrapper for Threat Defense objects
+
+      Parameters:
+         * **objpath** (*str*) – Swagger object path
+
+         * **id** (*str*) – Optional Object ID
+
+         * **action** (*str*) – Optional object action, e.g.
+           “nextavailableip”
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   get_id(objpath, *, key='', value='', include_path=False)
+
+      Get object id using key/value pair
+
+      Parameters:
+         * **objpath** (*str*) – Swagger object path
+
+         * **key** (*str*) – name of key to match
+
+         * **value** (*str*) – value to match
+
+      Returns:
+         object id or “”
+
+      Return type:
+         id (str)
+
+   get_object_by_key(objpath, *, key='', value='', include_path=False)
+
+      Get object using key/value pair
+
+      Parameters:
+         * **objpath** (*str*) – Swagger object path
+
+         * **key** (*str*) – name of key to match
+
+         * **value** (*str*) – value to match
+
+      Returns:
+         object id or “”
+
+      Return type:
+         id (str)
+
+   update(objpath, id='', body='')
+
+      Generic create object wrapper for ddi objects
+
+      Parameters:
+         * **objpath** (*str*) – Swagger object path
+
+         * **body** (*str*) – JSON formatted data payload
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)

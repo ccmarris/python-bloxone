@@ -1,0 +1,88 @@
+Welcome to BloxOne API Wrapper’s documentation!
+***********************************************
+
+Contents:
+
+* Introduction
+
+* License
+
+* Requirements
+
+  * Additional Modules
+
+  * Complete List Of Modules
+
+* Installation
+
+  * Installing Python
+
+  * Installing "bloxone"
+
+  * Uninstalling "bloxone"
+
+* Usage and Examples
+
+  * Basic Usage
+
+  * Examples
+
+    * Examples for class: b1ddi
+
+      * Basic Usage
+
+      * Examples
+
+    * b1td Usage
+
+      * Examples
+
+    * b1tdc Usage
+
+      * Examples
+
+    * b1td Usage
+
+      * Examples
+
+    * b1tddfp Usage
+
+      * Examples
+
+    * b1tdlad Usage
+
+      * Examples
+
+* Classes Documentation
+
+  * b1 and b1platform Classes
+
+  * b1ddi Class
+
+  * b1td Class
+
+  * b1tdc Class
+
+  * b1tdep Class
+
+  * b1tddfp Class
+
+  * b1tdlad Class
+
+* Additional Utilities
+
+* Source Documentation
+
+* ChangeLog
+
+* Authors and acknowledgment
+
+
+Indices and tables
+==================
+
+* Index
+
+* Module Index
+
+* Search Page

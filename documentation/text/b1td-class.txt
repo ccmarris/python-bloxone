@@ -1,0 +1,129 @@
+b1td Class
+**********
+
+class bloxone.b1td(cfg_file='config.ini')
+
+   BloxOne ThreatDefence API Wrapper Covers TIDE and Dossier
+
+   get(objpath, action='', **params)
+
+      Generic get object wrapper for TIDE data objects
+
+      Parameters:
+         * **objpath** (*str*) – Swagger object path
+
+         * **action** (*str*) – Optional object action
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   post(objpath, body='')
+
+      Generic create object wrapper for ddi objects
+
+      Parameters:
+         * **objpath** (*str*) – Swagger object path
+
+         * **body** (*str*) – JSON formatted data payload
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   querytide(datatype, query, **params)
+
+      Query Infoblox TIDE for all avaialble threat data related to
+      query.
+
+      Parameters:
+         * **datatype** (*str*) – “host”, “ip” or “url”
+
+         * **query** (*str*) – query data
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   querytideactive(datatype, query, **params)
+
+      Query Infoblox TIDE for “active” threat data i.e. threat data
+      that has not expired at time of call
+
+      Parameters:
+         * **datatype** (*str*) – “host”, “ip” or “url”
+
+         * **query** (*str*) – query data
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   querytidestate(datatype, query, **params)
+
+      Query Infoblox TIDE State Tables for specific query
+
+      Parameters:
+         * **datatype** (*str*) – “host”, “ip” or “url”
+
+         * **query** (*str*) – query data
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   threat_classes(**params)
+
+      Get list of threat classes
+
+      Parameters:
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   threat_properties(threatclass='', **params)
+
+      Get list of threat properties
+
+      Parameters:
+         **threatclass** (*str*) – Threat Class
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   tideactivefeed(datatype, profile='', threatclass='', threatproperty='', **params)
+
+      Bulk “active” threat intel download from Infoblox TIDE state
+      tables for specified datatype.
+
+      Parameters:
+         * **datatype** (*str*) – “host”, “ip” or “url”
+
+         * **profile** (*str**, **optional*) – Data provider
+
+         * **threatclass** (*str**, **optional*) – tide data class
+
+         * **threatproperty** (*str**, **optional*) – tide data
+           property
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)

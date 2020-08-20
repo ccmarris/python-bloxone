@@ -12,15 +12,16 @@ setuptools.setup(
     description="BloxOne API Wrapper Module",
     long_description=long_description,
     long_description_content_type="text/x-rst",
-    # url="https://github.com/pypa/sampleproject",
+    url="https://github.com/ccmarris/python-bloxone",
     packages=['bloxone'],
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: BSD-3-Clause",
+        "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.5',
     install_requires=[ 'requests' ],
+    package_data={'bloxone':['documentation/*', 'README.rst', 'LICENSE', 'config.ini', 'CHANGELOG.rst']},
     # data_files=['CHANGELOG.rst','README.rst','LICENSE'],
-    # include_package_data=True
+    include_package_data=True
 ) 

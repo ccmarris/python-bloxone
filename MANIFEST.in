@@ -1,0 +1,7 @@
+include LICENSE
+include README.rst
+include CHANGELOG.rst
+include config.ini
+recursive-include documentation *
+prune documentation/build
+prune documentation/doctree

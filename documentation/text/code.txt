@@ -1,0 +1,193 @@
+Source Documentation
+********************
+
+======================================================================
+
+   Description:
+
+   Module to provide class hierachy to simplify access to the BloxOne
+   APIs
+
+   Date Last Updated: 20200820
+
+   Todo:
+
+   Copyright (c) 2020 Chris Marrison / Infoblox
+
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions
+   are met:
+
+   1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+
+   2. Redistributions in binary form must reproduce the above
+   copyright notice, this list of conditions and the following
+   disclaimer in the documentation and/or other materials provided
+   with the distribution.
+
+   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+   "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+   FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+   COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+   INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+   (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+   SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+   HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+   STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+   OF THE POSSIBILITY OF SUCH DAMAGE.
+
+======================================================================
+
+class bloxone.bloxone.b1(cfg_file='config.ini')
+
+   Parent Class to simplify access to the BloxOne APIs for subclasses
+
+class bloxone.bloxone.b1platform(cfg_file='config.ini')
+
+   Class to simplify access to the BloxOne Platform APIs
+
+   create(objpath, body='')
+
+      Generic create object wrapper for platform objects
+
+      Parameters:
+         * **objpath** (*str*) -- Swagger object path
+
+         * **body** (*str*) -- JSON formatted data payload
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   delete(objpath, id='')
+
+      Generic delete object wrapper for platform objects
+
+      Parameters:
+         * **objpath** (*str*) -- Swagger object path
+
+         * **id** (*str*) -- Object id to delete
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   get(objpath, id='', action='', **params)
+
+      Generic get object wrapper for platform calls
+
+      Parameters:
+         * **objpath** (*str*) -- Swagger object path
+
+         * **id** (*str*) -- Optional Object ID
+
+         * **action** (*str*) -- Optional object action, e.g.
+           "nextavailableip"
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   get_tags(objpath, id='')
+
+      Get tags for an object id
+
+      Parameters:
+         * **objpath** (*str*) -- Swagger object path
+
+         * **id** (*str*) -- id of object
+
+      Returns:
+         Dictionary of current tags
+            or empty dict if none
+
+      Return type:
+         tags (dict)
+
+      Todo:
+
+      * make generic, however, this requires the below
+
+      * Lookup dictionary of 'required fields' per object type
+
+   on_prem_hosts(**params)
+
+      Method to retrieve On Prem Hosts (undocumented)
+
+      Parameters:
+         ****params** (*dict*) -- Generic API parameters
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   oph_add_tag(id='', tagname='', tagvalue='')
+
+      Method to add a tag to an existing On Prem Host
+
+      Parameters:
+         * **objpath** (*str*) -- Swagger object path
+
+         * **tagname** (*str*) -- Name of tag to add
+
+         * **tagvalue** (*str*) -- Value to associate
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   oph_delete_tag(id='', tagname='')
+
+      Method to delete a tag from an existing On Prem Host
+
+      Parameters:
+         * **objpath** (*str*) -- Swagger object path
+
+         * **tagname** (*str*) -- Name of tag to add
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   update(objpath, id='', body='')
+
+      Generic create object wrapper for ddi objects
+
+      Parameters:
+         * **objpath** (*str*) -- Swagger object path
+
+         * **body** (*str*) -- JSON formatted data payload
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+bloxone.bloxone.read_b1_ini(ini_filename)
+
+   Open and parse ini file
+
+   Parameters:
+      **ini_filename** (*str*) -- name of inifile
+
+   Returns:
+      Dictionary of BloxOne configuration elements
+
+   Return type:
+      config (dict)

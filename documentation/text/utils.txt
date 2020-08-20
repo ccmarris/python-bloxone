@@ -1,0 +1,204 @@
+Additional Utilities
+********************
+
+======================================================================
+
+   Description:
+      Simple utility functions for data type validation, domain
+      handling, and data normalisationa specifically with the aim of
+      supporting queries to TIDE and Dossier.
+
+   Requirements:
+      Python3 with re, ipaddress, requests
+
+   Author: Chris Marrison
+
+   Date Last Updated: 20200621
+
+   Todo:
+
+   Copyright (c) 2018 Chris Marrison / Infoblox
+
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions
+   are met:
+
+   1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+
+   2. Redistributions in binary form must reproduce the above
+   copyright notice, this list of conditions and the following
+   disclaimer in the documentation and/or other materials provided
+   with the distribution.
+
+   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+   “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+   FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+   COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+   INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+   (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+   SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+   HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+   STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+   OF THE POSSIBILITY OF SUCH DAMAGE.
+
+======================================================================
+
+bloxone.utils.buildregex()
+
+   Pre-compile ‘standard’ regexes as used by data_type and
+   validate_XXX functions
+
+   Returns:
+      Compiled regex for hostnames url_regex (re): Compiled regex for
+      URLs
+
+   Return type:
+      host_regex (re)
+
+bloxone.utils.convert_url_to_host(url)
+
+   Break down URL and return host element
+
+   Parameters:
+      **url** (*str*) – Validated URL
+
+   Returns:
+      hostname or ip
+
+   Return type:
+      host (str)
+
+bloxone.utils.count_labels(fqdn)
+
+   Count number of labels in an FQDN
+
+   Parameters:
+      **fqdn** (*str*) – Hostname as fqdn
+
+   Returns:
+      number of labels
+
+   Return type:
+      count (int)
+
+bloxone.utils.data_type(qdata, host_regex, url_regex)
+
+   Validate and determine data type (host, ip or url)
+
+   Parameters:
+      * **qdata** (*str*) – data to determine type/validity
+
+      * **host_regex/url_regex** (*re*) – pre-compiled regexes
+
+   Returns:
+      data type of qdata (“ip”, “host”, or “url”)
+
+   Return type:
+      dtype (str)
+
+bloxone.utils.get_domain(fqdn, no_of_labels=2)
+
+   Take FQDN and return n label domain or fqdn if no. of labels is 2
+   or less
+
+   Parameters:
+      * **fqdn** (*str*) – Hostname as fqdn
+
+      * **no_of_labels** (*int*) – Number of labels to return default
+        = 2
+
+   Returns:
+      N label domain name or fqdn
+
+   Return type:
+      domain (str)
+
+bloxone.utils.normalise(item, itype=None, port=False, www=False)
+
+   Take ip, host or url item process and return normalise data.
+
+   Parameters:
+      * **item** (*str*) – item to normalise
+
+      * **itype** (*str*) – One of [“host”, “url”, “ip”]
+
+      * **port** (*bool*) – stip port number e.g. :8080
+
+      * **www** (*bool*) – strip www. from hostname
+
+   Returns:
+      Normalised item or “invalid”
+
+   Return type:
+      normalised (str)
+
+bloxone.utils.reverse_labels(domain)
+
+   Reserve order of domain labels (or any dot separated data, e.g. IP)
+
+   Parameters:
+      **domain** (*str*) – domain.labels
+
+   Returns:
+      labels.domain
+
+   Return type:
+      rdomain (str)
+
+bloxone.utils.strip_host(fqdn)
+
+   Take FQDN and strip first label or fqdn if no. of labels is 2 or
+   less
+
+   Parameters:
+      **fqdn** (*str*) – Hostname as fqdn
+
+   Returns:
+      stripped domain down to two labels
+
+   Return type:
+      domain (str)
+
+bloxone.utils.validate_fqdn(hostname, regex)
+
+   Validate input data is a legitmate fqdn
+
+   Parameters:
+      **hostname** (*str*) – fqdn as a string
+
+   Returns:
+      Return True for valid and False otherwise
+
+   Return type:
+      bool
+
+bloxone.utils.validate_ip(ip)
+
+   Validate input data is a valid IP address
+
+   Parameters:
+      **ip** (*str*) – ip address as a string
+
+   Returns:
+      Return True for valid and False otherwise
+
+   Return type:
+      bool
+
+bloxone.utils.validate_url(url, regex)
+
+   Validate input data is a valid URL
+
+   Parameters:
+      * **url** (*str*) – string to verify as URL
+
+      * **regex** (*re*) – pre-compiled regex obj
+
+   Returns:
+      Return True for valid and False otherwise
+
+   Return type:
+      bool

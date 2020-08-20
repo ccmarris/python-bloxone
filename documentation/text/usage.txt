@@ -1,0 +1,109 @@
+Usage and Examples
+******************
+
+The aim of this module is to provide simple object based access to the
+BloxOne APIs and make it as simple as possible to code given the
+available swagger documentation.
+
+There are several classes/subclasses that provide this access. The
+base class is "b1". This acts as a parent class for the BloxOne
+Application APIs.
+
+The specific API 'trees' are then split in to subclasses of "b1":
+
+   "b1platform"
+      Providing access to API calls associated with the BloxOne
+      platform itself.
+
+   "b1ddi"
+      Access to the BloxOne DDI API with core methods for *get*,
+      *create*, *delete* and *update* in addition to specific task
+      orientated helper methods.
+
+   "b1td"
+      Access to the Infoblox TIDE API with a generic *get* method plus
+      specific task orientated helper methods.
+
+   "b1tdc"
+      Access to the BloxOne Threat Defence Cloud API with a generic
+      *get*, *create*, *delete* methods plus specific task orientated
+      helper methods.
+
+   "b1tdep"
+      Access to the BloxOne Threat Defence Cloud API with a generic
+      *get*, *create*, *delete* and *update* methods plus specific
+      task orientated helper methods.
+
+   "b1tddfp"
+      Access to the BloxOne Threat Defence Cloud API with a generic
+      *get*, and *update* methods plus specific task orientated helper
+      methods.
+
+   "b1tdlad"
+      Access to the BloxOne Threat Defence Cloud API with a generic
+      *get*, method.
+
+In addition to the API interfaces a set of data handling functions is
+provided in the "utils" sub-module.
+
+
+Basic Usage
+===========
+
+For BloxOne DDI therefore the basic usage structure for a *get* is:
+
+   import bloxone
+   b1ddi = bloxone.b1ddi(<ini file>)
+   response = b1ddi.get(<object path>)
+   if response.status_code in b1ddi.return_codes_ok:
+       print(response.text)
+   else:
+       print(response.status_code)
+
+Similarly for the other core functions, and classes. For details
+around parameters, please see the class documentation
+
+For debugging purposes, the "bloxone" module supports logging via the
+logging module using DEBUG.
+
+Warning:
+
+  Although I have attempted to keep debugging clean. There is still
+  potential for the debug output to produce full data dumps of API
+  responses.
+
+
+Examples
+========
+
+Although the basic flow of instantiating the class with a
+configuration ini file, the accessing the attributes or methods, with
+*get* being pretty universal as a method using the swagger object
+paths. Specific examples for each of the classes and there use is
+shown in more detail in the following documents:
+
+* Examples for class: b1ddi
+
+  * Basic Usage
+
+  * Examples
+
+* b1td Usage
+
+  * Examples
+
+* b1tdc Usage
+
+  * Examples
+
+* b1td Usage
+
+  * Examples
+
+* b1tddfp Usage
+
+  * Examples
+
+* b1tdlad Usage
+
+  * Examples

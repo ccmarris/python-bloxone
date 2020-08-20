@@ -1,0 +1,22 @@
+b1tdlad Class
+*************
+
+class bloxone.b1tdlad(cfg_file='config.ini')
+
+   get(objpath, **params)
+
+      Generic get object wrapper for Threat Defense objects
+
+      Parameters:
+         * **objpath** (*str*) – Swagger object path
+
+         * **id** (*str*) – Optional Object ID
+
+         * **action** (*str*) – Optional object action, e.g.
+           “nextavailableip”
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)

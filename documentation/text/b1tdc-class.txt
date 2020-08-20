@@ -1,0 +1,115 @@
+b1tdc Class
+***********
+
+class bloxone.b1tdc(cfg_file='config.ini')
+
+   BloxOne ThreatDefence API Wrapper Covers TIDE and Dossier
+
+   create(objpath, body='')
+
+      Generic create object wrapper for ddi objects
+
+      Parameters:
+         * **objpath** (*str*) – Swagger object path
+
+         * **body** (*str*) – JSON formatted data payload
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   delete(objpath, id='', body='')
+
+      Generic delete object wrapper for ddi objects
+
+      Parameters:
+         * **objpath** (*str*) – Swagger object path
+
+         * **id** (*str*) – Object id to delete
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   get(objpath, action='', **params)
+
+      Generic get object wrapper for TIDE data objects
+
+      Parameters:
+         * **objpath** (*str*) – Swagger object path
+
+         * **action** (*str*) – Optional object action
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   get_id(objpath, *, key='', value='', include_path=False)
+
+      Get object id using key/value pair
+
+      Parameters:
+         * **objpath** (*str*) – Swagger object path
+
+         * **key** (*str*) – name of key to match
+
+         * **value** (*str*) – value to match
+
+      Returns:
+         object id or “”
+
+      Return type:
+         id (str)
+
+   get_object_by_key(objpath, *, key='', value='', include_path=False)
+
+      Get object using key/value pair
+
+      Parameters:
+         * **objpath** (*str*) – Swagger object path
+
+         * **key** (*str*) – name of key to match
+
+         * **value** (*str*) – value to match
+
+      Returns:
+         object id or “”
+
+      Return type:
+         id (str)
+
+   post(objpath, body='')
+
+      Generic create object wrapper for ddi objects
+
+      Parameters:
+         * **objpath** (*str*) – Swagger object path
+
+         * **body** (*str*) – JSON formatted data payload
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   update(objpath, id='', body='')
+
+      Generic create object wrapper for ddi objects
+
+      Parameters:
+         * **objpath** (*str*) – Swagger object path
+
+         * **body** (*str*) – JSON formatted data payload
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)

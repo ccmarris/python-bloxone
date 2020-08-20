@@ -11,7 +11,7 @@ published APIs, performing the 'heavy lifting' whilst providing full access to
 to their functionality. This is achieved by providing simple wrappers that enable
 you to take the swagger documented object paths, fields and where appropriate 
 JSON body from the documentation and pass them to simple get, create, delete and
-update methods. These methods simply return a :mod:`requests` response object.
+update methods. These methods simply return a *requests* response object.
 
 In addition, useful utility methods are provided for common tasks such as 
 getting an object id, by defining the object key and value match pair. This is

@@ -1,0 +1,140 @@
+b1 and b1platform Classes
+*************************
+
+class bloxone.b1(cfg_file='config.ini')
+
+   Parent Class to simplify access to the BloxOne APIs for subclasses
+
+class bloxone.b1platform(cfg_file='config.ini')
+
+   Class to simplify access to the BloxOne Platform APIs
+
+   create(objpath, body='')
+
+      Generic create object wrapper for platform objects
+
+      Parameters:
+         * **objpath** (*str*) -- Swagger object path
+
+         * **body** (*str*) -- JSON formatted data payload
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   delete(objpath, id='')
+
+      Generic delete object wrapper for platform objects
+
+      Parameters:
+         * **objpath** (*str*) -- Swagger object path
+
+         * **id** (*str*) -- Object id to delete
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   get(objpath, id='', action='', **params)
+
+      Generic get object wrapper for platform calls
+
+      Parameters:
+         * **objpath** (*str*) -- Swagger object path
+
+         * **id** (*str*) -- Optional Object ID
+
+         * **action** (*str*) -- Optional object action, e.g.
+           "nextavailableip"
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   get_tags(objpath, id='')
+
+      Get tags for an object id
+
+      Parameters:
+         * **objpath** (*str*) -- Swagger object path
+
+         * **id** (*str*) -- id of object
+
+      Returns:
+         Dictionary of current tags
+            or empty dict if none
+
+      Return type:
+         tags (dict)
+
+      Todo:
+
+      * make generic, however, this requires the below
+
+      * Lookup dictionary of 'required fields' per object type
+
+   on_prem_hosts(**params)
+
+      Method to retrieve On Prem Hosts (undocumented)
+
+      Parameters:
+         ****params** (*dict*) -- Generic API parameters
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   oph_add_tag(id='', tagname='', tagvalue='')
+
+      Method to add a tag to an existing On Prem Host
+
+      Parameters:
+         * **objpath** (*str*) -- Swagger object path
+
+         * **tagname** (*str*) -- Name of tag to add
+
+         * **tagvalue** (*str*) -- Value to associate
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   oph_delete_tag(id='', tagname='')
+
+      Method to delete a tag from an existing On Prem Host
+
+      Parameters:
+         * **objpath** (*str*) -- Swagger object path
+
+         * **tagname** (*str*) -- Name of tag to add
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   update(objpath, id='', body='')
+
+      Generic create object wrapper for ddi objects
+
+      Parameters:
+         * **objpath** (*str*) -- Swagger object path
+
+         * **body** (*str*) -- JSON formatted data payload
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)

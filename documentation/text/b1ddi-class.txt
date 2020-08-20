@@ -1,0 +1,198 @@
+b1ddi Class
+***********
+
+class bloxone.b1ddi(cfg_file='config.ini')
+
+   BloxOne DDI API Wrapper Class
+
+   add_tag(objpath, id, tagname='', tagvalue='')
+
+      Method to add a tag to an existing On Prem Host
+
+      Parameters:
+         * **objpath** (*str*) -- Swagger object path
+
+         * **id** (*str*) -- Object ID
+
+         * **tagname** (*str*) -- Name of tag to add
+
+         * **tagvalue** (*str*) -- Value to associate with tag
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   create(objpath, body='')
+
+      Generic create object wrapper for ddi objects
+
+      Parameters:
+         * **objpath** (*str*) -- Swagger object path
+
+         * **body** (*str*) -- JSON formatted data payload
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   delete(objpath, id='')
+
+      Generic delete object wrapper for ddi objects
+
+      Parameters:
+         * **objpath** (*str*) -- Swagger object path
+
+         * **id** (*str*) -- Object id to delete
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   delete_tag(id='', tagname='')
+
+      Method to delete a tag from an existing On Prem Host
+
+      Parameters:
+         * **objpath** (*str*) -- Swagger object path
+
+         * **tagname** (*str*) -- Name of tag to add
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   get(objpath, id='', action='', **params)
+
+      Generic get object wrapper for ddi objects
+
+      Parameters:
+         * **objpath** (*str*) -- Swagger object path
+
+         * **id** (*str*) -- Optional Object ID
+
+         * **action** (*str*) -- Optional object action, e.g.
+           "nextavailableip"
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   get_id(objpath, *, key='', value='', include_path=False)
+
+      Get object id using key/value pair
+
+      Parameters:
+         * **objpath** (*str*) -- Swagger object path
+
+         * **key** (*str*) -- name of key to match
+
+         * **value** (*str*) -- value to match
+
+         * **include_path** (*bool*) -- Include path to object id
+
+      Returns:
+         object id or ""
+
+      Return type:
+         id (str)
+
+   get_object_by_key(objpath, *, key='', value='', include_path=False)
+
+      Get object using key/value pair
+
+      Parameters:
+         * **objpath** (*str*) -- Swagger object path
+
+         * **key** (*str*) -- name of key to match
+
+         * **value** (*str*) -- value to match
+
+      Returns:
+         object id or ""
+
+      Return type:
+         id (str)
+
+   get_tags(objpath, id='')
+
+      Get tags for an object id
+
+      Parameters:
+         * **objpath** (*str*) -- Swagger object path
+
+         * **id** (*str*) -- id of object
+
+      Returns:
+         Dictionary of current tags
+            or empty dict if none
+
+      Return type:
+         tags (dict)
+
+      Todo:
+
+      * make generic, however, this requires the below
+
+      * Lookup dictionary of 'required fields' per object type
+
+   get_zone_child(parent='zone', name='', id='', fields='')
+
+      Method to retrieve Zones in specified view
+
+      Parameters:
+         * **name** (*str*) -- BloxOne object id
+
+         * **id** (*str*) -- BloxOne object id
+
+         * ****params** (*dict*) -- Generic API parameters
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
+
+   search_response(resposne, key='', value='', include_path=False)
+
+      Get object id using key/value pair by searching a Request
+      response object.
+
+      Parameters:
+         * **response** (*obj*) -- Request response obj
+
+         * **key** (*str*) -- name of key to match
+
+         * **value** (*str*) -- value to match
+
+         * **include_path** (*bool*) -- Include path to object id
+
+      Returns:
+         object id or ""
+
+      Return type:
+         id (str)
+
+   update(objpath, id='', body='')
+
+      Generic create object wrapper for ddi objects
+
+      Parameters:
+         * **objpath** (*str*) -- Swagger object path
+
+         * **body** (*str*) -- JSON formatted data payload
+
+      Returns:
+         Requests response object
+
+      Return type:
+         response (obj)
