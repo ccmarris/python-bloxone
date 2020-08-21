@@ -9,7 +9,7 @@
 
  Author: Chris Marrison
 
- Date Last Updated: 20200820
+ Date Last Updated: 20200821
 
  Todo:
 
@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.3.5'
+__version__ = '0.3.6'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -176,7 +176,7 @@ class b1ddi(bloxone.b1):
             # Look for results
             if "results" in obj.keys():
                 obj = obj['results']
-                if "id" in obj[0].keys():
+                if obj:
                     id = obj[0]['id']
                     if not include_path:
                         id = id.rsplit('/',1)[1]

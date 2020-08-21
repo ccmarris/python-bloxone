@@ -21,7 +21,8 @@ Some basic configuration, such a base url, API version and API key are read
 from an ini file. An example of which is provided. When instantiating/initialising
 this will read config.ini by default. Alternatively a path can be provided.
 
-For more detailed documentation please see ./documentation/html/index.html
+For more detailed documentation please see 
+https://python-bloxone.readthedocs.io/en/latest/
 
 All feedback please to chris@infoblox.com
 
