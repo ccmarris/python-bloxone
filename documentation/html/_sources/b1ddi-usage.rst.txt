@@ -74,8 +74,11 @@ Examples
     response = b1ddi.get('/dns/view', _fields="name,id")
     response.json()
 
+    # Example using _filter
+    response = b1ddi.get('/ipam/ip_space', _filter='name=="space-name"')
+
     # Example with multiple API parameters
-    response = b1ddi.get('/ipam/subnet', _tfilter="Owner==marrison",_fields="address")
+    response = b1ddi.get('/ipam/subnet', _tfilter="Owner==marrison", _fields="address")
     response = b1ddi.get('/ipam/subnet', _tfilter="Owner~mar")
 
     # Get ID from key/value pair
@@ -84,6 +87,11 @@ Examples
 
     id = b1ddi.get_id('/ipam/ip_space', key="name", value="marrison-lab", include_path=True)
     # 'ipam/ip_space/fd388619-b013-11ea-b956-ca543bd8c483'
+
+    # Get DHCP Option IDs as a dictionary
+    options = b1ddi.get_option_ids()
+    options['43']
+    # 'dhcp/option_code/44bbac08-c518-11ea-b9d9-06bf0d811d6d'
 
     # Get data for zone
     r = b1ddi.get_zone_child(parent="zone", name="home.", fields="name,record_type,record_data")

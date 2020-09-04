@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>b1ddi Class &mdash; Bloxone API Wrapper 0.5.3 documentation</title>
+  <title>b1ddi Class &mdash; Bloxone API Wrapper 0.5.7 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.5.3
+                0.5.7
               </div>
             
           
@@ -324,6 +324,24 @@
 </dd></dl>
 
 <dl class="py method">
+<dt id="bloxone.b1ddi.get_option_ids">
+<code class="sig-name descname">get_option_ids</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">option_space</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get_option_ids"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.get_option_ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dictionary of DHCP Option IDs
+Based on idea/code from John Neerdael</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>option_space</strong> (<em>str</em>) – Optional Option Space ID</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dictionary keyed on option number of ids</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>option_ids (dict)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="bloxone.b1ddi.get_tags">
 <code class="sig-name descname">get_tags</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get_tags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.get_tags" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get tags for an object id</p>
@@ -377,7 +395,7 @@
 
 <dl class="py method">
 <dt id="bloxone.b1ddi.search_response">
-<code class="sig-name descname">search_response</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">resposne</span></em>, <em class="sig-param"><span class="n">key</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">value</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">include_path</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.search_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.search_response" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">search_response</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">response</span></em>, <em class="sig-param"><span class="n">key</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">value</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">include_path</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.search_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.search_response" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get object id using key/value pair by searching a
 Request response object.</p>
 <dl class="field-list simple">

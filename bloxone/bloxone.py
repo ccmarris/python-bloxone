@@ -39,7 +39,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.5.6'
+__version__ = '0.5.7'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 

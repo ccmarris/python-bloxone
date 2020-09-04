@@ -9,7 +9,7 @@
 
  Author: Chris Marrison
 
- Date Last Updated: 20200821
+ Date Last Updated: 20200903
 
  Todo:
 
@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.3.6'
+__version__ = '0.4.0'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -195,7 +195,7 @@ class b1ddi(bloxone.b1):
         return id
 
 
-    def search_response(self, resposne, key="", value="", include_path=False):
+    def search_response(self, response, key="", value="", include_path=False):
         '''
         Get object id using key/value pair by searching a 
         Request response object.
@@ -247,6 +247,31 @@ class b1ddi(bloxone.b1):
             id (str):   object id or ""
         '''
         return self.get(objpath, id=self.get_id(objpath, key=key, value=value))
+
+
+    def get_option_ids(self, option_space=""):
+        '''
+        Return a dictionary of DHCP Option IDs
+        Based on idea/code from John Neerdael
+
+        Parameters:
+            option_space (str): Optional Option Space ID
+        
+        Returns:
+            option_ids (dict): Dictionary keyed on option number of ids
+        '''
+        option_ids = {}
+
+        response = self.get('/dhcp/option_code', _fields='code,id')
+        if response.status_code in self.return_codes_ok:
+            if 'results' in response.json().keys():
+                optioncodes = response.json()['results']
+                for item in optioncodes:
+                    code = item['code']
+                    id = item['id']
+                    option_ids.update({ code: id })
+        
+        return option_ids
 
 
     def get_tags(self, objpath, id=""):

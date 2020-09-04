@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Examples for class: b1ddi &mdash; Bloxone API Wrapper 0.5.3 documentation</title>
+  <title>Examples for class: b1ddi &mdash; Bloxone API Wrapper 0.5.7 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.5.3
+                0.5.7
               </div>
             
           
@@ -246,8 +246,11 @@ the todo.</p>
 <span class="n">response</span> <span class="o">=</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/dns/view&#39;</span><span class="p">,</span> <span class="n">_fields</span><span class="o">=</span><span class="s2">&quot;name,id&quot;</span><span class="p">)</span>
 <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
+<span class="c1"># Example using _filter</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/ipam/ip_space&#39;</span><span class="p">,</span> <span class="n">_filter</span><span class="o">=</span><span class="s1">&#39;name==&quot;space-name&quot;&#39;</span><span class="p">)</span>
+
 <span class="c1"># Example with multiple API parameters</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/ipam/subnet&#39;</span><span class="p">,</span> <span class="n">_tfilter</span><span class="o">=</span><span class="s2">&quot;Owner==marrison&quot;</span><span class="p">,</span><span class="n">_fields</span><span class="o">=</span><span class="s2">&quot;address&quot;</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/ipam/subnet&#39;</span><span class="p">,</span> <span class="n">_tfilter</span><span class="o">=</span><span class="s2">&quot;Owner==marrison&quot;</span><span class="p">,</span> <span class="n">_fields</span><span class="o">=</span><span class="s2">&quot;address&quot;</span><span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/ipam/subnet&#39;</span><span class="p">,</span> <span class="n">_tfilter</span><span class="o">=</span><span class="s2">&quot;Owner~mar&quot;</span><span class="p">)</span>
 
 <span class="c1"># Get ID from key/value pair</span>
@@ -256,6 +259,11 @@ the todo.</p>
 
 <span class="nb">id</span> <span class="o">=</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">get_id</span><span class="p">(</span><span class="s1">&#39;/ipam/ip_space&#39;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;marrison-lab&quot;</span><span class="p">,</span> <span class="n">include_path</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="c1"># &#39;ipam/ip_space/fd388619-b013-11ea-b956-ca543bd8c483&#39;</span>
+
+<span class="c1"># Get DHCP Option IDs as a dictionary</span>
+<span class="n">options</span> <span class="o">=</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">get_option_ids</span><span class="p">()</span>
+<span class="n">options</span><span class="p">[</span><span class="s1">&#39;43&#39;</span><span class="p">]</span>
+<span class="c1"># &#39;dhcp/option_code/44bbac08-c518-11ea-b9d9-06bf0d811d6d&#39;</span>
 
 <span class="c1"># Get data for zone</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">get_zone_child</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="s2">&quot;zone&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;home.&quot;</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="s2">&quot;name,record_type,record_data&quot;</span><span class="p">)</span>

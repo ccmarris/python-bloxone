@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Usage and Examples &mdash; Bloxone API Wrapper 0.5.3 documentation</title>
+  <title>Usage and Examples &mdash; Bloxone API Wrapper 0.5.7 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.5.3
+                0.5.7
               </div>
             
           
@@ -216,7 +216,7 @@ in the <code class="xref py py-mod docutils literal notranslate"><span class="pr
 <h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
 <p>For BloxOne DDI therefore the basic usage structure for a <em>get</em> is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bloxone</span>
-<span class="n">b1ddi</span> <span class="o">=</span> <span class="n">bloxone</span><span class="o">.</span><span class="n">b1ddi</span><span class="p">(</span><span class="o">&lt;</span><span class="n">cini</span> <span class="n">file</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="n">b1ddi</span> <span class="o">=</span> <span class="n">bloxone</span><span class="o">.</span><span class="n">b1ddi</span><span class="p">(</span><span class="o">&lt;</span><span class="n">ini</span> <span class="n">file</span><span class="o">&gt;</span><span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="o">&lt;</span><span class="nb">object</span> <span class="n">path</span><span class="o">&gt;</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>

@@ -54,7 +54,7 @@ Basic Usage
 For BloxOne DDI therefore the basic usage structure for a *get* is::
 
     import bloxone
-    b1ddi = bloxone.b1ddi(<cini file>)
+    b1ddi = bloxone.b1ddi(<ini file>)
     response = b1ddi.get(<object path>)
     if response.status_code in b1ddi.return_codes_ok:
         print(response.text)
