@@ -68,7 +68,7 @@ class b1td(bloxone.b1):
             action (str):   Optional object action
         
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         # Build url
         url = self.tide_url + objpath
@@ -90,7 +90,7 @@ class b1td(bloxone.b1):
             body (str):     JSON formatted data payload
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         # Build url
         url = self.ddi_url + objpath
@@ -110,7 +110,7 @@ class b1td(bloxone.b1):
         Parameters:
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
 
         # Local Variables
@@ -133,7 +133,7 @@ class b1td(bloxone.b1):
             threatclass (str): Threat Class
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
 
         # Local Variables
@@ -159,7 +159,7 @@ class b1td(bloxone.b1):
             period (str): one of ['daily', 'weekly', 'monthly']
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         objpath = '/data/dashboard/'
 
@@ -184,7 +184,7 @@ class b1td(bloxone.b1):
             query (str): query data
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         objpath = '/data/threats/'
 
@@ -208,7 +208,7 @@ class b1td(bloxone.b1):
             query (str): query data
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         objpath = '/data/threats/'
         now = datetime.datetime.now()
@@ -234,7 +234,7 @@ class b1td(bloxone.b1):
             query (str): query data
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         objpath = '/data/threats/state/'
 
@@ -265,7 +265,7 @@ class b1td(bloxone.b1):
             threatproperty (str, optional): tide data property
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         objpath = '/data/threats/state/'
 
@@ -302,7 +302,7 @@ Not documented and returns Not Implemented
             sources (str): set of sources or "all"
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         url = self.dossier_url
         # Create body

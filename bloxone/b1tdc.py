@@ -68,7 +68,7 @@ class b1tdc(bloxone.b1):
             action (str):   Optional object action
         
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         # Build url
         url = self.tdc_url + objpath
@@ -89,7 +89,7 @@ class b1tdc(bloxone.b1):
             body (str):     JSON formatted data payload
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         # Build url
         url = self.tdc_url + objpath
@@ -109,7 +109,7 @@ class b1tdc(bloxone.b1):
             body (str):     JSON formatted data payload
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         # Build url
         url = self.tdc_url + objpath
@@ -129,7 +129,7 @@ class b1tdc(bloxone.b1):
             id (str):       Object id to delete
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         # Build url
         url = self.tdc_url + objpath
@@ -150,7 +150,7 @@ class b1tdc(bloxone.b1):
             body (str):     JSON formatted data payload
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         # Build url
         url = self.tdc_url + objpath

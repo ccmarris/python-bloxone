@@ -172,7 +172,7 @@
 
 <span class="sd"> Author: Chris Marrison</span>
 
-<span class="sd"> Date Last Updated: 20200621</span>
+<span class="sd"> Date Last Updated: 20200907</span>
 
 <span class="sd"> Todo:</span>
 
@@ -204,7 +204,7 @@
 
 <span class="sd">------------------------------------------------------------------------</span>
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.0.1&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.0.2&#39;</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison&#39;</span>
 <span class="n">__author_email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
 
@@ -250,12 +250,15 @@
 <span class="sd">    Pre-compile &#39;standard&#39; regexes as used by data_type and</span>
 <span class="sd">    validate_XXX functions</span>
 
+<span class="sd">    Parameters:</span>
+<span class="sd">        none</span>
+
 <span class="sd">    Returns:</span>
 <span class="sd">        host_regex (re): Compiled regex for hostnames</span>
 <span class="sd">        url_regex (re): Compiled regex for URLs</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="c1"># Added _ for support of Microsoft domains</span>
-    <span class="n">host_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;(?!-)[A-Z\d\-\_]{1,63}(?&lt;!-)$&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+    <span class="n">host_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(?!-)[A-Z\d\-\_]{1,63}(?&lt;!-)$&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
     <span class="n">url_regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
         <span class="c1"># r&#39;^(?:http|ftp)s?://&#39; # http:// or https://</span>
         <span class="c1"># http:// or https://</span>

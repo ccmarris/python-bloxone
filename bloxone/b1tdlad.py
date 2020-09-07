@@ -64,7 +64,7 @@ class b1tdlad(bloxone.b1):
             action (str):   Optional object action, e.g. "nextavailableip"
         
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         # Build url
         url = self.tdlad_url + objpath

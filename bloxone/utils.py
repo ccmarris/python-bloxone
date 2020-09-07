@@ -13,7 +13,7 @@
 
  Author: Chris Marrison
 
- Date Last Updated: 20200621
+ Date Last Updated: 20200907
 
  Todo:
 
@@ -45,7 +45,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -91,12 +91,15 @@ def buildregex():
     Pre-compile 'standard' regexes as used by data_type and
     validate_XXX functions
 
+    Parameters:
+        none
+
     Returns:
         host_regex (re): Compiled regex for hostnames
         url_regex (re): Compiled regex for URLs
     '''
     # Added _ for support of Microsoft domains
-    host_regex = re.compile("(?!-)[A-Z\d\-\_]{1,63}(?<!-)$", re.IGNORECASE)
+    host_regex = re.compile(r'(?!-)[A-Z\d\-\_]{1,63}(?<!-)$', re.IGNORECASE)
     url_regex = re.compile(
         # r'^(?:http|ftp)s?://' # http:// or https://
         # http:// or https://

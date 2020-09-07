@@ -7,7 +7,7 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20200820
+ Date Last Updated: 20200907
 
  Todo:
 
@@ -39,7 +39,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.5.7'
+__version__ = '0.5.8'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -62,7 +62,7 @@ def read_b1_ini(ini_filename):
         ini_filename (str): name of inifile
 
     Returns:
-        config (dict): Dictionary of BloxOne configuration elements
+        config :(dict): Dictionary of BloxOne configuration elements
 
     '''
     # Local Variables
@@ -248,7 +248,7 @@ class b1:
             nextip (bool): use nextavailableip
 
         Returns:
-            url (str): Updated url
+            string : Updated url
         '''
         # Check for id and next available IP
         if id:
@@ -278,7 +278,7 @@ class b1platform(b1):
             action (str):   Optional object action, e.g. "nextavailableip"
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
 
         # Build url
@@ -301,7 +301,7 @@ class b1platform(b1):
             body (str):     JSON formatted data payload
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         # Build url
         url = self.host_url + objpath
@@ -322,7 +322,7 @@ class b1platform(b1):
             id (str):       Object id to delete
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         # Build url
         url = self.host_url + objpath
@@ -344,7 +344,7 @@ class b1platform(b1):
             body (str):     JSON formatted data payload
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         # Build url
         url = self.host_url + objpath
@@ -396,7 +396,7 @@ class b1platform(b1):
             **params (dict): Generic API parameters
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
 
         # Call BloxOne API
@@ -416,7 +416,7 @@ class b1platform(b1):
             tagvalue (str): Value to associate
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         # tags = self.get_tags('/on_prem_hosts', id=id)
         response = self.get('/on_prem_hosts', id=id, _fields="display_name,tags")
@@ -444,7 +444,7 @@ class b1platform(b1):
             tagname (str): Name of tag to add
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         # tags = self.get_tags('/on_prem_hosts', id=id)
         response = self.get('/on_prem_hosts', id=id, _fields="display_name,tags")

@@ -175,7 +175,8 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This was developed under Python 3.8 but may work on earlier versions, but
-has not been tested. It is unlikely to work in versions prior to 3.6.</p>
+has not been tested. It is suggested a minimum version of 3.6, but may
+work with earlier versions.</p>
 </div>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -191,9 +192,9 @@ If you need to install these use the command:</p>
 installer for your system from <a class="reference external" href="https://python.org">python.org</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you are running MacOS Catalina Python 3 comes pre-installed. Previous versions
-only come with Python 2.x by default and you will therefore need to install Python 3
-as above or via Homebrew, Ports, etc.</p>
+<p>If you are running MacOS Catalina (or later) Python 3 comes pre-installed.
+Previous versions only come with Python 2.x by default and you will therefore
+need to install Python 3 as above or via Homebrew, Ports, etc.</p>
 <p>By default the python command points to Python 2.x, you can check this using
 the command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python -V
@@ -214,11 +215,20 @@ Python added to your PATH if the installer offers such an option
 <div class="section" id="installing-bloxone">
 <h2>Installing <code class="xref py py-mod docutils literal notranslate"><span class="pre">bloxone</span></code><a class="headerlink" href="#installing-bloxone" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
-<li><p>Intall bloxone as local package</p></li>
+<li><p>Install from PyPI</p></li>
 </ol>
-<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">bloxone</span></code> has been provided as an installable package using pip.</p>
+<p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">bloxone</span></code> module is available on PyPI and can simply be installed
+using pip/pip3:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">bloxone</span> <span class="o">&lt;--</span><span class="n">user</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Intall bloxone as local package from source</p></li>
+</ol>
+<p>If you have downloaded the source from GitHub then <code class="xref py py-mod docutils literal notranslate"><span class="pre">bloxone</span></code> has been
+provided as an installable package using pip.</p>
 <p>In your appropriate python3 environment you can therefore install <code class="xref py py-mod docutils literal notranslate"><span class="pre">bloxone</span></code>
-using the pip command. For example:</p>
+using the pip command from the root of the sourcetree. For example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">dist</span><span class="o">/</span><span class="n">bloxone</span><span class="o">-&lt;</span><span class="n">version</span><span class="o">&gt;-</span><span class="n">py3</span><span class="o">-</span><span class="n">none</span><span class="o">-</span><span class="nb">any</span><span class="o">.</span><span class="n">whl</span> <span class="o">--</span><span class="n">user</span>
 
 <span class="ow">or</span>

@@ -51,7 +51,7 @@ in the :mod:`utils` sub-module.
 Basic Usage
 -----------
 
-For BloxOne DDI therefore the basic usage structure for a *get* is::
+Using BloxOne DDI as an example, the basic usage structure for a *get* is::
 
     import bloxone
     b1ddi = bloxone.b1ddi(<ini file>)
@@ -61,25 +61,26 @@ For BloxOne DDI therefore the basic usage structure for a *get* is::
     else: 
         print(response.status_code)
 
-Similarly for the other core functions, and classes. For details around
-parameters, please see the :doc:`class documentation </classes>`
+Similarly for the other core functions, and classes. For details on method
+specific parameters, please see the :doc:`class documentation </classes>`
 
-For debugging purposes, the :mod:`bloxone` module supports logging via the
-logging module using DEBUG.
+For debugging purposes, the :mod:`bloxone` module supports logging using 
+:mod:`logging` using DEBUG.
 
 .. warning::
 
-    Although I have attempted to keep debugging clean. There is still potential
+    I have attempted to keep debugging clean, however, there is still potential
     for the debug output to produce full data dumps of API responses.
 
 
 Examples
 --------
 
-Although the basic flow of instantiating the class with a configuration ini 
-file, the accessing the attributes or methods, with *get* being pretty universal
-as a method using the swagger object paths. Specific examples for each of the 
-classes and there use is shown in more detail in the following documents:
+Although the basic flow of: instantiating the class with a configuration ini 
+file; access the attributes or methods, with *get* almost being universal
+as a method, and using the swagger object paths to access the required 
+resource. Specific examples for each of the classes, and their use, is shown 
+in more detail in the following documents, as well as the usage of :mod:`utils`:
 
 .. toctree::
     :maxdepth: 4
@@ -90,3 +91,4 @@ classes and there use is shown in more detail in the following documents:
     b1tdep-usage
     b1tddfp-usage
     b1tdlad-usage
+    utils-usage

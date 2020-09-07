@@ -2,6 +2,7 @@
 ChangeLog
 *********
 
+|   20200907	v0.5.8	 Fixed a regex warning in utils.buildregex()
 |   20200904	v0.5.7	 Added get_option_ids helper method.
 |   20200821	v0.5.5	 Changes to project_urls for packaging
 |   20200821	v0.5.4	 Fixed fact that documentation wasn't included in package.

@@ -9,7 +9,7 @@ Requirements
 Additional Modules
 ------------------
 
-In addition to the standard Python 3.8 Modules :mod:`bloxone` makes use of
+In addition to the standard Python 3 Modules :mod:`bloxone` makes use of
 the following packages:
 
  * :mod:`requests`
@@ -24,3 +24,4 @@ Modules used by bloxone ::
   import configparser
   import requests
   import json
+  import datetime

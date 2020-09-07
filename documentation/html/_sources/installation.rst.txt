@@ -8,7 +8,8 @@ Installation
 
 .. note::
   This was developed under Python 3.8 but may work on earlier versions, but
-  has not been tested. It is unlikely to work in versions prior to 3.6.
+  has not been tested. It is suggested a minimum version of 3.6, but may
+  work with earlier versions.
 
 .. important::
   Mac users will need the xcode command line utilities installed to use pip3, etc.
@@ -25,9 +26,9 @@ installer for your system from `python.org <https://python.org>`_.
 
 .. note::
 
-  If you are running MacOS Catalina Python 3 comes pre-installed. Previous versions
-  only come with Python 2.x by default and you will therefore need to install Python 3 
-  as above or via Homebrew, Ports, etc.
+  If you are running MacOS Catalina (or later) Python 3 comes pre-installed.
+  Previous versions only come with Python 2.x by default and you will therefore
+  need to install Python 3 as above or via Homebrew, Ports, etc.
 
   By default the python command points to Python 2.x, you can check this using 
   the command::
@@ -49,12 +50,20 @@ installer for your system from `python.org <https://python.org>`_.
 Installing :mod:`bloxone`
 ====================================
 
-#. Intall bloxone as local package
+#. Install from PyPI
 
-:mod:`bloxone` has been provided as an installable package using pip.
+The :mod:`bloxone` module is available on PyPI and can simply be installed
+using pip/pip3::
+
+  pip3 install bloxone <--user>
+
+#. Intall bloxone as local package from source
+
+If you have downloaded the source from GitHub then :mod:`bloxone` has been 
+provided as an installable package using pip.
 
 In your appropriate python3 environment you can therefore install :mod:`bloxone`
-using the pip command. For example::
+using the pip command from the root of the sourcetree. For example::
 
   pip3 install dist/bloxone-<version>-py3-none-any.whl --user
 

@@ -99,6 +99,7 @@
 <li class="toctree-l3"><a class="reference internal" href="b1tdep-usage.html">b1td Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="b1tddfp-usage.html">b1tddfp Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="b1tdlad-usage.html">b1tdlad Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utils-usage.html">Additional Utilities</a></li>
 </ul>
 </li>
 </ul>
@@ -214,7 +215,7 @@ methods.</p>
 in the <code class="xref py py-mod docutils literal notranslate"><span class="pre">utils</span></code> sub-module.</p>
 <div class="section" id="basic-usage">
 <h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
-<p>For BloxOne DDI therefore the basic usage structure for a <em>get</em> is:</p>
+<p>Using BloxOne DDI as an example, the basic usage structure for a <em>get</em> is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bloxone</span>
 <span class="n">b1ddi</span> <span class="o">=</span> <span class="n">bloxone</span><span class="o">.</span><span class="n">b1ddi</span><span class="p">(</span><span class="o">&lt;</span><span class="n">ini</span> <span class="n">file</span><span class="o">&gt;</span><span class="p">)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="o">&lt;</span><span class="nb">object</span> <span class="n">path</span><span class="o">&gt;</span><span class="p">)</span>
@@ -224,22 +225,23 @@ in the <code class="xref py py-mod docutils literal notranslate"><span class="pr
     <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Similarly for the other core functions, and classes. For details around
-parameters, please see the <a class="reference internal" href="classes.html"><span class="doc">class documentation</span></a></p>
-<p>For debugging purposes, the <code class="xref py py-mod docutils literal notranslate"><span class="pre">bloxone</span></code> module supports logging via the
-logging module using DEBUG.</p>
+<p>Similarly for the other core functions, and classes. For details on method
+specific parameters, please see the <a class="reference internal" href="classes.html"><span class="doc">class documentation</span></a></p>
+<p>For debugging purposes, the <code class="xref py py-mod docutils literal notranslate"><span class="pre">bloxone</span></code> module supports logging using
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">logging</span></code> using DEBUG.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Although I have attempted to keep debugging clean. There is still potential
+<p>I have attempted to keep debugging clean, however, there is still potential
 for the debug output to produce full data dumps of API responses.</p>
 </div>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<p>Although the basic flow of instantiating the class with a configuration ini
-file, the accessing the attributes or methods, with <em>get</em> being pretty universal
-as a method using the swagger object paths. Specific examples for each of the
-classes and there use is shown in more detail in the following documents:</p>
+<p>Although the basic flow of: instantiating the class with a configuration ini
+file; access the attributes or methods, with <em>get</em> almost being universal
+as a method, and using the swagger object paths to access the required
+resource. Specific examples for each of the classes, and their use, is shown
+in more detail in the following documents, as well as the usage of <code class="xref py py-mod docutils literal notranslate"><span class="pre">utils</span></code>:</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="b1ddi-usage.html">Examples for class: b1ddi</a><ul>
@@ -267,6 +269,7 @@ classes and there use is shown in more detail in the following documents:</p>
 <li class="toctree-l2"><a class="reference internal" href="b1tdlad-usage.html#examples">Examples</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="utils-usage.html">Additional Utilities</a></li>
 </ul>
 </div>
 </div>

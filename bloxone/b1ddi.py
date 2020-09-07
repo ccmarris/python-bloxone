@@ -67,7 +67,7 @@ class b1ddi(bloxone.b1):
             action (str):   Optional object action, e.g. "nextavailableip"
         
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         # Build url
         url = self.ddi_url + objpath
@@ -90,7 +90,7 @@ class b1ddi(bloxone.b1):
             body (str):     JSON formatted data payload
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         # Build url
         url = self.ddi_url + objpath
@@ -111,7 +111,7 @@ class b1ddi(bloxone.b1):
             id (str):       Object id to delete
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         # Build url
         url = self.ddi_url + objpath
@@ -133,7 +133,7 @@ class b1ddi(bloxone.b1):
             body (str):     JSON formatted data payload
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         # Build url
         url = self.ddi_url + objpath
@@ -201,7 +201,7 @@ class b1ddi(bloxone.b1):
         Request response object.
 
         Parameters:
-            response (obj):     Request response obj
+            response object:     Request response obj
             key (str):          name of key to match
             value (str):        value to match
             include_path (bool): Include path to object id
@@ -313,7 +313,7 @@ class b1ddi(bloxone.b1):
             tagvalue (str): Value to associate with tag
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         response = self.get(objpath, id=id)
         if response.status_code in self.return_codes_ok:
@@ -343,7 +343,7 @@ class b1ddi(bloxone.b1):
             tagname (str): Name of tag to add
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         # tags = self.get_tags('/on_prem_hosts', id=id)
         response = self.get('/on_prem_hosts', id=id)
@@ -373,7 +373,7 @@ class b1ddi(bloxone.b1):
             **params (dict): Generic API parameters
 
         Returns:
-           response (obj): Requests response object
+           response object: Requests response object
         '''
         if name and not id:
             if parent == "view":

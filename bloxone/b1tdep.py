@@ -64,7 +64,7 @@ class b1tdep(bloxone.b1):
             action (str):   Optional object action, e.g. "nextavailableip"
         
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         # Build url
         url = self.tdep_url + objpath
@@ -87,7 +87,7 @@ class b1tdep(bloxone.b1):
             body (str):     JSON formatted data payload
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         # Build url
         url = self.tdep_url + objpath
@@ -107,7 +107,7 @@ class b1tdep(bloxone.b1):
             id (str):       Object id to delete
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         # Build url
         url = self.tdep_url + objpath
@@ -128,7 +128,7 @@ class b1tdep(bloxone.b1):
             body (str):     JSON formatted data payload
 
         Returns:
-            response (obj): Requests response object
+            response object: Requests response object
         '''
         # Build url
         url = self.tdep_url + objpath
