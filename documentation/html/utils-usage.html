@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Additional Utilities &mdash; Bloxone API Wrapper 0.5.7 documentation</title>
+  <title>Additional Utilities &mdash; Bloxone API Wrapper 0.5.9 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.5.7
+                0.5.9
               </div>
             
           
@@ -180,9 +180,10 @@
 <p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">utils</span></code> sub-module contains a set of data Utilities for data validation
 and normalisation. Typically used for IoCs when using the <a class="reference internal" href="b1td-class.html#bloxone.b1td" title="bloxone.b1td"><code class="xref py py-mod docutils literal notranslate"><span class="pre">bloxone.b1td</span></code></a>
 methods for searches against TIDE.</p>
-<p>For performance purposes when handling bulk data, the data_type(), validate_fqdn()
-and validata_url() functions use pre-compliled regexes that are created using
-the buildregex() function, that returns host and url regexes as a tuple.</p>
+<p>For performance purposes when handling bulk data, the <code class="xref py py-func docutils literal notranslate"><span class="pre">data_type()</span></code>,
+<code class="xref py py-func docutils literal notranslate"><span class="pre">validate_fqdn()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">validata_url()</span></code> functions use pre-compliled
+regexes that are created using the <code class="xref py py-func docutils literal notranslate"><span class="pre">buildregex()</span></code> function, that returns
+host and url regexes as a tuple.</p>
 <p>These can then be passed to the appropriate data function.</p>
 <p>For example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bloxone</span>

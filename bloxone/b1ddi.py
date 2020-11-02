@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.4.0'
+__version__ = '0.4.3'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -141,11 +141,33 @@ class b1ddi(bloxone.b1):
         logging.debug("URL: {}".format(url))
 
         # Make API Call
+        response = self._apiput(url, body)
+
+        return response
+
+
+    def replace(self, objpath, id="", body=""):
+        '''
+        Generic create object wrapper for ddi objects
+
+        Parameters:
+            objpath (str):  Swagger object path
+            body (str):     JSON formatted data payload
+
+        Returns:
+            response object: Requests response object
+        '''
+        # Build url
+        url = self.ddi_url + objpath
+        url = self._use_obj_id(url, id=id)
+        logging.debug("URL: {}".format(url))
+
+        # Make API Call
         response = self._apipatch(url, body)
 
         return response
 
- 
+
    # *** Helper Methods ***
 
     def get_id(self, objpath, *, key="", value="", include_path=False):
@@ -304,7 +326,8 @@ class b1ddi(bloxone.b1):
 
     def add_tag(self, objpath, id, tagname="", tagvalue=""):
         '''
-        Method to add a tag to an existing On Prem Host
+        Method to add a tag to an existing object
+        Note: PUT/update Not Implemented in API as yet
 
         Parameters:
             objpath (str):  Swagger object path
@@ -315,7 +338,7 @@ class b1ddi(bloxone.b1):
         Returns:
             response object: Requests response object
         '''
-        response = self.get(objpath, id=id)
+        response = self.get(objpath, id=id, _fields='tags')
         if response.status_code in self.return_codes_ok:
             data = response.json()['result']
         else:
@@ -327,14 +350,14 @@ class b1ddi(bloxone.b1):
                 data['tags'].update({tagname: tagvalue})
                 logging.debug("New tags: {}".format(data['tags']))
             # Update object
-            response = self.update('/on_prem_hosts', id=id, body=json.dumps(data))
+            response = self.replace(objpath, id=id, body=json.dumps(data))
         else:
             logging.debug("No object found")
 
         return response
 
 
-    def delete_tag(self, id="", tagname=""):
+    def delete_tag(self, objpath, id="", tagname=""):
         '''
         Method to delete a tag from an existing On Prem Host
 
@@ -346,17 +369,16 @@ class b1ddi(bloxone.b1):
             response object: Requests response object
         '''
         # tags = self.get_tags('/on_prem_hosts', id=id)
-        response = self.get('/on_prem_hosts', id=id)
+        response = self.get(objpath, id=id, _fields='tags')
         if response.status_code in self.return_codes_ok:
             data = response.json()['result']
             logging.debug("Existing tags: {}".format(data['tags']))
             # Delete tag from data
             if tagname in data['tags'].keys():
                 data['tags'].pop(tagname, True)
-                print(json.dumps(data))
                 logging.debug("New tags: {}".format(data['tags']))
                 # Update object
-                response = self.update('/on_prem_hosts', id=id, body=json.dumps(data))
+                response = self.replace(objpath, id=id, body=json.dumps(data))
 
         return response
 

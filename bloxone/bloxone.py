@@ -39,7 +39,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.5.8'
+__version__ = '0.6.0'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -458,5 +458,23 @@ class b1platform(b1):
                 logging.debug("New tags: {}".format(data))
                 # Update object
                 response = self.update('/on_prem_hosts', id=id, body=json.dumps(data))
+
+        return response
+
+
+    def auditlog(self, **params):
+        '''
+        Get the audit log
+
+        Parameters:
+            **params (dict): Generic API parameters
+        Returns:
+            response object: Requests response object
+        '''
+        url = self.base_url + '/api/auditlog/' + self.api_version +'/logs'
+        url = self._add_params(url, **params)
+        logging.debug("URL: {}".format(url))
+
+        response = self._apiget(url)
 
         return response

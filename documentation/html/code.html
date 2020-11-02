@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Source Documentation &mdash; Bloxone API Wrapper 0.5.7 documentation</title>
+  <title>Source Documentation &mdash; Bloxone API Wrapper 0.5.9 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.5.7
+                0.5.9
               </div>
             
           
@@ -202,6 +202,23 @@ POSSIBILITY OF SUCH DAMAGE.</p>
 <em class="property">class </em><code class="sig-prename descclassname">bloxone.bloxone.</code><code class="sig-name descname">b1platform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cfg_file</span><span class="o">=</span><span class="default_value">'config.ini'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1platform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.bloxone.b1platform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to simplify access to the BloxOne Platform APIs</p>
 <dl class="py method">
+<dt id="bloxone.bloxone.b1platform.auditlog">
+<code class="sig-name descname">auditlog</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">params</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1platform.auditlog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.bloxone.b1platform.auditlog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the audit log</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**params</strong> (<em>dict</em>) – Generic API parameters</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Requests response object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>response object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="bloxone.bloxone.b1platform.create">
 <code class="sig-name descname">create</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="n">body</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1platform.create"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.bloxone.b1platform.create" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic create object wrapper for platform objects</p>
@@ -216,7 +233,7 @@ POSSIBILITY OF SUCH DAMAGE.</p>
 <dd class="field-even"><p>Requests response object</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response (obj)</p>
+<dd class="field-odd"><p>response object</p>
 </dd>
 </dl>
 </dd></dl>
@@ -236,7 +253,7 @@ POSSIBILITY OF SUCH DAMAGE.</p>
 <dd class="field-even"><p>Requests response object</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response (obj)</p>
+<dd class="field-odd"><p>response object</p>
 </dd>
 </dl>
 </dd></dl>
@@ -257,7 +274,7 @@ POSSIBILITY OF SUCH DAMAGE.</p>
 <dd class="field-even"><p>Requests response object</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response (obj)</p>
+<dd class="field-odd"><p>response object</p>
 </dd>
 </dl>
 </dd></dl>
@@ -306,7 +323,7 @@ POSSIBILITY OF SUCH DAMAGE.</p>
 <dd class="field-even"><p>Requests response object</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response (obj)</p>
+<dd class="field-odd"><p>response object</p>
 </dd>
 </dl>
 </dd></dl>
@@ -327,7 +344,7 @@ POSSIBILITY OF SUCH DAMAGE.</p>
 <dd class="field-even"><p>Requests response object</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response (obj)</p>
+<dd class="field-odd"><p>response object</p>
 </dd>
 </dl>
 </dd></dl>
@@ -347,7 +364,7 @@ POSSIBILITY OF SUCH DAMAGE.</p>
 <dd class="field-even"><p>Requests response object</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response (obj)</p>
+<dd class="field-odd"><p>response object</p>
 </dd>
 </dl>
 </dd></dl>
@@ -367,7 +384,7 @@ POSSIBILITY OF SUCH DAMAGE.</p>
 <dd class="field-even"><p>Requests response object</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response (obj)</p>
+<dd class="field-odd"><p>response object</p>
 </dd>
 </dl>
 </dd></dl>
@@ -383,10 +400,10 @@ POSSIBILITY OF SUCH DAMAGE.</p>
 <dd class="field-odd"><p><strong>ini_filename</strong> (<em>str</em>) – name of inifile</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Dictionary of BloxOne configuration elements</p>
+<dd class="field-even"><p>(dict): Dictionary of BloxOne configuration elements</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>config (dict)</p>
+<dd class="field-odd"><p>config</p>
 </dd>
 </dl>
 </dd></dl>

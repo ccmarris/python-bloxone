@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>bloxone.b1ddi &mdash; Bloxone API Wrapper 0.5.7 documentation</title>
+  <title>bloxone.b1ddi &mdash; Bloxone API Wrapper 0.5.9 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.5.7
+                0.5.9
               </div>
             
           
@@ -226,7 +226,7 @@
 <span class="sd">            action (str):   Optional object action, e.g. &quot;nextavailableip&quot;</span>
 <span class="sd">        </span>
 <span class="sd">        Returns:</span>
-<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c1"># Build url</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddi_url</span> <span class="o">+</span> <span class="n">objpath</span>
@@ -249,7 +249,7 @@
 <span class="sd">            body (str):     JSON formatted data payload</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c1"># Build url</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddi_url</span> <span class="o">+</span> <span class="n">objpath</span>
@@ -270,7 +270,7 @@
 <span class="sd">            id (str):       Object id to delete</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c1"># Build url</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddi_url</span> <span class="o">+</span> <span class="n">objpath</span>
@@ -292,7 +292,7 @@
 <span class="sd">            body (str):     JSON formatted data payload</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c1"># Build url</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddi_url</span> <span class="o">+</span> <span class="n">objpath</span>
@@ -360,7 +360,7 @@
 <span class="sd">        Request response object.</span>
 
 <span class="sd">        Parameters:</span>
-<span class="sd">            response (obj):     Request response obj</span>
+<span class="sd">            response object:     Request response obj</span>
 <span class="sd">            key (str):          name of key to match</span>
 <span class="sd">            value (str):        value to match</span>
 <span class="sd">            include_path (bool): Include path to object id</span>
@@ -472,7 +472,7 @@
 <span class="sd">            tagvalue (str): Value to associate with tag</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">objpath</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
@@ -502,7 +502,7 @@
 <span class="sd">            tagname (str): Name of tag to add</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c1"># tags = self.get_tags(&#39;/on_prem_hosts&#39;, id=id)</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/on_prem_hosts&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
@@ -532,7 +532,7 @@
 <span class="sd">            **params (dict): Generic API parameters</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">           response (obj): Requests response object</span>
+<span class="sd">           response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">id</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">parent</span> <span class="o">==</span> <span class="s2">&quot;view&quot;</span><span class="p">:</span>

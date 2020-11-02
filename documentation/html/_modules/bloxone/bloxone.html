@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>bloxone.bloxone &mdash; Bloxone API Wrapper 0.5.7 documentation</title>
+  <title>bloxone.bloxone &mdash; Bloxone API Wrapper 0.5.9 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.5.7
+                0.5.9
               </div>
             
           
@@ -221,7 +221,7 @@
 <span class="sd">        ini_filename (str): name of inifile</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        config (dict): Dictionary of BloxOne configuration elements</span>
+<span class="sd">        config :(dict): Dictionary of BloxOne configuration elements</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="c1"># Local Variables</span>
@@ -407,7 +407,7 @@
 <span class="sd">            nextip (bool): use nextavailableip</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            url (str): Updated url</span>
+<span class="sd">            string : Updated url</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c1"># Check for id and next available IP</span>
         <span class="k">if</span> <span class="nb">id</span><span class="p">:</span>
@@ -437,7 +437,7 @@
 <span class="sd">            action (str):   Optional object action, e.g. &quot;nextavailableip&quot;</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
 
         <span class="c1"># Build url</span>
@@ -460,7 +460,7 @@
 <span class="sd">            body (str):     JSON formatted data payload</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c1"># Build url</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">host_url</span> <span class="o">+</span> <span class="n">objpath</span>
@@ -481,7 +481,7 @@
 <span class="sd">            id (str):       Object id to delete</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c1"># Build url</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">host_url</span> <span class="o">+</span> <span class="n">objpath</span>
@@ -503,7 +503,7 @@
 <span class="sd">            body (str):     JSON formatted data payload</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c1"># Build url</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">host_url</span> <span class="o">+</span> <span class="n">objpath</span>
@@ -555,7 +555,7 @@
 <span class="sd">            **params (dict): Generic API parameters</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
 
         <span class="c1"># Call BloxOne API</span>
@@ -575,7 +575,7 @@
 <span class="sd">            tagvalue (str): Value to associate</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c1"># tags = self.get_tags(&#39;/on_prem_hosts&#39;, id=id)</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/on_prem_hosts&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">,</span> <span class="n">_fields</span><span class="o">=</span><span class="s2">&quot;display_name,tags&quot;</span><span class="p">)</span>
@@ -603,7 +603,7 @@
 <span class="sd">            tagname (str): Name of tag to add</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c1"># tags = self.get_tags(&#39;/on_prem_hosts&#39;, id=id)</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/on_prem_hosts&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">,</span> <span class="n">_fields</span><span class="o">=</span><span class="s2">&quot;display_name,tags&quot;</span><span class="p">)</span>
@@ -617,6 +617,24 @@
                 <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;New tags: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
                 <span class="c1"># Update object</span>
                 <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s1">&#39;/on_prem_hosts&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="b1platform.auditlog"><a class="viewcode-back" href="../../code.html#bloxone.b1platform.auditlog">[docs]</a>    <span class="k">def</span> <span class="nf">auditlog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get the audit log</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            **params (dict): Generic API parameters</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/api/auditlog/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_version</span> <span class="o">+</span><span class="s1">&#39;/logs&#39;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_params</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;URL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">response</span></div></div>
 </pre></div>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>bloxone.b1td &mdash; Bloxone API Wrapper 0.5.7 documentation</title>
+  <title>bloxone.b1td &mdash; Bloxone API Wrapper 0.5.9 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.5.7
+                0.5.9
               </div>
             
           
@@ -227,7 +227,7 @@
 <span class="sd">            action (str):   Optional object action</span>
 <span class="sd">        </span>
 <span class="sd">        Returns:</span>
-<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c1"># Build url</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tide_url</span> <span class="o">+</span> <span class="n">objpath</span>
@@ -249,7 +249,7 @@
 <span class="sd">            body (str):     JSON formatted data payload</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c1"># Build url</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ddi_url</span> <span class="o">+</span> <span class="n">objpath</span>
@@ -269,7 +269,7 @@
 <span class="sd">        Parameters:</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
 
         <span class="c1"># Local Variables</span>
@@ -292,7 +292,7 @@
 <span class="sd">            threatclass (str): Threat Class</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
 
         <span class="c1"># Local Variables</span>
@@ -318,7 +318,7 @@
 <span class="sd">            period (str): one of [&#39;daily&#39;, &#39;weekly&#39;, &#39;monthly&#39;]</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
 <span class="sd">        objpath = &#39;/data/dashboard/&#39;</span>
 
@@ -343,7 +343,7 @@
 <span class="sd">            query (str): query data</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">objpath</span> <span class="o">=</span> <span class="s1">&#39;/data/threats/&#39;</span>
 
@@ -367,7 +367,7 @@
 <span class="sd">            query (str): query data</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">objpath</span> <span class="o">=</span> <span class="s1">&#39;/data/threats/&#39;</span>
         <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
@@ -393,7 +393,7 @@
 <span class="sd">            query (str): query data</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">objpath</span> <span class="o">=</span> <span class="s1">&#39;/data/threats/state/&#39;</span>
 
@@ -424,7 +424,7 @@
 <span class="sd">            threatproperty (str, optional): tide data property</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">objpath</span> <span class="o">=</span> <span class="s1">&#39;/data/threats/state/&#39;</span>
 
@@ -461,7 +461,7 @@
 <span class="sd">            sources (str): set of sources or &quot;all&quot;</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            response (obj): Requests response object</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
 <span class="sd">        url = self.dossier_url</span>
 <span class="sd">        # Create body</span>
