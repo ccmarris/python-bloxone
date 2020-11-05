@@ -3,7 +3,7 @@ Introduction
 ============
 
 The Infoblox BloxOne suite of applications provides a RESTful API that is
-published using Swagger on https://docs.infoblox.com/apidoc along with other
+published using Swagger on https://csp.infoblox.com/apidoc along with other
 Infoblox APIs.
 
 This module aims to provide a class hierarchy to simplify access to these
@@ -21,8 +21,14 @@ Some basic configuration, such a base url, API version and API key are read
 from an ini file. An example of which is provided. When instantiating/initialising
 this will read config.ini by default. Alternatively a path can be provided.
 
-For more detailed documentation please see 
+For more detailed documentation please see: 
 https://python-bloxone.readthedocs.io/en/latest/
+
+PyPi:
+https://pypi.org/project/bloxone/
+
+GitHub:
+https://github.com/ccmarris/python-bloxone
 
 All feedback please to chris@infoblox.com
 
