@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>b1td Class &mdash; Bloxone API Wrapper 0.5.9 documentation</title>
+  <title>b1td Class &mdash; Bloxone API Wrapper 0.6.1 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.5.9
+                0.6.1
               </div>
             
           
@@ -179,6 +179,58 @@
 <dd><p>BloxOne ThreatDefence API Wrapper
 Covers TIDE and Dossier</p>
 <dl class="py method">
+<dt id="bloxone.b1td.dossier_sources">
+<code class="sig-name descname">dossier_sources</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.dossier_sources"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.dossier_sources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Sources for Dossier</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Requests response object</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>response object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="bloxone.b1td.dossierquery">
+<code class="sig-name descname">dossierquery</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">query</span></em>, <em class="sig-param"><span class="n">type</span><span class="o">=</span><span class="default_value">'host'</span></em>, <em class="sig-param"><span class="n">sources</span><span class="o">=</span><span class="default_value">'all'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.dossierquery"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.dossierquery" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple Dossier Query</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em>) – query data</p></li>
+<li><p><strong>type</strong> (<em>str</em>) – “host”, “ip” or “url”</p></li>
+<li><p><strong>sources</strong> (<em>str</em>) – set of sources or “all”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Requests response object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>response object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="bloxone.b1td.expand_mitre_vector">
+<code class="sig-name descname">expand_mitre_vector</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mitre</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.expand_mitre_vector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.expand_mitre_vector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Expand MITRE Vector details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mitre</strong> (<em>str</em>) – MITRE Vector</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Requests response object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>response object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="bloxone.b1td.get">
 <code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="n">action</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">params</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic get object wrapper for TIDE data objects</p>
@@ -270,6 +322,23 @@ i.e. threat data that has not expired at time of call</p>
 <li><p><strong>datatype</strong> (<em>str</em>) – “host”, “ip” or “url”</p></li>
 <li><p><strong>query</strong> (<em>str</em>) – query data</p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Requests response object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>response object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="bloxone.b1td.threat_actor">
+<code class="sig-name descname">threat_actor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.threat_actor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.threat_actor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Threat Actor details</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – Name of Threat Actor</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Requests response object</p>

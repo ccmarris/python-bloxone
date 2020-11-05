@@ -2,6 +2,7 @@
 ChangeLog
 *********
 
+|   20201105	v0.6.1	 Dossier & threat enrichment methods added
 |   20201102	v0.6.0	 Fixed the add_tag and delete_tag methods
 |   20201022	v0.5.9	 Added auditlog method to b1platform
 |   20200907	v0.5.8	 Fixed a regex warning in utils.buildregex()

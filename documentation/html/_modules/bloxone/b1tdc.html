@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>bloxone.b1tdc &mdash; Bloxone API Wrapper 0.5.9 documentation</title>
+  <title>bloxone.b1tdc &mdash; Bloxone API Wrapper 0.6.1 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.5.9
+                0.6.1
               </div>
             
           
@@ -200,7 +200,7 @@
 
 <span class="sd">------------------------------------------------------------------------</span>
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.0&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.1&#39;</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison/Krishna Vasudevan&#39;</span>
 <span class="n">__author_email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
 
@@ -213,14 +213,13 @@
 
 <div class="viewcode-block" id="b1tdc"><a class="viewcode-back" href="../../b1tdc-class.html#bloxone.b1tdc">[docs]</a><span class="k">class</span> <span class="nc">b1tdc</span><span class="p">(</span><span class="n">bloxone</span><span class="o">.</span><span class="n">b1</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    BloxOne ThreatDefence API Wrapper</span>
-<span class="sd">    Covers TIDE and Dossier</span>
+<span class="sd">    BloxOne ThreatDefence Cloud API Wrapper</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="c1"># Generic Methods</span>
 <div class="viewcode-block" id="b1tdc.get"><a class="viewcode-back" href="../../b1tdc-class.html#bloxone.b1tdc.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Generic get object wrapper for TIDE data objects</span>
+<span class="sd">        Generic get object wrapper for Threat Defense Cloud</span>
 
 <span class="sd">        Parameters:</span>
 <span class="sd">            objpath (str):  Swagger object path</span>
@@ -241,7 +240,7 @@
 
 <div class="viewcode-block" id="b1tdc.post"><a class="viewcode-back" href="../../b1tdc-class.html#bloxone.b1tdc.post">[docs]</a>    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Generic create object wrapper for ddi objects</span>
+<span class="sd">        Generic create object wrapper for Threat Defense Cloud</span>
 
 <span class="sd">        Parameters:</span>
 <span class="sd">            objpath (str):  Swagger object path</span>
@@ -261,7 +260,7 @@
 
 <div class="viewcode-block" id="b1tdc.create"><a class="viewcode-back" href="../../b1tdc-class.html#bloxone.b1tdc.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Generic create object wrapper for ddi objects</span>
+<span class="sd">        Generic create object wrapper for Threat Defense Cloud</span>
 
 <span class="sd">        Parameters:</span>
 <span class="sd">            objpath (str):  Swagger object path</span>
@@ -281,7 +280,7 @@
 
 <div class="viewcode-block" id="b1tdc.delete"><a class="viewcode-back" href="../../b1tdc-class.html#bloxone.b1tdc.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Generic delete object wrapper for ddi objects</span>
+<span class="sd">        Generic delete object wrapper for Threat Defense Cloud</span>
 
 <span class="sd">        Parameters:</span>
 <span class="sd">            objpath (str):  Swagger object path</span>
@@ -302,7 +301,7 @@
 
 <div class="viewcode-block" id="b1tdc.update"><a class="viewcode-back" href="../../b1tdc-class.html#bloxone.b1tdc.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Generic create object wrapper for ddi objects</span>
+<span class="sd">        Generic create object wrapper for Threat Defense Cloud</span>
 
 <span class="sd">        Parameters:</span>
 <span class="sd">            objpath (str):  Swagger object path</span>

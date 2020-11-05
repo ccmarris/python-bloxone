@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>bloxone.b1td &mdash; Bloxone API Wrapper 0.5.9 documentation</title>
+  <title>bloxone.b1td &mdash; Bloxone API Wrapper 0.6.1 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.5.9
+                0.6.1
               </div>
             
           
@@ -200,7 +200,7 @@
 
 <span class="sd">------------------------------------------------------------------------</span>
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.5&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.2.0&#39;</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison&#39;</span>
 <span class="n">__author_email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
 
@@ -446,13 +446,26 @@
         <span class="c1"># Make API Call</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">response</span></div></div>
+        <span class="k">return</span> <span class="n">response</span></div>
 
+    <span class="c1"># ** Dossier Methods **</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Not documented and returns Not Implemented</span>
-<span class="sd">    def dossierquery(self, type=&quot;host&quot;, sources=&quot;all&quot;):</span>
+<div class="viewcode-block" id="b1td.dossier_sources"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.dossier_sources">[docs]</a>    <span class="k">def</span> <span class="nf">dossier_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get Sources for Dossier</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dossier_url</span> <span class="o">+</span> <span class="s1">&#39;/sources&#39;</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="b1td.dossierquery"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.dossierquery">[docs]</a>    <span class="k">def</span> <span class="nf">dossierquery</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;host&quot;</span><span class="p">,</span> <span class="n">sources</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Simple Dossier Query</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters:</span>
@@ -463,25 +476,71 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-<span class="sd">        url = self.dossier_url</span>
-<span class="sd">        # Create body</span>
-<span class="sd">        if sources == &quot;all&quot;:</span>
-<span class="sd">            sources = (&#39;&quot;alexa&quot;,&quot;atp&quot;,&quot;ccb&quot;,&quot;dns&quot;,&quot;gcs&quot;,&quot;geo&quot;,&quot;gsb&quot;,</span>
-<span class="sd">                        &quot;isight&quot;,&quot;malware_analysis&quot;,&quot;ptr&quot;,&quot;pdns&quot;,&quot;rwhois&quot;,</span>
-<span class="sd">                        &quot;whois&quot;,&quot;inforank&quot;&#39;)</span>
-<span class="sd">        else:</span>
-<span class="sd">            sources = &#39;&quot;&#39;+sources+&#39;&quot;&#39;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dossier_url</span> <span class="o">+</span> <span class="s1">&#39;/jobs?wait=true&#39;</span>
+        <span class="c1"># Create body</span>
+        <span class="k">if</span> <span class="n">sources</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dossier_sources</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
+                <span class="n">sources</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Sources retrieved: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sources</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">sources</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;atp&#39;</span><span class="p">,</span> <span class="s1">&#39;dns&#39;</span><span class="p">,</span> <span class="s1">&#39;geo&#39;</span><span class="p">,</span> <span class="s1">&#39;pdns&#39;</span><span class="p">,</span> <span class="s1">&#39;ptr&#39;</span><span class="p">,</span> <span class="s1">&#39;rwhois&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;whopis&#39;</span><span class="p">,</span> <span class="s1">&#39;inforank&#39;</span><span class="p">,</span> <span class="s1">&#39;rpz_feeds&#39;</span><span class="p">,</span> <span class="s1">&#39;custom_lists&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;whitelist&#39;</span><span class="p">]</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Failed to retrieve sources, using &quot;</span> 
+                              <span class="o">+</span> <span class="s2">&quot;limited list </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sources</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">source_list</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">source_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span> 
+            <span class="n">sources</span> <span class="o">=</span> <span class="n">source_list</span>
 
-<span class="sd">        body = (&#39;{&quot;target&quot;: {&quot;one&quot;: {&quot;type&quot;: &quot;&#39;</span>
-<span class="sd">                + type + &#39;&quot;, &quot;target&quot;: &quot;&#39;</span>
-<span class="sd">                + query + &#39;&quot;, &quot;sources&quot;: [&#39;+sources+&#39;] }}}, &quot;</span>
-<span class="sd">                + &quot;options&quot;:{}}&#39;)</span>
+        <span class="n">body</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;{&quot;target&quot;: {&quot;one&quot;: {&quot;type&quot;: &quot;&#39;</span> <span class="o">+</span> <span class="nb">type</span> <span class="o">+</span> <span class="s1">&#39;&quot;, &#39;</span>
+                <span class="o">+</span> <span class="s1">&#39;&quot;sources&quot;: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span>
+                <span class="o">+</span> <span class="s1">&#39;&quot;target&quot;: &quot;&#39;</span> <span class="o">+</span> <span class="n">query</span> <span class="o">+</span> <span class="s1">&#39;&quot; } } }&#39;</span> <span class="p">)</span>
+        <span class="c1"># body = json.dumps(body)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Body: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
 
-<span class="sd">        response = self._apipost(url, body)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apipost</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span>
 
-<span class="sd">        return response</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">response</span></div>
 
+
+    <span class="c1"># *** threat enrichment </span>
+
+<div class="viewcode-block" id="b1td.threat_actor"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.threat_actor">[docs]</a>    <span class="k">def</span> <span class="nf">threat_actor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get Threat Actor details</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            name(str): Name of Threat Actor</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">threat_enrichment_url</span> <span class="o">+</span> <span class="s1">&#39;/threat_actor/lookup?name=&#39;</span> <span class="o">+</span> <span class="n">name</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="b1td.expand_mitre_vector"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.expand_mitre_vector">[docs]</a>    <span class="k">def</span> <span class="nf">expand_mitre_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mitre</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Expand MITRE Vector details</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            mitre(str): MITRE Vector</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">threat_enrichment_url</span> <span class="o">+</span> <span class="s1">&#39;/mitre/lookup&#39;</span>
+        <span class="n">body</span> <span class="o">=</span> <span class="s1">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="n">mitre</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;URL: </span><span class="si">{}</span><span class="s2">, Body: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">body</span><span class="p">))</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apipost</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div></div>
 
 </pre></div>
 

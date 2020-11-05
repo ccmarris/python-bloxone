@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 __author__ = 'Chris Marrison/Krishna Vasudevan'
 __author_email__ = 'chris@infoblox.com'
 
@@ -54,14 +54,13 @@ import datetime
 
 class b1tdc(bloxone.b1):
     '''
-    BloxOne ThreatDefence API Wrapper
-    Covers TIDE and Dossier
+    BloxOne ThreatDefence Cloud API Wrapper
     '''
 
     # Generic Methods
     def get(self, objpath, action="", **params):
         '''
-        Generic get object wrapper for TIDE data objects
+        Generic get object wrapper for Threat Defense Cloud
 
         Parameters:
             objpath (str):  Swagger object path
@@ -82,7 +81,7 @@ class b1tdc(bloxone.b1):
 
     def post(self, objpath, body=""):
         '''
-        Generic create object wrapper for ddi objects
+        Generic create object wrapper for Threat Defense Cloud
 
         Parameters:
             objpath (str):  Swagger object path
@@ -102,7 +101,7 @@ class b1tdc(bloxone.b1):
 
     def create(self, objpath, body=""):
         '''
-        Generic create object wrapper for ddi objects
+        Generic create object wrapper for Threat Defense Cloud
 
         Parameters:
             objpath (str):  Swagger object path
@@ -122,7 +121,7 @@ class b1tdc(bloxone.b1):
 
     def delete(self, objpath, id="", body=""):
         '''
-        Generic delete object wrapper for ddi objects
+        Generic delete object wrapper for Threat Defense Cloud
 
         Parameters:
             objpath (str):  Swagger object path
@@ -143,7 +142,7 @@ class b1tdc(bloxone.b1):
 
     def update(self, objpath, id="", body=""):
         '''
-        Generic create object wrapper for ddi objects
+        Generic create object wrapper for Threat Defense Cloud
 
         Parameters:
             objpath (str):  Swagger object path

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>b1ddi Class &mdash; Bloxone API Wrapper 0.5.9 documentation</title>
+  <title>b1ddi Class &mdash; Bloxone API Wrapper 0.6.1 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.5.9
+                0.6.1
               </div>
             
           
@@ -180,7 +180,8 @@
 <dl class="py method">
 <dt id="bloxone.b1ddi.add_tag">
 <code class="sig-name descname">add_tag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="n">id</span></em>, <em class="sig-param"><span class="n">tagname</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">tagvalue</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.add_tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.add_tag" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to add a tag to an existing On Prem Host</p>
+<dd><p>Method to add a tag to an existing object
+Note: PUT/update Not Implemented in API as yet</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -241,7 +242,7 @@
 
 <dl class="py method">
 <dt id="bloxone.b1ddi.delete_tag">
-<code class="sig-name descname">delete_tag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">tagname</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.delete_tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.delete_tag" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">delete_tag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">tagname</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.delete_tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.delete_tag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to delete a tag from an existing On Prem Host</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -382,6 +383,26 @@ Based on idea/code from John Neerdael</p>
 <li><p><strong>name</strong> (<em>str</em>) – BloxOne object id</p></li>
 <li><p><strong>id</strong> (<em>str</em>) – BloxOne object id</p></li>
 <li><p><strong>**params</strong> (<em>dict</em>) – Generic API parameters</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Requests response object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>response object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="bloxone.b1ddi.replace">
+<code class="sig-name descname">replace</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">body</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.replace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.replace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic create object wrapper for ddi objects</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
+<li><p><strong>body</strong> (<em>str</em>) – JSON formatted data payload</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

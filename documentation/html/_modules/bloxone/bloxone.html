@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>bloxone.bloxone &mdash; Bloxone API Wrapper 0.5.9 documentation</title>
+  <title>bloxone.bloxone &mdash; Bloxone API Wrapper 0.6.1 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.5.9
+                0.6.1
               </div>
             
           
@@ -198,17 +198,17 @@
 
 <span class="sd">------------------------------------------------------------------------</span>
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.5.8&#39;</span>
-<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison&#39;</span>
-<span class="n">__author_email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
-
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">configparser</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">json</span>
 
 <span class="c1"># ** Global Vars **</span>
-<span class="n">cspurl</span> <span class="o">=</span> <span class="s2">&quot;https://csp.infoblox.com/api&quot;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.6.1&#39;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
+<span class="vm">__doc__</span> <span class="o">=</span> <span class="s1">&#39;https://python-bloxone.readthedocs.io/en/latest/&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;BSD&#39;</span>
 
 
 <span class="c1"># ** Facilitate ini file for basic configuration including API Key</span>
@@ -287,7 +287,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">tddfp_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/api/atcdfp/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;api_version&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tdlad_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/api/atclad/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;api_version&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tide_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/tide/api&#39;</span> 
-        <span class="bp">self</span><span class="o">.</span><span class="n">dossier_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/dossier/api&#39;</span> <span class="c1"># Placeholder</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dossier_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/tide/api/services/intel/lookup&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threat_enrichment_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/tide/threat-enrichment&#39;</span>
 
         <span class="c1"># List of successful return codes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span> <span class="o">=</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">204</span><span class="p">]</span>
@@ -326,12 +327,16 @@
         <span class="k">return</span> <span class="n">response</span>
 
 
-    <span class="k">def</span> <span class="nf">_apipost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>    
-     <span class="c1"># Call BloxOne API</span>
+    <span class="k">def</span> <span class="nf">_apipost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>    
+        <span class="c1"># Set headers</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">headers</span><span class="p">:</span>
+            <span class="n">headers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span>
+     
+        <span class="c1"># Call BloxOne API</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span>
                                         <span class="n">url</span><span class="p">,</span>
-                                        <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span>
+                                        <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
                                         <span class="n">data</span><span class="o">=</span><span class="n">body</span><span class="p">)</span>
         <span class="c1"># Catch exceptions</span>
         <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>

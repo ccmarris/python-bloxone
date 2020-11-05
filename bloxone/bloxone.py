@@ -39,17 +39,17 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.6.0'
-__author__ = 'Chris Marrison'
-__author_email__ = 'chris@infoblox.com'
-
 import logging
 import configparser
 import requests
 import json
 
 # ** Global Vars **
-cspurl = "https://csp.infoblox.com/api"
+__version__ = '0.6.1'
+__author__ = 'Chris Marrison'
+__email__ = 'chris@infoblox.com'
+__doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
+__license__ = 'BSD'
 
 
 # ** Facilitate ini file for basic configuration including API Key
@@ -128,7 +128,8 @@ class b1:
         self.tddfp_url = self.base_url + '/api/atcdfp/' + self.cfg['api_version']
         self.tdlad_url = self.base_url + '/api/atclad/' + self.cfg['api_version']
         self.tide_url = self.base_url + '/tide/api' 
-        self.dossier_url = self.base_url + '/dossier/api' # Placeholder
+        self.dossier_url = self.base_url + '/tide/api/services/intel/lookup'
+        self.threat_enrichment_url = self.base_url + '/tide/threat-enrichment'
 
         # List of successful return codes
         self.return_codes_ok = [200, 201, 204]
@@ -167,12 +168,16 @@ class b1:
         return response
 
 
-    def _apipost(self, url, body):    
-     # Call BloxOne API
+    def _apipost(self, url, body, headers=""):    
+        # Set headers
+        if not headers:
+            headers = self.headers
+     
+        # Call BloxOne API
         try:
             response = requests.request("POST",
                                         url,
-                                        headers=self.headers,
+                                        headers=headers,
                                         data=body)
         # Catch exceptions
         except requests.exceptions.RequestException as e:

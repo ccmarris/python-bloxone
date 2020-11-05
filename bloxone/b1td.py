@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.1.5'
+__version__ = '0.2.0'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -289,10 +289,23 @@ class b1td(bloxone.b1):
 
         return response
 
+    # ** Dossier Methods **
 
-"""
-Not documented and returns Not Implemented
-    def dossierquery(self, type="host", sources="all"):
+    def dossier_sources(self):
+        '''
+        Get Sources for Dossier
+
+        Returns:
+            response object: Requests response object
+        '''
+        url = self.dossier_url + '/sources'
+
+        response = self._apiget(url)
+
+        return response
+
+
+    def dossierquery(self, query, type="host", sources="all"):
         '''
         Simple Dossier Query
         
@@ -304,23 +317,69 @@ Not documented and returns Not Implemented
         Returns:
             response object: Requests response object
         '''
-        url = self.dossier_url
+        url = self.dossier_url + '/jobs?wait=true'
         # Create body
         if sources == "all":
-            sources = ('"alexa","atp","ccb","dns","gcs","geo","gsb",
-                        "isight","malware_analysis","ptr","pdns","rwhois",
-                        "whois","inforank"')
+            response = self.dossier_sources()
+            if response.status_code in self.return_codes_ok:
+                sources = list(response.json().keys())
+                logging.debug("Sources retrieved: {}".format(sources))
+            else:
+                sources = ['atp', 'dns', 'geo', 'pdns', 'ptr', 'rwhois',
+                           'whopis', 'inforank', 'rpz_feeds', 'custom_lists',
+                           'whitelist']
+                logging.debug("Failed to retrieve sources, using " 
+                              + "limited list {}".format(sources))
         else:
-            sources = '"'+sources+'"'
+            source_list = []
+            source_list.append(sources) 
+            sources = source_list
 
-        body = ('{"target": {"one": {"type": "'
-                + type + '", "target": "'
-                + query + '", "sources": ['+sources+'] }}}, "
-                + "options":{}}')
+        body = ( '{"target": {"one": {"type": "' + type + '", '
+                + '"sources": ' + str(sources).replace("'",'"') + ', '
+                + '"target": "' + query + '" } } }' )
+        # body = json.dumps(body)
+        logging.debug("Body: {}".format(body))
 
         response = self._apipost(url, body)
 
         return response
-    """
 
+
+    # *** threat enrichment 
+
+    def threat_actor(self, name):
+        '''
+        Get Threat Actor details
+
+        Parameters:
+            name(str): Name of Threat Actor
+        
+        Returns:
+            response object: Requests response object
+        '''
+
+        url = self.threat_enrichment_url + '/threat_actor/lookup?name=' + name
+        response = self._apiget(url)
+
+        return response
+
+
+    def expand_mitre_vector(self, mitre):
+        '''
+        Expand MITRE Vector details
+
+        Parameters:
+            mitre(str): MITRE Vector
+        
+        Returns:
+            response object: Requests response object
+        '''
+
+        url = self.threat_enrichment_url + '/mitre/lookup'
+        body = '"' + mitre + '"'
+        logging.debug("URL: {}, Body: {}".format(url,body))
+        response = self._apipost(url, body)
+
+        return response
 
