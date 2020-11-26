@@ -1,4 +1,5 @@
 from .bloxone import *
+from .b1platform import *
 from .b1ddi import *
 from .b1td import *
 from .b1tdc import *
@@ -9,4 +10,4 @@ from .utils import *
 
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
-__version__ = '0.6.1'
+__version__ = '0.6.2'

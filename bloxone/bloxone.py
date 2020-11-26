@@ -45,7 +45,7 @@ import requests
 import json
 
 # ** Global Vars **
-__version__ = '0.6.1'
+__version__ = '0.6.5'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -76,7 +76,7 @@ def read_b1_ini(ini_filename):
     except configparser.Error as err:
         logging.error(err)
 
-    # Look for TIDE section
+    # Look for BloxOne section
     if 'BloxOne' in cfg:
         for key in ini_keys:
             # Check for key in BloxOne section
@@ -84,10 +84,10 @@ def read_b1_ini(ini_filename):
                 config[key] = cfg['BloxOne'][key].strip("'\"")
                 logging.debug('Key {} found in {}: {}'.format(key, ini_filename, config[key]))
             else:
-                logging.warn('Key {} not found in BloxOne section.'.format(key))
+                logging.warning('Key {} not found in BloxOne section.'.format(key))
                 config[key] = ''
     else:
-        logging.warn('No BloxOne Section in config file: {}'.format(ini_filename))
+        logging.warning('No BloxOne Section in config file: {}'.format(ini_filename))
         config['api_key'] = ''
 
     return config
@@ -122,6 +122,8 @@ class b1:
         self.api_version = self.cfg['api_version']
         self.ddi_url = self.base_url + '/api/ddi/' + self.api_version
         self.host_url = self.base_url + '/api/host_app/' + self.cfg['api_version']
+        self.ztp_url = self.base_url + '/atlas-host-activation/' + self.cfg['api_version']
+        self.bootstrap_url = self.base_url + '/atlas-bootstrap-app/' + self.cfg['api_version']
         self.anycast_url = self.base_url + '/api/anycast/' + self.cfg['api_version']
         self.tdc_url = self.base_url + '/api/atcfw/' + self.cfg['api_version']
         self.tdep_url = self.base_url + '/api/atcep/' + self.cfg['api_version']
@@ -266,220 +268,3 @@ class b1:
                               "a specified ovject id.")
         
         return url
-
-
-class b1platform(b1):
-    '''
-    Class to simplify access to the BloxOne Platform APIs
-    '''
-
-    def get(self, objpath, id="", action="", **params):
-        '''
-        Generic get object wrapper for platform calls
-
-        Parameters:
-            objpath (str):  Swagger object path
-            id (str):       Optional Object ID
-            action (str):   Optional object action, e.g. "nextavailableip"
-
-        Returns:
-            response object: Requests response object
-        '''
-
-        # Build url
-        url = self.host_url + objpath
-        url = self._use_obj_id(url,id=id)
-        url = self._add_params(url, **params)
-        logging.debug("URL: {}".format(url))
-
-        response = self._apiget(url)
-
-        return response
-
-        
-    def create(self, objpath, body=""):
-        '''
-        Generic create object wrapper for platform objects
-
-        Parameters:
-            objpath (str):  Swagger object path
-            body (str):     JSON formatted data payload
-
-        Returns:
-            response object: Requests response object
-        '''
-        # Build url
-        url = self.host_url + objpath
-        logging.debug("URL: {}".format(url))
-
-        # Make API Call
-        response = self._apipost(url, body)
-
-        return response
-
-
-    def delete(self, objpath, id=""):
-        '''
-        Generic delete object wrapper for platform objects
-
-        Parameters:
-            objpath (str):  Swagger object path
-            id (str):       Object id to delete
-
-        Returns:
-            response object: Requests response object
-        '''
-        # Build url
-        url = self.host_url + objpath
-        url = self._use_obj_id(url, id=id)
-        logging.debug("URL: {}".format(url))
-
-        # Make API Call
-        response = self._apidelete(url)
-
-        return response
-
-
-    def update(self, objpath, id="", body=""):
-        '''
-        Generic create object wrapper for ddi objects
-
-        Parameters:
-            objpath (str):  Swagger object path
-            body (str):     JSON formatted data payload
-
-        Returns:
-            response object: Requests response object
-        '''
-        # Build url
-        url = self.host_url + objpath
-        url = self._use_obj_id(url, id=id)
-        logging.debug("URL: {}".format(url))
-
-        # Make API Call
-        response = self._apiput(url, body)
-
-        return response
-
-
-    def get_tags(self, objpath, id=""):
-        '''
-        Get tags for an object id
-
-        Parameters:
-            objpath (str):  Swagger object path
-
-            id (str): id of object
-
-        Returns:
-            tags (dict): Dictionary of current tags
-                         or empty dict if none
-        
-        .. todo::
-            * make generic, however, this requires the below
-            * Lookup dictionary of 'required fields' per object type
-        '''
-        tags = {}
-        response = self.get(objpath, id=id, _fields="tags")
-        if response.status_code in self.return_codes_ok:
-            tags = json.loads(response.text)
-            tags = tags['result']
-        else:
-            tags = {}
-        
-        return tags
-
-
-    # *** Platform API Requests *** 
-
-    def on_prem_hosts(self, **params):
-        '''
-        Method to retrieve On Prem Hosts
-        (undocumented)
-
-        Parameters:
-            **params (dict): Generic API parameters
-
-        Returns:
-            response object: Requests response object
-        '''
-
-        # Call BloxOne API
-        response = self.get('/on_prem_hosts', **params)
-
-        # Return response object
-        return response 
-
-
-    def oph_add_tag(self, id="", tagname="", tagvalue=""):
-        '''
-        Method to add a tag to an existing On Prem Host
-
-        Parameters:
-            objpath (str):  Swagger object path
-            tagname (str): Name of tag to add
-            tagvalue (str): Value to associate
-
-        Returns:
-            response object: Requests response object
-        '''
-        # tags = self.get_tags('/on_prem_hosts', id=id)
-        response = self.get('/on_prem_hosts', id=id, _fields="display_name,tags")
-        if response.status_code in self.return_codes_ok:
-            data = response.json()['result']
-        else:
-            data = {}
-        logging.debug("Existing tags: {}".format(data))
-        # Add new tag to data
-        if tagname:
-            data['tags'].update({tagname: tagvalue})
-            logging.debug("New tags: {}".format(data))
-        # Update object
-        response = self.update('/on_prem_hosts', id=id, body=json.dumps(data))
-
-        return response
-
-
-    def oph_delete_tag(self, id="", tagname=""):
-        '''
-        Method to delete a tag from an existing On Prem Host
-
-        Parameters:
-            objpath (str):  Swagger object path
-            tagname (str): Name of tag to add
-
-        Returns:
-            response object: Requests response object
-        '''
-        # tags = self.get_tags('/on_prem_hosts', id=id)
-        response = self.get('/on_prem_hosts', id=id, _fields="display_name,tags")
-        if response.status_code in self.return_codes_ok:
-            data = response.json()['result']
-            logging.debug("Existing tags: {}".format(data))
-            # Delete tag from data
-            if tagname in data['tags'].keys():
-                data['tags'].pop(tagname, True)
-                print(json.dumps(data))
-                logging.debug("New tags: {}".format(data))
-                # Update object
-                response = self.update('/on_prem_hosts', id=id, body=json.dumps(data))
-
-        return response
-
-
-    def auditlog(self, **params):
-        '''
-        Get the audit log
-
-        Parameters:
-            **params (dict): Generic API parameters
-        Returns:
-            response object: Requests response object
-        '''
-        url = self.base_url + '/api/auditlog/' + self.api_version +'/logs'
-        url = self._add_params(url, **params)
-        logging.debug("URL: {}".format(url))
-
-        response = self._apiget(url)
-
-        return response
