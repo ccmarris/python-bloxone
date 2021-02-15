@@ -2,7 +2,11 @@
 ChangeLog
 *********
 
-|   20201105	v0.6.6	 Added b1cdc class
+|   20210215	v0.6.7	 Added New Platform classes for new API elements
+|                        b1anycast, b1authn, b1bootstrap, b1oph, b1sw, b1ztp
+|                        Deprecating b1platform class (inherits b1oph for
+|                        compatibility
+|   20210212	v0.6.6	 Added b1cdc class
 |   20201105	v0.6.5	 Minor bug fixes
 |   20201105	v0.6.2	 Added get_all_auditlog() method
 |   20201105	v0.6.1	 Dossier & threat enrichment methods added
