@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Introduction &mdash; Bloxone API Wrapper 0.6.1 documentation</title>
+  <title>Introduction &mdash; Bloxone API Wrapper 0.6.7 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.6.1
+                0.6.7
               </div>
             
           
@@ -163,21 +163,24 @@
   <div class="section" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <p>The Infoblox BloxOne suite of applications provides a RESTful API that is
-published using Swagger on <a class="reference external" href="https://docs.infoblox.com/apidoc">https://docs.infoblox.com/apidoc</a> along with other
+published using Swagger on <a class="reference external" href="https://csp.infoblox.com/apidoc">https://csp.infoblox.com/apidoc</a> along with other
 Infoblox APIs.</p>
 <p>This module aims to provide a class hierarchy to simplify access to these
 published APIs, performing the ‘heavy lifting’ whilst providing full access to
 to their functionality. This is achieved by providing simple wrappers that enable
 you to take the swagger documented object paths, fields and where appropriate
 JSON body from the documentation and pass them to simple get, create, delete and
-update methods. These methods simply return a <code class="xref py py-mod docutils literal notranslate"><span class="pre">requests</span></code> response object.</p>
+update methods. These methods simply return a <em>requests</em> response object.</p>
 <p>In addition, useful utility methods are provided for common tasks such as
-getting an object id, by defining the object key and value match pair. Or
-getting a threat feed from TIDE. This is combined with several (currently)
-undocumented API calls and some data validation/normalisation functions.</p>
+getting an object id, by defining the object key and value match pair. This is
+combined with several (currently) undocumented API calls.</p>
 <p>Some basic configuration, such a base url, API version and API key are read
 from an ini file. An example of which is provided. When instantiating/initialising
 this will read config.ini by default. Alternatively a path can be provided.</p>
+<p>PyPi:
+<a class="reference external" href="https://pypi.org/project/bloxone/">https://pypi.org/project/bloxone/</a></p>
+<p>GitHub:
+<a class="reference external" href="https://github.com/ccmarris/python-bloxone">https://github.com/ccmarris/python-bloxone</a></p>
 </div>
 
 
@@ -200,7 +203,7 @@ this will read config.ini by default. Alternatively a path can be provided.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2020, Chris Marrison
+        &copy; Copyright 2021, Chris Marrison
 
     </p>
   </div>

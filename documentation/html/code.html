@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Source Documentation &mdash; Bloxone API Wrapper 0.6.1 documentation</title>
+  <title>Source Documentation &mdash; Bloxone API Wrapper 0.6.7 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.6.1
+                0.6.7
               </div>
             
           
@@ -169,200 +169,6 @@
 <dd><p>Parent Class to simplify access to the BloxOne APIs for subclasses</p>
 </dd></dl>
 
-<dl class="py class">
-<dt id="bloxone.bloxone.b1platform">
-<em class="property">class </em><code class="sig-prename descclassname">bloxone.bloxone.</code><code class="sig-name descname">b1platform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cfg_file</span><span class="o">=</span><span class="default_value">'config.ini'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1platform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.bloxone.b1platform" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class to simplify access to the BloxOne Platform APIs</p>
-<dl class="py method">
-<dt id="bloxone.bloxone.b1platform.auditlog">
-<code class="sig-name descname">auditlog</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">params</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1platform.auditlog"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.bloxone.b1platform.auditlog" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the audit log</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>**params</strong> (<em>dict</em>) – Generic API parameters</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="bloxone.bloxone.b1platform.create">
-<code class="sig-name descname">create</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="n">body</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1platform.create"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.bloxone.b1platform.create" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generic create object wrapper for platform objects</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
-<li><p><strong>body</strong> (<em>str</em>) – JSON formatted data payload</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="bloxone.bloxone.b1platform.delete">
-<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1platform.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.bloxone.b1platform.delete" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generic delete object wrapper for platform objects</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
-<li><p><strong>id</strong> (<em>str</em>) – Object id to delete</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="bloxone.bloxone.b1platform.get">
-<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">action</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">params</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1platform.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.bloxone.b1platform.get" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generic get object wrapper for platform calls</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
-<li><p><strong>id</strong> (<em>str</em>) – Optional Object ID</p></li>
-<li><p><strong>action</strong> (<em>str</em>) – Optional object action, e.g. “nextavailableip”</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="bloxone.bloxone.b1platform.get_tags">
-<code class="sig-name descname">get_tags</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1platform.get_tags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.bloxone.b1platform.get_tags" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get tags for an object id</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
-<li><p><strong>id</strong> (<em>str</em>) – id of object</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>Dictionary of current tags</dt><dd><p>or empty dict if none</p>
-</dd>
-</dl>
-</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>tags (dict)</p>
-</dd>
-</dl>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<ul class="simple">
-<li><p>make generic, however, this requires the below</p></li>
-<li><p>Lookup dictionary of ‘required fields’ per object type</p></li>
-</ul>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt id="bloxone.bloxone.b1platform.on_prem_hosts">
-<code class="sig-name descname">on_prem_hosts</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">params</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1platform.on_prem_hosts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.bloxone.b1platform.on_prem_hosts" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to retrieve On Prem Hosts
-(undocumented)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>**params</strong> (<em>dict</em>) – Generic API parameters</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="bloxone.bloxone.b1platform.oph_add_tag">
-<code class="sig-name descname">oph_add_tag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">tagname</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">tagvalue</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1platform.oph_add_tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.bloxone.b1platform.oph_add_tag" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to add a tag to an existing On Prem Host</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
-<li><p><strong>tagname</strong> (<em>str</em>) – Name of tag to add</p></li>
-<li><p><strong>tagvalue</strong> (<em>str</em>) – Value to associate</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="bloxone.bloxone.b1platform.oph_delete_tag">
-<code class="sig-name descname">oph_delete_tag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">tagname</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1platform.oph_delete_tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.bloxone.b1platform.oph_delete_tag" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to delete a tag from an existing On Prem Host</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
-<li><p><strong>tagname</strong> (<em>str</em>) – Name of tag to add</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="bloxone.bloxone.b1platform.update">
-<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">body</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1platform.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.bloxone.b1platform.update" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generic create object wrapper for ddi objects</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
-<li><p><strong>body</strong> (<em>str</em>) – JSON formatted data payload</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 <dl class="py function">
 <dt id="bloxone.bloxone.read_b1_ini">
 <code class="sig-prename descclassname">bloxone.bloxone.</code><code class="sig-name descname">read_b1_ini</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ini_filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#read_b1_ini"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.bloxone.read_b1_ini" title="Permalink to this definition">¶</a></dt>
@@ -402,7 +208,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2020, Chris Marrison
+        &copy; Copyright 2021, Chris Marrison
 
     </p>
   </div>

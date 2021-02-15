@@ -13,8 +13,8 @@ APIs.
 The specific API 'trees' are then split in to subclasses of :class:`b1`:
 
     :class:`b1platform` 
-        Providing access to API calls associated with the BloxOne platform
-        itself.
+        Note, this has been deprecated and replaced by the b1oph class.
+        It therefore inherits from b1oph for compatibility.
 
     :class:`b1ddi` 
         Access to the BloxOne DDI API with core methods for *get*, *create*,

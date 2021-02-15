@@ -2,6 +2,8 @@
 ChangeLog
 *********
 
+|   20201105	v0.6.6	 Added b1cdc class
+|   20201105	v0.6.5	 Minor bug fixes
 |   20201105	v0.6.2	 Added get_all_auditlog() method
 |   20201105	v0.6.1	 Dossier & threat enrichment methods added
 |   20201102	v0.6.0	 Fixed the add_tag and delete_tag methods

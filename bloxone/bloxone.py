@@ -7,7 +7,7 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20200907
+ Date Last Updated: 20210215
 
  Todo:
 
@@ -45,7 +45,7 @@ import requests
 import json
 
 # ** Global Vars **
-__version__ = '0.6.5'
+__version__ = '0.6.7'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -120,11 +120,16 @@ class b1:
         # Create base URLs
         self.base_url = self.cfg['url']
         self.api_version = self.cfg['api_version']
+
+        self.anycast_url = self.base_url + '/api/anycast/' + self.cfg['api_version']
+        self.authn_url = self.base_url + '/api/authn/' + self.cfg['api_version']
+        self.bootstrap_url = self.base_url + '/api/atlas-bootstrap-app/' + self.cfg['api_version']
+        self.cdc_url = self.base_url + '/api/cdc-flow/' + self.api_version
         self.ddi_url = self.base_url + '/api/ddi/' + self.api_version
         self.host_url = self.base_url + '/api/host_app/' + self.cfg['api_version']
+        self.sw_url = self.base_url + '/api/upgrade_policy/' + self.cfg['api_version']
         self.ztp_url = self.base_url + '/atlas-host-activation/' + self.cfg['api_version']
-        self.bootstrap_url = self.base_url + '/atlas-bootstrap-app/' + self.cfg['api_version']
-        self.anycast_url = self.base_url + '/api/anycast/' + self.cfg['api_version']
+        
         self.tdc_url = self.base_url + '/api/atcfw/' + self.cfg['api_version']
         self.tdep_url = self.base_url + '/api/atcep/' + self.cfg['api_version']
         self.tddfp_url = self.base_url + '/api/atcdfp/' + self.cfg['api_version']
@@ -132,6 +137,7 @@ class b1:
         self.tide_url = self.base_url + '/tide/api' 
         self.dossier_url = self.base_url + '/tide/api/services/intel/lookup'
         self.threat_enrichment_url = self.base_url + '/tide/threat-enrichment'
+
 
         # List of successful return codes
         self.return_codes_ok = [200, 201, 204]

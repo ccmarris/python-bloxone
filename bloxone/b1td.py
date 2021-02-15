@@ -5,11 +5,11 @@
 
  Description:
 
- BloxOne DDI API Wrapper Class and Helpers
+ BloxOne Threat Defence API Wrapper Class and Helpers
 
  Author: Chris Marrison
 
- Date Last Updated: 20200810
+ Date Last Updated: 20210215
 
  Todo:
 
@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.2.0'
+__version__ = '0.2.2'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
