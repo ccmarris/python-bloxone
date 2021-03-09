@@ -7,9 +7,11 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20210215
+ Date Last Updated: 20210308
 
  Todo:
+
+    api_key format verification upon inifile read.
 
  Copyright (c) 2020 Chris Marrison / Infoblox
 
@@ -42,10 +44,11 @@
 import logging
 import configparser
 import requests
+import os
 import json
 
 # ** Global Vars **
-__version__ = '0.6.7'
+__version__ = '0.6.9'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -69,28 +72,48 @@ def read_b1_ini(ini_filename):
     cfg = configparser.ConfigParser()
     config = {}
     ini_keys = ['url', 'api_version', 'api_key']
+ 
+    # Check for inifile and raise exception if not found
+    if os.path.isfile(ini_filename):
+        # Attempt to read api_key from ini file
+        try:
+            cfg.read(ini_filename)
+        except configparser.Error as err:
+            logging.error(err)
 
-    # Attempt to read api_key from ini file
-    try:
-        cfg.read(ini_filename)
-    except configparser.Error as err:
-        logging.error(err)
-
-    # Look for BloxOne section
-    if 'BloxOne' in cfg:
-        for key in ini_keys:
-            # Check for key in BloxOne section
-            if key in cfg['BloxOne']:
-                config[key] = cfg['BloxOne'][key].strip("'\"")
-                logging.debug('Key {} found in {}: {}'.format(key, ini_filename, config[key]))
-            else:
-                logging.warning('Key {} not found in BloxOne section.'.format(key))
-                config[key] = ''
+        # Look for BloxOne section
+        if 'BloxOne' in cfg:
+            for key in ini_keys:
+                # Check for key in BloxOne section
+                if key in cfg['BloxOne']:
+                    config[key] = cfg['BloxOne'][key].strip("'\"")
+                    logging.debug('Key {} found in {}: {}'.format(key, ini_filename, config[key]))
+                else:
+                    logging.warning('Key {} not found in BloxOne section.'.format(key))
+                    config[key] = ''
+        else:
+            logging.warning('No BloxOne Section in config file: {}'.format(ini_filename))
+            config['api_key'] = ''
+        
+        # Verify format of API Key
+        if verify_api_key:
+            logging.debug('API Key format correct')
+        else:
+            logging.debug
     else:
-        logging.warning('No BloxOne Section in config file: {}'.format(ini_filename))
-        config['api_key'] = ''
+        raise FileNotFoundError('ini file "{}" not found.'.format(ini_filename))
 
     return config
+
+def new_func():
+    raise
+
+
+def verify_api_key(apikey):
+    '''
+    Verify format of API Key
+    '''
+    return 
 
 
 class b1:
@@ -274,3 +297,109 @@ class b1:
                               "a specified ovject id.")
         
         return url
+
+
+    # Public Generic Methods
+    def get(self, url, id="", action="", **params):
+        '''
+        Generic get object wrapper 
+
+        Parameters:
+            url (str):      Full URL
+            id (str):       Optional Object ID
+            action (str):   Optional object action, e.g. "nextavailableip"
+        
+        Returns:
+            response object: Requests response object
+        '''
+        # Build url
+        url = self._use_obj_id(url,id=id)
+        url = self._add_params(url, **params)
+        logging.debug("URL: {}".format(url))
+
+        response = self._apiget(url)
+
+        return response
+
+
+    def create(self, url, body=""):
+        '''
+        Generic create object wrapper 
+
+        Parameters:
+            url (str):  Full URL
+            body (str): JSON formatted data payload
+
+        Returns:
+            response object: Requests response object
+        '''
+        # Build url
+        logging.debug("URL: {}".format(url))
+
+        # Make API Call
+        response = self._apipost(url, body)
+
+        return response
+
+
+    def delete(self, url, id=""):
+        '''
+        Generic delete object wrapper
+
+        Parameters:
+            url (str):  Full URL
+            id (str):   Object id to delete
+
+        Returns:
+            response object: Requests response object
+        '''
+        # Build url
+        url = self._use_obj_id(url,id=id)
+        logging.debug("URL: {}".format(url))
+
+        # Make API Call
+        response = self._apidelete(url)
+
+        return response
+
+
+    def update(self, url, id="", body=""):
+        '''
+        Generic create object wrapper 
+
+        Parameters:
+            url (str):  Full URL
+            body (str): JSON formatted data payload
+
+        Returns:
+            response object: Requests response object
+        '''
+        # Build url if needed
+        url = self._use_obj_id(url, id=id)
+        logging.debug("URL: {}".format(url))
+
+        # Make API Call
+        response = self._apiput(url, body)
+
+        return response
+
+
+    def replace(self, url, id="", body=""):
+        '''
+        Generic create object wrapper 
+
+        Parameters:
+            url (str):  Full URL
+            body (str): JSON formatted data payload
+
+        Returns:
+            response object: Requests response object
+        '''
+        # Build url
+        url = self._use_obj_id(url, id=id)
+        logging.debug("URL: {}".format(url))
+
+        # Make API Call
+        response = self._apipatch(url, body)
+
+        return response
