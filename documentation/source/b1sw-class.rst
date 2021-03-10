@@ -2,5 +2,5 @@
 b1dw Class
 ==========
 
-.. autoclass:: bloxone.b1dw
+.. autoclass:: bloxone.b1sw
     :members:

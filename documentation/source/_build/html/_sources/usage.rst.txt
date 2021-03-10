@@ -1,0 +1,139 @@
+==================
+Usage and Examples
+==================
+
+The aim of this module is to provide simple object based access to the 
+BloxOne APIs and make it as simple as possible to code given the swagger
+available documentation. 
+
+There are several classes/subclasses that provide this access. The base
+class is :class:`b1`. This acts as a parent class for the BloxOne Application
+APIs.
+
+Associated with this are the subclasses :class:`b1platform` that provide access
+to API calls associated with the BloxOne platform itself and :class:`b1ddi` that
+provides access the BloxOne DDI API core methods for *get, create, delete* 
+and *update* in addition to specific task orientated helper methods. 
+
+.. note::
+    Currently it is only the Platform and BloxOne DDI APIs subclasses that
+    have been developed.
+
+    BloxOne Threat Defense and Cloud will be added in a later version. Place
+    holder files currently contain functions for TIDE and Dossier based on the 
+    ActiveTrust platform rather than BloxOne APIs. At this time this has not
+    been tested so functionality may be limited.
+
+    There is an associated set of utility functions provided in bloxone.utils.
+
+
+Basic Usage
+-----------
+
+For BloxOne DDI therefore the basic usage structure for a *get* is::
+
+    import bloxone
+    b1ddi = bloxone.b1ddi(<cini file>)
+    response = b1ddi.get(<object path>)
+    if response.status_code in b1ddi.return_codes_ok:
+        print(response.text)
+    else: 
+        print(response.status_code
+
+Similarly for the other core functions. For details around parameters, please
+see the :doc:`class documentation </classes>`
+
+For debugging purposes, the :mod:`bloxone` module supports logging via the logging
+module using debug.
+
+.. warning::
+
+    Although I have attempted to keep debugging clean. There is still potential for
+    the debug output to produce full data dumps of API responses.
+
+
+Examples
+--------
+
+.. todo::
+    These examples are placeholders, useful, but actual example set here is on 
+    the todo.
+
+.. code-block:: python
+
+    # Note this is a set of rough examples to show mthod calls
+
+    import bloxone
+    import logging
+
+    log=logging.getLogger(__name__)
+    # logging.basicConfig(level=logging.DEBUG)
+
+    # Create a BloxOne DDI Object
+    b1ddi = bloxone.b1ddi()
+    # Specify ini filename
+    # b1ddi = bloxone.b1ddi('/Users/<username/<path>/<inifile>')
+
+    # Show API Key
+    b1ddi.api_key
+
+    # Generic Get wrapper using "Swagger Path for object"
+    response = b1ddi.get('/ipam/ip_space')
+    
+    # Response object handling
+    response.status_code
+    response.text
+    response.json()
+
+    # Using custom parameters
+    response = b1ddi.get('/dns/view', _fields="name,id")
+    response.text
+
+    # Example with multiple API parameters
+    response = b1ddi.get('/ipam/subnet', _tfilter="Owner==marrison",_fields="address")
+    response = b1ddi.get('/ipam/subnet', _tfilter="Owner~mar")
+
+    # Get ID from key/value pair
+    id = b1ddi.get_id('/dns/auth_zone', key="fqdn", value="home.")
+    # 'dns/auth_zone/80b0e234-8d5b-465b-8c98-e9430c5d83a9'
+
+    id = b1ddi.get_id('/ipam/ip_space', key="name", value="marrison-lab")
+    # 'ipam/ip_space/fd388619-b013-11ea-b956-ca543bd8c483'
+
+    r = b1ddi.get_zone_child(parent="zone", name="home.", fields="name,record_type,record_data")
+
+    # Get all on_prem_hosts
+    b1platform = bloxone.b1platform()
+    response = b1platform.on_prem_hosts()
+    response.text
+
+    # Using tag filters
+    response = b1platform.on_prem_hosts(_tfilter="Owner==marrison")
+    response.text
+
+    # Get all records for a 'named' zone
+    response = b1ddi.get_zone_child(name="home.")
+    response.text
+
+    # Get all zones in a view by view name
+    response = b1ddi.get_zone_child(name="marrison-dns-view1")
+    response.text
+
+    # Create Examples
+    body = '{ "name": "my-ip-space", "tags": { "Owner": "marrison" }}' 
+    r = b1ddi.create('/ipam/ip_space', body=body)
+    r.text
+    # '{"result":{"asm_config":{"asm_threshold":90,"enable":true,"enable_notification":true,"forecast_period":14,"growth_factor":20,"growth_type":"percent","history":30,"min_total":10,"min_unused":10,"reenable_date":"1970-01-01T00:00:00Z"},"asm_scope_flag":0,"comment":"","dhcp_config":{"allow_unknown":true,"filters":[],"ignore_list":[],"lease_time":3600},"dhcp_options":[],"id":"ipam/ip_space/edfb2cde-c2fc-11ea-b5c8-3670d2b79356","inheritance_sources":null,"name":"marrison-test","tags":null,"threshold":{"enabled":false,"high":0,"low":0},"utilization":{"abandon_utilization":0,"abandoned":"0","dynamic":"0","free":"0","static":"0","total":"0","used":"0","utilization":0}}}'
+
+    >>> r = b1ddi.get_object_by_key('/ipam/ip_space', key="name", value="marrison-lab")
+    >>> r.text
+    '{"result":{"asm_config":{"asm_threshold":90,"enable":true,"enable_notification":true,"forecast_period":14,"growth_factor":20,"growth_type":"percent","history":30,"min_total":10,"min_unused":10,"reenable_date":"1970-01-01T00:00:00Z"},"asm_scope_flag":0,"comment":"","dhcp_config":{"allow_unknown":true,"filters":[],"ignore_list":[],"lease_time":43200},"dhcp_options":[],"id":"ipam/ip_space/fd388619-b013-11ea-b956-ca543bd8c483","inheritance_sources":null,"name":"marrison-lab","tags":{"Location":"Hampshire, UK","Owner":"marrison"},"threshold":{"enabled":false,"high":0,"low":0},"utilization":{"abandon_utilization":0,"abandoned":"0","dynamic":"40","free":"65491","static":"5","total":"65536","used":"45","utilization":0}}}'
+    >>> 
+
+    # Update tags on an on_prem_hosts object example
+    # Create a b1platform object
+    b1p = bloxone.b1platform('/Users/marrison/bin/tide.ini')
+    # Note: this will change the "tags" i.e. replace the "tags" with the "tags" in the update body
+    body = '{"display_name":"marrison-hw-ddi1", "tags":{"Location":"Hampshire, UK","Owner":"marrison","host/deployment_type":"APPLIANCE","host/k8s":"false","host/ophid":"63f2b1c3f80455d87186aa054e87f1a9"}}'
+    # Call the update method
+    response = b1p.update('/on_prem_hosts', id="97290", body=body)

@@ -14,9 +14,8 @@ Examples
     bloxone.utils.reverse_labels("www.infoblox.com")
 
     import bloxone
-    t = bloxone.b1td('/Users/marrison/configs/emea.ini')
-    t.version
     bloxone.__version__
+    t = bloxone.b1td('/Users/marrison/configs/emea.ini')
     t.tide_url
     t.threat_classes().json()
     t.threat_properties().json()

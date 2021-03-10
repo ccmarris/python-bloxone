@@ -1,0 +1,346 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Usage and Examples &mdash; Bloxone API Wrapper 0.1.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Classes Documentation" href="classes.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Bloxone API Wrapper
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage and Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic-usage">Basic Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Source Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version_history.html">ChangeLog</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Bloxone API Wrapper</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Usage and Examples</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="usage-and-examples">
+<h1>Usage and Examples<a class="headerlink" href="#usage-and-examples" title="Permalink to this headline">¶</a></h1>
+<p>The aim of this module is to provide simple object based access to the
+BloxOne APIs and make it as simple as possible to code given the swagger
+available documentation.</p>
+<p>There are several classes/subclasses that provide this access. The base
+class is <code class="xref py py-class docutils literal notranslate"><span class="pre">b1</span></code>. This acts as a parent class for the BloxOne Application
+APIs.</p>
+<p>Associated with this are the subclasses <code class="xref py py-class docutils literal notranslate"><span class="pre">b1platform</span></code> that provide access
+to API calls associated with the BloxOne platform itself and <code class="xref py py-class docutils literal notranslate"><span class="pre">b1ddi</span></code> that
+provides access the BloxOne DDI API core methods for <em>get, create, delete</em>
+and <em>update</em> in addition to specific task orientated helper methods.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently it is only the Platform and BloxOne DDI APIs subclasses that
+have been developed.</p>
+<p>BloxOne Threat Defense and Cloud will be added in a later version. Place
+holder files currently contain functions for TIDE and Dossier based on the
+ActiveTrust platform rather than BloxOne APIs. At this time this has not
+been tested so functionality may be limited.</p>
+<p>There is an associated set of utility functions provided in bloxone.utils.</p>
+</div>
+<div class="section" id="basic-usage">
+<h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
+<p>For BloxOne DDI therefore the basic usage structure for a <em>get</em> is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bloxone</span>
+<span class="n">b1ddi</span> <span class="o">=</span> <span class="n">bloxone</span><span class="o">.</span><span class="n">b1ddi</span><span class="p">(</span><span class="o">&lt;</span><span class="n">cini</span> <span class="n">file</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="o">&lt;</span><span class="nb">object</span> <span class="n">path</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span>
+</pre></div>
+</div>
+<p>Similarly for the other core functions. For details around parameters, please
+see the <a class="reference internal" href="classes.html"><span class="doc">class documentation</span></a></p>
+<p>For debugging purposes, the <code class="xref py py-mod docutils literal notranslate"><span class="pre">bloxone</span></code> module supports logging via the logging
+module using debug.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Although I have attempted to keep debugging clean. There is still potential for
+the debug output to produce full data dumps of API responses.</p>
+</div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>These examples are placeholders, useful, but actual example set here is on
+the todo.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note this is a set of rough examples to show mthod calls</span>
+
+<span class="kn">import</span> <span class="nn">bloxone</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">log</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="c1"># logging.basicConfig(level=logging.DEBUG)</span>
+
+<span class="c1"># Create a BloxOne DDI Object</span>
+<span class="n">b1ddi</span> <span class="o">=</span> <span class="n">bloxone</span><span class="o">.</span><span class="n">b1ddi</span><span class="p">()</span>
+<span class="c1"># Specify ini filename</span>
+<span class="c1"># b1ddi = bloxone.b1ddi(&#39;/Users/&lt;username/&lt;path&gt;/&lt;inifile&gt;&#39;)</span>
+
+<span class="c1"># Show API Key</span>
+<span class="n">b1ddi</span><span class="o">.</span><span class="n">api_key</span>
+
+<span class="c1"># Generic Get wrapper using &quot;Swagger Path for object&quot;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/ipam/ip_space&#39;</span><span class="p">)</span>
+
+<span class="c1"># Response object handling</span>
+<span class="n">response</span><span class="o">.</span><span class="n">status_code</span>
+<span class="n">response</span><span class="o">.</span><span class="n">text</span>
+<span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<span class="c1"># Using custom parameters</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/dns/view&#39;</span><span class="p">,</span> <span class="n">_fields</span><span class="o">=</span><span class="s2">&quot;name,id&quot;</span><span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">text</span>
+
+<span class="c1"># Example with multiple API parameters</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/ipam/subnet&#39;</span><span class="p">,</span> <span class="n">_tfilter</span><span class="o">=</span><span class="s2">&quot;Owner==marrison&quot;</span><span class="p">,</span><span class="n">_fields</span><span class="o">=</span><span class="s2">&quot;address&quot;</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/ipam/subnet&#39;</span><span class="p">,</span> <span class="n">_tfilter</span><span class="o">=</span><span class="s2">&quot;Owner~mar&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get ID from key/value pair</span>
+<span class="nb">id</span> <span class="o">=</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">get_id</span><span class="p">(</span><span class="s1">&#39;/dns/auth_zone&#39;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;fqdn&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;home.&quot;</span><span class="p">)</span>
+<span class="c1"># &#39;dns/auth_zone/80b0e234-8d5b-465b-8c98-e9430c5d83a9&#39;</span>
+
+<span class="nb">id</span> <span class="o">=</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">get_id</span><span class="p">(</span><span class="s1">&#39;/ipam/ip_space&#39;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;marrison-lab&quot;</span><span class="p">)</span>
+<span class="c1"># &#39;ipam/ip_space/fd388619-b013-11ea-b956-ca543bd8c483&#39;</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">get_zone_child</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="s2">&quot;zone&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;home.&quot;</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="s2">&quot;name,record_type,record_data&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get all on_prem_hosts</span>
+<span class="n">b1platform</span> <span class="o">=</span> <span class="n">bloxone</span><span class="o">.</span><span class="n">b1platform</span><span class="p">()</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">b1platform</span><span class="o">.</span><span class="n">on_prem_hosts</span><span class="p">()</span>
+<span class="n">response</span><span class="o">.</span><span class="n">text</span>
+
+<span class="c1"># Using tag filters</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">b1platform</span><span class="o">.</span><span class="n">on_prem_hosts</span><span class="p">(</span><span class="n">_tfilter</span><span class="o">=</span><span class="s2">&quot;Owner==marrison&quot;</span><span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">text</span>
+
+<span class="c1"># Get all records for a &#39;named&#39; zone</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">get_zone_child</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;home.&quot;</span><span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">text</span>
+
+<span class="c1"># Get all zones in a view by view name</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">get_zone_child</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;marrison-dns-view1&quot;</span><span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">text</span>
+
+<span class="c1"># Create Examples</span>
+<span class="n">body</span> <span class="o">=</span> <span class="s1">&#39;{ &quot;name&quot;: &quot;my-ip-space&quot;, &quot;tags&quot;: { &quot;Owner&quot;: &quot;marrison&quot; }}&#39;</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;/ipam/ip_space&#39;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">text</span>
+<span class="c1"># &#39;{&quot;result&quot;:{&quot;asm_config&quot;:{&quot;asm_threshold&quot;:90,&quot;enable&quot;:true,&quot;enable_notification&quot;:true,&quot;forecast_period&quot;:14,&quot;growth_factor&quot;:20,&quot;growth_type&quot;:&quot;percent&quot;,&quot;history&quot;:30,&quot;min_total&quot;:10,&quot;min_unused&quot;:10,&quot;reenable_date&quot;:&quot;1970-01-01T00:00:00Z&quot;},&quot;asm_scope_flag&quot;:0,&quot;comment&quot;:&quot;&quot;,&quot;dhcp_config&quot;:{&quot;allow_unknown&quot;:true,&quot;filters&quot;:[],&quot;ignore_list&quot;:[],&quot;lease_time&quot;:3600},&quot;dhcp_options&quot;:[],&quot;id&quot;:&quot;ipam/ip_space/edfb2cde-c2fc-11ea-b5c8-3670d2b79356&quot;,&quot;inheritance_sources&quot;:null,&quot;name&quot;:&quot;marrison-test&quot;,&quot;tags&quot;:null,&quot;threshold&quot;:{&quot;enabled&quot;:false,&quot;high&quot;:0,&quot;low&quot;:0},&quot;utilization&quot;:{&quot;abandon_utilization&quot;:0,&quot;abandoned&quot;:&quot;0&quot;,&quot;dynamic&quot;:&quot;0&quot;,&quot;free&quot;:&quot;0&quot;,&quot;static&quot;:&quot;0&quot;,&quot;total&quot;:&quot;0&quot;,&quot;used&quot;:&quot;0&quot;,&quot;utilization&quot;:0}}}&#39;</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">r</span> <span class="o">=</span> <span class="n">b1ddi</span><span class="o">.</span><span class="n">get_object_by_key</span><span class="p">(</span><span class="s1">&#39;/ipam/ip_space&#39;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;marrison-lab&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span>
+<span class="s1">&#39;{&quot;result&quot;:{&quot;asm_config&quot;:{&quot;asm_threshold&quot;:90,&quot;enable&quot;:true,&quot;enable_notification&quot;:true,&quot;forecast_period&quot;:14,&quot;growth_factor&quot;:20,&quot;growth_type&quot;:&quot;percent&quot;,&quot;history&quot;:30,&quot;min_total&quot;:10,&quot;min_unused&quot;:10,&quot;reenable_date&quot;:&quot;1970-01-01T00:00:00Z&quot;},&quot;asm_scope_flag&quot;:0,&quot;comment&quot;:&quot;&quot;,&quot;dhcp_config&quot;:{&quot;allow_unknown&quot;:true,&quot;filters&quot;:[],&quot;ignore_list&quot;:[],&quot;lease_time&quot;:43200},&quot;dhcp_options&quot;:[],&quot;id&quot;:&quot;ipam/ip_space/fd388619-b013-11ea-b956-ca543bd8c483&quot;,&quot;inheritance_sources&quot;:null,&quot;name&quot;:&quot;marrison-lab&quot;,&quot;tags&quot;:{&quot;Location&quot;:&quot;Hampshire, UK&quot;,&quot;Owner&quot;:&quot;marrison&quot;},&quot;threshold&quot;:{&quot;enabled&quot;:false,&quot;high&quot;:0,&quot;low&quot;:0},&quot;utilization&quot;:{&quot;abandon_utilization&quot;:0,&quot;abandoned&quot;:&quot;0&quot;,&quot;dynamic&quot;:&quot;40&quot;,&quot;free&quot;:&quot;65491&quot;,&quot;static&quot;:&quot;5&quot;,&quot;total&quot;:&quot;65536&quot;,&quot;used&quot;:&quot;45&quot;,&quot;utilization&quot;:0}}}&#39;</span>
+<span class="o">&gt;&gt;&gt;</span>
+
+<span class="c1"># Update tags on an on_prem_hosts object example</span>
+<span class="c1"># Create a b1platform object</span>
+<span class="n">b1p</span> <span class="o">=</span> <span class="n">bloxone</span><span class="o">.</span><span class="n">b1platform</span><span class="p">(</span><span class="s1">&#39;/Users/marrison/bin/tide.ini&#39;</span><span class="p">)</span>
+<span class="c1"># Note: this will change the &quot;tags&quot; i.e. replace the &quot;tags&quot; with the &quot;tags&quot; in the update body</span>
+<span class="n">body</span> <span class="o">=</span> <span class="s1">&#39;{&quot;display_name&quot;:&quot;marrison-hw-ddi1&quot;, &quot;tags&quot;:{&quot;Location&quot;:&quot;Hampshire, UK&quot;,&quot;Owner&quot;:&quot;marrison&quot;,&quot;host/deployment_type&quot;:&quot;APPLIANCE&quot;,&quot;host/k8s&quot;:&quot;false&quot;,&quot;host/ophid&quot;:&quot;63f2b1c3f80455d87186aa054e87f1a9&quot;}}&#39;</span>
+<span class="c1"># Call the update method</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">b1p</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s1">&#39;/on_prem_hosts&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;97290&quot;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="classes.html" class="btn btn-neutral float-right" title="Classes Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Chris Marrison
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>b1ddi Class &mdash; Bloxone API Wrapper 0.6.7 documentation</title>
+  <title>b1ddi Class &mdash; Bloxone API Wrapper 0.7.0 documentation</title>
   
 
   
@@ -17,36 +17,34 @@
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
 
+  
+  
     
 
   
+
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="b1cdc Class" href="b1cdc-class.html" />
     <link rel="prev" title="b1bootstrap Class" href="b1bootstrap-class.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -60,7 +58,7 @@
             
             
               <div class="version">
-                0.6.7
+                0.7.0
               </div>
             
           
@@ -180,288 +178,338 @@
             
   <div class="section" id="b1ddi-class">
 <h1>b1ddi Class<a class="headerlink" href="#b1ddi-class" title="Permalink to this headline">¶</a></h1>
-<dl class="py class">
+<dl class="class">
 <dt id="bloxone.b1ddi">
-<em class="property">class </em><code class="sig-prename descclassname">bloxone.</code><code class="sig-name descname">b1ddi</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cfg_file</span><span class="o">=</span><span class="default_value">'config.ini'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">bloxone.</code><code class="descname">b1ddi</code><span class="sig-paren">(</span><em>cfg_file='config.ini'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi" title="Permalink to this definition">¶</a></dt>
 <dd><p>BloxOne DDI API Wrapper Class</p>
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1ddi.add_tag">
-<code class="sig-name descname">add_tag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="n">id</span></em>, <em class="sig-param"><span class="n">tagname</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">tagvalue</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.add_tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.add_tag" title="Permalink to this definition">¶</a></dt>
+<code class="descname">add_tag</code><span class="sig-paren">(</span><em>objpath</em>, <em>id</em>, <em>tagname=''</em>, <em>tagvalue=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.add_tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.add_tag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to add a tag to an existing object
 Note: PUT/update Not Implemented in API as yet</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
-<li><p><strong>id</strong> (<em>str</em>) – Object ID</p></li>
-<li><p><strong>tagname</strong> (<em>str</em>) – Name of tag to add</p></li>
-<li><p><strong>tagvalue</strong> (<em>str</em>) – Value to associate with tag</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>objpath</strong> (<em>str</em>) – Swagger object path</li>
+<li><strong>id</strong> (<em>str</em>) – Object ID</li>
+<li><strong>tagname</strong> (<em>str</em>) – Name of tag to add</li>
+<li><strong>tagvalue</strong> (<em>str</em>) – Value to associate with tag</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Requests response object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">response object</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1ddi.create">
-<code class="sig-name descname">create</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="n">body</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.create"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.create" title="Permalink to this definition">¶</a></dt>
+<code class="descname">create</code><span class="sig-paren">(</span><em>objpath</em>, <em>body=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.create"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.create" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic create object wrapper for ddi objects</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
-<li><p><strong>body</strong> (<em>str</em>) – JSON formatted data payload</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>objpath</strong> (<em>str</em>) – Swagger object path</li>
+<li><strong>body</strong> (<em>str</em>) – JSON formatted data payload</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Requests response object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">response object</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1ddi.delete">
-<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.delete" title="Permalink to this definition">¶</a></dt>
+<code class="descname">delete</code><span class="sig-paren">(</span><em>objpath</em>, <em>id=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic delete object wrapper for ddi objects</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
-<li><p><strong>id</strong> (<em>str</em>) – Object id to delete</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>objpath</strong> (<em>str</em>) – Swagger object path</li>
+<li><strong>id</strong> (<em>str</em>) – Object id to delete</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Requests response object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">response object</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1ddi.delete_tag">
-<code class="sig-name descname">delete_tag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">tagname</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.delete_tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.delete_tag" title="Permalink to this definition">¶</a></dt>
+<code class="descname">delete_tag</code><span class="sig-paren">(</span><em>objpath</em>, <em>id=''</em>, <em>tagname=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.delete_tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.delete_tag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to delete a tag from an existing On Prem Host</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
-<li><p><strong>tagname</strong> (<em>str</em>) – Name of tag to add</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>objpath</strong> (<em>str</em>) – Swagger object path</li>
+<li><strong>tagname</strong> (<em>str</em>) – Name of tag to add</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Requests response object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">response object</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1ddi.get">
-<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">action</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">params</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.get" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get</code><span class="sig-paren">(</span><em>objpath</em>, <em>id=''</em>, <em>action=''</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic get object wrapper for ddi objects</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
-<li><p><strong>id</strong> (<em>str</em>) – Optional Object ID</p></li>
-<li><p><strong>action</strong> (<em>str</em>) – Optional object action, e.g. “nextavailableip”</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>objpath</strong> (<em>str</em>) – Swagger object path</li>
+<li><strong>id</strong> (<em>str</em>) – Optional Object ID</li>
+<li><strong>action</strong> (<em>str</em>) – Optional object action, e.g. “nextavailableip”</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Requests response object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">response object</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1ddi.get_id">
-<code class="sig-name descname">get_id</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">key</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">value</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">include_path</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.get_id" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_id</code><span class="sig-paren">(</span><em>objpath</em>, <em>*</em>, <em>key=''</em>, <em>value=''</em>, <em>include_path=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.get_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get object id using key/value pair</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
-<li><p><strong>key</strong> (<em>str</em>) – name of key to match</p></li>
-<li><p><strong>value</strong> (<em>str</em>) – value to match</p></li>
-<li><p><strong>include_path</strong> (<em>bool</em>) – Include path to object id</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>objpath</strong> (<em>str</em>) – Swagger object path</li>
+<li><strong>key</strong> (<em>str</em>) – name of key to match</li>
+<li><strong>value</strong> (<em>str</em>) – value to match</li>
+<li><strong>include_path</strong> (<em>bool</em>) – Include path to object id</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>object id or “”</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>id (str)</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">object id or “”</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">id (str)</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1ddi.get_object_by_key">
-<code class="sig-name descname">get_object_by_key</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">key</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">value</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">include_path</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get_object_by_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.get_object_by_key" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_object_by_key</code><span class="sig-paren">(</span><em>objpath</em>, <em>*</em>, <em>key=''</em>, <em>value=''</em>, <em>include_path=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get_object_by_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.get_object_by_key" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get object using key/value pair</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
-<li><p><strong>key</strong> (<em>str</em>) – name of key to match</p></li>
-<li><p><strong>value</strong> (<em>str</em>) – value to match</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>objpath</strong> (<em>str</em>) – Swagger object path</li>
+<li><strong>key</strong> (<em>str</em>) – name of key to match</li>
+<li><strong>value</strong> (<em>str</em>) – value to match</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>object id or “”</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>id (str)</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">object id or “”</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">id (str)</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1ddi.get_option_ids">
-<code class="sig-name descname">get_option_ids</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">option_space</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get_option_ids"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.get_option_ids" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_option_ids</code><span class="sig-paren">(</span><em>option_space=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get_option_ids"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.get_option_ids" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a dictionary of DHCP Option IDs
 Based on idea/code from John Neerdael</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>option_space</strong> (<em>str</em>) – Optional Option Space ID</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Dictionary keyed on option number of ids</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>option_ids (dict)</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>option_space</strong> (<em>str</em>) – Optional Option Space ID</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dictionary keyed on option number of ids</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">option_ids (dict)</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1ddi.get_tags">
-<code class="sig-name descname">get_tags</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get_tags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.get_tags" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_tags</code><span class="sig-paren">(</span><em>objpath</em>, <em>id=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get_tags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.get_tags" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get tags for an object id</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
-<li><p><strong>id</strong> (<em>str</em>) – id of object</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>objpath</strong> (<em>str</em>) – Swagger object path</li>
+<li><strong>id</strong> (<em>str</em>) – id of object</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>Dictionary of current tags</dt><dd><p>or empty dict if none</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>Dictionary of current tags</dt>
+<dd><p class="first last">or empty dict if none</p>
 </dd>
 </dl>
 </p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>tags (dict)</p>
-</dd>
-</dl>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<ul class="simple">
-<li><p>make generic, however, this requires the below</p></li>
-<li><p>Lookup dictionary of ‘required fields’ per object type</p></li>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">tags (dict)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<ul class="last simple">
+<li>make generic, however, this requires the below</li>
+<li>Lookup dictionary of ‘required fields’ per object type</li>
 </ul>
 </div>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1ddi.get_zone_child">
-<code class="sig-name descname">get_zone_child</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parent</span><span class="o">=</span><span class="default_value">'zone'</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">fields</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get_zone_child"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.get_zone_child" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_zone_child</code><span class="sig-paren">(</span><em>parent='zone'</em>, <em>name=''</em>, <em>id=''</em>, <em>fields=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get_zone_child"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.get_zone_child" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to retrieve Zones in specified view</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str</em>) – BloxOne object id</p></li>
-<li><p><strong>id</strong> (<em>str</em>) – BloxOne object id</p></li>
-<li><p><strong>**params</strong> (<em>dict</em>) – Generic API parameters</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) – BloxOne object id</li>
+<li><strong>id</strong> (<em>str</em>) – BloxOne object id</li>
+<li><strong>**params</strong> (<em>dict</em>) – Generic API parameters</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Requests response object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">response object</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1ddi.replace">
-<code class="sig-name descname">replace</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">body</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.replace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.replace" title="Permalink to this definition">¶</a></dt>
+<code class="descname">replace</code><span class="sig-paren">(</span><em>objpath</em>, <em>id=''</em>, <em>body=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.replace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.replace" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic create object wrapper for ddi objects</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
-<li><p><strong>body</strong> (<em>str</em>) – JSON formatted data payload</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>objpath</strong> (<em>str</em>) – Swagger object path</li>
+<li><strong>body</strong> (<em>str</em>) – JSON formatted data payload</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Requests response object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">response object</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1ddi.search_response">
-<code class="sig-name descname">search_response</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">response</span></em>, <em class="sig-param"><span class="n">key</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">value</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">include_path</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.search_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.search_response" title="Permalink to this definition">¶</a></dt>
+<code class="descname">search_response</code><span class="sig-paren">(</span><em>response</em>, <em>key=''</em>, <em>value=''</em>, <em>include_path=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.search_response"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.search_response" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get object id using key/value pair by searching a
 Request response object.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>object</strong> (<em>response</em>) – Request response obj</p></li>
-<li><p><strong>key</strong> (<em>str</em>) – name of key to match</p></li>
-<li><p><strong>value</strong> (<em>str</em>) – value to match</p></li>
-<li><p><strong>include_path</strong> (<em>bool</em>) – Include path to object id</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>object</strong> (<em>response</em>) – Request response obj</li>
+<li><strong>key</strong> (<em>str</em>) – name of key to match</li>
+<li><strong>value</strong> (<em>str</em>) – value to match</li>
+<li><strong>include_path</strong> (<em>bool</em>) – Include path to object id</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>object id or “”</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>id (str)</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">object id or “”</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">id (str)</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1ddi.update">
-<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">body</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.update" title="Permalink to this definition">¶</a></dt>
+<code class="descname">update</code><span class="sig-paren">(</span><em>objpath</em>, <em>id=''</em>, <em>body=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1ddi.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic create object wrapper for ddi objects</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
-<li><p><strong>body</strong> (<em>str</em>) – JSON formatted data payload</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>objpath</strong> (<em>str</em>) – Swagger object path</li>
+<li><strong>body</strong> (<em>str</em>) – JSON formatted data payload</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Requests response object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">response object</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -479,7 +527,7 @@ Request response object.</p>
         <a href="b1cdc-class.html" class="btn btn-neutral float-right" title="b1cdc Class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="b1bootstrap-class.html" class="btn btn-neutral float-left" title="b1bootstrap Class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="b1bootstrap-class.html" class="btn btn-neutral" title="b1bootstrap Class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -505,16 +553,26 @@ Request response object.</p>
   
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

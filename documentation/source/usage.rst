@@ -2,6 +2,25 @@
 Usage and Examples
 ==================
 
+Inifile configuration
+---------------------
+
+A sample inifile for the bloxone module is shared as *bloxone.ini* and follows
+the following format provided below::
+
+    [BloxOne]
+    url = 'https://csp.infoblox.com'
+    api_version = 'v1'
+    api_key = '<you API Key here>'
+
+You can therefore simply add your API Key, and this is ready for the bloxone
+module used by the automation demo script. Legacy, interactive and service API
+keys are supported.
+
+
+Overview
+--------
+
 The aim of this module is to provide simple object based access to the 
 BloxOne APIs and make it as simple as possible to code given the available
 swagger documentation. 
@@ -15,6 +34,7 @@ The specific API 'trees' are then split in to subclasses of :class:`b1`:
     :class:`b1platform` 
         Note, this has been deprecated and replaced by the b1oph class.
         It therefore inherits from b1oph for compatibility.
+        This may be used for specific platform elements in the future.
 
     :class:`b1ddi` 
         Access to the BloxOne DDI API with core methods for *get*, *create*,
@@ -44,6 +64,33 @@ The specific API 'trees' are then split in to subclasses of :class:`b1`:
         Access to the BloxOne Threat Defence Cloud API with a generic
         *get*, method. 
 
+    :class:`b1anycast` 
+        Access to the BloxOne Anycast API with a generic
+        *get*, *create*, *delete* and *update* methods plus specific task 
+
+    :class:`b1authn` 
+        Access to the BloxOne On-Prem Authentication Service API with generic
+        *get*, *create*, *delete* and *update* methods plus specific task 
+
+    :class:`b1bootstrap` 
+        Access to the BloxOne On-Prem Bootstrap App API with generic
+        *get*, *create*, *delete* and *update* methods plus specific task 
+
+    :class:`b1cdc` 
+        Access to the BloxOne Data Connector API with generic
+        *get*, *create*, *delete* and *update* methods plus specific task 
+
+    :class:`b1oph` 
+        Access to the BloxOne On Prem Host API with generic
+        *get*, *create*, *delete* and *update* methods plus specific task 
+
+    :class:`b1sw` 
+        Access to the BloxOne Software Upgrade Scheduling API with generic
+        *get*, *create*, *delete* and *update* methods plus specific task 
+
+    :class:`b1ztp` 
+        Access to the BloxOne On Prem Host Host Activation API with generic
+        *get*, *create*, *delete* and *update* methods plus specific task 
 
 In addition to the API interfaces a set of data handling functions is provided
 in the :mod:`utils` sub-module.
@@ -73,6 +120,25 @@ For debugging purposes, the :mod:`bloxone` module supports logging using
     for the debug output to produce full data dumps of API responses.
 
 
+Generic API Wrapper
+-------------------
+
+It is also possible to use the bloxone.b1 class as a generic API wrapper with public methods
+for *get*, *create*, *update* and *delete*. These can be used to pass a full URL, and where 
+appropriate body and parameters. It is of course possible to build the URL using the attributes
+of this class, in addition to manually entering the full url::
+
+    import bloxone
+    b1 = bloxone.b1(<ini file>)
+    url = 'https://csp.infoblox.com/api/ddi/v1/ipam/ip_space'
+    response = b1.get(url)
+    print(response.json())
+
+    url = b1.ddi_url + '/ipam/ip_space'
+    response = b1.get(url, _filter='name=="test_ip_space"')
+    print(response.json())
+
+
 Examples
 --------
 
@@ -92,3 +158,8 @@ in more detail in the following documents, as well as the usage of :mod:`utils`:
     b1tddfp-usage
     b1tdlad-usage
     utils-usage
+
+The remaining classes generally provide generic interfaces for *get*, *create*, *update* and *delete*.
+Usage follows the same format of instantiating the class with an ini file and accessing the generic methods
+using using the 'swagger' path for the appropriate object.
+

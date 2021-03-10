@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>bloxone.utils &mdash; Bloxone API Wrapper 0.6.7 documentation</title>
+  <title>bloxone.utils &mdash; Bloxone API Wrapper 0.7.0 documentation</title>
   
 
   
@@ -17,34 +17,32 @@
   
 
   
-  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
+  
+  
     
 
   
+
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -58,7 +56,7 @@
             
             
               <div class="version">
-                0.6.7
+                0.7.0
               </div>
             
           
@@ -172,7 +170,7 @@
 
 <span class="sd"> Author: Chris Marrison</span>
 
-<span class="sd"> Date Last Updated: 20200907</span>
+<span class="sd"> Date Last Updated: 20210224</span>
 
 <span class="sd"> Todo:</span>
 
@@ -204,7 +202,7 @@
 
 <span class="sd">------------------------------------------------------------------------</span>
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.0.2&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.0.3&#39;</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison&#39;</span>
 <span class="n">__author_email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
 
@@ -223,7 +221,7 @@
 
 <span class="c1"># ** Data Validation functions ** #</span>
 
-<div class="viewcode-block" id="data_type"><a class="viewcode-back" href="../../utils.html#bloxone.utils.data_type">[docs]</a><span class="k">def</span> <span class="nf">data_type</span><span class="p">(</span><span class="n">qdata</span><span class="p">,</span> <span class="n">host_regex</span><span class="p">,</span> <span class="n">url_regex</span><span class="p">):</span>
+<div class="viewcode-block" id="data_type"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.utils.data_type">[docs]</a><span class="k">def</span> <span class="nf">data_type</span><span class="p">(</span><span class="n">qdata</span><span class="p">,</span> <span class="n">host_regex</span><span class="p">,</span> <span class="n">url_regex</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Validate and determine data type (host, ip or url)</span>
 
@@ -245,7 +243,7 @@
     <span class="k">return</span> <span class="n">dtype</span></div>
 
 
-<div class="viewcode-block" id="buildregex"><a class="viewcode-back" href="../../utils.html#bloxone.utils.buildregex">[docs]</a><span class="k">def</span> <span class="nf">buildregex</span><span class="p">():</span>
+<div class="viewcode-block" id="buildregex"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.utils.buildregex">[docs]</a><span class="k">def</span> <span class="nf">buildregex</span><span class="p">():</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Pre-compile &#39;standard&#39; regexes as used by data_type and</span>
 <span class="sd">    validate_XXX functions</span>
@@ -277,7 +275,7 @@
     <span class="k">return</span> <span class="n">host_regex</span><span class="p">,</span> <span class="n">url_regex</span></div>
 
 
-<div class="viewcode-block" id="validate_fqdn"><a class="viewcode-back" href="../../utils.html#bloxone.utils.validate_fqdn">[docs]</a><span class="k">def</span> <span class="nf">validate_fqdn</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">regex</span><span class="p">):</span>
+<div class="viewcode-block" id="validate_fqdn"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.utils.validate_fqdn">[docs]</a><span class="k">def</span> <span class="nf">validate_fqdn</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">regex</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Validate input data is a legitmate fqdn</span>
 
@@ -298,7 +296,7 @@
     <span class="k">return</span> <span class="n">result</span></div>
 
 
-<div class="viewcode-block" id="validate_ip"><a class="viewcode-back" href="../../utils.html#bloxone.utils.validate_ip">[docs]</a><span class="k">def</span> <span class="nf">validate_ip</span><span class="p">(</span><span class="n">ip</span><span class="p">):</span>
+<div class="viewcode-block" id="validate_ip"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.utils.validate_ip">[docs]</a><span class="k">def</span> <span class="nf">validate_ip</span><span class="p">(</span><span class="n">ip</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Validate input data is a valid IP address</span>
 
@@ -317,7 +315,7 @@
     <span class="k">return</span> <span class="n">result</span></div>
 
 
-<div class="viewcode-block" id="validate_url"><a class="viewcode-back" href="../../utils.html#bloxone.utils.validate_url">[docs]</a><span class="k">def</span> <span class="nf">validate_url</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">regex</span><span class="p">):</span>
+<div class="viewcode-block" id="validate_url"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.utils.validate_url">[docs]</a><span class="k">def</span> <span class="nf">validate_url</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">regex</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Validate input data is a valid URL</span>
 
@@ -335,7 +333,7 @@
 
 <span class="c1"># ** Misc Functions **</span>
 
-<div class="viewcode-block" id="reverse_labels"><a class="viewcode-back" href="../../utils.html#bloxone.utils.reverse_labels">[docs]</a><span class="k">def</span> <span class="nf">reverse_labels</span><span class="p">(</span><span class="n">domain</span><span class="p">):</span>
+<div class="viewcode-block" id="reverse_labels"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.utils.reverse_labels">[docs]</a><span class="k">def</span> <span class="nf">reverse_labels</span><span class="p">(</span><span class="n">domain</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Reserve order of domain labels (or any dot separated data, e.g. IP)</span>
 
@@ -356,7 +354,7 @@
 
 <span class="c1"># ** Data Conversion functions ** #</span>
 
-<div class="viewcode-block" id="convert_url_to_host"><a class="viewcode-back" href="../../utils.html#bloxone.utils.convert_url_to_host">[docs]</a><span class="k">def</span> <span class="nf">convert_url_to_host</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+<div class="viewcode-block" id="convert_url_to_host"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.utils.convert_url_to_host">[docs]</a><span class="k">def</span> <span class="nf">convert_url_to_host</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Break down URL and return host element</span>
 
@@ -379,7 +377,7 @@
     <span class="k">return</span> <span class="n">host</span></div>
 
 
-<div class="viewcode-block" id="normalise"><a class="viewcode-back" href="../../utils.html#bloxone.utils.normalise">[docs]</a><span class="k">def</span> <span class="nf">normalise</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">itype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">www</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="normalise"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.utils.normalise">[docs]</a><span class="k">def</span> <span class="nf">normalise</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">itype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">www</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Take ip, host or url item process and</span>
 <span class="sd">    return normalise data.</span>
@@ -448,7 +446,7 @@
     <span class="k">return</span> <span class="n">normalised</span></div>
 
 
-<div class="viewcode-block" id="count_labels"><a class="viewcode-back" href="../../utils.html#bloxone.utils.count_labels">[docs]</a><span class="k">def</span> <span class="nf">count_labels</span><span class="p">(</span><span class="n">fqdn</span><span class="p">):</span>
+<div class="viewcode-block" id="count_labels"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.utils.count_labels">[docs]</a><span class="k">def</span> <span class="nf">count_labels</span><span class="p">(</span><span class="n">fqdn</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Count number of labels in an FQDN</span>
 
@@ -467,7 +465,7 @@
     <span class="k">return</span> <span class="n">count</span></div>
 
 
-<div class="viewcode-block" id="strip_host"><a class="viewcode-back" href="../../utils.html#bloxone.utils.strip_host">[docs]</a><span class="k">def</span> <span class="nf">strip_host</span><span class="p">(</span><span class="n">fqdn</span><span class="p">):</span>
+<div class="viewcode-block" id="strip_host"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.utils.strip_host">[docs]</a><span class="k">def</span> <span class="nf">strip_host</span><span class="p">(</span><span class="n">fqdn</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Take FQDN and strip first label</span>
 <span class="sd">    or fqdn if no. of labels is 2 or less</span>
@@ -499,7 +497,7 @@
     <span class="k">return</span> <span class="n">domain</span></div>
 
 
-<div class="viewcode-block" id="get_domain"><a class="viewcode-back" href="../../utils.html#bloxone.utils.get_domain">[docs]</a><span class="k">def</span> <span class="nf">get_domain</span><span class="p">(</span><span class="n">fqdn</span><span class="p">,</span> <span class="n">no_of_labels</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<div class="viewcode-block" id="get_domain"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.utils.get_domain">[docs]</a><span class="k">def</span> <span class="nf">get_domain</span><span class="p">(</span><span class="n">fqdn</span><span class="p">,</span> <span class="n">no_of_labels</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Take FQDN and return n label domain</span>
 <span class="sd">    or fqdn if no. of labels is 2 or less</span>
@@ -532,6 +530,98 @@
         <span class="n">domain</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">domain</span></div>
+
+<span class="c1"># ** Local db Functions **</span>
+
+<div class="viewcode-block" id="opendb"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.utils.opendb">[docs]</a><span class="k">def</span> <span class="nf">opendb</span><span class="p">(</span><span class="n">dbfile</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Open sqlite db and return cursor()</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        dbfile (str): path to file</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        cursor (obj): Returns a db.cursor()</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">dbfile</span><span class="p">):</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dbfile</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">row_factory</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">Row</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Database &quot;</span><span class="o">+</span><span class="n">dbfile</span><span class="o">+</span><span class="s2">&quot; not found.&quot;</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">cursor</span></div>
+
+
+<div class="viewcode-block" id="get_table"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.utils.get_table">[docs]</a><span class="k">def</span> <span class="nf">get_table</span><span class="p">(</span><span class="n">cursor</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Determine db table and return</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        cursor (obj): db.cursor object</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        table (str): Table name as string</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1"># ** Determine table name ** #</span>
+    <span class="n">select</span> <span class="o">=</span> <span class="s1">&#39;SELECT name FROM sqlite_master WHERE type=&quot;table&quot;&#39;</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">select</span><span class="p">)</span>
+    <span class="n">tables</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="c1"># ** Expecting single table ** #</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tables</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># ** Assume table is correct (even if it isn&#39;t) ** #</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># ** Print error and exit ###</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;DB not of correct format - too many tables&quot;</span><span class="p">)</span>
+        <span class="n">table</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">table</span></div>
+
+
+<div class="viewcode-block" id="db_query"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.utils.db_query">[docs]</a><span class="k">def</span> <span class="nf">db_query</span><span class="p">(</span><span class="n">db_cursor</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">query_type</span><span class="p">,</span> <span class="n">query_data</span><span class="p">,</span> <span class="o">*</span><span class="n">flags</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Perform db query and return appropriate rows</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        db_cursor (obj): db.cursor object</span>
+<span class="sd">        table (str): database table name</span>
+<span class="sd">        query_type (str): data type for query</span>
+<span class="sd">        query_data (str): search string</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        rows (list): (All matching db rows</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">query_type</span> <span class="o">==</span> <span class="s2">&quot;host&quot;</span><span class="p">:</span>
+        <span class="c1"># ** Form DB Query **</span>
+        <span class="n">select</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;SELECT * FROM &#39;</span>
+                  <span class="o">+</span> <span class="n">table</span> <span class="o">+</span> <span class="s1">&#39; WHERE host=&quot;&#39;</span> <span class="o">+</span> <span class="n">query_data</span>
+                  <span class="o">+</span> <span class="s1">&#39;&quot; OR domain=&quot;&#39;</span> <span class="o">+</span> <span class="n">query_data</span><span class="o">+</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+        <span class="c1"># Ignore class = &quot;Policy&quot;</span>
+        <span class="k">if</span> <span class="n">flags</span><span class="p">:</span>
+            <span class="n">select</span> <span class="o">=</span> <span class="n">select</span><span class="o">+</span><span class="s1">&#39; AND property!=&quot;Policy_UnsolictedBulkEmail&quot;&#39;</span>
+    <span class="k">elif</span> <span class="n">query_type</span> <span class="o">==</span> <span class="s2">&quot;ip&quot;</span><span class="p">:</span>
+        <span class="c1"># ** Form DB Query **</span>
+        <span class="n">select</span> <span class="o">=</span> <span class="s1">&#39;SELECT * FROM &#39;</span><span class="o">+</span><span class="n">table</span><span class="o">+</span><span class="s1">&#39; WHERE ip=&quot;&#39;</span><span class="o">+</span><span class="n">query_data</span><span class="o">+</span><span class="s1">&#39;&quot;&#39;</span>
+        <span class="c1"># Ignore class = &quot;Policy&quot;</span>
+        <span class="k">if</span> <span class="n">flags</span><span class="p">:</span>
+            <span class="n">select</span> <span class="o">=</span> <span class="n">select</span><span class="o">+</span><span class="s1">&#39; AND property!=&quot;Policy_UnsolictedBulkEmail&quot;&#39;</span>
+    <span class="k">elif</span> <span class="n">query_type</span> <span class="o">==</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span>
+        <span class="c1"># ** Form DB Query **</span>
+        <span class="n">select</span> <span class="o">=</span> <span class="s1">&#39;SELECT * FROM &#39;</span><span class="o">+</span><span class="n">table</span><span class="o">+</span><span class="s1">&#39; WHERE url=&quot;&#39;</span><span class="o">+</span><span class="n">query_data</span><span class="o">+</span><span class="s1">&#39;&quot;&#39;</span>
+        <span class="c1"># Ignore class = &quot;Policy&quot;</span>
+        <span class="k">if</span> <span class="n">flags</span><span class="p">:</span>
+            <span class="n">select</span> <span class="o">=</span> <span class="n">select</span><span class="o">+</span><span class="s1">&#39; AND property!=&quot;Policy_UnsolictedBulkEmail&quot;&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Invalid Type for </span><span class="si">{}</span><span class="s2"> data type for </span><span class="si">{}</span><span class="s2">&quot;</span>
+                      <span class="s2">&quot; - should not be here&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">query_type</span><span class="p">,</span> <span class="n">query_data</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="n">db_cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">select</span><span class="p">)</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">db_cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">rows</span></div>
 </pre></div>
 
            </div>
@@ -561,16 +651,26 @@
   
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

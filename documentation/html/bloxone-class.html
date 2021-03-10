@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>b1 and b1platform Classes &mdash; Bloxone API Wrapper 0.6.7 documentation</title>
+  <title>bloxone.b1 Class &mdash; Bloxone API Wrapper 0.7.0 documentation</title>
   
 
   
@@ -17,36 +17,34 @@
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
 
+  
+  
     
 
   
+
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="b1anycast Class" href="b1anycast-class.html" />
     <link rel="prev" title="Classes Documentation" href="classes.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -60,7 +58,7 @@
             
             
               <div class="version">
-                0.6.7
+                0.7.0
               </div>
             
           
@@ -92,7 +90,7 @@
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage and Examples</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="classes.html">Classes Documentation</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">b1 and b1platform Classes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">bloxone.b1 Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1anycast-class.html">b1anycast Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1authn-class.html">b1authn Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1bootstrap-class.html">b1bootstrap Class</a></li>
@@ -159,7 +157,7 @@
         
           <li><a href="classes.html">Classes Documentation</a> &raquo;</li>
         
-      <li>b1 and b1platform Classes</li>
+      <li>bloxone.b1 Class</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -178,17 +176,170 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="b1-and-b1platform-classes">
-<h1>b1 and b1platform Classes<a class="headerlink" href="#b1-and-b1platform-classes" title="Permalink to this headline">¶</a></h1>
-<dl class="py class">
+  <div class="section" id="bloxone-b1-class">
+<h1>bloxone.b1 Class<a class="headerlink" href="#bloxone-b1-class" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
 <dt id="bloxone.b1">
-<em class="property">class </em><code class="sig-prename descclassname">bloxone.</code><code class="sig-name descname">b1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cfg_file</span><span class="o">=</span><span class="default_value">'config.ini'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">bloxone.</code><code class="descname">b1</code><span class="sig-paren">(</span><em>cfg_file='config.ini'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parent Class to simplify access to the BloxOne APIs for subclasses</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><a class="reference internal" href="#bloxone.IniFileSectionError" title="bloxone.IniFileSectionError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IniFileSectionError</span></code></a></li>
+<li><a class="reference internal" href="#bloxone.IniFileKeyError" title="bloxone.IniFileKeyError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">IniFileKeyError</span></code></a></li>
+<li><a class="reference internal" href="#bloxone.APIKeyFormatError" title="bloxone.APIKeyFormatError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">APIKeyFormatError</span></code></a></li>
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">FileNotFoundError</span></code></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="bloxone.b1.create">
+<code class="descname">create</code><span class="sig-paren">(</span><em>url</em>, <em>body=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1.create"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic create object wrapper</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>url</strong> (<em>str</em>) – Full URL</li>
+<li><strong>body</strong> (<em>str</em>) – JSON formatted data payload</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Requests response object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">response object</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py class">
+<dl class="method">
+<dt id="bloxone.b1.delete">
+<code class="descname">delete</code><span class="sig-paren">(</span><em>url</em>, <em>id=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic delete object wrapper</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>url</strong> (<em>str</em>) – Full URL</li>
+<li><strong>id</strong> (<em>str</em>) – Object id to delete</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Requests response object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">response object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="bloxone.b1.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>url</em>, <em>id=''</em>, <em>action=''</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic get object wrapper</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>url</strong> (<em>str</em>) – Full URL</li>
+<li><strong>id</strong> (<em>str</em>) – Optional Object ID</li>
+<li><strong>action</strong> (<em>str</em>) – Optional object action, e.g. “nextavailableip”</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Requests response object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">response object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="bloxone.b1.replace">
+<code class="descname">replace</code><span class="sig-paren">(</span><em>url</em>, <em>id=''</em>, <em>body=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1.replace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1.replace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic create object wrapper</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>url</strong> (<em>str</em>) – Full URL</li>
+<li><strong>body</strong> (<em>str</em>) – JSON formatted data payload</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Requests response object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">response object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="bloxone.b1.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>url</em>, <em>id=''</em>, <em>body=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic create object wrapper</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>url</strong> (<em>str</em>) – Full URL</li>
+<li><strong>body</strong> (<em>str</em>) – JSON formatted data payload</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Requests response object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">response object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="bloxone.IniFileSectionError">
+<em class="property">class </em><code class="descclassname">bloxone.</code><code class="descname">IniFileSectionError</code><a class="reference internal" href="_modules/bloxone/bloxone.html#IniFileSectionError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.IniFileSectionError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception for missing section in ini file</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="bloxone.IniFileKeyError">
+<em class="property">class </em><code class="descclassname">bloxone.</code><code class="descname">IniFileKeyError</code><a class="reference internal" href="_modules/bloxone/bloxone.html#IniFileKeyError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.IniFileKeyError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception for missing key in ini file</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="bloxone.APIKeyFormatError">
+<em class="property">class </em><code class="descclassname">bloxone.</code><code class="descname">APIKeyFormatError</code><a class="reference internal" href="_modules/bloxone/bloxone.html#APIKeyFormatError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.APIKeyFormatError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception for API key format mismatch</p>
+</dd></dl>
+
+<dl class="class">
 <dt id="bloxone.b1platform">
-<em class="property">class </em><code class="sig-prename descclassname">bloxone.</code><code class="sig-name descname">b1platform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cfg_file</span><span class="o">=</span><span class="default_value">'config.ini'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1platform" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">bloxone.</code><code class="descname">b1platform</code><span class="sig-paren">(</span><em>cfg_file='config.ini'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1platform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Deprecated Class Due to New API Structure
 This Class is replaced with b1oph class inherited here for compatibility</p>
 </dd></dl>
@@ -206,7 +357,7 @@ This Class is replaced with b1oph class inherited here for compatibility</p>
         <a href="b1anycast-class.html" class="btn btn-neutral float-right" title="b1anycast Class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="classes.html" class="btn btn-neutral float-left" title="Classes Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="classes.html" class="btn btn-neutral" title="Classes Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -232,16 +383,26 @@ This Class is replaced with b1oph class inherited here for compatibility</p>
   
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

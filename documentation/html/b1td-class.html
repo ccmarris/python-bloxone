@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>b1td Class &mdash; Bloxone API Wrapper 0.6.7 documentation</title>
+  <title>b1td Class &mdash; Bloxone API Wrapper 0.7.0 documentation</title>
   
 
   
@@ -17,36 +17,34 @@
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
 
+  
+  
     
 
   
+
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="b1tdc Class" href="b1tdc-class.html" />
     <link rel="prev" title="b1ztp Class" href="b1ztp-class.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -60,7 +58,7 @@
             
             
               <div class="version">
-                0.6.7
+                0.7.0
               </div>
             
           
@@ -180,235 +178,270 @@
             
   <div class="section" id="b1td-class">
 <h1>b1td Class<a class="headerlink" href="#b1td-class" title="Permalink to this headline">¶</a></h1>
-<dl class="py class">
+<dl class="class">
 <dt id="bloxone.b1td">
-<em class="property">class </em><code class="sig-prename descclassname">bloxone.</code><code class="sig-name descname">b1td</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cfg_file</span><span class="o">=</span><span class="default_value">'config.ini'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">bloxone.</code><code class="descname">b1td</code><span class="sig-paren">(</span><em>cfg_file='config.ini'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td" title="Permalink to this definition">¶</a></dt>
 <dd><p>BloxOne ThreatDefence API Wrapper
 Covers TIDE and Dossier</p>
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1td.dossier_sources">
-<code class="sig-name descname">dossier_sources</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.dossier_sources"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.dossier_sources" title="Permalink to this definition">¶</a></dt>
+<code class="descname">dossier_sources</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.dossier_sources"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.dossier_sources" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get Sources for Dossier</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Requests response object</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>response object</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Requests response object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">response object</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1td.dossierquery">
-<code class="sig-name descname">dossierquery</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">query</span></em>, <em class="sig-param"><span class="n">type</span><span class="o">=</span><span class="default_value">'host'</span></em>, <em class="sig-param"><span class="n">sources</span><span class="o">=</span><span class="default_value">'all'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.dossierquery"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.dossierquery" title="Permalink to this definition">¶</a></dt>
+<code class="descname">dossierquery</code><span class="sig-paren">(</span><em>query</em>, <em>type='host'</em>, <em>sources='all'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.dossierquery"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.dossierquery" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simple Dossier Query</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>query</strong> (<em>str</em>) – query data</p></li>
-<li><p><strong>type</strong> (<em>str</em>) – “host”, “ip” or “url”</p></li>
-<li><p><strong>sources</strong> (<em>str</em>) – set of sources or “all”</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>query</strong> (<em>str</em>) – query data</li>
+<li><strong>type</strong> (<em>str</em>) – “host”, “ip” or “url”</li>
+<li><strong>sources</strong> (<em>str</em>) – set of sources or “all”</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Requests response object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">response object</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1td.expand_mitre_vector">
-<code class="sig-name descname">expand_mitre_vector</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mitre</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.expand_mitre_vector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.expand_mitre_vector" title="Permalink to this definition">¶</a></dt>
+<code class="descname">expand_mitre_vector</code><span class="sig-paren">(</span><em>mitre</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.expand_mitre_vector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.expand_mitre_vector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Expand MITRE Vector details</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>mitre</strong> (<em>str</em>) – MITRE Vector</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mitre</strong> (<em>str</em>) – MITRE Vector</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Requests response object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">response object</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1td.get">
-<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="n">action</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">params</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.get" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get</code><span class="sig-paren">(</span><em>objpath</em>, <em>action=''</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic get object wrapper for TIDE data objects</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
-<li><p><strong>action</strong> (<em>str</em>) – Optional object action</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>objpath</strong> (<em>str</em>) – Swagger object path</li>
+<li><strong>action</strong> (<em>str</em>) – Optional object action</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Requests response object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">response object</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1td.post">
-<code class="sig-name descname">post</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">objpath</span></em>, <em class="sig-param"><span class="n">body</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.post" title="Permalink to this definition">¶</a></dt>
+<code class="descname">post</code><span class="sig-paren">(</span><em>objpath</em>, <em>body=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.post" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic create object wrapper for ddi objects</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>objpath</strong> (<em>str</em>) – Swagger object path</p></li>
-<li><p><strong>body</strong> (<em>str</em>) – JSON formatted data payload</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>objpath</strong> (<em>str</em>) – Swagger object path</li>
+<li><strong>body</strong> (<em>str</em>) – JSON formatted data payload</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Requests response object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">response object</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1td.querytide">
-<code class="sig-name descname">querytide</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">datatype</span></em>, <em class="sig-param"><span class="n">query</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">params</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.querytide"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.querytide" title="Permalink to this definition">¶</a></dt>
+<code class="descname">querytide</code><span class="sig-paren">(</span><em>datatype</em>, <em>query</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.querytide"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.querytide" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query Infoblox TIDE for all avaialble threat data
 related to query.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>datatype</strong> (<em>str</em>) – “host”, “ip” or “url”</p></li>
-<li><p><strong>query</strong> (<em>str</em>) – query data</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>datatype</strong> (<em>str</em>) – “host”, “ip” or “url”</li>
+<li><strong>query</strong> (<em>str</em>) – query data</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Requests response object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">response object</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1td.querytideactive">
-<code class="sig-name descname">querytideactive</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">datatype</span></em>, <em class="sig-param"><span class="n">query</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">params</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.querytideactive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.querytideactive" title="Permalink to this definition">¶</a></dt>
+<code class="descname">querytideactive</code><span class="sig-paren">(</span><em>datatype</em>, <em>query</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.querytideactive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.querytideactive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query Infoblox TIDE for “active” threat data
 i.e. threat data that has not expired at time of call</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>datatype</strong> (<em>str</em>) – “host”, “ip” or “url”</p></li>
-<li><p><strong>query</strong> (<em>str</em>) – query data</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>datatype</strong> (<em>str</em>) – “host”, “ip” or “url”</li>
+<li><strong>query</strong> (<em>str</em>) – query data</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Requests response object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">response object</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1td.querytidestate">
-<code class="sig-name descname">querytidestate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">datatype</span></em>, <em class="sig-param"><span class="n">query</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">params</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.querytidestate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.querytidestate" title="Permalink to this definition">¶</a></dt>
+<code class="descname">querytidestate</code><span class="sig-paren">(</span><em>datatype</em>, <em>query</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.querytidestate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.querytidestate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query Infoblox TIDE State Tables for specific query</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>datatype</strong> (<em>str</em>) – “host”, “ip” or “url”</p></li>
-<li><p><strong>query</strong> (<em>str</em>) – query data</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>datatype</strong> (<em>str</em>) – “host”, “ip” or “url”</li>
+<li><strong>query</strong> (<em>str</em>) – query data</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Requests response object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">response object</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1td.threat_actor">
-<code class="sig-name descname">threat_actor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.threat_actor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.threat_actor" title="Permalink to this definition">¶</a></dt>
+<code class="descname">threat_actor</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.threat_actor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.threat_actor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get Threat Actor details</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – Name of Threat Actor</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – Name of Threat Actor</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Requests response object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">response object</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1td.threat_classes">
-<code class="sig-name descname">threat_classes</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">params</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.threat_classes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.threat_classes" title="Permalink to this definition">¶</a></dt>
+<code class="descname">threat_classes</code><span class="sig-paren">(</span><em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.threat_classes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.threat_classes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get list of threat classes</p>
 <p>Parameters:</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Requests response object</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>response object</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Requests response object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">response object</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1td.threat_properties">
-<code class="sig-name descname">threat_properties</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">threatclass</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">params</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.threat_properties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.threat_properties" title="Permalink to this definition">¶</a></dt>
+<code class="descname">threat_properties</code><span class="sig-paren">(</span><em>threatclass=''</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.threat_properties"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.threat_properties" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get list of threat properties</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>threatclass</strong> (<em>str</em>) – Threat Class</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>threatclass</strong> (<em>str</em>) – Threat Class</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Requests response object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">response object</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="bloxone.b1td.tideactivefeed">
-<code class="sig-name descname">tideactivefeed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">datatype</span></em>, <em class="sig-param"><span class="n">profile</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">threatclass</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">threatproperty</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">params</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.tideactivefeed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.tideactivefeed" title="Permalink to this definition">¶</a></dt>
+<code class="descname">tideactivefeed</code><span class="sig-paren">(</span><em>datatype</em>, <em>profile=''</em>, <em>threatclass=''</em>, <em>threatproperty=''</em>, <em>**params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.tideactivefeed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.b1td.tideactivefeed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bulk “active” threat intel download from Infoblox TIDE state tables
 for specified datatype.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>datatype</strong> (<em>str</em>) – “host”, “ip” or “url”</p></li>
-<li><p><strong>profile</strong> (<em>str</em><em>, </em><em>optional</em>) – Data provider</p></li>
-<li><p><strong>threatclass</strong> (<em>str</em><em>, </em><em>optional</em>) – tide data class</p></li>
-<li><p><strong>threatproperty</strong> (<em>str</em><em>, </em><em>optional</em>) – tide data property</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>datatype</strong> (<em>str</em>) – “host”, “ip” or “url”</li>
+<li><strong>profile</strong> (<em>str</em><em>, </em><em>optional</em>) – Data provider</li>
+<li><strong>threatclass</strong> (<em>str</em><em>, </em><em>optional</em>) – tide data class</li>
+<li><strong>threatproperty</strong> (<em>str</em><em>, </em><em>optional</em>) – tide data property</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Requests response object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">response object</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -426,7 +459,7 @@ for specified datatype.</p>
         <a href="b1tdc-class.html" class="btn btn-neutral float-right" title="b1tdc Class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="b1ztp-class.html" class="btn btn-neutral float-left" title="b1ztp Class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="b1ztp-class.html" class="btn btn-neutral" title="b1ztp Class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -452,16 +485,26 @@ for specified datatype.</p>
   
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

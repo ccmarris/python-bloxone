@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>b1td Usage &mdash; Bloxone API Wrapper 0.6.7 documentation</title>
+  <title>b1td Usage &mdash; Bloxone API Wrapper 0.7.0 documentation</title>
   
 
   
@@ -17,36 +17,34 @@
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
 
+  
+  
     
 
   
+
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="b1tdc Usage" href="b1tdc-usage.html" />
     <link rel="prev" title="Examples for class: b1ddi" href="b1ddi-usage.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -60,7 +58,7 @@
             
             
               <div class="version">
-                0.6.7
+                0.7.0
               </div>
             
           
@@ -91,6 +89,8 @@
 <li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="usage.html">Usage and Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="usage.html#inifile-configuration">Inifile configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#basic-usage">Basic Usage</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="usage.html#examples">Examples</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="b1ddi-usage.html">Examples for class: b1ddi</a></li>
@@ -182,17 +182,16 @@
 <h1>b1td Usage<a class="headerlink" href="#b1td-usage" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>These examples are placeholders, useful, but actual example set here is on
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">These examples are placeholders, useful, but actual example set here is on
 the todo.</p>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bloxone</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">reverse_labels</span><span class="p">(</span><span class="s2">&quot;www.infoblox.com&quot;</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">bloxone</span>
-<span class="n">t</span> <span class="o">=</span> <span class="n">bloxone</span><span class="o">.</span><span class="n">b1td</span><span class="p">(</span><span class="s1">&#39;/Users/marrison/configs/emea.ini&#39;</span><span class="p">)</span>
-<span class="n">t</span><span class="o">.</span><span class="n">version</span>
 <span class="n">bloxone</span><span class="o">.</span><span class="n">__version__</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">bloxone</span><span class="o">.</span><span class="n">b1td</span><span class="p">(</span><span class="s1">&#39;/Users/marrison/configs/emea.ini&#39;</span><span class="p">)</span>
 <span class="n">t</span><span class="o">.</span><span class="n">tide_url</span>
 <span class="n">t</span><span class="o">.</span><span class="n">threat_classes</span><span class="p">()</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 <span class="n">t</span><span class="o">.</span><span class="n">threat_properties</span><span class="p">()</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
@@ -217,7 +216,7 @@ the todo.</p>
         <a href="b1tdc-usage.html" class="btn btn-neutral float-right" title="b1tdc Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="b1ddi-usage.html" class="btn btn-neutral float-left" title="Examples for class: b1ddi" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="b1ddi-usage.html" class="btn btn-neutral" title="Examples for class: b1ddi" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -243,16 +242,26 @@ the todo.</p>
   
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

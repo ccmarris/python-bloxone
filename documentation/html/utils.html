@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Additional Utilities &mdash; Bloxone API Wrapper 0.6.7 documentation</title>
+  <title>Additional Utilities &mdash; Bloxone API Wrapper 0.7.0 documentation</title>
   
 
   
@@ -17,36 +17,34 @@
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
-  
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
 
+  
+  
     
 
   
+
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Source Documentation" href="code.html" />
     <link rel="prev" title="b1tdlad Class" href="b1tdlad-class.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -60,7 +58,7 @@
             
             
               <div class="version">
-                0.6.7
+                0.7.0
               </div>
             
           
@@ -164,16 +162,16 @@
 <span id="additional-utilities"></span><h1>Additional Utilities<a class="headerlink" href="#module-bloxone.utils" title="Permalink to this headline">¶</a></h1>
 <hr class="docutils" />
 <blockquote>
-<div><dl class="simple">
-<dt>Description:</dt><dd><p>Simple utility functions for data type validation, domain handling,
+<div><dl class="docutils">
+<dt>Description:</dt>
+<dd>Simple utility functions for data type validation, domain handling,
 and data normalisationa specifically with the aim of supporting
-queries to TIDE and Dossier.</p>
-</dd>
-<dt>Requirements:</dt><dd><p>Python3 with re, ipaddress, requests</p>
-</dd>
+queries to TIDE and Dossier.</dd>
+<dt>Requirements:</dt>
+<dd>Python3 with re, ipaddress, requests</dd>
 </dl>
 <p>Author: Chris Marrison</p>
-<p>Date Last Updated: 20200907</p>
+<p>Date Last Updated: 20210224</p>
 <p>Todo:</p>
 <p>Copyright (c) 2018 Chris Marrison / Infoblox</p>
 <p>Redistribution and use in source and binary forms,
@@ -198,211 +196,296 @@ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.</p>
 </div></blockquote>
 <hr class="docutils" />
-<dl class="py function">
+<dl class="function">
 <dt id="bloxone.utils.buildregex">
-<code class="sig-prename descclassname">bloxone.utils.</code><code class="sig-name descname">buildregex</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#buildregex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.buildregex" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">bloxone.utils.</code><code class="descname">buildregex</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#buildregex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.buildregex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pre-compile ‘standard’ regexes as used by data_type and
 validate_XXX functions</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>none</strong> – </p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Compiled regex for hostnames
-url_regex (re): Compiled regex for URLs</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>host_regex (re)</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>none</strong> – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Compiled regex for hostnames
+url_regex (re): Compiled regex for URLs</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">host_regex (re)</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="bloxone.utils.convert_url_to_host">
-<code class="sig-prename descclassname">bloxone.utils.</code><code class="sig-name descname">convert_url_to_host</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">url</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#convert_url_to_host"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.convert_url_to_host" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">bloxone.utils.</code><code class="descname">convert_url_to_host</code><span class="sig-paren">(</span><em>url</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#convert_url_to_host"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.convert_url_to_host" title="Permalink to this definition">¶</a></dt>
 <dd><p>Break down URL and return host element</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>url</strong> (<em>str</em>) – Validated URL</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>hostname or ip</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>host (str)</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>url</strong> (<em>str</em>) – Validated URL</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">hostname or ip</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">host (str)</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="bloxone.utils.count_labels">
-<code class="sig-prename descclassname">bloxone.utils.</code><code class="sig-name descname">count_labels</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fqdn</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#count_labels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.count_labels" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">bloxone.utils.</code><code class="descname">count_labels</code><span class="sig-paren">(</span><em>fqdn</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#count_labels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.count_labels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Count number of labels in an FQDN</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>fqdn</strong> (<em>str</em>) – Hostname as fqdn</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>number of labels</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>count (int)</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fqdn</strong> (<em>str</em>) – Hostname as fqdn</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">number of labels</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">count (int)</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="bloxone.utils.data_type">
-<code class="sig-prename descclassname">bloxone.utils.</code><code class="sig-name descname">data_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">qdata</span></em>, <em class="sig-param"><span class="n">host_regex</span></em>, <em class="sig-param"><span class="n">url_regex</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#data_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.data_type" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">bloxone.utils.</code><code class="descname">data_type</code><span class="sig-paren">(</span><em>qdata</em>, <em>host_regex</em>, <em>url_regex</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#data_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.data_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validate and determine data type (host, ip or url)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>qdata</strong> (<em>str</em>) – data to determine type/validity</p></li>
-<li><p><strong>host_regex/url_regex</strong> (<em>re</em>) – pre-compiled regexes</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>qdata</strong> (<em>str</em>) – data to determine type/validity</li>
+<li><strong>host_regex/url_regex</strong> (<em>re</em>) – pre-compiled regexes</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>data type of qdata (“ip”, “host”, or “url”)</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dtype (str)</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">data type of qdata (“ip”, “host”, or “url”)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dtype (str)</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
+<dt id="bloxone.utils.db_query">
+<code class="descclassname">bloxone.utils.</code><code class="descname">db_query</code><span class="sig-paren">(</span><em>db_cursor</em>, <em>table</em>, <em>query_type</em>, <em>query_data</em>, <em>*flags</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#db_query"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.db_query" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform db query and return appropriate rows</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>db_cursor</strong> (<em>obj</em>) – db.cursor object</li>
+<li><strong>table</strong> (<em>str</em>) – database table name</li>
+<li><strong>query_type</strong> (<em>str</em>) – data type for query</li>
+<li><strong>query_data</strong> (<em>str</em>) – search string</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">(All matching db rows</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">rows (list)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="bloxone.utils.get_domain">
-<code class="sig-prename descclassname">bloxone.utils.</code><code class="sig-name descname">get_domain</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fqdn</span></em>, <em class="sig-param"><span class="n">no_of_labels</span><span class="o">=</span><span class="default_value">2</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#get_domain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.get_domain" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">bloxone.utils.</code><code class="descname">get_domain</code><span class="sig-paren">(</span><em>fqdn</em>, <em>no_of_labels=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#get_domain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.get_domain" title="Permalink to this definition">¶</a></dt>
 <dd><p>Take FQDN and return n label domain
 or fqdn if no. of labels is 2 or less</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>fqdn</strong> (<em>str</em>) – Hostname as fqdn</p></li>
-<li><p><strong>no_of_labels</strong> (<em>int</em>) – Number of labels to return
-default = 2</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>fqdn</strong> (<em>str</em>) – Hostname as fqdn</li>
+<li><strong>no_of_labels</strong> (<em>int</em>) – Number of labels to return
+default = 2</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>N label domain name or fqdn</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>domain (str)</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">N label domain name or fqdn</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">domain (str)</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
+<dt id="bloxone.utils.get_table">
+<code class="descclassname">bloxone.utils.</code><code class="descname">get_table</code><span class="sig-paren">(</span><em>cursor</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#get_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.get_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine db table and return</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cursor</strong> (<em>obj</em>) – db.cursor object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Table name as string</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">table (str)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="bloxone.utils.normalise">
-<code class="sig-prename descclassname">bloxone.utils.</code><code class="sig-name descname">normalise</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">item</span></em>, <em class="sig-param"><span class="n">itype</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">port</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">www</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#normalise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.normalise" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">bloxone.utils.</code><code class="descname">normalise</code><span class="sig-paren">(</span><em>item</em>, <em>itype=None</em>, <em>port=False</em>, <em>www=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#normalise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.normalise" title="Permalink to this definition">¶</a></dt>
 <dd><p>Take ip, host or url item process and
 return normalise data.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>item</strong> (<em>str</em>) – item to normalise</p></li>
-<li><p><strong>itype</strong> (<em>str</em>) – One of [“host”, “url”, “ip”]</p></li>
-<li><p><strong>port</strong> (<em>bool</em>) – stip port number e.g. :8080</p></li>
-<li><p><strong>www</strong> (<em>bool</em>) – strip www. from hostname</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>item</strong> (<em>str</em>) – item to normalise</li>
+<li><strong>itype</strong> (<em>str</em>) – One of [“host”, “url”, “ip”]</li>
+<li><strong>port</strong> (<em>bool</em>) – stip port number e.g. :8080</li>
+<li><strong>www</strong> (<em>bool</em>) – strip www. from hostname</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Normalised item or “invalid”</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>normalised (str)</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Normalised item or “invalid”</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">normalised (str)</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
+<dt id="bloxone.utils.opendb">
+<code class="descclassname">bloxone.utils.</code><code class="descname">opendb</code><span class="sig-paren">(</span><em>dbfile</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#opendb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.opendb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open sqlite db and return cursor()</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dbfile</strong> (<em>str</em>) – path to file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Returns a db.cursor()</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">cursor (obj)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="bloxone.utils.reverse_labels">
-<code class="sig-prename descclassname">bloxone.utils.</code><code class="sig-name descname">reverse_labels</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">domain</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#reverse_labels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.reverse_labels" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">bloxone.utils.</code><code class="descname">reverse_labels</code><span class="sig-paren">(</span><em>domain</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#reverse_labels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.reverse_labels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reserve order of domain labels (or any dot separated data, e.g. IP)</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>domain</strong> (<em>str</em>) – domain.labels</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>labels.domain</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>rdomain (str)</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>domain</strong> (<em>str</em>) – domain.labels</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">labels.domain</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">rdomain (str)</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="bloxone.utils.strip_host">
-<code class="sig-prename descclassname">bloxone.utils.</code><code class="sig-name descname">strip_host</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fqdn</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#strip_host"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.strip_host" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">bloxone.utils.</code><code class="descname">strip_host</code><span class="sig-paren">(</span><em>fqdn</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#strip_host"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.strip_host" title="Permalink to this definition">¶</a></dt>
 <dd><p>Take FQDN and strip first label
 or fqdn if no. of labels is 2 or less</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>fqdn</strong> (<em>str</em>) – Hostname as fqdn</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>stripped domain down to two labels</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>domain (str)</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fqdn</strong> (<em>str</em>) – Hostname as fqdn</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">stripped domain down to two labels</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">domain (str)</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="bloxone.utils.validate_fqdn">
-<code class="sig-prename descclassname">bloxone.utils.</code><code class="sig-name descname">validate_fqdn</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hostname</span></em>, <em class="sig-param"><span class="n">regex</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#validate_fqdn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.validate_fqdn" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">bloxone.utils.</code><code class="descname">validate_fqdn</code><span class="sig-paren">(</span><em>hostname</em>, <em>regex</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#validate_fqdn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.validate_fqdn" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validate input data is a legitmate fqdn</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>hostname</strong> (<em>str</em>) – fqdn as a string</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Return True for valid and False otherwise</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>hostname</strong> (<em>str</em>) – fqdn as a string</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Return True for valid and False otherwise</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="bloxone.utils.validate_ip">
-<code class="sig-prename descclassname">bloxone.utils.</code><code class="sig-name descname">validate_ip</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ip</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#validate_ip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.validate_ip" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">bloxone.utils.</code><code class="descname">validate_ip</code><span class="sig-paren">(</span><em>ip</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#validate_ip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.validate_ip" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validate input data is a valid IP address</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>ip</strong> (<em>str</em>) – ip address as a string</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Return True for valid and False otherwise</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ip</strong> (<em>str</em>) – ip address as a string</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Return True for valid and False otherwise</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py function">
+<dl class="function">
 <dt id="bloxone.utils.validate_url">
-<code class="sig-prename descclassname">bloxone.utils.</code><code class="sig-name descname">validate_url</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">url</span></em>, <em class="sig-param"><span class="n">regex</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#validate_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.validate_url" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">bloxone.utils.</code><code class="descname">validate_url</code><span class="sig-paren">(</span><em>url</em>, <em>regex</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#validate_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#bloxone.utils.validate_url" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validate input data is a valid URL</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>url</strong> (<em>str</em>) – string to verify as URL</p></li>
-<li><p><strong>regex</strong> (<em>re</em>) – pre-compiled regex obj</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>url</strong> (<em>str</em>) – string to verify as URL</li>
+<li><strong>regex</strong> (<em>re</em>) – pre-compiled regex obj</li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Return True for valid and False otherwise</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>bool</p>
-</dd>
-</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Return True for valid and False otherwise</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
@@ -418,7 +501,7 @@ or fqdn if no. of labels is 2 or less</p>
         <a href="code.html" class="btn btn-neutral float-right" title="Source Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="b1tdlad-class.html" class="btn btn-neutral float-left" title="b1tdlad Class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="b1tdlad-class.html" class="btn btn-neutral" title="b1tdlad Class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -444,16 +527,26 @@ or fqdn if no. of labels is 2 or less</p>
   
 
 
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

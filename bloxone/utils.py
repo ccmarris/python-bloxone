@@ -13,7 +13,7 @@
 
  Author: Chris Marrison
 
- Date Last Updated: 20200907
+ Date Last Updated: 20210224
 
  Todo:
 
@@ -45,7 +45,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.0.2'
+__version__ = '0.0.3'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -373,3 +373,95 @@ def get_domain(fqdn, no_of_labels=2):
         domain = domain.rstrip(".")
 
     return domain
+
+# ** Local db Functions **
+
+def opendb(dbfile):
+    '''
+    Open sqlite db and return cursor()
+
+    Parameters:
+        dbfile (str): path to file
+
+    Returns:
+        cursor (obj): Returns a db.cursor()
+    '''
+    if os.path.isfile(dbfile):
+        db = sqlite3.connect(dbfile)
+        db.row_factory = sqlite3.Row
+        cursor = db.cursor()
+    else:
+        logging.error("Database "+dbfile+" not found.")
+        cursor = None
+
+    return cursor
+
+
+def get_table(cursor):
+    '''
+    Determine db table and return
+
+    Parameters:
+        cursor (obj): db.cursor object
+
+    Returns:
+        table (str): Table name as string
+    '''
+    # ** Determine table name ** #
+    select = 'SELECT name FROM sqlite_master WHERE type="table"'
+    cursor.execute(select)
+    tables = cursor.fetchall()
+    # ** Expecting single table ** #
+    if len(tables) == 1:
+        # ** Assume table is correct (even if it isn't) ** #
+        table = tables[0][0]
+    else:
+        # ** Print error and exit ###
+        logging.error("DB not of correct format - too many tables")
+        table = None
+
+    return table
+
+
+def db_query(db_cursor, table, query_type, query_data, *flags):
+    '''
+    Perform db query and return appropriate rows
+
+    Parameters:
+        db_cursor (obj): db.cursor object
+        table (str): database table name
+        query_type (str): data type for query
+        query_data (str): search string
+
+    Returns:
+        rows (list): (All matching db rows
+    '''
+    if query_type == "host":
+        # ** Form DB Query **
+        select = ('SELECT * FROM '
+                  + table + ' WHERE host="' + query_data
+                  + '" OR domain="' + query_data+'"')
+        # Ignore class = "Policy"
+        if flags:
+            select = select+' AND property!="Policy_UnsolictedBulkEmail"'
+    elif query_type == "ip":
+        # ** Form DB Query **
+        select = 'SELECT * FROM '+table+' WHERE ip="'+query_data+'"'
+        # Ignore class = "Policy"
+        if flags:
+            select = select+' AND property!="Policy_UnsolictedBulkEmail"'
+    elif query_type == "url":
+        # ** Form DB Query **
+        select = 'SELECT * FROM '+table+' WHERE url="'+query_data+'"'
+        # Ignore class = "Policy"
+        if flags:
+            select = select+' AND property!="Policy_UnsolictedBulkEmail"'
+    else:
+        logging.error("Invalid Type for {} data type for {}"
+                      " - should not be here".format(query_type, query_data))
+        return None
+
+    db_cursor.execute(select)
+    rows = db_cursor.fetchall()
+
+    return rows
