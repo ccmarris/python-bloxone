@@ -15,7 +15,7 @@ For BloxOne DDI therefore the basic usage structure for a *get* is::
     import bloxone
     b1ddi = bloxone.b1ddi(<cini file>)
     response = b1ddi.get(<object path>)
-    if response.status_code in b1ddi.return_codes_ok:
+    if response.status_code in b1.return_codes_ok:
         print(response.text)
     else: 
         print(response.status_code)
@@ -24,7 +24,7 @@ With create and update the key difference is that a JSON body is supplied::
 
     payload = '{ "address": "10.0.0.0", "cidr": "24" }'
     response = b1ddi.create('/ipam/subnet', body=payload)
-    if repsonse.status_code in b1ddi.return_codes_ok:
+    if repsonse.status_code in b1.return_codes_ok:
         print(repsonse.text)
     else: 
         print(response.status_code)
