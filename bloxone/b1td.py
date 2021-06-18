@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.2.2'
+__version__ = '0.2.3'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -337,7 +337,7 @@ class b1td(bloxone.b1):
 
         body = ( '{"target": {"one": {"type": "' + type + '", '
                 + '"sources": ' + str(sources).replace("'",'"') + ', '
-                + '"target": "' + query + '" } } }' )
+                + '"target": "' + str(query) + '" } } }' )
         # body = json.dumps(body)
         logging.debug("Body: {}".format(body))
 

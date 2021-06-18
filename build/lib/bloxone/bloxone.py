@@ -7,9 +7,11 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20210215
+ Date Last Updated: 20210615
 
  Todo:
+
+    api_key format verification upon inifile read.
 
  Copyright (c) 2020 Chris Marrison / Infoblox
 
@@ -42,15 +44,36 @@
 import logging
 import configparser
 import requests
+import os
+import re
 import json
 
 # ** Global Vars **
-__version__ = '0.6.7'
+__version__ = '0.7.1'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
 __license__ = 'BSD'
 
+
+# Custom Exceptions
+class IniFileSectionError(Exception):
+    '''
+    Exception for missing section in ini file
+    '''
+    pass
+
+class IniFileKeyError(Exception):
+    '''
+    Exception for missing key in ini file
+    '''
+    pass
+
+class APIKeyFormatError(Exception):
+    '''
+    Exception for API key format mismatch
+    '''
+    pass
 
 # ** Facilitate ini file for basic configuration including API Key
 
@@ -62,40 +85,91 @@ def read_b1_ini(ini_filename):
         ini_filename (str): name of inifile
 
     Returns:
-        config :(dict): Dictionary of BloxOne configuration elements
+        config (dict): Dictionary of BloxOne configuration elements
+
+    Raises:
+        IniFileSectionError
+        IniFileKeyError
+        APIKeyFormatError
+        FileNotFoundError
 
     '''
     # Local Variables
     cfg = configparser.ConfigParser()
     config = {}
     ini_keys = ['url', 'api_version', 'api_key']
+ 
+    # Check for inifile and raise exception if not found
+    if os.path.isfile(ini_filename):
+        # Attempt to read api_key from ini file
+        try:
+            cfg.read(ini_filename)
+        except configparser.Error as err:
+            logging.error(err)
 
-    # Attempt to read api_key from ini file
-    try:
-        cfg.read(ini_filename)
-    except configparser.Error as err:
-        logging.error(err)
+        # Look for BloxOne section
+        if 'BloxOne' in cfg:
+            for key in ini_keys:
+                # Check for key in BloxOne section
+                if key in cfg['BloxOne']:
+                    config[key] = cfg['BloxOne'][key].strip("'\"")
+                    logging.debug('Key {} found in {}: {}'
+                                 .format(key, ini_filename, config[key]))
+                else:
+                    logging.error('Key {} not found in BloxOne section.'
+                                 .format(key))
+                    raise IniFileKeyError('Key "' + key + '" not found within' 
+                        '[BloxOne] section of ini file {}'.format(ini_filename))
+                    
+        else:
+            logging.error('No BloxOne Section in config file: {}'
+                         .format(ini_filename))
+            raise IniFileSectionError('No [BloxOne] section found in ini file {}'
+                                     .format(ini_filename))
+        
+        # Verify format of API Key
+        if verify_api_key(config['api_key']):
+            logging.debug('API Key passed format verification')
+        else:
+            logging.debug('API Key {} failed format verification'
+                          .format(config['api_key']))
+            raise APIKeyFormatError('API Key {} failed format verification'
+                                    .format(config['api_key']))
 
-    # Look for BloxOne section
-    if 'BloxOne' in cfg:
-        for key in ini_keys:
-            # Check for key in BloxOne section
-            if key in cfg['BloxOne']:
-                config[key] = cfg['BloxOne'][key].strip("'\"")
-                logging.debug('Key {} found in {}: {}'.format(key, ini_filename, config[key]))
-            else:
-                logging.warning('Key {} not found in BloxOne section.'.format(key))
-                config[key] = ''
     else:
-        logging.warning('No BloxOne Section in config file: {}'.format(ini_filename))
-        config['api_key'] = ''
+        raise FileNotFoundError('ini file "{}" not found.'.format(ini_filename))
 
     return config
+
+
+def verify_api_key(apikey):
+    '''
+    Verify format of API Key
+    
+    Parameters:
+       apikey (str): api key
+
+    Returns:
+        bool: True is apikey passes format validation
+    '''
+    if re.fullmatch('[a-z0-9]{32}|[a-z0-9]{64}', apikey, re.IGNORECASE):
+        status = True
+    else:
+        status = False
+
+    return status
 
 
 class b1:
     '''
     Parent Class to simplify access to the BloxOne APIs for subclasses
+    Can also be used to genericallly access the API
+
+    Raises:
+        IniFileSectionError
+        IniFileKeyError
+        APIKeyFormatError
+        FileNotFoundError
     '''
 
     def __init__(self, cfg_file='config.ini'):
@@ -125,8 +199,10 @@ class b1:
         self.authn_url = self.base_url + '/api/authn/' + self.cfg['api_version']
         self.bootstrap_url = self.base_url + '/api/atlas-bootstrap-app/' + self.cfg['api_version']
         self.cdc_url = self.base_url + '/api/cdc-flow/' + self.api_version
+        self.diagnostics_url = self.base_url + '/diagnostic-service/' + self.api_version
         self.ddi_url = self.base_url + '/api/ddi/' + self.api_version
         self.host_url = self.base_url + '/api/host_app/' + self.cfg['api_version']
+        self.notifications_url = self.base_url + '/atlas-notifications-config/'+ self.api_version
         self.sw_url = self.base_url + '/api/upgrade_policy/' + self.cfg['api_version']
         self.ztp_url = self.base_url + '/atlas-host-activation/' + self.cfg['api_version']
         
@@ -274,3 +350,109 @@ class b1:
                               "a specified ovject id.")
         
         return url
+
+
+    # Public Generic Methods
+    def get(self, url, id="", action="", **params):
+        '''
+        Generic get object wrapper 
+
+        Parameters:
+            url (str):      Full URL
+            id (str):       Optional Object ID
+            action (str):   Optional object action, e.g. "nextavailableip"
+        
+        Returns:
+            response object: Requests response object
+        '''
+        # Build url
+        url = self._use_obj_id(url,id=id)
+        url = self._add_params(url, **params)
+        logging.debug("URL: {}".format(url))
+
+        response = self._apiget(url)
+
+        return response
+
+
+    def create(self, url, body=""):
+        '''
+        Generic create object wrapper 
+
+        Parameters:
+            url (str):  Full URL
+            body (str): JSON formatted data payload
+
+        Returns:
+            response object: Requests response object
+        '''
+        # Build url
+        logging.debug("URL: {}".format(url))
+
+        # Make API Call
+        response = self._apipost(url, body)
+
+        return response
+
+
+    def delete(self, url, id=""):
+        '''
+        Generic delete object wrapper
+
+        Parameters:
+            url (str):  Full URL
+            id (str):   Object id to delete
+
+        Returns:
+            response object: Requests response object
+        '''
+        # Build url
+        url = self._use_obj_id(url,id=id)
+        logging.debug("URL: {}".format(url))
+
+        # Make API Call
+        response = self._apidelete(url)
+
+        return response
+
+
+    def update(self, url, id="", body=""):
+        '''
+        Generic create object wrapper 
+
+        Parameters:
+            url (str):  Full URL
+            body (str): JSON formatted data payload
+
+        Returns:
+            response object: Requests response object
+        '''
+        # Build url if needed
+        url = self._use_obj_id(url, id=id)
+        logging.debug("URL: {}".format(url))
+
+        # Make API Call
+        response = self._apiput(url, body)
+
+        return response
+
+
+    def replace(self, url, id="", body=""):
+        '''
+        Generic create object wrapper 
+
+        Parameters:
+            url (str):  Full URL
+            body (str): JSON formatted data payload
+
+        Returns:
+            response object: Requests response object
+        '''
+        # Build url
+        url = self._use_obj_id(url, id=id)
+        logging.debug("URL: {}".format(url))
+
+        # Make API Call
+        response = self._apipatch(url, body)
+
+        return response
