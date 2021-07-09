@@ -198,11 +198,19 @@ class b1diagnostics(bloxone.b1):
 
     def get_remote_commands(self):
         '''
+        Get set of possible remote commands and parameters
+
+        Returns:
+            response object: Requests response object
         '''
         return self.get('/remotecommands')
 
 
     def execute_task(self, ophid='', cmd=''):
         '''
+        Execute remote command on an OPH
+
+        Returns:
+            response object: Requests response object
         '''
         return

@@ -196,6 +196,9 @@ class b1diagnostics(bloxone.b1):
 
     # Helper Methods
 
+    def get_ophid(self):
+        return ophid
+
     def get_remote_commands(self):
         '''
         Get set of possible remote commands and parameters
@@ -206,7 +209,7 @@ class b1diagnostics(bloxone.b1):
         return self.get('/remotecommands')
 
 
-    def execute_task(self, ophid='', cmd=''):
+    def execute_task(self, ophid='', cmd='', args=''):
         '''
         Execute remote command on an OPH
 

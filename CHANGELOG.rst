@@ -2,10 +2,14 @@
 ChangeLog
 *********
 
+|   20210709	v0.7.3	 Added get_ophid() method to b1oph class
+|                        Updated bootstap-app_url
+|   20210621	v0.7.2	 Fixed issue with get_zone_child() method in b1ddi
+|   20210618	v0.7.1	 Framwork for b1diagnostics and b1notifications classes
 |   20210308	v0.7.0	 Added api_key format verification, raising exception
 |   20210308	v0.6.9	 Added exception raising for ini file not found
 |   20210221	v0.6.8	 Created 'public' generic methods for get, create, i
-                         replace, update:wq
+|                        replace, update:wq
 |   20210215	v0.6.7	 Added New Platform classes for new API elements
 |                        b1anycast, b1authn, b1bootstrap, b1oph, b1sw, b1ztp
 |                        Deprecating b1platform class (inherits b1oph for

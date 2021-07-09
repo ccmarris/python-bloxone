@@ -465,3 +465,10 @@ def db_query(db_cursor, table, query_type, query_data, *flags):
     rows = db_cursor.fetchall()
 
     return rows
+
+
+def encode_dhcp_option(option, sub_opt_defs={}, padding=False):
+    '''
+    '''
+
+    return encoded
