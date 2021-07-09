@@ -45,7 +45,7 @@ import requests
 import json
 
 # ** Global Vars **
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -242,6 +242,29 @@ class b1oph(bloxone.b1):
         return id
 
 
+    def get_ophid(self, name=""):
+        '''
+        Return the ophid of named OPH
+
+        Parameters:
+            name (str): display name of OPH
+        
+        Returns:
+            ophid(str): ophid of the specified OPH
+        '''
+        filter = f'display_name=="{name}"'
+        response = self.get('/on_prem_hosts', _filter=filter, _fields="display_name,ophid")
+        if response.status_code in self.return_codes_ok:
+            if 'result' in response.json().keys():
+                ophid = response.json()['result'][0]['ophid']
+            else:
+                ophid = ''
+        else:
+            ophid = ''
+
+        return ophid
+
+
     def oph_add_tag(self, id="", tagname="", tagvalue=""):
         '''
         Method to add a tag to an existing On Prem Host
@@ -296,51 +319,3 @@ class b1oph(bloxone.b1):
                 response = self.update('/on_prem_hosts', id=id, body=json.dumps(data))
 
         return response
-
-
-    def auditlog(self, **params):
-        '''
-        Get the audit log
-
-        Parameters:
-            **params (dict): Generic API parameters
-        Returns:
-            audit_log (list); list of dict
-        '''
-        # Local variables
-        audit_log = []
-
-        url = self.base_url + '/api/auditlog/' + self.api_version +'/logs'
-        url = self._add_params(url, **params)
-
-        logging.debug("URL: {}".format(url))
-
-        # Call API
-        response = self._apiget(url)
-
-        if response.status_code in self.return_codes_ok:
-            if 'results' in response.json().keys():
-                audit_log = response.json()['results']
-        else:
-            audit_log = response.json()
-        
-        return audit_log
-
-
-    def get_full_auditlog(self, **params):
-        '''
-        '''
-        all_logs = []
-        offset = 0
-        limit = 1000
-
-        audit_log = self.auditlog(_offset=str(offset), 
-                                  _limit=str(limit), **params)
-        while isinstance(audit_log, list) and len(audit_log):
-            all_logs += audit_log
-            offset += limit + 1
-            audit_log = self.auditlog(_offset=str(offset), 
-                                      _limit=str(limit), **params)
-
-        return all_logs
-

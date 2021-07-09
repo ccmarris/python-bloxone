@@ -3,7 +3,9 @@ from .b1anycast import *
 from .b1authn import *
 from .b1bootstrap import *
 from .b1ddi import *
+from .b1diagnostics import *
 from .b1cdc import *
+from .b1notifications import *
 from .b1oph import *
 from .b1sw import *
 from .b1ztp import *
@@ -17,4 +19,4 @@ from .b1platform import *
 
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
-__version__ = '0.7.0'
+__version__ = '0.7.3'

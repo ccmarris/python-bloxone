@@ -7,7 +7,7 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20210308
+ Date Last Updated: 20210615
 
  Todo:
 
@@ -49,7 +49,7 @@ import re
 import json
 
 # ** Global Vars **
-__version__ = '0.7.0'
+__version__ = '0.7.3'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -197,10 +197,12 @@ class b1:
 
         self.anycast_url = self.base_url + '/api/anycast/' + self.cfg['api_version']
         self.authn_url = self.base_url + '/api/authn/' + self.cfg['api_version']
-        self.bootstrap_url = self.base_url + '/api/atlas-bootstrap-app/' + self.cfg['api_version']
+        self.bootstrap_url = self.base_url + '/bootstrap-app/' + self.cfg['api_version']
         self.cdc_url = self.base_url + '/api/cdc-flow/' + self.api_version
+        self.diagnostics_url = self.base_url + '/diagnostic-service/' + self.api_version
         self.ddi_url = self.base_url + '/api/ddi/' + self.api_version
         self.host_url = self.base_url + '/api/host_app/' + self.cfg['api_version']
+        self.notifications_url = self.base_url + '/atlas-notifications-config/'+ self.api_version
         self.sw_url = self.base_url + '/api/upgrade_policy/' + self.cfg['api_version']
         self.ztp_url = self.base_url + '/atlas-host-activation/' + self.cfg['api_version']
         

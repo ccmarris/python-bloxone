@@ -52,7 +52,7 @@ __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
 __license__ = 'BSD'
 
 
-class b1oph(bloxone.b1):
+class b1sw(bloxone.b1):
     '''
     Class to simplify access to the BloxOne Platform APIs
     '''
@@ -71,7 +71,7 @@ class b1oph(bloxone.b1):
         '''
 
         # Build url
-        url = self.host_url + objpath
+        url = self.sw_url + objpath
         url = self._use_obj_id(url,id=id)
         url = self._add_params(url, **params)
         logging.debug("URL: {}".format(url))
@@ -93,7 +93,7 @@ class b1oph(bloxone.b1):
             response object: Requests response object
         '''
         # Build url
-        url = self.host_url + objpath
+        url = self.sw_url + objpath
         logging.debug("URL: {}".format(url))
 
         # Make API Call
@@ -114,7 +114,7 @@ class b1oph(bloxone.b1):
             response object: Requests response object
         '''
         # Build url
-        url = self.host_url + objpath
+        url = self.sw_url + objpath
         url = self._use_obj_id(url, id=id)
         logging.debug("URL: {}".format(url))
 
@@ -136,7 +136,7 @@ class b1oph(bloxone.b1):
             response object: Requests response object
         '''
         # Build url
-        url = self.host_url + objpath
+        url = self.sw_url + objpath
         url = self._use_obj_id(url, id=id)
         logging.debug("URL: {}".format(url))
 
@@ -146,54 +146,7 @@ class b1oph(bloxone.b1):
         return response
 
 
-    def get_tags(self, objpath, id=""):
-        '''
-        Get tags for an object id
-
-        Parameters:
-            objpath (str):  Swagger object path
-
-            id (str): id of object
-
-        Returns:
-            tags (dict): Dictionary of current tags
-                         or empty dict if none
-        
-        .. todo::
-            * make generic, however, this requires the below
-            * Lookup dictionary of 'required fields' per object type
-        '''
-        tags = {}
-        response = self.get(objpath, id=id, _fields="tags")
-        if response.status_code in self.return_codes_ok:
-            tags = json.loads(response.text)
-            tags = tags['result']
-        else:
-            tags = {}
-        
-        return tags
-
-
-    # *** Platform API Requests *** 
-
-    def on_prem_hosts(self, **params):
-        '''
-        Method to retrieve On Prem Hosts
-        (undocumented)
-
-        Parameters:
-            **params (dict): Generic API parameters
-
-        Returns:
-            response object: Requests response object
-        '''
-
-        # Call BloxOne API
-        response = self.get('/on_prem_hosts', **params)
-
-        # Return response object
-        return response 
-
+    # *** Helper Methods ***
 
     def get_id(self, objpath, *, key="", value="", include_path=False):
         '''
@@ -240,59 +193,3 @@ class b1oph(bloxone.b1):
         logging.debug("id: {}".format(id)) 
 
         return id
-
-
-    def oph_add_tag(self, id="", tagname="", tagvalue=""):
-        '''
-        Method to add a tag to an existing On Prem Host
-
-        Parameters:
-            objpath (str):  Swagger object path
-            tagname (str): Name of tag to add
-            tagvalue (str): Value to associate
-
-        Returns:
-            response object: Requests response object
-        '''
-        # tags = self.get_tags('/on_prem_hosts', id=id)
-        response = self.get('/on_prem_hosts', id=id, _fields="display_name,tags")
-        if response.status_code in self.return_codes_ok:
-            data = response.json()['result']
-        else:
-            data = {}
-        logging.debug("Existing tags: {}".format(data))
-        # Add new tag to data
-        if tagname:
-            data['tags'].update({tagname: tagvalue})
-            logging.debug("New tags: {}".format(data))
-        # Update object
-        response = self.update('/on_prem_hosts', id=id, body=json.dumps(data))
-
-        return response
-
-
-    def oph_delete_tag(self, id="", tagname=""):
-        '''
-        Method to delete a tag from an existing On Prem Host
-
-        Parameters:
-            objpath (str):  Swagger object path
-            tagname (str): Name of tag to add
-
-        Returns:
-            response object: Requests response object
-        '''
-        # tags = self.get_tags('/on_prem_hosts', id=id)
-        response = self.get('/on_prem_hosts', id=id, _fields="display_name,tags")
-        if response.status_code in self.return_codes_ok:
-            data = response.json()['result']
-            logging.debug("Existing tags: {}".format(data))
-            # Delete tag from data
-            if tagname in data['tags'].keys():
-                data['tags'].pop(tagname, True)
-                print(json.dumps(data))
-                logging.debug("New tags: {}".format(data))
-                # Update object
-                response = self.update('/on_prem_hosts', id=id, body=json.dumps(data))
-
-        return response

@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.2.2'
+__version__ = '0.2.4'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -305,7 +305,7 @@ class b1td(bloxone.b1):
         return response
 
 
-    def dossierquery(self, query, type="host", sources="all"):
+    def dossierquery(self, query, type="host", sources="all", wait=True):
         '''
         Simple Dossier Query
         
@@ -317,12 +317,15 @@ class b1td(bloxone.b1):
         Returns:
             response object: Requests response object
         '''
-        url = self.dossier_url + '/jobs?wait=true'
+        url = self.dossier_url + '/jobs?wait=' + wait
         # Create body
         if sources == "all":
             response = self.dossier_sources()
             if response.status_code in self.return_codes_ok:
-                sources = list(response.json().keys())
+                sources = []
+                for source in response.json().keys():
+                    if response.json()[source]:
+                        sources.append(source)
                 logging.debug("Sources retrieved: {}".format(sources))
             else:
                 sources = ['atp', 'dns', 'geo', 'pdns', 'ptr', 'rwhois',
@@ -337,7 +340,7 @@ class b1td(bloxone.b1):
 
         body = ( '{"target": {"one": {"type": "' + type + '", '
                 + '"sources": ' + str(sources).replace("'",'"') + ', '
-                + '"target": "' + query + '" } } }' )
+                + '"target": "' + str(query) + '" } } }' )
         # body = json.dumps(body)
         logging.debug("Body: {}".format(body))
 

@@ -45,7 +45,7 @@ import requests
 import json
 
 # ** Global Vars **
-__version__ = '0.6.2'
+__version__ = '0.7.1'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -54,6 +54,133 @@ __license__ = 'BSD'
 
 class b1platform(bloxone.b1oph):
     '''
-    Deprecated Class Due to New API Structure
-    This Class is replaced with b1oph class inherited here for compatibility
+    Class now reused for BloxOne Platform Methods, e.g. Audit Log
+    Management of BloxOne On Prem Hosts is via the b1oph Class 
+    b1oph class  is inherited here for compatibility
     '''
+
+    def auditlog(self, **params):
+        '''
+        Get the audit log
+
+        Parameters:
+            **params (dict): Generic API parameters
+        Returns:
+            audit_log (list); list of dict
+        '''
+        # Local variables
+        audit_log = []
+
+        url = self.base_url + '/api/auditlog/' + self.api_version +'/logs'
+        url = self._add_params(url, **params)
+
+        logging.debug("URL: {}".format(url))
+
+        # Call API
+        response = self._apiget(url)
+
+        if response.status_code in self.return_codes_ok:
+            if 'results' in response.json().keys():
+                audit_log = response.json()['results']
+        else:
+            audit_log = response.json()
+        
+        return audit_log
+
+
+    def get_full_auditlog(self, **params):
+        '''
+        '''
+        all_logs = []
+        offset = 0
+        limit = 1000
+
+        audit_log = self.auditlog(_offset=str(offset), 
+                                  _limit=str(limit), **params)
+        while isinstance(audit_log, list) and len(audit_log):
+            all_logs += audit_log
+            offset += limit + 1
+            audit_log = self.auditlog(_offset=str(offset), 
+                                      _limit=str(limit), **params)
+
+        return all_logs
+    
+    # Methods for undocumented API Calls - use at own risk
+
+    def get_current_user(self, **params):
+        '''
+        Get Current User Data
+
+        Parameters:
+            **params (dict): Generic API parameters
+        
+        Returns:
+            response object: Requests response object
+        '''
+        # Build URL
+        url = self.base_url + '/v2/current_user'
+        url = self._add_params(url, **params)
+        logging.debug("URL: {}".format(url))
+
+        # Make API Call
+        response = self._apiget(url)
+
+        return response
+
+
+    def get_users(self, **params):
+        '''
+        Get User Data
+
+        Parameters:
+            **params (dict): Generic API parameters
+        
+        Returns:
+            response object: Requests response object
+        '''
+        # Build URL
+        url = self.base_url + '/v2/users'
+        url = self._add_params(url, **params)
+        logging.debug("URL: {}".format(url))
+
+        # Make API Call
+        response = self._apiget(url)
+
+        return response
+
+
+    def audit_users(self, domains=[]):
+        '''
+        Audit User Data for non compliant email domains
+
+        Parameters:
+            domain (list): List of valid email domains
+
+        Returns:
+            List of User Data (json)
+        '''
+        users = []
+        user_data = []
+        valid = False
+
+        # Check for list of domains, otherwise use current users
+        if len(domains) == 0:
+            current_user = self.get_current_user().json()
+            email = current_user['result']['email']
+            domain = email.split('@')[1]
+            domains.append(domain)
+        logging.debug(f'Checking against domains: {domains}')
+
+        # Get user data and check against valid domains
+        response = self.get_users()
+        user_data = response.json()['results']
+        for user in user_data:
+            valid = False
+            for domain in domains:
+                if domain in user['email']:
+                    valid = True
+                    break
+            if not valid:
+                users.append(user)
+        
+        return users

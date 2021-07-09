@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.4.3'
+__version__ = '0.4.4'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -399,20 +399,13 @@ class b1ddi(bloxone.b1):
         '''
         if name and not id:
             if parent == "view":
-                id = self.get_id('/dns/view', key="name", value=name)
+                id = self.get_id('/dns/view', key="name", value=name, include_path=True)
                 # result = self.get('/dns/view', _fields="name,id")
                 # logging.debug(result.text)
             elif parent == "zone":
-                id = self.get_id('/dns/auth_zone', key="fqdn", value=name)
-                result = self.get('/dns/auth_zone', _fields="fqdn,id")
-                logging.debug(result.text)
-            objs = json.loads(result.text)
-            if "results" in objs.keys():
-                for obj in objs['results']:
-                    if obj['fqdn'] == name:
-                        id = obj['id']
-            else:
-                id = ""
+                id = self.get_id('/dns/auth_zone', key="fqdn", value=name, include_path=True)
+                # result = self.get('/dns/auth_zone', _fields="fqdn,id")
+                # logging.debug(result.text)
             logging.debug("id: {}".format(id)) 
         # Build URL
         objpath = '/dns/zone_child' + '?_filter=parent=="' + id + '"'
