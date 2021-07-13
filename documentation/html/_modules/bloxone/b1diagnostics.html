@@ -1,0 +1,640 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>bloxone.b1diagnostics &mdash; Bloxone API Wrapper 0.7.4 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Bloxone API Wrapper
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7.4
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage and Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../classes.html">Classes Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils.html">Additional Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code.html">Source Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../version_history.html">ChangeLog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ackowledgements.html">Authors and acknowledgment</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Bloxone API Wrapper</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>bloxone.b1diagnostics</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for bloxone.b1diagnostics</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/local/bin/python3</span>
+<span class="c1"># vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">------------------------------------------------------------------------</span>
+
+<span class="sd"> Description:</span>
+
+<span class="sd"> Module to provide class hierachy to simplify access to the BloxOne APIs</span>
+
+<span class="sd"> Date Last Updated: 20210713</span>
+
+<span class="sd"> Todo:</span>
+
+<span class="sd"> Copyright (c) 2021 Chris Marrison / Infoblox</span>
+
+<span class="sd"> Redistribution and use in source and binary forms,</span>
+<span class="sd"> with or without modification, are permitted provided</span>
+<span class="sd"> that the following conditions are met:</span>
+
+<span class="sd"> 1. Redistributions of source code must retain the above copyright</span>
+<span class="sd"> notice, this list of conditions and the following disclaimer.</span>
+
+<span class="sd"> 2. Redistributions in binary form must reproduce the above copyright</span>
+<span class="sd"> notice, this list of conditions and the following disclaimer in the</span>
+<span class="sd"> documentation and/or other materials provided with the distribution.</span>
+
+<span class="sd"> THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</span>
+<span class="sd"> &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</span>
+<span class="sd"> LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS</span>
+<span class="sd"> FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE</span>
+<span class="sd"> COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,</span>
+<span class="sd"> INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,</span>
+<span class="sd"> BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;</span>
+<span class="sd"> LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span>
+<span class="sd"> CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT</span>
+<span class="sd"> LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN</span>
+<span class="sd"> ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
+<span class="sd"> POSSIBILITY OF SUCH DAMAGE.</span>
+
+<span class="sd">------------------------------------------------------------------------</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">bloxone.b1oph</span> <span class="kn">import</span> <span class="n">b1oph</span>
+<span class="kn">import</span> <span class="nn">bloxone</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="c1"># ** Global Vars **</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.0&#39;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
+<span class="vm">__doc__</span> <span class="o">=</span> <span class="s1">&#39;https://python-bloxone.readthedocs.io/en/latest/&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;BSD&#39;</span>
+
+
+<span class="k">class</span> <span class="nc">APIError_Unable_To_Retrieve_Commands</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Exception for API call in __init__</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">pass</span>
+
+
+<span class="k">class</span> <span class="nc">Command_Not_Supported</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Exception for API call in __init__</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">pass</span>
+
+
+<span class="k">class</span> <span class="nc">Unknown_Argument</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Exception for API call in __init__</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">pass</span>
+
+
+<div class="viewcode-block" id="b1diagnostics"><a class="viewcode-back" href="../../b1diagnostics-class.html#bloxone.b1diagnostics">[docs]</a><span class="k">class</span> <span class="nc">b1diagnostics</span><span class="p">(</span><span class="n">bloxone</span><span class="o">.</span><span class="n">b1</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Class to simplify access to the BloxOne Platform APIs</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cfg_file</span><span class="o">=</span><span class="s1">&#39;config.ini&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Call base __init__ and extend</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">cfg_file</span><span class="p">)</span>
+
+        <span class="c1"># Instantiate b1oph class as need access to b1oph.get_ophid()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b1_oph</span> <span class="o">=</span> <span class="n">b1oph</span><span class="p">(</span><span class="n">cfg_file</span><span class="p">)</span>
+
+        <span class="c1"># Automatically get list of remote_commands</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_remote_commands</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">commands</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Response code: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Response body: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">APIError_Unable_To_Retrieve_Commands</span><span class="p">()</span>
+        
+        <span class="k">return</span>
+
+
+<div class="viewcode-block" id="b1diagnostics.get"><a class="viewcode-back" href="../../b1diagnostics-class.html#bloxone.b1diagnostics.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Generic get object wrapper for platform calls</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            objpath (str):  Swagger object path</span>
+<span class="sd">            id (str):       Optional Object ID</span>
+<span class="sd">            action (str):   Optional object action, e.g. &quot;nextavailableip&quot;</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="c1"># Build url</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">diagnostics_url</span> <span class="o">+</span> <span class="n">objpath</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_obj_id</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_params</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;URL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+        
+<div class="viewcode-block" id="b1diagnostics.post"><a class="viewcode-back" href="../../b1diagnostics-class.html#bloxone.b1diagnostics.post">[docs]</a>    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Generic create object wrapper for platform objects</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            objpath (str):  Swagger object path</span>
+<span class="sd">            body (str):     JSON formatted data payload</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Build url</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">diagnostics_url</span> <span class="o">+</span> <span class="n">objpath</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;URL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+
+        <span class="c1"># Make API Call</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apipost</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="b1diagnostics.delete"><a class="viewcode-back" href="../../b1diagnostics-class.html#bloxone.b1diagnostics.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Generic delete object wrapper for platform objects</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            objpath (str):  Swagger object path</span>
+<span class="sd">            id (str):       Object id to delete</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Build url</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">diagnostics_url</span> <span class="o">+</span> <span class="n">objpath</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_obj_id</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;URL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+
+        <span class="c1"># Make API Call</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apidelete</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="b1diagnostics.update"><a class="viewcode-back" href="../../b1diagnostics-class.html#bloxone.b1diagnostics.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Generic create object wrapper for ddi objects</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            objpath (str):  Swagger object path</span>
+<span class="sd">            body (str):     JSON formatted data payload</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Build url</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">diagnostics_url</span> <span class="o">+</span> <span class="n">objpath</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_obj_id</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;URL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+
+        <span class="c1"># Make API Call</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiput</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+    <span class="c1"># *** Helper Methods ***</span>
+
+<div class="viewcode-block" id="b1diagnostics.get_id"><a class="viewcode-back" href="../../b1diagnostics-class.html#bloxone.b1diagnostics.get_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">include_path</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get object id using key/value pair</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            objpath (str):  Swagger object path</span>
+<span class="sd">            key (str):      name of key to match</span>
+<span class="sd">            value (str):    value to match</span>
+<span class="sd">            include_path (bool): Include path to object id</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            id (str):   object id or &quot;&quot;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="c1"># Local Variables</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="nb">filter</span> <span class="o">=</span> <span class="n">key</span><span class="o">+</span><span class="s1">&#39;==&quot;&#39;</span><span class="o">+</span><span class="n">value</span><span class="o">+</span><span class="s1">&#39;&quot;&#39;</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="n">key</span> <span class="o">+</span> <span class="s1">&#39;,id&#39;</span>
+
+        <span class="c1"># Make API Call</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">objpath</span><span class="p">,</span> <span class="n">_filter</span><span class="o">=</span><span class="nb">filter</span><span class="p">,</span> <span class="n">_fields</span><span class="o">=</span><span class="n">fields</span><span class="p">)</span>
+
+        <span class="c1"># Process response</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+            <span class="c1"># Look for results</span>
+            <span class="k">if</span> <span class="s2">&quot;results&quot;</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">obj</span><span class="p">:</span>
+                    <span class="nb">id</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">include_path</span><span class="p">:</span>
+                        <span class="nb">id</span> <span class="o">=</span> <span class="nb">id</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Key </span><span class="si">{}</span><span class="s2"> with value </span><span class="si">{}</span><span class="s2"> not found.&quot;</span>
+                                  <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">id</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;No results found.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;HTTP Error occured. </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">))</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;id: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">id</span><span class="p">))</span> 
+
+        <span class="k">return</span> <span class="nb">id</span></div>
+
+    <span class="c1"># Helper Methods</span>
+
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    def get_ophid(self):</span>
+<span class="sd">        return ophid</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+<div class="viewcode-block" id="b1diagnostics.get_remote_commands"><a class="viewcode-back" href="../../b1diagnostics-class.html#bloxone.b1diagnostics.get_remote_commands">[docs]</a>    <span class="k">def</span> <span class="nf">get_remote_commands</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get set of possible remote commands and parameters</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/remotecommands&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="b1diagnostics.is_command"><a class="viewcode-back" href="../../b1diagnostics-class.html#bloxone.b1diagnostics.is_command">[docs]</a>    <span class="k">def</span> <span class="nf">is_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Check whether command is valid</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            command(str): command to check</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            boolean</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">cmds</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="p">:</span>
+            <span class="n">cmds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cmd</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">command</span> <span class="ow">in</span> <span class="n">cmds</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="n">status</span></div>
+
+    
+<div class="viewcode-block" id="b1diagnostics.get_args"><a class="viewcode-back" href="../../b1diagnostics-class.html#bloxone.b1diagnostics.get_args">[docs]</a>    <span class="k">def</span> <span class="nf">get_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Check the args for a command</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            command(str): Command to retrieve argyments for</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Disctionary of arguments or empty dictionary if none.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises:</span>
+<span class="sd">            Command_Not_Supported Exception if command is not available</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_command</span><span class="p">(</span><span class="n">command</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">commands</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cmd</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">command</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="s1">&#39;args&#39;</span> <span class="ow">in</span> <span class="n">cmd</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                        <span class="n">args</span> <span class="o">=</span> <span class="n">cmd</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">args</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Command_Not_Supported</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Command: </span><span class="si">{</span><span class="n">command</span><span class="si">}</span><span class="s1"> not supported.&#39;</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">args</span></div>
+
+
+
+<div class="viewcode-block" id="b1diagnostics.execute_task"><a class="viewcode-back" href="../../b1diagnostics-class.html#bloxone.b1diagnostics.execute_task">[docs]</a>    <span class="k">def</span> <span class="nf">execute_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">{},</span> <span class="n">ophname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                     <span class="n">ophid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">id_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">priv</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Execute remote command on an OPH</span>
+<span class="sd">    </span>
+<span class="sd">        Parameters:</span>
+<span class="sd">            cmd(str): Command to execute</span>
+<span class="sd">            args(dict): Command arguments</span>
+<span class="sd">            ophname(str): Name of OPH to execute command on (or supply ophid)</span>
+<span class="sd">            ophid(str): (Optional) ophid of OPH for cmd execution</span>
+<span class="sd">            id_only(bool): default of True</span>
+<span class="sd">            priv(bool): Run privileged task, default of False</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            id string of task if id_only=True (defult)</span>
+<span class="sd">            response object: Requests response object if id_only=False</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TypeError Exception if required options not supplied </span>
+<span class="sd">            KeyErro Exception if ophname is not found (and ophid not supplied)</span>
+<span class="sd">            Command_Not_Supported Exception if command is not valid</span>
+<span class="sd">            Unknown_Argument Exception if arguments do not match required</span>
+<span class="sd">        </span>
+<span class="sd">        Todo:</span>
+<span class="sd">            [ ] Enhance logic to run /priviledgetask or /task</span>
+<span class="sd">            Awaiting API enhancement to determine priv versus non-priv</span>
+<span class="sd">            [ ] Enhance args check for required arguments</span>
+<span class="sd">            Awaiting API enhancement for arg to determine required versus </span>
+<span class="sd">            optional arguments</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Check command is valid</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_command</span><span class="p">(</span><span class="n">command</span><span class="p">):</span>
+            <span class="c1"># If ophid supplied then get this</span>
+            <span class="k">if</span> <span class="n">ophid</span> <span class="ow">or</span> <span class="n">ophname</span><span class="p">:</span> 
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">ophid</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Getting ophid for OPH: </span><span class="si">{</span><span class="n">ophname</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">ophid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">b1_oph</span><span class="o">.</span><span class="n">get_ophid</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">ophname</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">ophid</span><span class="p">:</span>
+                        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;OPH not found.&#39;</span><span class="p">)</span>
+                        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;OPH </span><span class="si">{</span><span class="n">ophname</span><span class="si">}</span><span class="s1"> not found&#39;</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;OPHID: </span><span class="si">{</span><span class="n">ophid</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+                <span class="c1"># Check args</span>
+                <span class="n">arglist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_args</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">arg</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">arglist</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                        <span class="k">raise</span> <span class="n">Unknown_Argument</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Argument: </span><span class="si">{</span><span class="n">arg</span><span class="si">}</span><span class="s1"> not recognised&#39;</span><span class="p">)</span>
+                    <span class="n">s_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="n">arg</span><span class="p">])</span> 
+                    <span class="n">ex_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">arglist</span><span class="p">[</span><span class="n">arg</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="n">s_type</span> <span class="o">!=</span> <span class="n">ex_type</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Supplied argument type </span><span class="si">{</span><span class="n">s_type</span><span class="si">}</span><span class="s1">&#39;</span> <span class="o">+</span>
+                            <span class="sa">f</span><span class="s1">&#39; does not match expected type </span><span class="si">{</span><span class="n">ex_type</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+                <span class="c1"># Create command body</span>
+                <span class="n">body</span> <span class="o">=</span> <span class="s1">&#39;{ &quot;cmd&quot;: &#39;</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">body</span> <span class="o">=</span> <span class="n">body</span> <span class="o">+</span> <span class="s1">&#39;{ &quot;args&quot;: &#39;</span> <span class="o">+</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">body</span> <span class="o">=</span> <span class="n">body</span> <span class="o">+</span> <span class="s1">&#39;{ &#39;</span>
+                <span class="n">body</span> <span class="o">=</span> <span class="n">body</span> <span class="o">+</span> <span class="s1">&#39;&quot;name&quot;: &quot;&#39;</span> <span class="o">+</span> <span class="n">command</span> <span class="o">+</span> <span class="s1">&#39;&quot; }, &#39;</span>
+                <span class="n">body</span> <span class="o">=</span> <span class="n">body</span> <span class="o">+</span> <span class="s1">&#39;&quot;ophid&quot;: &quot;&#39;</span> <span class="o">+</span> <span class="n">ophid</span> <span class="o">+</span> <span class="s1">&#39;&quot; }&#39;</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Task body: </span><span class="si">{</span><span class="n">body</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+                <span class="c1"># Execute</span>
+                <span class="k">if</span> <span class="n">priv</span><span class="p">:</span>
+                    <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/privilegedtask&#39;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/task&#39;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">id_only</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
+                        <span class="nb">id</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;result&#39;</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">error_msg</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;Failed to create task, &#39;</span> <span class="o">+</span>
+                                    <span class="sa">f</span><span class="s1">&#39;HTTP Code: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
+                        <span class="nb">id</span> <span class="o">=</span> <span class="kc">None</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="nb">id</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="n">response</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;No ophname or ophid supplied.&#39;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Requires either ophname or ophid to be defined&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Command: </span><span class="si">{</span><span class="n">command</span><span class="si">}</span><span class="s1"> is not a supported command&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">Command_Not_Supported</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Command: </span><span class="si">{</span><span class="n">command</span><span class="si">}</span><span class="s1"> not supported.&#39;</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="b1diagnostics.get_task_result"><a class="viewcode-back" href="../../b1diagnostics-class.html#bloxone.b1diagnostics.get_task_result">[docs]</a>    <span class="k">def</span> <span class="nf">get_task_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taskid</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get the results for specidied task</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            taskid(str): id of executed task</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object if id_only=False</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="s1">&#39;/task/&#39;</span> <span class="o">+</span> <span class="n">taskid</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span></div>
+        
+
+<div class="viewcode-block" id="b1diagnostics.download_task_results"><a class="viewcode-back" href="../../b1diagnostics-class.html#bloxone.b1diagnostics.download_task_results">[docs]</a>    <span class="k">def</span> <span class="nf">download_task_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taskid</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get the results for specidied task</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            taskid(str): id of executed task</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object if id_only=False</span>
+
+<span class="sd">        Note:</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="s1">&#39;/task/&#39;</span> <span class="o">+</span> <span class="n">taskid</span> <span class="o">+</span> <span class="s1">&#39;/download&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span></div></div>
+        
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Chris Marrison.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

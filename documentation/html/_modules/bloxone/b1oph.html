@@ -1,48 +1,56 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>bloxone.b1oph &mdash; Bloxone API Wrapper 0.7.0 documentation</title>
-  
-
-  
-  
-  
+  <title>bloxone.b1oph &mdash; Bloxone API Wrapper 0.7.4 documentation</title>
   
 
   
-
-  
-  
-    
-
-  
-
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
 
   
-  <script src="../../_static/js/modernizr.min.js"></script>
+  
 
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -56,7 +64,7 @@
             
             
               <div class="version">
-                0.7.0
+                0.7.4
               </div>
             
           
@@ -73,6 +81,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -97,6 +106,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -131,11 +141,13 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../../index.html">Docs</a> &raquo;</li>
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../index.html">Module code</a> &raquo;</li>
         
@@ -202,7 +214,7 @@
 <span class="kn">import</span> <span class="nn">json</span>
 
 <span class="c1"># ** Global Vars **</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.0&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.1&#39;</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison&#39;</span>
 <span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
 <span class="vm">__doc__</span> <span class="o">=</span> <span class="s1">&#39;https://python-bloxone.readthedocs.io/en/latest/&#39;</span>
@@ -399,6 +411,29 @@
         <span class="k">return</span> <span class="nb">id</span></div>
 
 
+<div class="viewcode-block" id="b1oph.get_ophid"><a class="viewcode-back" href="../../b1oph-class.html#bloxone.b1oph.get_ophid">[docs]</a>    <span class="k">def</span> <span class="nf">get_ophid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Return the ophid of named OPH</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            name (str): display name of OPH</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            ophid(str): ophid of the specified OPH</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="nb">filter</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;display_name==&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/on_prem_hosts&#39;</span><span class="p">,</span> <span class="n">_filter</span><span class="o">=</span><span class="nb">filter</span><span class="p">,</span> <span class="n">_fields</span><span class="o">=</span><span class="s2">&quot;display_name,ophid&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;result&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">ophid</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;result&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;ophid&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ophid</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ophid</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="k">return</span> <span class="n">ophid</span></div>
+
+
 <div class="viewcode-block" id="b1oph.oph_add_tag"><a class="viewcode-back" href="../../b1oph-class.html#bloxone.b1oph.oph_add_tag">[docs]</a>    <span class="k">def</span> <span class="nf">oph_add_tag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">tagname</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">tagvalue</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Method to add a tag to an existing On Prem Host</span>
@@ -452,75 +487,32 @@
                 <span class="c1"># Update object</span>
                 <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s1">&#39;/on_prem_hosts&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
 
-        <span class="k">return</span> <span class="n">response</span></div>
-
-
-<div class="viewcode-block" id="b1oph.auditlog"><a class="viewcode-back" href="../../b1oph-class.html#bloxone.b1oph.auditlog">[docs]</a>    <span class="k">def</span> <span class="nf">auditlog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Get the audit log</span>
-
-<span class="sd">        Parameters:</span>
-<span class="sd">            **params (dict): Generic API parameters</span>
-<span class="sd">        Returns:</span>
-<span class="sd">            audit_log (list); list of dict</span>
-<span class="sd">        &#39;&#39;&#39;</span>
-        <span class="c1"># Local variables</span>
-        <span class="n">audit_log</span> <span class="o">=</span> <span class="p">[]</span>
-
-        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/api/auditlog/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_version</span> <span class="o">+</span><span class="s1">&#39;/logs&#39;</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_params</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
-
-        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;URL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
-
-        <span class="c1"># Call API</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
-            <span class="k">if</span> <span class="s1">&#39;results&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="n">audit_log</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">audit_log</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-        
-        <span class="k">return</span> <span class="n">audit_log</span></div>
-
-
-<div class="viewcode-block" id="b1oph.get_full_auditlog"><a class="viewcode-back" href="../../b1oph-class.html#bloxone.b1oph.get_full_auditlog">[docs]</a>    <span class="k">def</span> <span class="nf">get_full_auditlog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        &#39;&#39;&#39;</span>
-        <span class="n">all_logs</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">limit</span> <span class="o">=</span> <span class="mi">1000</span>
-
-        <span class="n">audit_log</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auditlog</span><span class="p">(</span><span class="n">_offset</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">offset</span><span class="p">),</span> 
-                                  <span class="n">_limit</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">limit</span><span class="p">),</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
-        <span class="k">while</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">audit_log</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">audit_log</span><span class="p">):</span>
-            <span class="n">all_logs</span> <span class="o">+=</span> <span class="n">audit_log</span>
-            <span class="n">offset</span> <span class="o">+=</span> <span class="n">limit</span> <span class="o">+</span> <span class="mi">1</span>
-            <span class="n">audit_log</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auditlog</span><span class="p">(</span><span class="n">_offset</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">offset</span><span class="p">),</span> 
-                                      <span class="n">_limit</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">limit</span><span class="p">),</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">all_logs</span></div></div>
-
+        <span class="k">return</span> <span class="n">response</span></div></div>
 </pre></div>
 
            </div>
            
           </div>
           <footer>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2021, Chris Marrison
+        &#169; Copyright 2021, Chris Marrison.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -529,27 +521,16 @@
   </div>
   
 
-
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>
