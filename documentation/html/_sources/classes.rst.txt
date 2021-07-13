@@ -10,6 +10,7 @@ Classes Documentation
     b1authn-class
     b1bootstrap-class
     b1ddi-class
+    b1diagnostics-class
     b1cdc-class
     b1oph-class
     b1sw-class

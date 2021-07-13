@@ -152,6 +152,7 @@ in more detail in the following documents, as well as the usage of :mod:`utils`:
     :maxdepth: 4
 
     b1ddi-usage
+    b1diagnostics-usage
     b1td-usage
     b1tdc-usage
     b1tdep-usage

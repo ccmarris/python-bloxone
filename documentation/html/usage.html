@@ -1,50 +1,58 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Usage and Examples &mdash; Bloxone API Wrapper 0.7.0 documentation</title>
-  
-
-  
-  
-  
+  <title>Usage and Examples &mdash; Bloxone API Wrapper 0.7.4 documentation</title>
   
 
   
-
-  
-  
-    
-
-  
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Examples for class: b1ddi" href="b1ddi-usage.html" />
     <link rel="prev" title="Installation" href="installation.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -58,7 +66,7 @@
             
             
               <div class="version">
-                0.7.0
+                0.7.4
               </div>
             
           
@@ -75,6 +83,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -95,6 +104,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#generic-api-wrapper">Generic API Wrapper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="b1ddi-usage.html">Examples for class: b1ddi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="b1diagnostics-usage.html">b1diagnostics Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="b1td-usage.html">b1td Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="b1tdc-usage.html">b1tdc Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="b1tdep-usage.html">b1td Usage</a></li>
@@ -115,6 +125,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -149,18 +160,20 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Usage and Examples</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -200,54 +213,54 @@ class is <code class="xref py py-class docutils literal notranslate"><span class
 APIs.</p>
 <p>The specific API ‘trees’ are then split in to subclasses of <code class="xref py py-class docutils literal notranslate"><span class="pre">b1</span></code>:</p>
 <blockquote>
-<div><dl class="docutils">
-<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1platform</span></code></dt>
-<dd>Note, this has been deprecated and replaced by the b1oph class.
+<div><dl class="simple">
+<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1platform</span></code></dt><dd><p>Note, this has been deprecated and replaced by the b1oph class.
 It therefore inherits from b1oph for compatibility.
-This may be used for specific platform elements in the future.</dd>
-<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1ddi</span></code></dt>
-<dd>Access to the BloxOne DDI API with core methods for <em>get</em>, <em>create</em>,
+This may be used for specific platform elements in the future.</p>
+</dd>
+<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1ddi</span></code></dt><dd><p>Access to the BloxOne DDI API with core methods for <em>get</em>, <em>create</em>,
 <em>delete</em> and <em>update</em> in addition to specific task orientated helper
-methods.</dd>
-<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1td</span></code></dt>
-<dd>Access to the Infoblox TIDE API with a generic <em>get</em> method plus
-specific task orientated helper methods.</dd>
-<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1tdc</span></code></dt>
-<dd>Access to the BloxOne Threat Defence Cloud API with a generic
+methods.</p>
+</dd>
+<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1td</span></code></dt><dd><p>Access to the Infoblox TIDE API with a generic <em>get</em> method plus
+specific task orientated helper methods.</p>
+</dd>
+<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1tdc</span></code></dt><dd><p>Access to the BloxOne Threat Defence Cloud API with a generic
 <em>get</em>, <em>create</em>, <em>delete</em> methods plus specific task orientated
-helper methods.</dd>
-<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1tdep</span></code></dt>
-<dd>Access to the BloxOne Threat Defence Cloud API with a generic
+helper methods.</p>
+</dd>
+<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1tdep</span></code></dt><dd><p>Access to the BloxOne Threat Defence Cloud API with a generic
 <em>get</em>, <em>create</em>, <em>delete</em> and <em>update</em> methods plus specific task
-orientated helper methods.</dd>
-<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1tddfp</span></code></dt>
-<dd>Access to the BloxOne Threat Defence Cloud API with a generic
+orientated helper methods.</p>
+</dd>
+<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1tddfp</span></code></dt><dd><p>Access to the BloxOne Threat Defence Cloud API with a generic
 <em>get</em>, and <em>update</em> methods plus specific task orientated helper
-methods.</dd>
-<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1tdlad</span></code></dt>
-<dd>Access to the BloxOne Threat Defence Cloud API with a generic
-<em>get</em>, method.</dd>
-<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1anycast</span></code></dt>
-<dd>Access to the BloxOne Anycast API with a generic
-<em>get</em>, <em>create</em>, <em>delete</em> and <em>update</em> methods plus specific task</dd>
-<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1authn</span></code></dt>
-<dd>Access to the BloxOne On-Prem Authentication Service API with generic
-<em>get</em>, <em>create</em>, <em>delete</em> and <em>update</em> methods plus specific task</dd>
-<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1bootstrap</span></code></dt>
-<dd>Access to the BloxOne On-Prem Bootstrap App API with generic
-<em>get</em>, <em>create</em>, <em>delete</em> and <em>update</em> methods plus specific task</dd>
-<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1cdc</span></code></dt>
-<dd>Access to the BloxOne Data Connector API with generic
-<em>get</em>, <em>create</em>, <em>delete</em> and <em>update</em> methods plus specific task</dd>
-<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1oph</span></code></dt>
-<dd>Access to the BloxOne On Prem Host API with generic
-<em>get</em>, <em>create</em>, <em>delete</em> and <em>update</em> methods plus specific task</dd>
-<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1sw</span></code></dt>
-<dd>Access to the BloxOne Software Upgrade Scheduling API with generic
-<em>get</em>, <em>create</em>, <em>delete</em> and <em>update</em> methods plus specific task</dd>
-<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1ztp</span></code></dt>
-<dd>Access to the BloxOne On Prem Host Host Activation API with generic
-<em>get</em>, <em>create</em>, <em>delete</em> and <em>update</em> methods plus specific task</dd>
+methods.</p>
+</dd>
+<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1tdlad</span></code></dt><dd><p>Access to the BloxOne Threat Defence Cloud API with a generic
+<em>get</em>, method.</p>
+</dd>
+<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1anycast</span></code></dt><dd><p>Access to the BloxOne Anycast API with a generic
+<em>get</em>, <em>create</em>, <em>delete</em> and <em>update</em> methods plus specific task</p>
+</dd>
+<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1authn</span></code></dt><dd><p>Access to the BloxOne On-Prem Authentication Service API with generic
+<em>get</em>, <em>create</em>, <em>delete</em> and <em>update</em> methods plus specific task</p>
+</dd>
+<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1bootstrap</span></code></dt><dd><p>Access to the BloxOne On-Prem Bootstrap App API with generic
+<em>get</em>, <em>create</em>, <em>delete</em> and <em>update</em> methods plus specific task</p>
+</dd>
+<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1cdc</span></code></dt><dd><p>Access to the BloxOne Data Connector API with generic
+<em>get</em>, <em>create</em>, <em>delete</em> and <em>update</em> methods plus specific task</p>
+</dd>
+<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1oph</span></code></dt><dd><p>Access to the BloxOne On Prem Host API with generic
+<em>get</em>, <em>create</em>, <em>delete</em> and <em>update</em> methods plus specific task</p>
+</dd>
+<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1sw</span></code></dt><dd><p>Access to the BloxOne Software Upgrade Scheduling API with generic
+<em>get</em>, <em>create</em>, <em>delete</em> and <em>update</em> methods plus specific task</p>
+</dd>
+<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1ztp</span></code></dt><dd><p>Access to the BloxOne On Prem Host Host Activation API with generic
+<em>get</em>, <em>create</em>, <em>delete</em> and <em>update</em> methods plus specific task</p>
+</dd>
 </dl>
 </div></blockquote>
 <p>In addition to the API interfaces a set of data handling functions is provided
@@ -270,8 +283,8 @@ specific parameters, please see the <a class="reference internal" href="classes.
 <p>For debugging purposes, the <code class="xref py py-mod docutils literal notranslate"><span class="pre">bloxone</span></code> module supports logging using
 <code class="xref py py-mod docutils literal notranslate"><span class="pre">logging</span></code> using DEBUG.</p>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">I have attempted to keep debugging clean, however, there is still potential
+<p class="admonition-title">Warning</p>
+<p>I have attempted to keep debugging clean, however, there is still potential
 for the debug output to produce full data dumps of API responses.</p>
 </div>
 </div>
@@ -305,6 +318,10 @@ in more detail in the following documents, as well as the usage of <code class="
 <li class="toctree-l1"><a class="reference internal" href="b1ddi-usage.html">Examples for class: b1ddi</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="b1ddi-usage.html#basic-usage">Basic Usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1ddi-usage.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="b1diagnostics-usage.html">b1diagnostics Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="b1diagnostics-usage.html#examples">Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="b1td-usage.html">b1td Usage</a><ul>
@@ -341,29 +358,29 @@ using using the ‘swagger’ path for the appropriate object.</p>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="b1ddi-usage.html" class="btn btn-neutral float-right" title="Examples for class: b1ddi" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="installation.html" class="btn btn-neutral" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="b1ddi-usage.html" class="btn btn-neutral float-right" title="Examples for class: b1ddi" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2021, Chris Marrison
+        &#169; Copyright 2021, Chris Marrison.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -372,27 +389,16 @@ using using the ‘swagger’ path for the appropriate object.</p>
   </div>
   
 
-
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-        <script type="text/javascript" src="_static/language_data.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

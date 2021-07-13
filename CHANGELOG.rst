@@ -2,6 +2,7 @@
 ChangeLog
 *********
 
+|   20210713	v0.7.4	 Methods and docs for b1diagnostics class
 |   20210709	v0.7.3	 Added get_ophid() method to b1oph class
 |                        Updated bootstap-app_url
 |   20210621	v0.7.2	 Fixed issue with get_zone_child() method in b1ddi
