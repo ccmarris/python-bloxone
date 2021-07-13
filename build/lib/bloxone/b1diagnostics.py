@@ -7,7 +7,7 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20210615
+ Date Last Updated: 20210713
 
  Todo:
 
@@ -39,6 +39,7 @@
 
 ------------------------------------------------------------------------
 '''
+from bloxone.b1oph import b1oph
 import bloxone
 import logging
 import requests
@@ -52,10 +53,52 @@ __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
 __license__ = 'BSD'
 
 
+class APIError_Unable_To_Retrieve_Commands(Exception):
+    '''
+    Exception for API call in __init__
+    '''
+    pass
+
+
+class Command_Not_Supported(Exception):
+    '''
+    Exception for API call in __init__
+    '''
+    pass
+
+
+class Unknown_Argument(Exception):
+    '''
+    Exception for API call in __init__
+    '''
+    pass
+
+
 class b1diagnostics(bloxone.b1):
     '''
     Class to simplify access to the BloxOne Platform APIs
     '''
+
+    def __init__(self, cfg_file='config.ini'):
+        '''
+        Call base __init__ and extend
+        '''
+        super().__init__(cfg_file)
+
+        # Instantiate b1oph class as need access to b1oph.get_ophid()
+        self.b1_oph = b1oph(cfg_file)
+
+        # Automatically get list of remote_commands
+        try:
+            response = self.get_remote_commands()
+            self.commands = response.json()['results']
+        except:
+            logging.error(f'Response code: {response.status_code}')
+            logging.error(f'Response body: {response.text}')
+            raise APIError_Unable_To_Retrieve_Commands()
+        
+        return
+
 
     def get(self, objpath, id="", action="", **params):
         '''
@@ -81,7 +124,7 @@ class b1diagnostics(bloxone.b1):
         return response
 
         
-    def create(self, objpath, body=""):
+    def post(self, objpath, body=""):
         '''
         Generic create object wrapper for platform objects
 
@@ -196,6 +239,11 @@ class b1diagnostics(bloxone.b1):
 
     # Helper Methods
 
+    '''
+    def get_ophid(self):
+        return ophid
+    '''
+
     def get_remote_commands(self):
         '''
         Get set of possible remote commands and parameters
@@ -206,11 +254,172 @@ class b1diagnostics(bloxone.b1):
         return self.get('/remotecommands')
 
 
-    def execute_task(self, ophid='', cmd=''):
+    def is_command(self, command):
         '''
-        Execute remote command on an OPH
+        Check whether command is valid
+
+        Parameters:
+            command(str): command to check
+        
+        Returns:
+            boolean
+        '''
+        cmds = []
+        for cmd in self.commands:
+            cmds.append(cmd['name'])
+        if command in cmds:
+            status = True
+        else:
+            status = False
+        return status
+
+    
+    def get_args(self, command):
+        '''
+        Check the args for a command
+
+        Parameters:
+            command(str): Command to retrieve argyments for
 
         Returns:
-            response object: Requests response object
+            Disctionary of arguments or empty dictionary if none.
+        
+        Raises:
+            Command_Not_Supported Exception if command is not available
         '''
-        return
+        args = {}
+        if self.is_command(command):
+            for cmd in self.commands:
+                if cmd['name'] == command:
+                    if 'args' in cmd.keys():
+                        args = cmd['args']
+                    else:
+                        args = {}
+                    break
+        else:
+            raise Command_Not_Supported(f'Command: {command} not supported.')
+        
+        return args
+
+
+
+    def execute_task(self, command, args={}, ophname=None, 
+                     ophid=None, id_only=True, priv=False):
+        '''
+        Execute remote command on an OPH
+    
+        Parameters:
+            cmd(str): Command to execute
+            args(dict): Command arguments
+            ophname(str): Name of OPH to execute command on (or supply ophid)
+            ophid(str): (Optional) ophid of OPH for cmd execution
+            id_only(bool): default of True
+            priv(bool): Run privileged task, default of False
+
+        Returns:
+            id string of task if id_only=True (defult)
+            response object: Requests response object if id_only=False
+
+        Raises:
+            TypeError Exception if required options not supplied 
+            KeyErro Exception if ophname is not found (and ophid not supplied)
+            Command_Not_Supported Exception if command is not valid
+            Unknown_Argument Exception if arguments do not match required
+        
+        Todo:
+            [ ] Enhance logic to run /priviledgetask or /task
+            Awaiting API enhancement to determine priv versus non-priv
+            [ ] Enhance args check for required arguments
+            Awaiting API enhancement for arg to determine required versus 
+            optional arguments
+        '''
+        # Check command is valid
+        if self.is_command(command):
+            # If ophid supplied then get this
+            if ophid or ophname: 
+                if not ophid:
+                    logging.debug(f'Getting ophid for OPH: {ophname}')
+                    ophid = self.b1_oph.get_ophid(name=ophname)
+                    if not ophid:
+                        logging.error(f'OPH not found.')
+                        raise KeyError(f'OPH {ophname} not found')
+                logging.debug(f'OPHID: {ophid}')
+
+                # Check args
+                arglist = self.get_args(command)
+                for arg in args.keys():
+                    if arg not in arglist.keys():
+                        raise Unknown_Argument(f'Argument: {arg} not recognised')
+                    s_type = type(args[arg]) 
+                    ex_type = type(arglist[arg])
+                    if s_type != ex_type:
+                        raise TypeError(f'Supplied argument type {s_type}' +
+                            f' does not match expected type {ex_type}')
+
+                # Create command body
+                body = '{ "cmd": '
+                if len(args) > 0:
+                    body = body + '{ "args": ' + json.dumps(args) + ', '
+                else:
+                    body = body + '{ '
+                body = body + '"name": "' + command + '" }, '
+                body = body + '"ophid": "' + ophid + '" }'
+                logging.debug(f'Task body: {body}')
+
+                # Execute
+                if priv:
+                    response = self.post('/privilegedtask', body=body)
+                else:
+                    response = self.post('/task', body=body)
+                if id_only:
+                    if response.status_code in self.return_codes_ok:
+                        id = response.json()['result']['id']
+                    else:
+                        error_msg = ( 'Failed to create task, ' +
+                                    f'HTTP Code: {response.status_code}')
+                        logging.error(error_msg)
+                        id = None
+                    result = id
+                else:
+                    result = response
+
+            else:
+                logging.error('No ophname or ophid supplied.')
+                raise TypeError('Requires either ophname or ophid to be defined')
+        else:
+            logging.error(f'Command: {command} is not a supported command')
+            raise Command_Not_Supported(f'Command: {command} not supported.')
+        
+        return result
+
+
+    def get_task_result(self, taskid):
+        '''
+        Get the results for specidied task
+
+        Parameters:
+            taskid(str): id of executed task
+        
+        Returns:
+            response object: Requests response object if id_only=False
+        '''
+        id = '/task/' + taskid
+        return self.get(id)
+        
+
+    def download_task_results(self, taskid):
+        '''
+        Get the results for specidied task
+
+        Parameters:
+            taskid(str): id of executed task
+        
+        Returns:
+            response object: Requests response object if id_only=False
+
+        Note:
+
+        '''
+        id = '/task/' + taskid + '/download'
+        return self.get(id)
+        

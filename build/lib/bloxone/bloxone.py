@@ -7,7 +7,7 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20210615
+ Date Last Updated: 20210713
 
  Todo:
 
@@ -49,7 +49,7 @@ import re
 import json
 
 # ** Global Vars **
-__version__ = '0.7.2'
+__version__ = '0.7.4'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -197,7 +197,7 @@ class b1:
 
         self.anycast_url = self.base_url + '/api/anycast/' + self.cfg['api_version']
         self.authn_url = self.base_url + '/api/authn/' + self.cfg['api_version']
-        self.bootstrap_url = self.base_url + '/api/atlas-bootstrap-app/' + self.cfg['api_version']
+        self.bootstrap_url = self.base_url + '/bootstrap-app/' + self.cfg['api_version']
         self.cdc_url = self.base_url + '/api/cdc-flow/' + self.api_version
         self.diagnostics_url = self.base_url + '/diagnostic-service/' + self.api_version
         self.ddi_url = self.base_url + '/api/ddi/' + self.api_version
