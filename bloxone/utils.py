@@ -13,7 +13,7 @@
 
  Author: Chris Marrison
 
- Date Last Updated: 20210224
+ Date Last Updated: 20210714
 
  Todo:
 
@@ -52,10 +52,7 @@ __author_email__ = 'chris@infoblox.com'
 import logging
 import os
 import re
-import configparser
-import datetime
 import ipaddress
-import requests
 import urllib.parse
 import sqlite3
 
@@ -465,10 +462,3 @@ def db_query(db_cursor, table, query_type, query_data, *flags):
     rows = db_cursor.fetchall()
 
     return rows
-
-
-def encode_dhcp_option(option, sub_opt_defs={}, padding=False):
-    '''
-    '''
-
-    return encoded
