@@ -45,7 +45,7 @@ import requests
 import json
 
 # ** Global Vars **
-__version__ = '0.1.0'
+__version__ = '0.1.5'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -240,6 +240,29 @@ class b1oph(bloxone.b1):
         logging.debug("id: {}".format(id)) 
 
         return id
+
+
+    def get_ophid(self, name=""):
+        '''
+        Return the ophid of named OPH
+
+        Parameters:
+            name (str): display name of OPH
+        
+        Returns:
+            ophid(str): ophid of the specified OPH
+        '''
+        filter = f'display_name=="{name}"'
+        response = self.get('/on_prem_hosts', _filter=filter, _fields="display_name,ophid")
+        if response.status_code in self.return_codes_ok:
+            if 'result' in response.json().keys():
+                ophid = response.json()['result'][0]['ophid']
+            else:
+                ophid = ''
+        else:
+            ophid = ''
+
+        return ophid
 
 
     def oph_add_tag(self, id="", tagname="", tagvalue=""):

@@ -45,7 +45,7 @@ import requests
 import json
 
 # ** Global Vars **
-__version__ = '0.1.1'
+__version__ = '0.1.5'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
