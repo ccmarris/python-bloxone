@@ -121,6 +121,7 @@ def validate_fqdn(hostname, regex):
 
     Parameters:
         hostname (str): fqdn as a string
+        regex (obj): Compiled regex for hostnames
 
     Returns:
         bool: Return True for valid and False otherwise
