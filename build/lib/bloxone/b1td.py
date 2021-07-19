@@ -9,7 +9,7 @@
 
  Author: Chris Marrison
 
- Date Last Updated: 20210215
+ Date Last Updated: 20210713
 
  Todo:
 
@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.2.4'
+__version__ = '0.2.5'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -59,7 +59,7 @@ class b1td(bloxone.b1):
     '''
 
     # Generic Methods
-    def get(self, objpath, action="", **params):
+    def get(self, objpath, **params):
         '''
         Generic get object wrapper for TIDE data objects
 
@@ -248,6 +248,7 @@ class b1td(bloxone.b1):
 
         return response
 
+
     def tideactivefeed(self, 
                        datatype, 
                        profile="", 
@@ -288,6 +289,49 @@ class b1td(bloxone.b1):
         response = self._apiget(url)
 
         return response
+
+
+    def tidedatafeed(self, 
+                    datatype, 
+                    profile="", 
+                    threatclass="",
+                    threatproperty="",
+                    **params ):
+        '''
+        Bulk threat intel download from Infoblox TIDE 
+        for specified datatype. Please use wisely.
+
+        Parameters:
+            datatype (str): "host", "ip" or "url"
+            profile (str, optional): Data provider
+            threatclass (str, optional): tide data class
+            threatproperty (str, optional): tide data property
+
+        Returns:
+            response object: Requests response object
+        '''
+        objpath = '/data/threats/'
+
+        # Build URL
+        url = self.tide_url + objpath
+        url = url + datatype 
+        if profile or threatclass or threatproperty:
+            url = url + '?'
+            if profile:
+                url = url + '&profile=' + profile
+            if threatclass:
+                url = url + '&class=' + threatclass
+            if threatproperty:
+                url = url + '&property=' + threatproperty
+            url = self._add_params(url, first_param=False, **params) 
+        else:
+            url = self._add_params(url, **params) 
+
+        # Make API Call
+        response = self._apiget(url)
+
+        return response
+
 
     # ** Dossier Methods **
 
