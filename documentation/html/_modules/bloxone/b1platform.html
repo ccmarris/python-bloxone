@@ -7,14 +7,12 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>bloxone.b1platform &mdash; Bloxone API Wrapper 0.7.4 documentation</title>
+  <title>bloxone.b1platform &mdash; Bloxone API Wrapper 0.7.6 documentation</title>
   
 
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
 
   
   
@@ -31,7 +29,6 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -64,7 +61,7 @@
             
             
               <div class="version">
-                0.7.4
+                0.7.6
               </div>
             
           
@@ -176,7 +173,7 @@
 
 <span class="sd"> Module to provide class hierachy to simplify access to the BloxOne APIs</span>
 
-<span class="sd"> Date Last Updated: 20210215</span>
+<span class="sd"> Date Last Updated: 20210719</span>
 
 <span class="sd"> Todo:</span>
 
@@ -214,7 +211,7 @@
 <span class="kn">import</span> <span class="nn">json</span>
 
 <span class="c1"># ** Global Vars **</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.7.1&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.7.2&#39;</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison&#39;</span>
 <span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
 <span class="vm">__doc__</span> <span class="o">=</span> <span class="s1">&#39;https://python-bloxone.readthedocs.io/en/latest/&#39;</span>
@@ -297,6 +294,56 @@
         <span class="k">return</span> <span class="n">response</span></div>
 
 
+<div class="viewcode-block" id="b1platform.get_current_user_accounts"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.b1platform.get_current_user_accounts">[docs]</a>    <span class="k">def</span> <span class="nf">get_current_user_accounts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get Current Users Accounts Data</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            **params (dict): Generic API parameters</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Build URL</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/v2/current_user/accounts&#39;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_params</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;URL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+
+        <span class="c1"># Make API Call</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="b1platform.get_current_tenant"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.b1platform.get_current_tenant">[docs]</a>    <span class="k">def</span> <span class="nf">get_current_tenant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get name of current tenant</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            **params (dict): Generic API parameters</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            string containing name of tenant or &#39;&#39; on failure</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">tenant_name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="n">current_user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_current_user</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
+            <span class="n">user_id</span> <span class="o">=</span> <span class="n">current_user</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;result&#39;</span><span class="p">][</span><span class="s1">&#39;account_id&#39;</span><span class="p">]</span>
+            <span class="n">user_accounts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_current_user_accounts</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">account</span> <span class="ow">in</span> <span class="n">user_accounts</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;results&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">user_id</span> <span class="o">==</span> <span class="n">account</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]:</span>
+                    <span class="n">tenant_name</span> <span class="o">=</span> <span class="n">account</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+                    <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Failed to get account details API reponded with&#39;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;HTTP code: </span><span class="si">{</span><span class="n">current_user</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s1"> &#39;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Response: </span><span class="si">{</span><span class="n">current_user</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">tenant_name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="n">tenant_name</span></div>
+
+    
 <div class="viewcode-block" id="b1platform.get_users"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.b1platform.get_users">[docs]</a>    <span class="k">def</span> <span class="nf">get_users</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Get User Data</span>

@@ -31,11 +31,6 @@ APIs.
 
 The specific API 'trees' are then split in to subclasses of :class:`b1`:
 
-    :class:`b1platform` 
-        Note, this has been deprecated and replaced by the b1oph class.
-        It therefore inherits from b1oph for compatibility.
-        This may be used for specific platform elements in the future.
-
     :class:`b1ddi` 
         Access to the BloxOne DDI API with core methods for *get*, *create*,
         *delete* and *update* in addition to specific task orientated helper
@@ -80,9 +75,15 @@ The specific API 'trees' are then split in to subclasses of :class:`b1`:
         Access to the BloxOne Data Connector API with generic
         *get*, *create*, *delete* and *update* methods plus specific task 
 
+    :class:`b1diagnostics` 
+        Allows the user to execute remote commands on an OPH via the API
+
     :class:`b1oph` 
         Access to the BloxOne On Prem Host API with generic
         *get*, *create*, *delete* and *update* methods plus specific task 
+
+    :class:`b1platform` 
+        Methods to provide access to users and audit log information
 
     :class:`b1sw` 
         Access to the BloxOne Software Upgrade Scheduling API with generic
@@ -158,6 +159,8 @@ in more detail in the following documents, as well as the usage of :mod:`utils`:
     b1tdep-usage
     b1tddfp-usage
     b1tdlad-usage
+    b1oph-usage
+    b1platform-usage
     utils-usage
 
 The remaining classes generally provide generic interfaces for *get*, *create*, *update* and *delete*.

@@ -7,7 +7,7 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20210215
+ Date Last Updated: 20210719
 
  Todo:
 
@@ -45,7 +45,7 @@ import requests
 import json
 
 # ** Global Vars **
-__version__ = '0.7.1'
+__version__ = '0.7.2'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -128,6 +128,56 @@ class b1platform(bloxone.b1oph):
         return response
 
 
+    def get_current_user_accounts(self, **params):
+        '''
+        Get Current Users Accounts Data
+
+        Parameters:
+            **params (dict): Generic API parameters
+        
+        Returns:
+            response object: Requests response object
+        '''
+        # Build URL
+        url = self.base_url + '/v2/current_user/accounts'
+        url = self._add_params(url, **params)
+        logging.debug("URL: {}".format(url))
+
+        # Make API Call
+        response = self._apiget(url)
+
+        return response
+
+
+    def get_current_tenant(self, **params):
+        '''
+        Get name of current tenant
+
+        Parameters:
+            **params (dict): Generic API parameters
+        
+        Returns:
+            string containing name of tenant or '' on failure
+        '''
+        tenant_name = ''
+
+        current_user = self.get_current_user()
+        if current_user.status_code in self.return_codes_ok:
+            user_id = current_user.json()['result']['account_id']
+            user_accounts = self.get_current_user_accounts()
+            for account in user_accounts.json()['results']:
+                if user_id == account['id']:
+                    tenant_name = account['name']
+                    break
+        else:
+            logging.error('Failed to get account details API reponded with')
+            logging.error(f'HTTP code: {current_user.status_code} ')
+            logging.error(f'Response: {current_user.text}')
+            tenant_name = ''
+        
+        return tenant_name
+
+    
     def get_users(self, **params):
         '''
         Get User Data

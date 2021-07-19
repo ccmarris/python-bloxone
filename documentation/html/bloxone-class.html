@@ -7,14 +7,12 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>bloxone.b1 Class &mdash; Bloxone API Wrapper 0.7.4 documentation</title>
+  <title>bloxone.b1 Class &mdash; Bloxone API Wrapper 0.7.6 documentation</title>
   
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
 
   
   
@@ -31,7 +29,6 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
@@ -66,7 +63,7 @@
             
             
               <div class="version">
-                0.7.4
+                0.7.6
               </div>
             
           
@@ -104,8 +101,10 @@
 <li class="toctree-l2"><a class="reference internal" href="b1authn-class.html">b1authn Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1bootstrap-class.html">b1bootstrap Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1ddi-class.html">b1ddi Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="b1diagnostics-class.html">b1diagnostics Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1cdc-class.html">b1cdc Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1oph-class.html">b1oph Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="b1platform-class.html">b1platform Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1sw-class.html">b1dw Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1ztp-class.html">b1ztp Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1td-class.html">b1td Class</a></li>
@@ -191,8 +190,8 @@
   <div class="section" id="bloxone-b1-class">
 <h1>bloxone.b1 Class<a class="headerlink" href="#bloxone-b1-class" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="bloxone.b1">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">bloxone.</span></span><span class="sig-name descname"><span class="pre">b1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'config.ini'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1" title="Permalink to this definition">¶</a></dt>
+<dt id="bloxone.b1">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">bloxone.</span></code><code class="sig-name descname"><span class="pre">b1</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'config.ini'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parent Class to simplify access to the BloxOne APIs for subclasses
 Can also be used to genericallly access the API</p>
 <dl class="field-list simple">
@@ -206,8 +205,8 @@ Can also be used to genericallly access the API</p>
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="bloxone.b1.create">
-<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1.create" title="Permalink to this definition">¶</a></dt>
+<dt id="bloxone.b1.create">
+<code class="sig-name descname"><span class="pre">create</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1.create" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic create object wrapper</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -226,8 +225,8 @@ Can also be used to genericallly access the API</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="bloxone.b1.delete">
-<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1.delete" title="Permalink to this definition">¶</a></dt>
+<dt id="bloxone.b1.delete">
+<code class="sig-name descname"><span class="pre">delete</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1.delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic delete object wrapper</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -246,8 +245,8 @@ Can also be used to genericallly access the API</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="bloxone.b1.get">
-<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1.get" title="Permalink to this definition">¶</a></dt>
+<dt id="bloxone.b1.get">
+<code class="sig-name descname"><span class="pre">get</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic get object wrapper</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -267,8 +266,8 @@ Can also be used to genericallly access the API</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="bloxone.b1.replace">
-<span class="sig-name descname"><span class="pre">replace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1.replace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1.replace" title="Permalink to this definition">¶</a></dt>
+<dt id="bloxone.b1.replace">
+<code class="sig-name descname"><span class="pre">replace</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1.replace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1.replace" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic create object wrapper</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -287,8 +286,8 @@ Can also be used to genericallly access the API</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="bloxone.b1.update">
-<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1.update" title="Permalink to this definition">¶</a></dt>
+<dt id="bloxone.b1.update">
+<code class="sig-name descname"><span class="pre">update</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/bloxone.html#b1.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic create object wrapper</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -309,32 +308,32 @@ Can also be used to genericallly access the API</p>
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="bloxone.IniFileSectionError">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">bloxone.</span></span><span class="sig-name descname"><span class="pre">IniFileSectionError</span></span><a class="reference internal" href="_modules/bloxone/bloxone.html#IniFileSectionError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.IniFileSectionError" title="Permalink to this definition">¶</a></dt>
+<dt id="bloxone.IniFileSectionError">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">bloxone.</span></code><code class="sig-name descname"><span class="pre">IniFileSectionError</span></code><a class="reference internal" href="_modules/bloxone/bloxone.html#IniFileSectionError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.IniFileSectionError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception for missing section in ini file</p>
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="bloxone.IniFileKeyError">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">bloxone.</span></span><span class="sig-name descname"><span class="pre">IniFileKeyError</span></span><a class="reference internal" href="_modules/bloxone/bloxone.html#IniFileKeyError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.IniFileKeyError" title="Permalink to this definition">¶</a></dt>
+<dt id="bloxone.IniFileKeyError">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">bloxone.</span></code><code class="sig-name descname"><span class="pre">IniFileKeyError</span></code><a class="reference internal" href="_modules/bloxone/bloxone.html#IniFileKeyError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.IniFileKeyError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception for missing key in ini file</p>
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="bloxone.APIKeyFormatError">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">bloxone.</span></span><span class="sig-name descname"><span class="pre">APIKeyFormatError</span></span><a class="reference internal" href="_modules/bloxone/bloxone.html#APIKeyFormatError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.APIKeyFormatError" title="Permalink to this definition">¶</a></dt>
+<dt id="bloxone.APIKeyFormatError">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">bloxone.</span></code><code class="sig-name descname"><span class="pre">APIKeyFormatError</span></code><a class="reference internal" href="_modules/bloxone/bloxone.html#APIKeyFormatError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.APIKeyFormatError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception for API key format mismatch</p>
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="bloxone.b1platform">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">bloxone.</span></span><span class="sig-name descname"><span class="pre">b1platform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'config.ini'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform" title="Permalink to this definition">¶</a></dt>
+<dt id="bloxone.b1platform">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">bloxone.</span></code><code class="sig-name descname"><span class="pre">b1platform</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'config.ini'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class now reused for BloxOne Platform Methods, e.g. Audit Log
 Management of BloxOne On Prem Hosts is via the b1oph Class
 b1oph class  is inherited here for compatibility</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="bloxone.b1platform.audit_users">
-<span class="sig-name descname"><span class="pre">audit_users</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domains</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.audit_users"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.audit_users" title="Permalink to this definition">¶</a></dt>
+<dt id="bloxone.b1platform.audit_users">
+<code class="sig-name descname"><span class="pre">audit_users</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domains</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.audit_users"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.audit_users" title="Permalink to this definition">¶</a></dt>
 <dd><p>Audit User Data for non compliant email domains</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -347,8 +346,8 @@ b1oph class  is inherited here for compatibility</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="bloxone.b1platform.auditlog">
-<span class="sig-name descname"><span class="pre">auditlog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.auditlog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.auditlog" title="Permalink to this definition">¶</a></dt>
+<dt id="bloxone.b1platform.auditlog">
+<code class="sig-name descname"><span class="pre">auditlog</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.auditlog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.auditlog" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the audit log</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -361,8 +360,22 @@ b1oph class  is inherited here for compatibility</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="bloxone.b1platform.get_current_user">
-<span class="sig-name descname"><span class="pre">get_current_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.get_current_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.get_current_user" title="Permalink to this definition">¶</a></dt>
+<dt id="bloxone.b1platform.get_current_tenant">
+<code class="sig-name descname"><span class="pre">get_current_tenant</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.get_current_tenant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.get_current_tenant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get name of current tenant</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**params</strong> (<em>dict</em>) – Generic API parameters</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>string containing name of tenant or ‘’ on failure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="bloxone.b1platform.get_current_user">
+<code class="sig-name descname"><span class="pre">get_current_user</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.get_current_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.get_current_user" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get Current User Data</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -378,13 +391,30 @@ b1oph class  is inherited here for compatibility</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="bloxone.b1platform.get_full_auditlog">
-<span class="sig-name descname"><span class="pre">get_full_auditlog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.get_full_auditlog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.get_full_auditlog" title="Permalink to this definition">¶</a></dt>
+<dt id="bloxone.b1platform.get_current_user_accounts">
+<code class="sig-name descname"><span class="pre">get_current_user_accounts</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.get_current_user_accounts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.get_current_user_accounts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Current Users Accounts Data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**params</strong> (<em>dict</em>) – Generic API parameters</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Requests response object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>response object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="bloxone.b1platform.get_full_auditlog">
+<code class="sig-name descname"><span class="pre">get_full_auditlog</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.get_full_auditlog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.get_full_auditlog" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="bloxone.b1platform.get_users">
-<span class="sig-name descname"><span class="pre">get_users</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.get_users"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.get_users" title="Permalink to this definition">¶</a></dt>
+<dt id="bloxone.b1platform.get_users">
+<code class="sig-name descname"><span class="pre">get_users</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.get_users"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.get_users" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get User Data</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

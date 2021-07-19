@@ -7,14 +7,12 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>bloxone.utils &mdash; Bloxone API Wrapper 0.7.4 documentation</title>
+  <title>bloxone.utils &mdash; Bloxone API Wrapper 0.7.6 documentation</title>
   
 
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
 
   
   
@@ -31,7 +29,6 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -64,7 +61,7 @@
             
             
               <div class="version">
-                0.7.4
+                0.7.6
               </div>
             
           
@@ -182,7 +179,7 @@
 
 <span class="sd"> Author: Chris Marrison</span>
 
-<span class="sd"> Date Last Updated: 20210224</span>
+<span class="sd"> Date Last Updated: 20210714</span>
 
 <span class="sd"> Todo:</span>
 
@@ -221,10 +218,7 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">configparser</span>
-<span class="kn">import</span> <span class="nn">datetime</span>
 <span class="kn">import</span> <span class="nn">ipaddress</span>
-<span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">urllib.parse</span>
 <span class="kn">import</span> <span class="nn">sqlite3</span>
 
@@ -293,6 +287,7 @@
 
 <span class="sd">    Parameters:</span>
 <span class="sd">        hostname (str): fqdn as a string</span>
+<span class="sd">        regex (obj): Compiled regex for hostnames</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        bool: Return True for valid and False otherwise</span>
@@ -634,13 +629,6 @@
     <span class="n">rows</span> <span class="o">=</span> <span class="n">db_cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">rows</span></div>
-
-
-<div class="viewcode-block" id="encode_dhcp_option"><a class="viewcode-back" href="../../utils.html#bloxone.utils.encode_dhcp_option">[docs]</a><span class="k">def</span> <span class="nf">encode_dhcp_option</span><span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="n">sub_opt_defs</span><span class="o">=</span><span class="p">{},</span> <span class="n">padding</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-
-    <span class="k">return</span> <span class="n">encoded</span></div>
 </pre></div>
 
            </div>
