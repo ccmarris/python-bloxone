@@ -7,14 +7,12 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Usage and Examples &mdash; Bloxone API Wrapper 0.7.4 documentation</title>
+  <title>Usage and Examples &mdash; Bloxone API Wrapper 0.7.6 documentation</title>
   
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
 
   
   
@@ -31,7 +29,6 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
@@ -66,7 +63,7 @@
             
             
               <div class="version">
-                0.7.4
+                0.7.6
               </div>
             
           
@@ -110,6 +107,8 @@
 <li class="toctree-l3"><a class="reference internal" href="b1tdep-usage.html">b1td Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="b1tddfp-usage.html">b1tddfp Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="b1tdlad-usage.html">b1tdlad Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="b1oph-usage.html">b1oph Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="b1platform-usage.html">b1platform Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="utils-usage.html">Additional Utilities</a></li>
 </ul>
 </li>
@@ -214,10 +213,6 @@ APIs.</p>
 <p>The specific API ‘trees’ are then split in to subclasses of <code class="xref py py-class docutils literal notranslate"><span class="pre">b1</span></code>:</p>
 <blockquote>
 <div><dl class="simple">
-<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1platform</span></code></dt><dd><p>Note, this has been deprecated and replaced by the b1oph class.
-It therefore inherits from b1oph for compatibility.
-This may be used for specific platform elements in the future.</p>
-</dd>
 <dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1ddi</span></code></dt><dd><p>Access to the BloxOne DDI API with core methods for <em>get</em>, <em>create</em>,
 <em>delete</em> and <em>update</em> in addition to specific task orientated helper
 methods.</p>
@@ -252,8 +247,12 @@ methods.</p>
 <dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1cdc</span></code></dt><dd><p>Access to the BloxOne Data Connector API with generic
 <em>get</em>, <em>create</em>, <em>delete</em> and <em>update</em> methods plus specific task</p>
 </dd>
+<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1diagnostics</span></code></dt><dd><p>Allows the user to execute remote commands on an OPH via the API</p>
+</dd>
 <dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1oph</span></code></dt><dd><p>Access to the BloxOne On Prem Host API with generic
 <em>get</em>, <em>create</em>, <em>delete</em> and <em>update</em> methods plus specific task</p>
+</dd>
+<dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1platform</span></code></dt><dd><p>Methods to provide access to users and audit log information</p>
 </dd>
 <dt><code class="xref py py-class docutils literal notranslate"><span class="pre">b1sw</span></code></dt><dd><p>Access to the BloxOne Software Upgrade Scheduling API with generic
 <em>get</em>, <em>create</em>, <em>delete</em> and <em>update</em> methods plus specific task</p>
@@ -342,6 +341,14 @@ in more detail in the following documents, as well as the usage of <code class="
 </li>
 <li class="toctree-l1"><a class="reference internal" href="b1tdlad-usage.html">b1tdlad Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="b1tdlad-usage.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="b1oph-usage.html">b1oph Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="b1oph-usage.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="b1platform-usage.html">b1platform Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="b1platform-usage.html#examples">Examples</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="utils-usage.html">Additional Utilities</a></li>

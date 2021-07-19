@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>b1platform Class &mdash; Bloxone API Wrapper 0.7.6 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="b1dw Class" href="b1sw-class.html" />
+    <link rel="prev" title="b1oph Class" href="b1oph-class.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Bloxone API Wrapper
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage and Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="classes.html">Classes Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bloxone-class.html">bloxone.b1 Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="b1anycast-class.html">b1anycast Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="b1authn-class.html">b1authn Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="b1bootstrap-class.html">b1bootstrap Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="b1ddi-class.html">b1ddi Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="b1diagnostics-class.html">b1diagnostics Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="b1cdc-class.html">b1cdc Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="b1oph-class.html">b1oph Class</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">b1platform Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="b1sw-class.html">b1dw Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="b1ztp-class.html">b1ztp Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="b1td-class.html">b1td Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="b1tdc-class.html">b1tdc Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="b1tdep-class.html">b1tdep Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="b1tddfp-class.html">b1tddfp Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="b1tdlad-class.html">b1tdlad Class</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Additional Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Source Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version_history.html">ChangeLog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ackowledgements.html">Authors and acknowledgment</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Bloxone API Wrapper</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="classes.html">Classes Documentation</a> &raquo;</li>
+        
+      <li>b1platform Class</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/b1platform-class.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="b1platform-class">
+<h1>b1platform Class<a class="headerlink" href="#b1platform-class" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="bloxone.b1platform">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">bloxone.</span></code><code class="sig-name descname"><span class="pre">b1platform</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'config.ini'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class now reused for BloxOne Platform Methods, e.g. Audit Log
+Management of BloxOne On Prem Hosts is via the b1oph Class
+b1oph class  is inherited here for compatibility</p>
+<dl class="py method">
+<dt id="bloxone.b1platform.audit_users">
+<code class="sig-name descname"><span class="pre">audit_users</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domains</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.audit_users"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.audit_users" title="Permalink to this definition">¶</a></dt>
+<dd><p>Audit User Data for non compliant email domains</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>domain</strong> (<em>list</em>) – List of valid email domains</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of User Data (json)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="bloxone.b1platform.auditlog">
+<code class="sig-name descname"><span class="pre">auditlog</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.auditlog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.auditlog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the audit log</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**params</strong> (<em>dict</em>) – Generic API parameters</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>audit_log (list); list of dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="bloxone.b1platform.get_current_tenant">
+<code class="sig-name descname"><span class="pre">get_current_tenant</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.get_current_tenant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.get_current_tenant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get name of current tenant</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**params</strong> (<em>dict</em>) – Generic API parameters</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>string containing name of tenant or ‘’ on failure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="bloxone.b1platform.get_current_user">
+<code class="sig-name descname"><span class="pre">get_current_user</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.get_current_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.get_current_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Current User Data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**params</strong> (<em>dict</em>) – Generic API parameters</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Requests response object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>response object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="bloxone.b1platform.get_current_user_accounts">
+<code class="sig-name descname"><span class="pre">get_current_user_accounts</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.get_current_user_accounts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.get_current_user_accounts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Current Users Accounts Data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**params</strong> (<em>dict</em>) – Generic API parameters</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Requests response object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>response object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="bloxone.b1platform.get_full_auditlog">
+<code class="sig-name descname"><span class="pre">get_full_auditlog</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.get_full_auditlog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.get_full_auditlog" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="bloxone.b1platform.get_users">
+<code class="sig-name descname"><span class="pre">get_users</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.get_users"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.get_users" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get User Data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>**params</strong> (<em>dict</em>) – Generic API parameters</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Requests response object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>response object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="b1sw-class.html" class="btn btn-neutral float-right" title="b1dw Class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="b1oph-class.html" class="btn btn-neutral float-left" title="b1oph Class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Chris Marrison.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

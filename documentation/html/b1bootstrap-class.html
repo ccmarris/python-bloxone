@@ -7,14 +7,12 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>b1bootstrap Class &mdash; Bloxone API Wrapper 0.7.4 documentation</title>
+  <title>b1bootstrap Class &mdash; Bloxone API Wrapper 0.7.6 documentation</title>
   
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
 
   
   
@@ -31,7 +29,6 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
@@ -66,7 +63,7 @@
             
             
               <div class="version">
-                0.7.4
+                0.7.6
               </div>
             
           
@@ -104,6 +101,7 @@
 <li class="toctree-l2"><a class="reference internal" href="b1authn-class.html">b1authn Class</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">b1bootstrap Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1ddi-class.html">b1ddi Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="b1diagnostics-class.html">b1diagnostics Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1cdc-class.html">b1cdc Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1oph-class.html">b1oph Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1sw-class.html">b1dw Class</a></li>
@@ -191,12 +189,12 @@
   <div class="section" id="b1bootstrap-class">
 <h1>b1bootstrap Class<a class="headerlink" href="#b1bootstrap-class" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="bloxone.b1bootstrap">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">bloxone.</span></span><span class="sig-name descname"><span class="pre">b1bootstrap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'config.ini'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1bootstrap.html#b1bootstrap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1bootstrap" title="Permalink to this definition">¶</a></dt>
+<dt id="bloxone.b1bootstrap">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">bloxone.</span></code><code class="sig-name descname"><span class="pre">b1bootstrap</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'config.ini'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1bootstrap.html#b1bootstrap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1bootstrap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to simplify access to the BloxOne Platform APIs</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="bloxone.b1bootstrap.create">
-<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1bootstrap.html#b1bootstrap.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1bootstrap.create" title="Permalink to this definition">¶</a></dt>
+<dt id="bloxone.b1bootstrap.create">
+<code class="sig-name descname"><span class="pre">create</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1bootstrap.html#b1bootstrap.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1bootstrap.create" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic create object wrapper for platform objects</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -215,8 +213,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="bloxone.b1bootstrap.delete">
-<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1bootstrap.html#b1bootstrap.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1bootstrap.delete" title="Permalink to this definition">¶</a></dt>
+<dt id="bloxone.b1bootstrap.delete">
+<code class="sig-name descname"><span class="pre">delete</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1bootstrap.html#b1bootstrap.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1bootstrap.delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic delete object wrapper for platform objects</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -235,8 +233,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="bloxone.b1bootstrap.get">
-<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1bootstrap.html#b1bootstrap.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1bootstrap.get" title="Permalink to this definition">¶</a></dt>
+<dt id="bloxone.b1bootstrap.get">
+<code class="sig-name descname"><span class="pre">get</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1bootstrap.html#b1bootstrap.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1bootstrap.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic get object wrapper for platform calls</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -256,8 +254,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="bloxone.b1bootstrap.get_id">
-<span class="sig-name descname"><span class="pre">get_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1bootstrap.html#b1bootstrap.get_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1bootstrap.get_id" title="Permalink to this definition">¶</a></dt>
+<dt id="bloxone.b1bootstrap.get_id">
+<code class="sig-name descname"><span class="pre">get_id</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1bootstrap.html#b1bootstrap.get_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1bootstrap.get_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get object id using key/value pair</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -278,8 +276,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="bloxone.b1bootstrap.update">
-<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1bootstrap.html#b1bootstrap.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1bootstrap.update" title="Permalink to this definition">¶</a></dt>
+<dt id="bloxone.b1bootstrap.update">
+<code class="sig-name descname"><span class="pre">update</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1bootstrap.html#b1bootstrap.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1bootstrap.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic create object wrapper for ddi objects</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

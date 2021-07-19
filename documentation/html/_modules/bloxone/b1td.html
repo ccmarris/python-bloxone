@@ -7,14 +7,12 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>bloxone.b1td &mdash; Bloxone API Wrapper 0.7.4 documentation</title>
+  <title>bloxone.b1td &mdash; Bloxone API Wrapper 0.7.6 documentation</title>
   
 
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
 
   
   
@@ -31,7 +29,6 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -64,7 +61,7 @@
             
             
               <div class="version">
-                0.7.4
+                0.7.6
               </div>
             
           
@@ -178,7 +175,7 @@
 
 <span class="sd"> Author: Chris Marrison</span>
 
-<span class="sd"> Date Last Updated: 20210215</span>
+<span class="sd"> Date Last Updated: 20210713</span>
 
 <span class="sd"> Todo:</span>
 
@@ -210,7 +207,7 @@
 
 <span class="sd">------------------------------------------------------------------------</span>
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.2.4&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.2.5&#39;</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison&#39;</span>
 <span class="n">__author_email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
 
@@ -228,7 +225,7 @@
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="c1"># Generic Methods</span>
-<div class="viewcode-block" id="b1td.get"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+<div class="viewcode-block" id="b1td.get"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Generic get object wrapper for TIDE data objects</span>
 
@@ -417,6 +414,7 @@
 
         <span class="k">return</span> <span class="n">response</span></div>
 
+
 <div class="viewcode-block" id="b1td.tideactivefeed"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.tideactivefeed">[docs]</a>    <span class="k">def</span> <span class="nf">tideactivefeed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
                        <span class="n">datatype</span><span class="p">,</span> 
                        <span class="n">profile</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> 
@@ -457,6 +455,49 @@
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="b1td.tidedatafeed"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.tidedatafeed">[docs]</a>    <span class="k">def</span> <span class="nf">tidedatafeed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+                    <span class="n">datatype</span><span class="p">,</span> 
+                    <span class="n">profile</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> 
+                    <span class="n">threatclass</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                    <span class="n">threatproperty</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                    <span class="o">**</span><span class="n">params</span> <span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Bulk threat intel download from Infoblox TIDE </span>
+<span class="sd">        for specified datatype. Please use wisely.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            datatype (str): &quot;host&quot;, &quot;ip&quot; or &quot;url&quot;</span>
+<span class="sd">            profile (str, optional): Data provider</span>
+<span class="sd">            threatclass (str, optional): tide data class</span>
+<span class="sd">            threatproperty (str, optional): tide data property</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">objpath</span> <span class="o">=</span> <span class="s1">&#39;/data/threats/&#39;</span>
+
+        <span class="c1"># Build URL</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tide_url</span> <span class="o">+</span> <span class="n">objpath</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="n">datatype</span> 
+        <span class="k">if</span> <span class="n">profile</span> <span class="ow">or</span> <span class="n">threatclass</span> <span class="ow">or</span> <span class="n">threatproperty</span><span class="p">:</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="s1">&#39;?&#39;</span>
+            <span class="k">if</span> <span class="n">profile</span><span class="p">:</span>
+                <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="s1">&#39;&amp;profile=&#39;</span> <span class="o">+</span> <span class="n">profile</span>
+            <span class="k">if</span> <span class="n">threatclass</span><span class="p">:</span>
+                <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="s1">&#39;&amp;class=&#39;</span> <span class="o">+</span> <span class="n">threatclass</span>
+            <span class="k">if</span> <span class="n">threatproperty</span><span class="p">:</span>
+                <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="s1">&#39;&amp;property=&#39;</span> <span class="o">+</span> <span class="n">threatproperty</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_params</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">first_param</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> 
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_params</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> 
+
+        <span class="c1"># Make API Call</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
 
     <span class="c1"># ** Dossier Methods **</span>
 

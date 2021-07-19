@@ -13,6 +13,7 @@ Classes Documentation
     b1diagnostics-class
     b1cdc-class
     b1oph-class
+    b1platform-class
     b1sw-class
     b1ztp-class
     b1td-class

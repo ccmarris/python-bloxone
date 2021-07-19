@@ -24,7 +24,7 @@ copyright = '2021, Chris Marrison'
 author = 'Chris Marrison'
 
 # The short X.Y version
-version = '0.7.4'
+version = '0.7.6'
 # The full version, including alpha/beta/rc tags
 release = version
 
