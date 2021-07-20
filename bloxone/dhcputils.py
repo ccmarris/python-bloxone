@@ -13,7 +13,7 @@
 
  Author: Chris Marrison
 
- Date Last Updated: 20210716
+ Date Last Updated: 20210720
 
  Todo:
 
@@ -45,14 +45,16 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
 import logging
 import ipaddress
+import os
+import yaml
+import binascii
 import bloxone
-from re import I
 
 # ** Global Vars **
 # DHCP Encoding Utils
@@ -104,6 +106,13 @@ class dhcp_encode():
     # IP encondings
     def ip_to_hex(self, ip):
         '''
+        Encode an IPv4 or IPv6 address to hex
+
+        Parameters:
+            ip (str): IPv4 or IPv6 address as a string
+        
+        Returns:
+            hex encoding as string
         '''
         if self.validate_ip(ip):
             ip = ipaddress.ip_address(ip)
@@ -116,12 +125,26 @@ class dhcp_encode():
     # Methods for IPv4 and IPv6
     def ipv4_address_to_hex(self, ipv4):
         '''
+        Encode an IPv4 address to hex
+
+        Parameters:
+            ipv4 (str): IPv4 address as a string
+        
+        Returns:
+            hex encoding as string
         '''
         return self.ip_to_hex(ipv4)
         
     
     def ipv6_address_to_hex(self, ipv6):
         '''
+        Encode an IPv6 address to hex
+
+        Parameters:
+            ipv6 (str): IPv4 or IPv6 address as a string
+        
+        Returns:
+            hex encoding as string
         '''
         return self.ip_to_hex(ipv6)
 
@@ -129,14 +152,28 @@ class dhcp_encode():
     # String/text encoding
     def string_to_hex(self, string):
         '''
+        Encode a text string to hex
+
+        Parameters:
+            string (str): text string
+        
+        Returns:
+            hex encoding as string
         '''
-        s = string.encode('utf-8')
+        s = str(string).encode('utf-8')
         return s.hex()
 
 
     # Boolean encoding
     def boolean_to_hex(self, flag):
-        '''
+        ''' 
+        Encode boolean value as single hex byte
+
+        Parameters:
+            flag (bool/str): True or False as bool or text
+        
+        Returns:
+            hex encoding as string
         '''
         # Handle Bool or str
         if not isinstance(flag, bool):
@@ -160,6 +197,14 @@ class dhcp_encode():
    # integer encodings 
     def int_to_hex(self, i, size = 8):
         '''
+        Encode integer of specified size as signed int in hex
+
+        Parameters:
+            i (int): integer value to encode
+            size (int): size in bits [8, 16, 32]
+        
+        Returns:
+            hex encoding as string
         '''
         hex_value = ''
         i = int(i)
@@ -180,6 +225,16 @@ class dhcp_encode():
 
     def uint_to_hex(self, i, size = 8):
         '''
+        Encode integer of specified size as unsigned int in hex
+        Uses 2's compliment if supplied with negative number
+
+
+        Parameters:
+            i (int): integer value to encode
+            size (int): size in bits [8, 16, 32]
+        
+        Returns:
+            hex encoding as string
         '''
         i = int(i)
         i_sizes = [ 8, 16, 32 ]
@@ -223,6 +278,13 @@ class dhcp_encode():
     # FDQN Encoding
     def fqdn_to_hex(self, fqdn):
         '''
+        Encode an fdqn in RFC 1035 Section 3.1 formatted hex
+
+        Parameters:
+            fqdn (str): hostname to encode
+
+        Returns:
+            hex encoding as string
         '''
         hex = ''
         hex_label = ''
@@ -250,9 +312,25 @@ class dhcp_encode():
     # Binary Encoding
     def binary_to_hex(self, data):
         '''
+        Format hex string of binary/hex encoded data
+
+        Parameters:
+            data (str): data to format
+
+        Returns:
+            hex encoding as string
         '''
-        # Should put some format of checking
-        return data
+        hex_value = ''
+        base = 16 
+
+        # Check for binary
+        if data[:2] == '0b':
+            base = 2
+        
+        # Force hex encoding without 0x using base
+        hex_value = '{:02x}'.format(int(data, base))
+
+        return hex_value
 
     
     # Empty Encoding
@@ -411,3 +489,133 @@ class dhcp_encode():
         return
                 
 
+# Class to handle Vendor Option Definitions Dictionary in YAML
+class DHCP_OPTION_DEFS():
+    '''
+    Class to load and handle DHCP Option Defs
+    '''
+
+    def __init__(self, cfg='vendor_dict.yaml'):
+        '''
+        Initialise Class Using YAML config
+        '''
+        self.config = {}
+   
+        # Check for yaml file and raise exception if not found
+        if os.path.isfile(cfg):
+            # Read yaml configuration file
+            try:
+                self.config = yaml.safe_load(open(cfg, 'r'))
+            except yaml.YAMLError as err:
+                logging.error(err)
+                raise
+        else:
+            logging.error(f'No such file {cfg}')
+            raise FileNotFoundError(f'YAML config file "{cfg}" not found.')
+
+        return
+
+
+    def version(self):
+        return self.config['version']
+
+
+    def keys(self):
+        return self.config.keys()
+
+
+    def vendors(self):
+        return self.config['vendors'].keys()
+
+
+    def vendor_keys(self, vendor):
+        '''
+        Return Objects Keys
+        '''
+        if self.included(vendor):
+             response = self.config['vendors'][vendor].keys()
+        else:
+            response = None
+        
+        return response
+
+
+    def count(self):
+        return len(self.config['vendors'])  
+
+
+    def included(self, vendor):
+        '''
+        Check whether this vendor is configured
+        '''
+        status = False
+        if vendor in self.vendors():
+            status = True
+        else:
+            status = False
+
+        return status
+
+
+    def vendor_description(self, vendor):
+        '''
+        Return description of vendor
+        '''
+        t = None
+        if self.included(vendor):
+            t = self.config['vendors'][vendor]['description']
+        else:
+            t = None
+        
+        return t
+
+
+    def option_def(self, vendor):
+        '''
+        Return option definition
+        '''
+        opt_def = {}
+        if self.included(vendor):
+            if 'option-def' in self.vendor_keys(vendor):
+                opt_def = self.config['vendors'][vendor]['option-def']
+            else:
+                logging.error(f'No option definition for vendor {vendor}')
+        else:
+            logging.error(f'Vendor: {vendor} not defined')
+        
+        return opt_def
+
+
+    def parent_opt_def(self, vendor):
+        '''
+        Return parent-option definition
+        '''
+        opt_def = {}
+        if self.included(vendor):
+            opt_def = self.option_def(vendor)
+            if 'parent-option' in opt_def.keys():
+                parent_opt_def = opt_def['parent-option']
+            else:
+                logging.error(f'No parent-option for vendor {vendor}')
+        else:
+            logging.error(f'Vendor: {vendor} not defined')
+        
+        return parent_opt_def
+
+
+    def sub_options(self, vendor):
+        '''
+        Return parent-option definition
+        '''
+        opt_def = {}
+        sub_opt_defs = []
+        if self.included(vendor):
+            opt_def = self.option_def(vendor)
+            if 'sub-options' in opt_def.keys():
+                sub_opt_defs = opt_def['sub-options']
+            else:
+                logging.error(f'No parent-option for vendor {vendor}')
+        else:
+            logging.error(f'Vendor: {vendor} not defined')
+        
+        return sub_opt_defs
