@@ -13,7 +13,7 @@
 
  Author: Chris Marrison
 
- Date Last Updated: 20210720
+ Date Last Updated: 20210721
 
  Todo:
 
@@ -45,7 +45,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.1.2'
+__version__ = '0.1.4'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -336,6 +336,13 @@ class dhcp_encode():
     # Empty Encoding
     def empty_to_hex(self, data):
         '''
+        Return empyt hex string ''
+
+        Parameters:
+            data (str): Data not to encode (should be empty)
+        
+        Returns:
+            Empty String ''
         '''
         if data:
             data = ''
@@ -345,6 +352,13 @@ class dhcp_encode():
     # Code and Length encoding
     def optcode_to_hex(self, optcode):
         '''
+        Encode Option Code in hex (1-octet)
+
+        Parameters:
+            optcode (str/int): Option Code 
+        
+        Returns:
+            hex encoding as string
         '''
         hex_opt = '{:02x}'.format(int(optcode))
         return hex_opt
@@ -352,6 +366,13 @@ class dhcp_encode():
 
     def hex_length(self, hex_string):
         '''
+        Encode Option Length in hex (1-octet)
+
+        Parameters:
+            hex_string (str): Octet Encoded Hex String
+        
+        Returns:
+            Number of Hex Octects as hex encoded string
         '''
         hex_len = '{:02x}'.format(int(len(hex_string) / 2))
         return hex_len
@@ -360,6 +381,16 @@ class dhcp_encode():
     # Encoding Methods
     def encode_data(self, sub_opt, padding=False, pad_bytes=1):
         '''
+        Encode the data section of a sub_option definition
+
+        Parameters:
+            sub_opt (dict): Dict containing sub option details
+                            Must include 'data' and 'type' keys
+            padding (bool): Whether extra 'null' termination bytes are req.
+            pad_bytes (int): Number of null bytes to append
+
+        Returns:
+            Hex encoded data for specified data-type as string
         '''
         hex_data = ''
         if sub_opt['type'] in self.opt_types:
@@ -395,6 +426,18 @@ class dhcp_encode():
                           padding=False,
                           pad_bytes=1):
         '''
+        Encode individual sub option
+
+        Parameters:
+            sub_opt (dict): Sub Option Definition, as dict.
+            data_only (bool): Encode data portion only if True
+                              (Note the sub_opt dict is also checked for 
+                              the 'data-only' key)
+            padding (bool): Whether extra 'null' termination bytes are req.
+            pad_bytes (int): Number of null bytes to append
+        
+        Returns:
+            Encoded suboption as a hex string
         '''
         # Local variables
         hex_value = ''
@@ -402,6 +445,10 @@ class dhcp_encode():
         hex_len = ''
         hex_data = ''
 
+        # Check whether 'data-only' is defined in sub_option
+        if 'data-only' in sub_opt.keys():
+            data_only = sub_opt['data-only']
+        # Check whether to encode only the data or whole sub option
         if data_only:
             hex_data = self.encode_data(sub_opt)
             hex_value = hex_data
@@ -424,8 +471,21 @@ class dhcp_encode():
                            padding=False,
                            pad_bytes=1,
                            encapsulate=False,
-                           id=None ):
+                           id=None,
+                           prefix='' ):
         '''
+        Encode list of DHCP Sub Options to Hex
+
+        Parameters:
+            sub_opt_defs (list): List of Sub Option definition dictionaries
+            padding (bool): Whether extra 'null' termination bytes are req.
+            pad_bytes (int): Number of null bytes to append
+            encapsulate (bool): Add id and total length as prefix
+            id (int): option code to prepend
+            prefix (str): String value to prepend to encoded options
+        
+        Returns:
+            Encoded suboption as a hex string
         '''
         hex_value = ''
 
@@ -437,16 +497,23 @@ class dhcp_encode():
             total_len = self.hex_length(hex)
             main_opt = self.optcode_to_hex(id)
             hex_value = main_opt + total_len + hex_value
+        
+        if prefix:
+            hex_value += prefix 
 
         return hex_value
 
 
     def tests(self):
         '''
+        Run through encoding methods and output example results
         '''
-        test_data = [ { 'code': '1', 'type': 'string', 'data': 'AABBDDCCEEDD-aabbccddeeff' },
-                      { 'code': '2', 'type': 'ipv4_address', 'data': '10.10.10.10' },
-                      { 'code': '3', 'type': 'ipv4_address', 'data': '10.10.10.10,11.11.11.11', 'array': True },
+        test_data = [ { 'code': '1', 'type': 'string',
+                        'data': 'AABBDDCCEEDD-aabbccddeeff' },
+                      { 'code': '2', 'type': 'ipv4_address',
+                        'data': '10.10.10.10' },
+                      { 'code': '3', 'type': 'ipv4_address',
+                        'data': '10.10.10.10,11.11.11.11', 'array': True },
                       { 'code': '4', 'type': 'boolean', 'data': True },
                       { 'code': '5', 'type': 'int8', 'data': '22' },
                       { 'code': '5', 'type': 'int8', 'data': '-22' },
@@ -457,11 +524,14 @@ class dhcp_encode():
                       { 'code': '10', 'type': 'int32', 'data': '44'}, 
                       { 'code': '11', 'type': 'uint32', 'data': '-44'}, 
                       { 'code': '12', 'type': 'uint32', 'data': '44'}, 
-                      { 'code': '13', 'type': 'fqdn', 'data': 'www.infoblox.com' },
+                      { 'code': '13', 'type': 'fqdn',
+                        'data': 'www.infoblox.com' },
                       { 'code': '14', 'type': 'binary', 'data': 'DEADBEEF' },
                       { 'code': '15', 'type': 'empty', 'data': ''},
-                      { 'code': '16', 'type': 'ipv6_address', 'data': '2001:DB8::1' },
-                      { 'code': '17', 'type': 'ipv6_address', 'data': '2001:DB8::1,2001:DB8::2', 'array': True } ]
+                      { 'code': '16', 'type': 'ipv6_address',
+                        'data': '2001:DB8::1' },
+                      { 'code': '17', 'type': 'ipv6_address',
+                        'data': '2001:DB8::1,2001:DB8::2', 'array': True } ]
 
         print(f'Encoding types supported: {self.opt_types}')
         print()
@@ -476,11 +546,15 @@ class dhcp_encode():
         # Padding Test
         test_data = { 'code': '99', 'type': 'string', 'data': 'AABBCCDD' }
         result = self.encode_data(test_data, padding=True)
-        print(f'Padding test (1 byte), type string: {test_data["data"]} {result}')
+        print(f'Padding test (1 byte), type string: {test_data["data"]}' +
+              f' {result}')
         # Full encode test
-        test_data = [ { 'code': '1', 'type': 'string', 'data': 'AABBDDCCEEDD-aabbccddeeff' },
-                      { 'code': '2', 'type': 'ipv4_address', 'data': '10.10.10.10' },
-                      { 'code': '3', 'type': 'ipv4_address', 'data': '10.10.10.10,11.11.11.11', 'array': True },
+        test_data = [ { 'code': '1', 'type': 'string',
+                        'data': 'AABBDDCCEEDD-aabbccddeeff' },
+                      { 'code': '2', 'type': 'ipv4_address',
+                        'data': '10.10.10.10' },
+                      { 'code': '3', 'type': 'ipv4_address',
+                        'data': '10.10.10.10,11.11.11.11', 'array': True },
                       { 'code': '4', 'type': 'boolean', 'data': True },
                       { 'code': '5', 'type': 'int8', 'data': '22' } ]
         result = self.encode_dhcp_option(test_data)
@@ -489,7 +563,7 @@ class dhcp_encode():
         return
                 
 
-# Class to handle Vendor Option Definitions Dictionary in YAML
+# *** Class to handle Vendor Option Definitions Dictionary in YAML ***
 class DHCP_OPTION_DEFS():
     '''
     Class to load and handle DHCP Option Defs
@@ -498,6 +572,12 @@ class DHCP_OPTION_DEFS():
     def __init__(self, cfg='vendor_dict.yaml'):
         '''
         Initialise Class Using YAML config
+
+        Parameters:
+            cfg (str): Config file to load, default vendor_dict.yaml
+        
+        Raises:
+            FileNotFoundError is yaml file is not found
         '''
         self.config = {}
    
@@ -517,20 +597,44 @@ class DHCP_OPTION_DEFS():
 
 
     def version(self):
-        return self.config['version']
+        '''
+        Returns:
+        
+            str containing config file version or 'Version not defined'
+        '''
+        if 'version' in self.config.keys():
+            version = self.config['version']
+        else:
+            version = 'Version not defined'
+
+        return version
 
 
     def keys(self):
+        '''
+        Returns:
+            list of top level keys
+        '''
         return self.config.keys()
 
 
     def vendors(self):
+        '''
+        Returns:
+           list of defined vendors
+        '''
         return self.config['vendors'].keys()
 
 
     def vendor_keys(self, vendor):
         '''
-        Return Objects Keys
+        Returns vendor top level keys
+
+        Parameters:
+            vendor (str): Vendor Identifier
+        
+        Returns:
+            list of keys defined for a vendor
         '''
         if self.included(vendor):
              response = self.config['vendors'][vendor].keys()
@@ -541,12 +645,23 @@ class DHCP_OPTION_DEFS():
 
 
     def count(self):
+        '''
+        Get numbner of defined vendors
+    
+        Returns:
+            int
+        '''
         return len(self.config['vendors'])  
 
 
     def included(self, vendor):
         '''
         Check whether this vendor is configured
+
+        Parameters:
+            vendor (str): Vendor Identifier
+
+        Returns bool
         '''
         status = False
         if vendor in self.vendors():
@@ -559,20 +674,47 @@ class DHCP_OPTION_DEFS():
 
     def vendor_description(self, vendor):
         '''
-        Return description of vendor
+        Get description of vendor
+
+        Parameters:
+            vendor (str): Vendor Identifier
         '''
-        t = None
+        desc = None
         if self.included(vendor):
-            t = self.config['vendors'][vendor]['description']
+            desc = self.config['vendors'][vendor]['description']
         else:
-            t = None
+            desc = None
         
-        return t
+        return desc
+
+
+    def vendor_prefix(self, vendor):
+        '''
+        Get the prefix is present as a string
+
+        Parameters:
+            vendor (str): Vendor Identifier
+        
+        Returns:
+            string containing defined prefix or '' if none
+        '''
+        prefix = ''
+        if self.included(vendor):
+            if 'prefix' in self.vendor_keys(vendor):
+                prefix = self.config['vendors'][vendor]['prefix']
+        
+        return prefix
 
 
     def option_def(self, vendor):
         '''
-        Return option definition
+        Returns option definition as dict
+
+        Parameters:
+            vendor (str): Vendor Identifier
+        
+        Returns:
+            Dict containing both parent and sub option definitions
         '''
         opt_def = {}
         if self.included(vendor):
@@ -588,24 +730,37 @@ class DHCP_OPTION_DEFS():
 
     def parent_opt_def(self, vendor):
         '''
-        Return parent-option definition
+        Returns parent-option definition as dict
+
+        Parameters:
+            vendor (str): Vendor Identifier
+        
+        Returns:
+            dict containing parent option definition
         '''
         opt_def = {}
+        parent_def = {}
         if self.included(vendor):
             opt_def = self.option_def(vendor)
             if 'parent-option' in opt_def.keys():
-                parent_opt_def = opt_def['parent-option']
+                parent_def = opt_def['parent-option']
             else:
                 logging.error(f'No parent-option for vendor {vendor}')
         else:
             logging.error(f'Vendor: {vendor} not defined')
         
-        return parent_opt_def
+        return parent_def
 
 
     def sub_options(self, vendor):
         '''
-        Return parent-option definition
+        Returns list of sub-option definitions
+
+        Parameters:
+            vendor (str): Vendor Identifier
+        
+        Returns:
+            list of dict
         '''
         opt_def = {}
         sub_opt_defs = []
@@ -619,3 +774,20 @@ class DHCP_OPTION_DEFS():
             logging.error(f'Vendor: {vendor} not defined')
         
         return sub_opt_defs
+    
+    
+    def dump_vendor_def(self, vendor):
+        '''
+        Returns the vendor definition as a dict
+
+        Parameters:
+            vendor (str): Vendor Identifier
+        
+        Returns:
+            dict containing vendor definition
+        '''
+        vendor_def = {}
+        if self.included(vendor):
+            vendor_def = self.config['vendors'][vendor]
+        
+        return vendor_def

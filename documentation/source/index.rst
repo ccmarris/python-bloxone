@@ -17,8 +17,9 @@ Welcome to BloxOne API Wrapper's documentation!
    installation
    usage
    classes
+   dhcp-utils-classes
    utils
-   code.rst
+   code
    version_history
    ackowledgements
 

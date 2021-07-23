@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Classes Documentation &mdash; Bloxone API Wrapper 0.7.6 documentation</title>
+  <title>DHCP Utilities &mdash; Bloxone API Wrapper 0.7.6 documentation</title>
   
 
   
@@ -38,8 +38,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="bloxone.b1 Class" href="bloxone-class.html" />
-    <link rel="prev" title="Additional Utilities" href="utils-usage.html" /> 
+    <link rel="next" title="DHCP Encoding/Decoding Utils" href="dhcp_encode-class.html" />
+    <link rel="prev" title="b1tdlad Class" href="b1tdlad-class.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -95,26 +95,12 @@
 <li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage and Examples</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Classes Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="bloxone-class.html">bloxone.b1 Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1anycast-class.html">b1anycast Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1authn-class.html">b1authn Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1bootstrap-class.html">b1bootstrap Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1ddi-class.html">b1ddi Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1diagnostics-class.html">b1diagnostics Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1cdc-class.html">b1cdc Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1oph-class.html">b1oph Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1platform-class.html">b1platform Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1sw-class.html">b1dw Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1ztp-class.html">b1ztp Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1td-class.html">b1td Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1tdc-class.html">b1tdc Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1tdep-class.html">b1tdep Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1tddfp-class.html">b1tddfp Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1tdlad-class.html">b1tdlad Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes Documentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">DHCP Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dhcp_encode-class.html">DHCP Encoding/Decoding Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dhcp-option-data-class.html">DHCP Option Data Class</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="dhcp-utils-classes.html">DHCP Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Additional Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code.html">Source Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="version_history.html">ChangeLog</a></li>
@@ -167,13 +153,13 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Classes Documentation</li>
+      <li>DHCP Utilities</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="_sources/classes.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/dhcp-utils-classes.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -186,26 +172,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="classes-documentation">
-<h1>Classes Documentation<a class="headerlink" href="#classes-documentation" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="dhcp-utilities">
+<h1>DHCP Utilities<a class="headerlink" href="#dhcp-utilities" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="bloxone-class.html">bloxone.b1 Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="b1anycast-class.html">b1anycast Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="b1authn-class.html">b1authn Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="b1bootstrap-class.html">b1bootstrap Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="b1ddi-class.html">b1ddi Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="b1diagnostics-class.html">b1diagnostics Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="b1cdc-class.html">b1cdc Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="b1oph-class.html">b1oph Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="b1platform-class.html">b1platform Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="b1sw-class.html">b1dw Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="b1ztp-class.html">b1ztp Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="b1td-class.html">b1td Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="b1tdc-class.html">b1tdc Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="b1tdep-class.html">b1tdep Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="b1tddfp-class.html">b1tddfp Class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="b1tdlad-class.html">b1tdlad Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dhcp_encode-class.html">DHCP Encoding/Decoding Utils</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dhcp-option-data-class.html">DHCP Option Data Class</a></li>
 </ul>
 </div>
 </div>
@@ -216,8 +188,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="bloxone-class.html" class="btn btn-neutral float-right" title="bloxone.b1 Class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="utils-usage.html" class="btn btn-neutral float-left" title="Additional Utilities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dhcp_encode-class.html" class="btn btn-neutral float-right" title="DHCP Encoding/Decoding Utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="b1tdlad-class.html" class="btn btn-neutral float-left" title="b1tdlad Class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
