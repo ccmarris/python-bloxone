@@ -38,7 +38,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="DHCP Encoding/Decoding Utils" href="dhcp-option-data-class.html" />
+    <link rel="next" title="Usage and Examples for dhcputils" href="dhcp_encode-usage.html" />
     <link rel="prev" title="DHCP Utilities" href="dhcp-utils-classes.html" /> 
 </head>
 
@@ -95,28 +95,11 @@
 <li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage and Examples</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="classes.html">Classes Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="bloxone-class.html">bloxone.b1 Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1anycast-class.html">b1anycast Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1authn-class.html">b1authn Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1bootstrap-class.html">b1bootstrap Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1ddi-class.html">b1ddi Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1diagnostics-class.html">b1diagnostics Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1cdc-class.html">b1cdc Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1oph-class.html">b1oph Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1platform-class.html">b1platform Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1sw-class.html">b1dw Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1ztp-class.html">b1ztp Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1td-class.html">b1td Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1tdc-class.html">b1tdc Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1tdep-class.html">b1tdep Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1tddfp-class.html">b1tddfp Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1tdlad-class.html">b1tdlad Class</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="dhcp-utils-classes.html">DHCP Utilities</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">DHCP Encoding/Decoding Utils</a></li>
-<li class="toctree-l3"><a class="reference internal" href="dhcp-option-data-class.html">DHCP Encoding/Decoding Utils</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="dhcp-utils-classes.html">DHCP Utilities</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">DHCP Encoding/Decoding Utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dhcp_encode-usage.html">Usage and Examples for dhcputils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dhcp-option-data-class.html">DHCP Option Data Class</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Additional Utilities</a></li>
@@ -170,8 +153,6 @@
   <ul class="wy-breadcrumbs">
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="classes.html">Classes Documentation</a> &raquo;</li>
         
           <li><a href="dhcp-utils-classes.html">DHCP Utilities</a> &raquo;</li>
         
@@ -232,22 +213,77 @@ DHCP Options and sub_options</p>
 <dl class="py method">
 <dt id="bloxone.dhcp_encode.empty_to_hex">
 <code class="sig-name descname"><span class="pre">empty_to_hex</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.empty_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.empty_to_hex" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Return empyt hex string ‘’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>str</em>) – Data not to encode (should be empty)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Empty String ‘’</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="bloxone.dhcp_encode.encode_data">
 <code class="sig-name descname"><span class="pre">encode_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_opt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_bytes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.encode_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.encode_data" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Encode the data section of a sub_option definition</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sub_opt</strong> (<em>dict</em>) – Dict containing sub option details
+Must include ‘data’ and ‘type’ keys</p></li>
+<li><p><strong>padding</strong> (<em>bool</em>) – Whether extra ‘null’ termination bytes are req.</p></li>
+<li><p><strong>pad_bytes</strong> (<em>int</em>) – Number of null bytes to append</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Hex encoded data for specified data-type as string</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="bloxone.dhcp_encode.encode_dhcp_option">
-<code class="sig-name descname"><span class="pre">encode_dhcp_option</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_opt_defs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_bytes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encapsulate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.encode_dhcp_option"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.encode_dhcp_option" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname"><span class="pre">encode_dhcp_option</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_opt_defs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_bytes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encapsulate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.encode_dhcp_option"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.encode_dhcp_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encode list of DHCP Sub Options to Hex</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sub_opt_defs</strong> (<em>list</em>) – List of Sub Option definition dictionaries</p></li>
+<li><p><strong>padding</strong> (<em>bool</em>) – Whether extra ‘null’ termination bytes are req.</p></li>
+<li><p><strong>pad_bytes</strong> (<em>int</em>) – Number of null bytes to append</p></li>
+<li><p><strong>encapsulate</strong> (<em>bool</em>) – Add id and total length as prefix</p></li>
+<li><p><strong>id</strong> (<em>int</em>) – option code to prepend</p></li>
+<li><p><strong>prefix</strong> (<em>str</em>) – String value to prepend to encoded options</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Encoded suboption as a hex string</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="bloxone.dhcp_encode.encode_sub_option">
 <code class="sig-name descname"><span class="pre">encode_sub_option</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_opt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_bytes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.encode_sub_option"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.encode_sub_option" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Encode individual sub option</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sub_opt</strong> (<em>dict</em>) – Sub Option Definition, as dict.</p></li>
+<li><p><strong>data_only</strong> (<em>bool</em>) – Encode data portion only if True
+(Note the sub_opt dict is also checked for
+the ‘data-only’ key)</p></li>
+<li><p><strong>padding</strong> (<em>bool</em>) – Whether extra ‘null’ termination bytes are req.</p></li>
+<li><p><strong>pad_bytes</strong> (<em>int</em>) – Number of null bytes to append</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Encoded suboption as a hex string</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="bloxone.dhcp_encode.fqdn_to_hex">
@@ -266,7 +302,16 @@ DHCP Options and sub_options</p>
 <dl class="py method">
 <dt id="bloxone.dhcp_encode.hex_length">
 <code class="sig-name descname"><span class="pre">hex_length</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hex_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.hex_length"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.hex_length" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Encode Option Length in hex (1-octet)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hex_string</strong> (<em>str</em>) – Octet Encoded Hex String</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Number of Hex Octects as hex encoded string</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="bloxone.dhcp_encode.int_to_hex">
@@ -330,7 +375,16 @@ DHCP Options and sub_options</p>
 <dl class="py method">
 <dt id="bloxone.dhcp_encode.optcode_to_hex">
 <code class="sig-name descname"><span class="pre">optcode_to_hex</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optcode</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.optcode_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.optcode_to_hex" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Encode Option Code in hex (1-octet)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>optcode</strong> (<em>str/int</em>) – Option Code</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>hex encoding as string</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="bloxone.dhcp_encode.string_to_hex">
@@ -349,7 +403,8 @@ DHCP Options and sub_options</p>
 <dl class="py method">
 <dt id="bloxone.dhcp_encode.tests">
 <code class="sig-name descname"><span class="pre">tests</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.tests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.tests" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Run through encoding methods and output example results</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="bloxone.dhcp_encode.uint_to_hex">
@@ -397,7 +452,7 @@ Uses 2’s compliment if supplied with negative number</p>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="dhcp-option-data-class.html" class="btn btn-neutral float-right" title="DHCP Encoding/Decoding Utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="dhcp_encode-usage.html" class="btn btn-neutral float-right" title="Usage and Examples for dhcputils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="dhcp-utils-classes.html" class="btn btn-neutral float-left" title="DHCP Utilities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
