@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.2.5'
+__version__ = '0.2.6'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -296,7 +296,7 @@ class b1td(bloxone.b1):
                     profile="", 
                     threatclass="",
                     threatproperty="",
-                    **params ):
+                    **params):
         '''
         Bulk threat intel download from Infoblox TIDE 
         for specified datatype. Please use wisely.
@@ -331,7 +331,6 @@ class b1td(bloxone.b1):
         response = self._apiget(url)
 
         return response
-
 
     # ** Dossier Methods **
 
