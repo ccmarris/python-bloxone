@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
@@ -88,7 +91,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
@@ -114,6 +117,7 @@
 <li class="toctree-l2"><a class="reference internal" href="b1tdlad-class.html">b1tdlad Class</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="dhcp-utils-classes.html">DHCP Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Additional Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code.html">Source Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="version_history.html">ChangeLog</a></li>
@@ -190,12 +194,12 @@
   <div class="section" id="b1diagnostics-class">
 <h1>b1diagnostics Class<a class="headerlink" href="#b1diagnostics-class" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="bloxone.b1diagnostics">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">bloxone.</span></code><code class="sig-name descname"><span class="pre">b1diagnostics</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'config.ini'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.b1diagnostics">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">bloxone.</span></span><span class="sig-name descname"><span class="pre">b1diagnostics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'config.ini'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to simplify access to the BloxOne Platform APIs</p>
 <dl class="py method">
-<dt id="bloxone.b1diagnostics.delete">
-<code class="sig-name descname"><span class="pre">delete</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics.delete" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.b1diagnostics.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics.delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic delete object wrapper for platform objects</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -214,8 +218,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.b1diagnostics.download_task_results">
-<code class="sig-name descname"><span class="pre">download_task_results</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taskid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics.download_task_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics.download_task_results" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.b1diagnostics.download_task_results">
+<span class="sig-name descname"><span class="pre">download_task_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taskid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics.download_task_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics.download_task_results" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the results for specidied task</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -232,8 +236,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.b1diagnostics.execute_task">
-<code class="sig-name descname"><span class="pre">execute_task</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ophname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ophid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">priv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics.execute_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics.execute_task" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.b1diagnostics.execute_task">
+<span class="sig-name descname"><span class="pre">execute_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ophname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ophid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">priv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics.execute_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics.execute_task" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute remote command on an OPH</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -270,8 +274,8 @@ optional arguments</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.b1diagnostics.get">
-<code class="sig-name descname"><span class="pre">get</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics.get" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.b1diagnostics.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic get object wrapper for platform calls</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -291,8 +295,8 @@ optional arguments</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.b1diagnostics.get_args">
-<code class="sig-name descname"><span class="pre">get_args</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics.get_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics.get_args" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.b1diagnostics.get_args">
+<span class="sig-name descname"><span class="pre">get_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics.get_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics.get_args" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check the args for a command</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -308,8 +312,8 @@ optional arguments</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.b1diagnostics.get_id">
-<code class="sig-name descname"><span class="pre">get_id</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics.get_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics.get_id" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.b1diagnostics.get_id">
+<span class="sig-name descname"><span class="pre">get_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics.get_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics.get_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get object id using key/value pair</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -330,8 +334,8 @@ optional arguments</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.b1diagnostics.get_remote_commands">
-<code class="sig-name descname"><span class="pre">get_remote_commands</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics.get_remote_commands"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics.get_remote_commands" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.b1diagnostics.get_remote_commands">
+<span class="sig-name descname"><span class="pre">get_remote_commands</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics.get_remote_commands"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics.get_remote_commands" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get set of possible remote commands and parameters</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -344,8 +348,8 @@ optional arguments</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.b1diagnostics.get_task_result">
-<code class="sig-name descname"><span class="pre">get_task_result</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taskid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics.get_task_result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics.get_task_result" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.b1diagnostics.get_task_result">
+<span class="sig-name descname"><span class="pre">get_task_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taskid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics.get_task_result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics.get_task_result" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the results for specidied task</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -361,8 +365,8 @@ optional arguments</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.b1diagnostics.is_command">
-<code class="sig-name descname"><span class="pre">is_command</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics.is_command"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics.is_command" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.b1diagnostics.is_command">
+<span class="sig-name descname"><span class="pre">is_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics.is_command"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics.is_command" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check whether command is valid</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -375,8 +379,8 @@ optional arguments</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.b1diagnostics.post">
-<code class="sig-name descname"><span class="pre">post</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics.post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics.post" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.b1diagnostics.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics.post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics.post" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic create object wrapper for platform objects</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -395,8 +399,8 @@ optional arguments</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.b1diagnostics.update">
-<code class="sig-name descname"><span class="pre">update</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics.update" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.b1diagnostics.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1diagnostics.html#b1diagnostics.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1diagnostics.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic create object wrapper for ddi objects</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
@@ -39,7 +42,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Source Documentation" href="code.html" />
-    <link rel="prev" title="b1tdlad Class" href="b1tdlad-class.html" /> 
+    <link rel="prev" title="DHCP Options Data Class Usage" href="dhcp-option-data-class-usage.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,7 +91,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
@@ -96,6 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage and Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classes.html">Classes Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dhcp-utils-classes.html">DHCP Utilities</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Additional Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code.html">Source Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="version_history.html">ChangeLog</a></li>
@@ -206,8 +210,8 @@ POSSIBILITY OF SUCH DAMAGE.</p>
 </div></blockquote>
 <hr class="docutils" />
 <dl class="py function">
-<dt id="bloxone.utils.buildregex">
-<code class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></code><code class="sig-name descname"><span class="pre">buildregex</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#buildregex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.buildregex" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.utils.buildregex">
+<span class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></span><span class="sig-name descname"><span class="pre">buildregex</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#buildregex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.buildregex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pre-compile ‘standard’ regexes as used by data_type and
 validate_XXX functions</p>
 <dl class="field-list simple">
@@ -225,8 +229,8 @@ url_regex (re): Compiled regex for URLs</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="bloxone.utils.convert_url_to_host">
-<code class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></code><code class="sig-name descname"><span class="pre">convert_url_to_host</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#convert_url_to_host"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.convert_url_to_host" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.utils.convert_url_to_host">
+<span class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></span><span class="sig-name descname"><span class="pre">convert_url_to_host</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#convert_url_to_host"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.convert_url_to_host" title="Permalink to this definition">¶</a></dt>
 <dd><p>Break down URL and return host element</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -242,8 +246,8 @@ url_regex (re): Compiled regex for URLs</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="bloxone.utils.count_labels">
-<code class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></code><code class="sig-name descname"><span class="pre">count_labels</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fqdn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#count_labels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.count_labels" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.utils.count_labels">
+<span class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></span><span class="sig-name descname"><span class="pre">count_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fqdn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#count_labels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.count_labels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Count number of labels in an FQDN</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -259,8 +263,8 @@ url_regex (re): Compiled regex for URLs</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="bloxone.utils.data_type">
-<code class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></code><code class="sig-name descname"><span class="pre">data_type</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host_regex</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url_regex</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#data_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.data_type" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.utils.data_type">
+<span class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></span><span class="sig-name descname"><span class="pre">data_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host_regex</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url_regex</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#data_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.data_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validate and determine data type (host, ip or url)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -279,8 +283,8 @@ url_regex (re): Compiled regex for URLs</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="bloxone.utils.db_query">
-<code class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></code><code class="sig-name descname"><span class="pre">db_query</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_cursor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_data</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">flags</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#db_query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.db_query" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.utils.db_query">
+<span class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></span><span class="sig-name descname"><span class="pre">db_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_cursor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_data</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">flags</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#db_query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.db_query" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform db query and return appropriate rows</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -301,8 +305,8 @@ url_regex (re): Compiled regex for URLs</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="bloxone.utils.get_domain">
-<code class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></code><code class="sig-name descname"><span class="pre">get_domain</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fqdn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_of_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#get_domain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.get_domain" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.utils.get_domain">
+<span class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></span><span class="sig-name descname"><span class="pre">get_domain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fqdn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_of_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#get_domain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.get_domain" title="Permalink to this definition">¶</a></dt>
 <dd><p>Take FQDN and return n label domain
 or fqdn if no. of labels is 2 or less</p>
 <dl class="field-list simple">
@@ -323,8 +327,8 @@ default = 2</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt id="bloxone.utils.get_table">
-<code class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></code><code class="sig-name descname"><span class="pre">get_table</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cursor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#get_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.get_table" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.utils.get_table">
+<span class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></span><span class="sig-name descname"><span class="pre">get_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cursor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#get_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.get_table" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine db table and return</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -340,8 +344,8 @@ default = 2</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt id="bloxone.utils.normalise">
-<code class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></code><code class="sig-name descname"><span class="pre">normalise</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">itype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">www</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#normalise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.normalise" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.utils.normalise">
+<span class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></span><span class="sig-name descname"><span class="pre">normalise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">itype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">www</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#normalise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.normalise" title="Permalink to this definition">¶</a></dt>
 <dd><p>Take ip, host or url item process and
 return normalise data.</p>
 <dl class="field-list simple">
@@ -363,8 +367,8 @@ return normalise data.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="bloxone.utils.opendb">
-<code class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></code><code class="sig-name descname"><span class="pre">opendb</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dbfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#opendb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.opendb" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.utils.opendb">
+<span class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></span><span class="sig-name descname"><span class="pre">opendb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dbfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#opendb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.opendb" title="Permalink to this definition">¶</a></dt>
 <dd><p>Open sqlite db and return cursor()</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -380,8 +384,8 @@ return normalise data.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="bloxone.utils.reverse_labels">
-<code class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></code><code class="sig-name descname"><span class="pre">reverse_labels</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#reverse_labels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.reverse_labels" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.utils.reverse_labels">
+<span class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></span><span class="sig-name descname"><span class="pre">reverse_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#reverse_labels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.reverse_labels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reserve order of domain labels (or any dot separated data, e.g. IP)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -397,8 +401,8 @@ return normalise data.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="bloxone.utils.strip_host">
-<code class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></code><code class="sig-name descname"><span class="pre">strip_host</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fqdn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#strip_host"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.strip_host" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.utils.strip_host">
+<span class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></span><span class="sig-name descname"><span class="pre">strip_host</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fqdn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#strip_host"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.strip_host" title="Permalink to this definition">¶</a></dt>
 <dd><p>Take FQDN and strip first label
 or fqdn if no. of labels is 2 or less</p>
 <dl class="field-list simple">
@@ -415,8 +419,8 @@ or fqdn if no. of labels is 2 or less</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="bloxone.utils.validate_fqdn">
-<code class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></code><code class="sig-name descname"><span class="pre">validate_fqdn</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regex</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#validate_fqdn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.validate_fqdn" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.utils.validate_fqdn">
+<span class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></span><span class="sig-name descname"><span class="pre">validate_fqdn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regex</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#validate_fqdn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.validate_fqdn" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validate input data is a legitmate fqdn</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -435,8 +439,8 @@ or fqdn if no. of labels is 2 or less</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="bloxone.utils.validate_ip">
-<code class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></code><code class="sig-name descname"><span class="pre">validate_ip</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#validate_ip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.validate_ip" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.utils.validate_ip">
+<span class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></span><span class="sig-name descname"><span class="pre">validate_ip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#validate_ip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.validate_ip" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validate input data is a valid IP address</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -452,8 +456,8 @@ or fqdn if no. of labels is 2 or less</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="bloxone.utils.validate_url">
-<code class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></code><code class="sig-name descname"><span class="pre">validate_url</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regex</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#validate_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.validate_url" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.utils.validate_url">
+<span class="sig-prename descclassname"><span class="pre">bloxone.utils.</span></span><span class="sig-name descname"><span class="pre">validate_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regex</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/utils.html#validate_url"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.utils.validate_url" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validate input data is a valid URL</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -480,7 +484,7 @@ or fqdn if no. of labels is 2 or less</p>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="code.html" class="btn btn-neutral float-right" title="Source Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="b1tdlad-class.html" class="btn btn-neutral float-left" title="b1tdlad Class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dhcp-option-data-class-usage.html" class="btn btn-neutral float-left" title="DHCP Options Data Class Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
