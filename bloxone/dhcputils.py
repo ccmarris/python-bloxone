@@ -1386,8 +1386,8 @@ class dhcp_decode():
         '''
         formats = [ 'csv', 'pprint', 'json']
         if output in formats:
-            if format == 'pprint':
-                pprint(decoded_opts)
+            if output == 'pprint':
+                pprint.pprint(decoded_opts)
         else:
             print(decoded_opts)
         
@@ -1428,7 +1428,7 @@ class dhcp_decode():
         print()
         print('Non-array tests:')
         for data_test in test_data:
-            result = self.encode_data(data_test)
+            result = encode.encode_data(data_test)
             hex_len = self.hex_length(result)
             print(f'Type: {data_test["type"]}: {data_test["data"]}, ' +
                   f'Encoded: {result}, Length(hex): {hex_len}')
@@ -1436,7 +1436,7 @@ class dhcp_decode():
         print()
         # Padding Test
         test_data = { 'code': '99', 'type': 'string', 'data': 'AABBCCDD' }
-        result = self.encode_data(test_data, padding=True)
+        result = encode.encode_data(test_data, padding=True)
         print(f'Padding test (1 byte), type string: {test_data["data"]}' +
               f' {result}')
         # Full encode test
@@ -1448,7 +1448,10 @@ class dhcp_decode():
                         'data': '10.10.10.10,11.11.11.11', 'array': True },
                       { 'code': '4', 'type': 'boolean', 'data': True },
                       { 'code': '5', 'type': 'int8', 'data': '22' } ]
-        result = self.encode_dhcp_option(test_data)
+        result = encode.encode_dhcp_option(test_data)
         print(f'Full encoding of sample: {result}')
+        decode = self.decode_dhcp_option(result)
+        print(f'Decoding result:')
+        pprint.pprint(decode)
 
         return
