@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
@@ -88,7 +91,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
@@ -104,6 +107,7 @@
 <li class="toctree-l2"><a class="reference internal" href="b1diagnostics-class.html">b1diagnostics Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1cdc-class.html">b1cdc Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1oph-class.html">b1oph Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="b1platform-class.html">b1platform Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1sw-class.html">b1dw Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1ztp-class.html">b1ztp Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1td-class.html">b1td Class</a></li>
@@ -113,6 +117,7 @@
 <li class="toctree-l2"><a class="reference internal" href="b1tdlad-class.html">b1tdlad Class</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="dhcp-utils-classes.html">DHCP Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Additional Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code.html">Source Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="version_history.html">ChangeLog</a></li>
@@ -188,13 +193,13 @@
             
   <div class="section" id="b1ddi-class">
 <h1>b1ddi Class<a class="headerlink" href="#b1ddi-class" title="Permalink to this headline">¶</a></h1>
-<dl class="py class">
-<dt id="bloxone.b1ddi">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">bloxone.</span></code><code class="sig-name descname"><span class="pre">b1ddi</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'config.ini'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi" title="Permalink to this definition">¶</a></dt>
+<dl class="py">
+<dt class="py" id="bloxone.b1ddi">
+<em class="property"><span class="pre">class</span> </em><span><span class="pre">bloxone.</span></span><span><span class="pre">b1ddi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'config.ini'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi" title="Permalink to this definition">¶</a></dt>
 <dd><p>BloxOne DDI API Wrapper Class</p>
-<dl class="py method">
-<dt id="bloxone.b1ddi.add_tag">
-<code class="sig-name descname"><span class="pre">add_tag</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tagname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tagvalue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.add_tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.add_tag" title="Permalink to this definition">¶</a></dt>
+<dl class="py">
+<dt class="py" id="bloxone.b1ddi.add_tag">
+<span><span class="pre">add_tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tagname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tagvalue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.add_tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.add_tag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to add a tag to an existing object
 Note: PUT/update Not Implemented in API as yet</p>
 <dl class="field-list simple">
@@ -215,9 +220,9 @@ Note: PUT/update Not Implemented in API as yet</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="bloxone.b1ddi.create">
-<code class="sig-name descname"><span class="pre">create</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.create" title="Permalink to this definition">¶</a></dt>
+<dl class="py">
+<dt class="py" id="bloxone.b1ddi.create">
+<span><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.create" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic create object wrapper for ddi objects</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -235,9 +240,9 @@ Note: PUT/update Not Implemented in API as yet</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="bloxone.b1ddi.delete">
-<code class="sig-name descname"><span class="pre">delete</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.delete" title="Permalink to this definition">¶</a></dt>
+<dl class="py">
+<dt class="py" id="bloxone.b1ddi.delete">
+<span><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic delete object wrapper for ddi objects</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -255,9 +260,9 @@ Note: PUT/update Not Implemented in API as yet</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="bloxone.b1ddi.delete_tag">
-<code class="sig-name descname"><span class="pre">delete_tag</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tagname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.delete_tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.delete_tag" title="Permalink to this definition">¶</a></dt>
+<dl class="py">
+<dt class="py" id="bloxone.b1ddi.delete_tag">
+<span><span class="pre">delete_tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tagname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.delete_tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.delete_tag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to delete a tag from an existing On Prem Host</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -275,9 +280,9 @@ Note: PUT/update Not Implemented in API as yet</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="bloxone.b1ddi.get">
-<code class="sig-name descname"><span class="pre">get</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.get" title="Permalink to this definition">¶</a></dt>
+<dl class="py">
+<dt class="py" id="bloxone.b1ddi.get">
+<span><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic get object wrapper for ddi objects</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -296,9 +301,9 @@ Note: PUT/update Not Implemented in API as yet</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="bloxone.b1ddi.get_id">
-<code class="sig-name descname"><span class="pre">get_id</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.get_id" title="Permalink to this definition">¶</a></dt>
+<dl class="py">
+<dt class="py" id="bloxone.b1ddi.get_id">
+<span><span class="pre">get_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.get_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get object id using key/value pair</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -318,9 +323,9 @@ Note: PUT/update Not Implemented in API as yet</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="bloxone.b1ddi.get_object_by_key">
-<code class="sig-name descname"><span class="pre">get_object_by_key</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get_object_by_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.get_object_by_key" title="Permalink to this definition">¶</a></dt>
+<dl class="py">
+<dt class="py" id="bloxone.b1ddi.get_object_by_key">
+<span><span class="pre">get_object_by_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get_object_by_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.get_object_by_key" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get object using key/value pair</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -339,9 +344,9 @@ Note: PUT/update Not Implemented in API as yet</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="bloxone.b1ddi.get_option_ids">
-<code class="sig-name descname"><span class="pre">get_option_ids</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">option_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get_option_ids"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.get_option_ids" title="Permalink to this definition">¶</a></dt>
+<dl class="py">
+<dt class="py" id="bloxone.b1ddi.get_option_ids">
+<span><span class="pre">get_option_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">option_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get_option_ids"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.get_option_ids" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a dictionary of DHCP Option IDs
 Based on idea/code from John Neerdael</p>
 <dl class="field-list simple">
@@ -357,9 +362,9 @@ Based on idea/code from John Neerdael</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="bloxone.b1ddi.get_tags">
-<code class="sig-name descname"><span class="pre">get_tags</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get_tags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.get_tags" title="Permalink to this definition">¶</a></dt>
+<dl class="py">
+<dt class="py" id="bloxone.b1ddi.get_tags">
+<span><span class="pre">get_tags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get_tags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.get_tags" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get tags for an object id</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -388,9 +393,9 @@ Based on idea/code from John Neerdael</p>
 </div>
 </dd></dl>
 
-<dl class="py method">
-<dt id="bloxone.b1ddi.get_zone_child">
-<code class="sig-name descname"><span class="pre">get_zone_child</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'zone'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get_zone_child"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.get_zone_child" title="Permalink to this definition">¶</a></dt>
+<dl class="py">
+<dt class="py" id="bloxone.b1ddi.get_zone_child">
+<span><span class="pre">get_zone_child</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'zone'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.get_zone_child"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.get_zone_child" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to retrieve Zones in specified view</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -409,9 +414,9 @@ Based on idea/code from John Neerdael</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="bloxone.b1ddi.replace">
-<code class="sig-name descname"><span class="pre">replace</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.replace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.replace" title="Permalink to this definition">¶</a></dt>
+<dl class="py">
+<dt class="py" id="bloxone.b1ddi.replace">
+<span><span class="pre">replace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.replace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.replace" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic create object wrapper for ddi objects</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -429,9 +434,9 @@ Based on idea/code from John Neerdael</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="bloxone.b1ddi.search_response">
-<code class="sig-name descname"><span class="pre">search_response</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.search_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.search_response" title="Permalink to this definition">¶</a></dt>
+<dl class="py">
+<dt class="py" id="bloxone.b1ddi.search_response">
+<span><span class="pre">search_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.search_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.search_response" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get object id using key/value pair by searching a
 Request response object.</p>
 <dl class="field-list simple">
@@ -452,9 +457,9 @@ Request response object.</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="bloxone.b1ddi.update">
-<code class="sig-name descname"><span class="pre">update</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.update" title="Permalink to this definition">¶</a></dt>
+<dl class="py">
+<dt class="py" id="bloxone.b1ddi.update">
+<span><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1ddi.html#b1ddi.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1ddi.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic create object wrapper for ddi objects</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

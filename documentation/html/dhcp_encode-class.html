@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
@@ -88,7 +91,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
@@ -100,6 +103,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">DHCP Encoding/Decoding Utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dhcp_encode-usage.html">Usage and Examples for dhcputils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dhcp-option-data-class.html">DHCP Option Data Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dhcp-option-data-class-usage.html">DHCP Options Data Class Usage</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Additional Utilities</a></li>
@@ -178,13 +182,13 @@
   <div class="section" id="dhcp-encoding-decoding-utils">
 <h1>DHCP Encoding/Decoding Utils<a class="headerlink" href="#dhcp-encoding-decoding-utils" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="bloxone.dhcp_encode">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">bloxone.</span></code><code class="sig-name descname"><span class="pre">dhcp_encode</span></code><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.dhcp_encode">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">bloxone.</span></span><span class="sig-name descname"><span class="pre">dhcp_encode</span></span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to assist with Hex Encoding of
 DHCP Options and sub_options</p>
 <dl class="py method">
-<dt id="bloxone.dhcp_encode.binary_to_hex">
-<code class="sig-name descname"><span class="pre">binary_to_hex</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.binary_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.binary_to_hex" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.dhcp_encode.binary_to_hex">
+<span class="sig-name descname"><span class="pre">binary_to_hex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.binary_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.binary_to_hex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Format hex string of binary/hex encoded data</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -197,8 +201,8 @@ DHCP Options and sub_options</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.dhcp_encode.boolean_to_hex">
-<code class="sig-name descname"><span class="pre">boolean_to_hex</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.boolean_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.boolean_to_hex" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.dhcp_encode.boolean_to_hex">
+<span class="sig-name descname"><span class="pre">boolean_to_hex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.boolean_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.boolean_to_hex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Encode boolean value as single hex byte</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -211,8 +215,8 @@ DHCP Options and sub_options</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.dhcp_encode.empty_to_hex">
-<code class="sig-name descname"><span class="pre">empty_to_hex</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.empty_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.empty_to_hex" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.dhcp_encode.empty_to_hex">
+<span class="sig-name descname"><span class="pre">empty_to_hex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.empty_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.empty_to_hex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return empyt hex string ‘’</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -225,8 +229,8 @@ DHCP Options and sub_options</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.dhcp_encode.encode_data">
-<code class="sig-name descname"><span class="pre">encode_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_opt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_bytes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.encode_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.encode_data" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.dhcp_encode.encode_data">
+<span class="sig-name descname"><span class="pre">encode_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_opt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_bytes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.encode_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.encode_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Encode the data section of a sub_option definition</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -244,8 +248,8 @@ Must include ‘data’ and ‘type’ keys</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.dhcp_encode.encode_dhcp_option">
-<code class="sig-name descname"><span class="pre">encode_dhcp_option</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_opt_defs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_bytes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encapsulate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.encode_dhcp_option"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.encode_dhcp_option" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.dhcp_encode.encode_dhcp_option">
+<span class="sig-name descname"><span class="pre">encode_dhcp_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_opt_defs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_bytes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encapsulate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.encode_dhcp_option"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.encode_dhcp_option" title="Permalink to this definition">¶</a></dt>
 <dd><p>Encode list of DHCP Sub Options to Hex</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -265,8 +269,8 @@ Must include ‘data’ and ‘type’ keys</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.dhcp_encode.encode_sub_option">
-<code class="sig-name descname"><span class="pre">encode_sub_option</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_opt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_bytes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.encode_sub_option"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.encode_sub_option" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.dhcp_encode.encode_sub_option">
+<span class="sig-name descname"><span class="pre">encode_sub_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sub_opt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_bytes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.encode_sub_option"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.encode_sub_option" title="Permalink to this definition">¶</a></dt>
 <dd><p>Encode individual sub option</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -286,8 +290,8 @@ the ‘data-only’ key)</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.dhcp_encode.fqdn_to_hex">
-<code class="sig-name descname"><span class="pre">fqdn_to_hex</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fqdn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.fqdn_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.fqdn_to_hex" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.dhcp_encode.fqdn_to_hex">
+<span class="sig-name descname"><span class="pre">fqdn_to_hex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fqdn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.fqdn_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.fqdn_to_hex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Encode an fdqn in RFC 1035 Section 3.1 formatted hex</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -300,8 +304,8 @@ the ‘data-only’ key)</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.dhcp_encode.hex_length">
-<code class="sig-name descname"><span class="pre">hex_length</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hex_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.hex_length"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.hex_length" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.dhcp_encode.hex_length">
+<span class="sig-name descname"><span class="pre">hex_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hex_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.hex_length"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.hex_length" title="Permalink to this definition">¶</a></dt>
 <dd><p>Encode Option Length in hex (1-octet)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -314,8 +318,8 @@ the ‘data-only’ key)</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.dhcp_encode.int_to_hex">
-<code class="sig-name descname"><span class="pre">int_to_hex</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.int_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.int_to_hex" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.dhcp_encode.int_to_hex">
+<span class="sig-name descname"><span class="pre">int_to_hex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.int_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.int_to_hex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Encode integer of specified size as signed int in hex</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -331,8 +335,8 @@ the ‘data-only’ key)</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.dhcp_encode.ip_to_hex">
-<code class="sig-name descname"><span class="pre">ip_to_hex</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.ip_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.ip_to_hex" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.dhcp_encode.ip_to_hex">
+<span class="sig-name descname"><span class="pre">ip_to_hex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.ip_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.ip_to_hex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Encode an IPv4 or IPv6 address to hex</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -345,8 +349,8 @@ the ‘data-only’ key)</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.dhcp_encode.ipv4_address_to_hex">
-<code class="sig-name descname"><span class="pre">ipv4_address_to_hex</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ipv4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.ipv4_address_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.ipv4_address_to_hex" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.dhcp_encode.ipv4_address_to_hex">
+<span class="sig-name descname"><span class="pre">ipv4_address_to_hex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ipv4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.ipv4_address_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.ipv4_address_to_hex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Encode an IPv4 address to hex</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -359,8 +363,8 @@ the ‘data-only’ key)</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.dhcp_encode.ipv6_address_to_hex">
-<code class="sig-name descname"><span class="pre">ipv6_address_to_hex</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ipv6</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.ipv6_address_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.ipv6_address_to_hex" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.dhcp_encode.ipv6_address_to_hex">
+<span class="sig-name descname"><span class="pre">ipv6_address_to_hex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ipv6</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.ipv6_address_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.ipv6_address_to_hex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Encode an IPv6 address to hex</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -373,8 +377,8 @@ the ‘data-only’ key)</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.dhcp_encode.optcode_to_hex">
-<code class="sig-name descname"><span class="pre">optcode_to_hex</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optcode</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.optcode_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.optcode_to_hex" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.dhcp_encode.optcode_to_hex">
+<span class="sig-name descname"><span class="pre">optcode_to_hex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optcode</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.optcode_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.optcode_to_hex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Encode Option Code in hex (1-octet)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -387,8 +391,8 @@ the ‘data-only’ key)</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.dhcp_encode.string_to_hex">
-<code class="sig-name descname"><span class="pre">string_to_hex</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.string_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.string_to_hex" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.dhcp_encode.string_to_hex">
+<span class="sig-name descname"><span class="pre">string_to_hex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.string_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.string_to_hex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Encode a text string to hex</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -401,14 +405,14 @@ the ‘data-only’ key)</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.dhcp_encode.tests">
-<code class="sig-name descname"><span class="pre">tests</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.tests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.tests" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.dhcp_encode.tests">
+<span class="sig-name descname"><span class="pre">tests</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.tests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.tests" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run through encoding methods and output example results</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.dhcp_encode.uint_to_hex">
-<code class="sig-name descname"><span class="pre">uint_to_hex</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.uint_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.uint_to_hex" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.dhcp_encode.uint_to_hex">
+<span class="sig-name descname"><span class="pre">uint_to_hex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.uint_to_hex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.uint_to_hex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Encode integer of specified size as unsigned int in hex
 Uses 2’s compliment if supplied with negative number</p>
 <dl class="field-list simple">
@@ -425,8 +429,8 @@ Uses 2’s compliment if supplied with negative number</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.dhcp_encode.validate_ip">
-<code class="sig-name descname"><span class="pre">validate_ip</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.validate_ip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.validate_ip" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.dhcp_encode.validate_ip">
+<span class="sig-name descname"><span class="pre">validate_ip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_encode.validate_ip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_encode.validate_ip" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validate input data is a valid IP address
 (Supports both IPv4 and IPv6)</p>
 <dl class="field-list simple">

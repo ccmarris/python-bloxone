@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
@@ -38,7 +41,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Additional Utilities" href="utils.html" />
+    <link rel="next" title="DHCP Options Data Class Usage" href="dhcp-option-data-class-usage.html" />
     <link rel="prev" title="Usage and Examples for dhcputils" href="dhcp_encode-usage.html" /> 
 </head>
 
@@ -88,7 +91,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
@@ -100,6 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="dhcp_encode-class.html">DHCP Encoding/Decoding Utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dhcp_encode-usage.html">Usage and Examples for dhcputils</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">DHCP Option Data Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dhcp-option-data-class-usage.html">DHCP Options Data Class Usage</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">Additional Utilities</a></li>
@@ -178,12 +182,12 @@
   <div class="section" id="dhcp-option-data-class">
 <h1>DHCP Option Data Class<a class="headerlink" href="#dhcp-option-data-class" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="bloxone.DHCP_OPTION_DEFS">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">bloxone.</span></code><code class="sig-name descname"><span class="pre">DHCP_OPTION_DEFS</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vendor_dict.yaml'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.DHCP_OPTION_DEFS">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">bloxone.</span></span><span class="sig-name descname"><span class="pre">DHCP_OPTION_DEFS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vendor_dict.yaml'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class to load and handle DHCP Option Defs</p>
 <dl class="py method">
-<dt id="bloxone.DHCP_OPTION_DEFS.count">
-<code class="sig-name descname"><span class="pre">count</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.count"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.count" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.DHCP_OPTION_DEFS.count">
+<span class="sig-name descname"><span class="pre">count</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.count"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.count" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get numbner of defined vendors</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -193,8 +197,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.DHCP_OPTION_DEFS.dump_vendor_def">
-<code class="sig-name descname"><span class="pre">dump_vendor_def</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vendor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.dump_vendor_def"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.dump_vendor_def" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.DHCP_OPTION_DEFS.dump_vendor_def">
+<span class="sig-name descname"><span class="pre">dump_vendor_def</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vendor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.dump_vendor_def"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.dump_vendor_def" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the vendor definition as a dict</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -207,8 +211,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.DHCP_OPTION_DEFS.included">
-<code class="sig-name descname"><span class="pre">included</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vendor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.included"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.included" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.DHCP_OPTION_DEFS.included">
+<span class="sig-name descname"><span class="pre">included</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vendor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.included"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.included" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check whether this vendor is configured</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -219,8 +223,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.DHCP_OPTION_DEFS.keys">
-<code class="sig-name descname"><span class="pre">keys</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.keys" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.DHCP_OPTION_DEFS.keys">
+<span class="sig-name descname"><span class="pre">keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.keys" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>list of top level keys</p>
@@ -229,8 +233,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.DHCP_OPTION_DEFS.option_def">
-<code class="sig-name descname"><span class="pre">option_def</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vendor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.option_def"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.option_def" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.DHCP_OPTION_DEFS.option_def">
+<span class="sig-name descname"><span class="pre">option_def</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vendor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.option_def"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.option_def" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns option definition as dict</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -243,8 +247,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.DHCP_OPTION_DEFS.parent_opt_def">
-<code class="sig-name descname"><span class="pre">parent_opt_def</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vendor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.parent_opt_def"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.parent_opt_def" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.DHCP_OPTION_DEFS.parent_opt_def">
+<span class="sig-name descname"><span class="pre">parent_opt_def</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vendor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.parent_opt_def"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.parent_opt_def" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns parent-option definition as dict</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -257,8 +261,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.DHCP_OPTION_DEFS.sub_options">
-<code class="sig-name descname"><span class="pre">sub_options</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vendor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.sub_options"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.sub_options" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.DHCP_OPTION_DEFS.sub_options">
+<span class="sig-name descname"><span class="pre">sub_options</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vendor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.sub_options"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.sub_options" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns list of sub-option definitions</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -271,8 +275,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.DHCP_OPTION_DEFS.vendor_description">
-<code class="sig-name descname"><span class="pre">vendor_description</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vendor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.vendor_description"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.vendor_description" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.DHCP_OPTION_DEFS.vendor_description">
+<span class="sig-name descname"><span class="pre">vendor_description</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vendor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.vendor_description"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.vendor_description" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get description of vendor</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -282,8 +286,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.DHCP_OPTION_DEFS.vendor_keys">
-<code class="sig-name descname"><span class="pre">vendor_keys</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vendor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.vendor_keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.vendor_keys" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.DHCP_OPTION_DEFS.vendor_keys">
+<span class="sig-name descname"><span class="pre">vendor_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vendor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.vendor_keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.vendor_keys" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns vendor top level keys</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -296,8 +300,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.DHCP_OPTION_DEFS.vendor_prefix">
-<code class="sig-name descname"><span class="pre">vendor_prefix</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vendor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.vendor_prefix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.vendor_prefix" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.DHCP_OPTION_DEFS.vendor_prefix">
+<span class="sig-name descname"><span class="pre">vendor_prefix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vendor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.vendor_prefix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.vendor_prefix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the prefix is present as a string</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -310,8 +314,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.DHCP_OPTION_DEFS.vendors">
-<code class="sig-name descname"><span class="pre">vendors</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.vendors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.vendors" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.DHCP_OPTION_DEFS.vendors">
+<span class="sig-name descname"><span class="pre">vendors</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.vendors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.vendors" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>list of defined vendors</p>
@@ -320,8 +324,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="bloxone.DHCP_OPTION_DEFS.version">
-<code class="sig-name descname"><span class="pre">version</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.version" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="bloxone.DHCP_OPTION_DEFS.version">
+<span class="sig-name descname"><span class="pre">version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#DHCP_OPTION_DEFS.version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.DHCP_OPTION_DEFS.version" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>str containing config file version or ‘Version not defined’</p>
@@ -339,7 +343,7 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="utils.html" class="btn btn-neutral float-right" title="Additional Utilities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="dhcp-option-data-class-usage.html" class="btn btn-neutral float-right" title="DHCP Options Data Class Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="dhcp_encode-usage.html" class="btn btn-neutral float-left" title="Usage and Examples for dhcputils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

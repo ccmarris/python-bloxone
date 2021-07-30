@@ -45,7 +45,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -1387,7 +1387,7 @@ class dhcp_decode():
         formats = [ 'csv', 'pprint', 'json']
         if output in formats:
             if output == 'pprint':
-                pprint.pprint(decoded_opts)
+                pprint(decoded_opts)
         else:
             print(decoded_opts)
         
@@ -1452,6 +1452,6 @@ class dhcp_decode():
         print(f'Full encoding of sample: {result}')
         decode = self.decode_dhcp_option(result)
         print(f'Decoding result:')
-        pprint.pprint(decode)
+        self.output_decoded_options(decode)
 
         return
