@@ -80,6 +80,7 @@ documentation/doctrees/usage.doctree
 documentation/doctrees/utils-usage.doctree
 documentation/doctrees/utils.doctree
 documentation/doctrees/version_history.doctree
+documentation/html/.DS_Store
 documentation/html/.buildinfo
 documentation/html/.nojekyll
 documentation/html/ackowledgements.html

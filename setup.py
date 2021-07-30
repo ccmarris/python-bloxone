@@ -25,7 +25,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
-    install_requires=[ 'requests' ],
+    install_requires=[ 'requests', 'pyyaml' ],
     package_data={'bloxone':['documentation/*', 'README.rst', 'LICENSE', 'config.ini', 'CHANGELOG.rst']},
     # data_files=['CHANGELOG.rst','README.rst','LICENSE'],
     include_package_data=True

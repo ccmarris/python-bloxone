@@ -20,4 +20,4 @@ from .dhcputils import *
 
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
-__version__ = '0.7.7'
+__version__ = '0.7.8'
