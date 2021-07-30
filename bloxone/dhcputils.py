@@ -13,7 +13,7 @@
 
  Author: Chris Marrison
 
- Date Last Updated: 20210721
+ Date Last Updated: 20210730
 
  Todo:
 
@@ -45,7 +45,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.1.4'
+__version__ = '0.2.0'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -55,6 +55,7 @@ import os
 import yaml
 import binascii
 import bloxone
+from pprint import pprint
 
 # ** Global Vars **
 # DHCP Encoding Utils
@@ -118,7 +119,8 @@ class dhcp_encode():
             ip = ipaddress.ip_address(ip)
             hex_value = '{:x}'.format(ip)
         else:
-            hex_value = None
+            logging.error(f'{ip} not a valid IP')
+            hex_value = ''
 
         return hex_value
 
@@ -409,7 +411,7 @@ class dhcp_encode():
             array = False
 
         # Encode data
-        if array and (len(sub_opt['data'].split(',')) > 1):
+        if array:
             for item in sub_opt['data'].split(','):
                 hex_data += type_to_hex(item)
         else:
@@ -535,7 +537,7 @@ class dhcp_encode():
 
         print(f'Encoding types supported: {self.opt_types}')
         print()
-        print('Non-array tests:')
+        print('Data tests:')
         for data_test in test_data:
             result = self.encode_data(data_test)
             hex_len = self.hex_length(result)
@@ -791,3 +793,662 @@ class DHCP_OPTION_DEFS():
             vendor_def = self.config['vendors'][vendor]
         
         return vendor_def
+
+
+# DHCP Decoding Utils
+
+class dhcp_decode():
+    '''
+    Class to assist with Hex Encoding of 
+    DHCP Options and sub_options
+    '''
+    def __init__(self) -> None:
+        self.opt_types = [ 'string', 
+                           'ip',
+                           'array_of_ip',
+                           'ipv4_address', 
+                           'ipv6_address',
+                           'boolean',
+                           'int8',
+                           'uint8',
+                           'int16',
+                           'uint16',
+                           'int32',
+                           'uint32',
+                           'fqdn',
+                           'binary',
+                           'empty' ]
+
+        self.fqdn_re, self.url_re = bloxone.utils.buildregex()
+        return
+
+
+    def hex_string_to_list(self, hex_string):
+        '''
+        Take a hex string and convert in to a list
+
+        Parameters:
+            hex_string (str): Hex represented as string
+
+        Returns:
+            list of hex bytes
+        '''
+        hex_list = []
+        
+        # Remove colons if present
+        hex_string = hex_string.replace(':','')
+
+        # Turn hex_string into a list
+        for h in range(0, len(hex_string), 2):
+            hex_list.append(hex_string[h:h+2])
+
+        return hex_list
+
+    def hex_to_suboptions(self, hex_string, encapsulated=False):
+        '''
+        Extract the sub-options from the hex data 
+        '''
+        hex_list = []
+        index = 0
+        subopt = {}
+        suboptions = []
+        opt_len = 0
+        opt_data = ''
+        opt_code = ''
+
+        # Turn hex_string into a list
+        hex_list = self.hex_string_to_list(hex_string)
+            
+        # If encapsulated assume first two bytes
+        if encapsulated:
+            index = 2
+
+        while index < len(hex_list):
+            opt_code = hex_list[index]
+            opt_len = int(hex_list[index+1], 16)
+            # Get option data
+            for i in range(index + 2, (index + opt_len + 2)):
+                opt_data += hex_list[i]
+            
+            # Build sub_opt and add to list of suboptions
+            sub_opt = { 'code': self.hex_to_optcode(opt_code),
+                        'data_length': opt_len,
+                        'data': opt_data }
+            
+            suboptions.append(sub_opt)
+
+            # Reset opt_data
+            opt_data = ''
+
+            # Move index 
+            index = index + opt_len + 2
+        
+        return suboptions
+
+
+    def validate_ip(self, ip):
+        '''
+        Validate input data is a valid IP address
+        (Supports both IPv4 and IPv6)
+
+        Parameters:
+            ip (str): ip address as a string
+
+        Returns:
+            bool: Return True for valid and False otherwise
+
+        '''
+        try:
+            ipaddress.ip_address(ip)
+            result = True
+        except ValueError:
+            result = False
+        return result
+
+
+    # IP encondings
+    def hex_to_ip(self, hex_string):
+        '''
+        Decode a 4 or 16 octect hex string to an IPv4 or IPv6 string 
+
+        Parameters:
+            hex_string (str): Hex representation of an IPv4 or IPv6 address 
+        
+        Returns:
+            IP Address as a string
+        '''
+        ip = ''
+        hex_string = hex_string.replace(':','')
+        no_of_octects = self.hex_length(hex_string) 
+
+        # Check number of octets
+        if no_of_octects == '04' or no_of_octects == '10':
+            # Assume IPv4 or IPv6
+            int_ip = int(hex_string, 16)
+            if self.validate_ip(int_ip):
+                ip = ipaddress.ip_address(int_ip).exploded
+            else:
+                logging.error(f'{hex_string} not a valid IP Address')
+                ip = ''
+        else:
+            ip = ''
+
+        return ip
+
+    def hex_to_array_of_ip(self, hex_string):
+        '''
+        '''
+        array_of_ip = ''
+        
+        hex_length = int(self.hex_length(hex_string),16)
+
+        if hex_length in [ 8, 12, 16, 20, 24 ]:
+            # Assume IPv4
+            for ip in [hex_string[n:n+8] for n in range(0, len(hex_string), 8)]:
+                dip = self.hex_to_ip(ip)
+                array_of_ip += dip + ','
+            
+        elif hex_length in [ 32, 48, 64 ]:
+            # Assume IPv6
+            for ip in [hex_string[n:n+32] for n in range(0, len(hex_string), 32)]:
+                dip = self.hex_to_ip(ip)
+                array_of_ip += dip + ','
+
+        else:
+            array_of_ip = 'array_of_ip_failed.'
+            
+        array_of_ip = array_of_ip[:-1]
+            
+        return array_of_ip
+
+
+    # Methods for IPv4 and IPv6
+    def hex_to_ipv4_address(self, hex_string):
+        '''
+        Decode a hex string to an IPv4 Address as a string
+
+        Parameters:
+            hex_string (str): Hex representation of an IPv4 address 
+        
+        Returns:
+            IPv4 Address as a string
+        '''
+        hex_string = hex_string.replace(':','')
+        return self.hex_to_ip(hex_string)
+        
+    
+    def hex_to_ipv6_address(self, hex_string):
+        '''
+        Decode a hex string to an IPv6 address as a string 
+
+        Parameters:
+            hex_string (str): Hex representation of an IPv6 address 
+        
+        Returns:
+            IPv6 Address as a string
+        '''
+        hex_string = hex_string.replace(':','')
+        return self.hex_to_ip(hex_string)
+
+
+    # String/text encoding
+    def hex_to_string(self, hex_string):
+        '''
+        Decode a string of hex values to a text string
+
+        Parameters:
+            hex_string (str): Hex representation of a string
+        
+        Returns:
+            text string (str)
+        '''
+        hex_string = hex_string.replace(':','')
+        s = binascii.unhexlify(hex_string).decode()
+        return s
+
+
+    # Boolean encoding
+    def hex_to_boolean(self, hex_string):
+        ''' 
+        Decode Hex value as a string to 'true' or 'false'
+
+        Parameters:
+            hex_string (str): Hex value as a str
+        
+        Returns:
+           string representation of a boolean
+        '''
+        hex_string = hex_string.replace(':','')
+
+        # Assume true if not zero i.e. check all bits for non-zero
+        if int(hex_string, 16) == 0:
+            text_bool = 'false'
+        else:
+            text_bool = 'true'
+        
+        return text_bool
+
+
+   # integer encodings 
+    def hex_to_int(self, hex_string, size = 8):
+        '''
+        Decode hex to signed integer of defined size
+
+        Parameters:
+            hex_string (str): hex value as string
+            size (int): size in bits [8, 16, 32]
+        
+        Returns:
+            integer
+        '''
+        value = 0
+        i_sizes = [ 8, 16, 32 ]
+        hex_string = hex_string.replace(':','')
+
+        i = int(hex_string, 16)
+        if size in i_sizes:
+            max_bits = size - 1
+            if i < (2**size):
+                if (i > (2**max_bits)):
+                    value = -abs(i - (2**max_bits))
+                else:
+                    value = i
+            else:
+                raise ValueError(f'{i} is out of range for int{size} type')
+        else:
+            raise ValueError(f'Size must be 8, 16, or 32')
+
+        return value 
+
+
+    def hex_to_uint(self, hex_string, size = 8):
+        '''
+        Encode integer of specified size as unsigned int in hex
+        Uses 2's compliment if supplied with negative number
+
+
+        Parameters:
+            i (int): integer value to encode
+            size (int): size in bits [8, 16, 32]
+        
+        Returns:
+            hex encoding as string
+        '''
+        i_sizes = [ 8, 16, 32 ]
+        hex_string = hex_string.replace(':','')
+        i = int(hex_string, 16)
+
+        if size in i_sizes:
+            max_size = 2**size
+            if i < max_size:
+                value = i
+            else:
+                raise ValueError(f'{i} is out of range for uint{size} type')
+        else:
+            raise ValueError(f'Size must be 8, 16, or 32')
+
+        return value 
+
+
+    # Methods for intX and uintX
+    def hex_to_int8(self, value):
+        return self.hex_to_int(value, size=8)
+
+
+    def hex_to_uint8(self, value):
+        return self.hex_to_uint(value, size=8)
+
+
+    def hex_to_int16(self, value):
+        return self.hex_to_int(value, size=16)
+
+
+    def hex_to_uint16(self, value):
+        return self.hex_to_uint(value, size=16)
+
+
+    def hex_to_int32(self, value):
+        return self.hex_to_int(value, size=32)
+
+
+    def hex_to_uint32(self, value):
+        return self.hex_to_uint(value, size=32)
+
+
+    # FDQN Encoding
+    def hex_to_fqdn(self, hex_string):
+        '''
+        Decode RFC 1035 Section 3.1 formatted hexa to fqdn
+
+        Parameters:
+            hex_string (str): hex encoded fqdn
+
+        Returns:
+            fqdn as string
+        '''
+        hex_list = []
+        index = 0
+        fqdn = ''
+        label_len = 0
+        label = ''
+
+        # Turn hex_string into a list
+        hex_list = self.hex_string_to_list(hex_string)
+            
+        label_len = int(hex_list[index], 16)
+        while label_len != 0:
+            
+            # Build label
+            for i in range(index + 1, (index + label_len + 1)):
+                label += hex_list[i]
+            
+            # Build fqdn and reset label
+            fqdn += self.hex_to_string(label) + '.'
+            label = ''
+
+            # Reset index and check
+            index = index + label_len + 1
+            if index < len(hex_list):
+                label_len = int(hex_list[index], 16)
+            else:
+                logging.warning('Reach end before null')
+                label_len = 00
+
+        return fqdn
+
+
+    # Binary Encoding
+    def hex_to_binary(self, data):
+        '''
+        Format hex string of binary/hex encoded data
+
+        Parameters:
+            data (str): data to format
+
+        Returns:
+            hex encoding as string
+        '''
+        hex_value = ''
+        base = 16 
+
+        # Check for binary
+        if data[:2] == '0b':
+            base = 2
+        else:
+            hex_string = hex_string.replace(':','')
+
+        # Force hex encoding without 0x using base
+        hex_value = '{:02x}'.format(int(data, base))
+
+        return hex_value
+
+    
+    # Empty Encoding
+    def hex_to_empty(self, data):
+        '''
+        Return empyt hex string ''
+
+        Parameters:
+            data (str): Data not to encode (should be empty)
+        
+        Returns:
+            Empty String ''
+        '''
+        if data:
+            data = ''
+        return data
+        
+
+    # Code and Length encoding
+    def hex_to_optcode(self, hex_string):
+        '''
+        Encode Option Code in hex (1-octet)
+
+        Parameters:
+            optcode (str/int): Option Code 
+        
+        Returns:
+            hex encoding as string
+        '''
+        opt_code = self.hex_to_int8(hex_string)
+        return opt_code
+
+
+    def hex_length(self, hex_string):
+        '''
+        Encode Option Length in hex (1-octet)
+
+        Parameters:
+            hex_string (str): Octet Encoded Hex String
+        
+        Returns:
+            Number of Hex Octects as hex encoded string
+        '''
+        hex_string = hex_string.replace(':','')
+        hex_len = '{:02x}'.format(int(len(hex_string) / 2))
+        return hex_len
+
+
+    def check_data_type(self, optcode, sub_defs=[], guess=False):
+        '''
+        Get data_type for optcode from sub optino definitions
+
+        Parameters:
+            optcode (int): Option code to check
+            sub_defs (list of dict): sub option definitions to cross
+                    reference
+        
+        Returns:
+            data_type as str
+        
+        '''
+        data_type = ''
+
+        if sub_defs:
+            for d in sub_defs:
+                if optcode == d['code']:
+                    data_type = d['type']
+                    break
+        
+        return data_type
+                
+
+    def guess_data_type(self, subopt, padding=False):
+        '''
+        '''
+        data_type = ''
+        data_types = []
+        dl = subopt['data_length']
+        data = subopt['data'].replace(':','')
+
+        # Check for 1 byte first
+        if dl == 1:
+            # int8 or bool (so treat as int8)
+            # data_types.append('int8')
+            data_type = 'int8'
+        else:
+            # We know it has more than one byte
+                
+            if data[-2:] == '00' and not padding: 
+                # Possible FQDN
+                logging.debug('Checking fqdn guess')
+                fqdn = self.hex_to_fqdn(subopt['data'])
+                # Validate FQDN
+                if bloxone.utils.validate_fqdn(fqdn, self.fqdn_re):
+                    logging.debug('FQDN verified')
+                    data_types.append('fqdn')
+                    data_type = 'fqdn'
+
+            if dl in [4, 16]:
+                logging.debug('CHecking for type ip')
+                if self.hex_to_ip(data):
+                    data_types.append('ip')
+                    data_type = 'ip'
+
+            if dl in [8, 32]:
+                logging.debug('Checking for array of ip')
+                if self.hex_to_ip(data[:dl]):
+                    data_types.append('ip')
+                    data_type = 'array_of_ip'
+            
+            if data_type == '':
+                logging.debug('Default guess of string')
+                data_type = 'string'            
+
+
+        return data_type
+        
+    
+    def decode_data(self, data, data_type='string'):
+        '''
+        '''
+        decoded = ''
+        if data_type in self.opt_types:
+            hex_to_type = eval('self.' + 'hex_to_' + data_type)
+        else:
+            logging.error(f'Unsupported Option Type {data_type}')
+            logging.info('Unsupported option type, ' +
+                         'attempting to process as string')
+            hex_to_type = eval('self.hex_to_string')
+        
+        decoded = hex_to_type(data)
+
+        return decoded
+        
+
+    def decode_dhcp_option(self, 
+                           hex_string,
+                           sub_opt_defs=[],
+                           padding=False,
+                           pad_bytes=1,
+                           encapsulated=False,
+                           id=None,
+                           prefix=''):
+        '''
+        Attempt to decode DHCP options from hex representation
+
+        Parameters:
+            sub_opt_defs (list): List of Sub Option definition dictionaries
+            padding (bool): Whether extra 'null' termination bytes are req.
+            pad_bytes (int): Number of null bytes to append
+            encapsulate (bool): Add id and total length as prefix
+            id (int): option code to prepend
+            prefix (str): String value to prepend to encoded options
+        
+        Returns:
+            Encoded suboption as a hex string
+        '''
+        value = ''
+        str_value = ''
+        suboptions = []
+        de_sub_opt = {}
+        decoded_opts = []
+        guessed = False
+        hex_string = hex_string.replace(':','')
+
+        if encapsulated:
+            parent_opt = self.hex_to_opcode(hexstring[:2])
+            total_len = self.hex_to_int8(hexstring[2:4])
+            hex_string = hex_string[4:]
+
+        # Break out sub-options
+        suboptions = self.hex_to_suboptions(hex_string)
+
+        # Attempt to decode sub_options
+        for opt in suboptions:
+            if sub_opt_defs:
+                data_type = self.check_data_type(opt['code'],
+                                                 sub_defs=sub_opt_defs)
+            else:
+                logging.debug(f'Attempting to guess option type for {opt}')
+                data_type = self.guess_data_type(opt)
+                guessed = True
+            
+            if data_type: 
+                value = self.decode_data(opt['data'], data_type=data_type)
+            
+            str_value = self.decode_data(opt['data'], data_type='string')
+
+            de_sub_opt = { 'code': opt['code'],
+                           'type': data_type,
+                           'data_length': opt['data_length'],
+                           'data': value,
+                           'data_str': str_value,
+                           'guess': guessed }
+
+            decoded_opts.append(de_sub_opt)
+
+        return decoded_opts
+
+
+    def output_decoded_options(self, decoded_opts=[], output='pprint'):
+        '''
+        '''
+        formats = [ 'csv', 'pprint', 'json']
+        if output in formats:
+            if format == 'pprint':
+                pprint(decoded_opts)
+        else:
+            print(decoded_opts)
+        
+        return
+        
+        
+    def tests(self):
+        '''
+        Run through encoding methods and output example results
+        '''
+        encode = dhcp_encode()
+        test_data = [ { 'code': '1', 'type': 'string',
+                        'data': 'AABBDDCCEEDD-aabbccddeeff' },
+                      { 'code': '2', 'type': 'ipv4_address',
+                        'data': '10.10.10.10' },
+                      { 'code': '3', 'type': 'ipv4_address',
+                        'data': '10.10.10.10,11.11.11.11', 'array': True },
+                      { 'code': '4', 'type': 'boolean', 'data': True },
+                      { 'code': '5', 'type': 'int8', 'data': '22' },
+                      { 'code': '5', 'type': 'int8', 'data': '-22' },
+                      { 'code': '6', 'type': 'uint8', 'data': '22' },
+                      { 'code': '7', 'type': 'int16', 'data': '33'},
+                      { 'code': '8', 'type': 'int16', 'data': '33'},
+                      { 'code': '9', 'type': 'uint16', 'data': '33'}, 
+                      { 'code': '10', 'type': 'int32', 'data': '44'}, 
+                      { 'code': '11', 'type': 'uint32', 'data': '-44'}, 
+                      { 'code': '12', 'type': 'uint32', 'data': '44'}, 
+                      { 'code': '13', 'type': 'fqdn',
+                        'data': 'www.infoblox.com' },
+                      { 'code': '14', 'type': 'binary', 'data': 'DEADBEEF' },
+                      { 'code': '15', 'type': 'empty', 'data': ''},
+                      { 'code': '16', 'type': 'ipv6_address',
+                        'data': '2001:DB8::1' },
+                      { 'code': '17', 'type': 'ipv6_address',
+                        'data': '2001:DB8::1,2001:DB8::2', 'array': True } ]
+
+        print(f'Decoding types supported: {self.opt_types}')
+        print()
+        print('Non-array tests:')
+        for data_test in test_data:
+            result = self.encode_data(data_test)
+            hex_len = self.hex_length(result)
+            print(f'Type: {data_test["type"]}: {data_test["data"]}, ' +
+                  f'Encoded: {result}, Length(hex): {hex_len}')
+        
+        print()
+        # Padding Test
+        test_data = { 'code': '99', 'type': 'string', 'data': 'AABBCCDD' }
+        result = self.encode_data(test_data, padding=True)
+        print(f'Padding test (1 byte), type string: {test_data["data"]}' +
+              f' {result}')
+        # Full encode test
+        test_data = [ { 'code': '1', 'type': 'string',
+                        'data': 'AABBDDCCEEDD-aabbccddeeff' },
+                      { 'code': '2', 'type': 'ipv4_address',
+                        'data': '10.10.10.10' },
+                      { 'code': '3', 'type': 'ipv4_address',
+                        'data': '10.10.10.10,11.11.11.11', 'array': True },
+                      { 'code': '4', 'type': 'boolean', 'data': True },
+                      { 'code': '5', 'type': 'int8', 'data': '22' } ]
+        result = self.encode_dhcp_option(test_data)
+        print(f'Full encoding of sample: {result}')
+
+        return
