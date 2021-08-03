@@ -1,0 +1,548 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>DHCP Decoding Class &mdash; Bloxone API Wrapper 0.7.6 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Usage and Examples for dhcputils (decode)" href="dhcp_decode-usage.html" />
+    <link rel="prev" title="Usage and Examples for dhcputils (encode)" href="dhcp_encode-usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Bloxone API Wrapper
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage and Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="dhcp-utils-classes.html">DHCP Utilities</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dhcp_encode-class.html">DHCP Encoding Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dhcp_encode-usage.html">Usage and Examples for dhcputils (encode)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">DHCP Decoding Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dhcp_decode-usage.html">Usage and Examples for dhcputils (decode)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dhcp-option-data-class.html">DHCP Option Data Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dhcp-option-data-class-usage.html">DHCP Options Data Class Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Additional Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Source Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version_history.html">ChangeLog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ackowledgements.html">Authors and acknowledgment</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Bloxone API Wrapper</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="dhcp-utils-classes.html">DHCP Utilities</a> &raquo;</li>
+        
+      <li>DHCP Decoding Class</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/dhcp_decode-class.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dhcp-decoding-class">
+<h1>DHCP Decoding Class<a class="headerlink" href="#dhcp-decoding-class" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">bloxone.</span></span><span class="sig-name descname"><span class="pre">dhcp_decode</span></span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class to assist with Hex Encoding of
+DHCP Options and sub_options</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode.check_data_type">
+<span class="sig-name descname"><span class="pre">check_data_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optcode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub_defs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">guess</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.check_data_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.check_data_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get data_type for optcode from sub optino definitions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>optcode</strong> (<em>int</em>) – Option code to check</p></li>
+<li><p><strong>sub_defs</strong> (<em>list of dict</em>) – sub option definitions to cross
+reference</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>data_type as str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode.decode_data">
+<span class="sig-name descname"><span class="pre">decode_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'string'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.decode_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.decode_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode.decode_dhcp_option">
+<span class="sig-name descname"><span class="pre">decode_dhcp_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hex_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub_opt_defs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_bytes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encapsulated</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.decode_dhcp_option"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.decode_dhcp_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempt to decode DHCP options from hex representation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sub_opt_defs</strong> (<em>list</em>) – List of Sub Option definition dictionaries</p></li>
+<li><p><strong>padding</strong> (<em>bool</em>) – Whether extra ‘null’ termination bytes are req.</p></li>
+<li><p><strong>pad_bytes</strong> (<em>int</em>) – Number of null bytes to append</p></li>
+<li><p><strong>encapsulate</strong> (<em>bool</em>) – Add id and total length as prefix</p></li>
+<li><p><strong>id</strong> (<em>int</em>) – option code to prepend</p></li>
+<li><p><strong>prefix</strong> (<em>str</em>) – String value to prepend to encoded options</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Encoded suboption as a hex string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode.get_name">
+<span class="sig-name descname"><span class="pre">get_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optcode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub_defs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.get_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.get_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get data_type for optcode from sub optino definitions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>optcode</strong> (<em>int</em>) – Option code to check</p></li>
+<li><p><strong>sub_defs</strong> (<em>list of dict</em>) – sub option definitions to cross
+reference</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>name as str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode.guess_data_type">
+<span class="sig-name descname"><span class="pre">guess_data_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subopt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.guess_data_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.guess_data_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode.hex_length">
+<span class="sig-name descname"><span class="pre">hex_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hex_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.hex_length"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.hex_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encode Option Length in hex (1-octet)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hex_string</strong> (<em>str</em>) – Octet Encoded Hex String</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Number of Hex Octects as hex encoded string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode.hex_string_to_list">
+<span class="sig-name descname"><span class="pre">hex_string_to_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hex_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.hex_string_to_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.hex_string_to_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take a hex string and convert in to a list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hex_string</strong> (<em>str</em>) – Hex represented as string</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of hex bytes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode.hex_to_array_of_ip">
+<span class="sig-name descname"><span class="pre">hex_to_array_of_ip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hex_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.hex_to_array_of_ip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.hex_to_array_of_ip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decode array of IPv4 or IPv6 addresses to CSV string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hex_string</strong> (<em>str</em>) – Hex representation of an array of IPv4 or IPv6</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>IP Addresses in a CSV string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode.hex_to_binary">
+<span class="sig-name descname"><span class="pre">hex_to_binary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.hex_to_binary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.hex_to_binary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format hex string of binary/hex encoded data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>str</em>) – data to format</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>hex encoding as string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode.hex_to_boolean">
+<span class="sig-name descname"><span class="pre">hex_to_boolean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hex_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.hex_to_boolean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.hex_to_boolean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decode Hex value as a string to ‘true’ or ‘false’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hex_string</strong> (<em>str</em>) – Hex value as a str</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>string representation of a boolean</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode.hex_to_empty">
+<span class="sig-name descname"><span class="pre">hex_to_empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.hex_to_empty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.hex_to_empty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return empyt hex string ‘’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>str</em>) – Data not to encode (should be empty)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Empty String ‘’</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode.hex_to_fqdn">
+<span class="sig-name descname"><span class="pre">hex_to_fqdn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hex_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.hex_to_fqdn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.hex_to_fqdn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decode RFC 1035 Section 3.1 formatted hexa to fqdn</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hex_string</strong> (<em>str</em>) – hex encoded fqdn</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>fqdn as string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode.hex_to_int">
+<span class="sig-name descname"><span class="pre">hex_to_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hex_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.hex_to_int"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.hex_to_int" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decode hex to signed integer of defined size</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hex_string</strong> (<em>str</em>) – hex value as string</p></li>
+<li><p><strong>size</strong> (<em>int</em>) – size in bits [8, 16, 32]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>integer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode.hex_to_ip">
+<span class="sig-name descname"><span class="pre">hex_to_ip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hex_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.hex_to_ip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.hex_to_ip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decode a 4 or 16 octect hex string to an IPv4 or IPv6 string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hex_string</strong> (<em>str</em>) – Hex representation of an IPv4 or IPv6 address</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>IP Address as a string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode.hex_to_ipv4_address">
+<span class="sig-name descname"><span class="pre">hex_to_ipv4_address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hex_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.hex_to_ipv4_address"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.hex_to_ipv4_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decode a hex string to an IPv4 Address as a string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hex_string</strong> (<em>str</em>) – Hex representation of an IPv4 address</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>IPv4 Address as a string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode.hex_to_ipv6_address">
+<span class="sig-name descname"><span class="pre">hex_to_ipv6_address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hex_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.hex_to_ipv6_address"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.hex_to_ipv6_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decode a hex string to an IPv6 address as a string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hex_string</strong> (<em>str</em>) – Hex representation of an IPv6 address</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>IPv6 Address as a string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode.hex_to_optcode">
+<span class="sig-name descname"><span class="pre">hex_to_optcode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hex_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.hex_to_optcode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.hex_to_optcode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encode Option Code in hex (1-octet)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>optcode</strong> (<em>str/int</em>) – Option Code</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>hex encoding as string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode.hex_to_string">
+<span class="sig-name descname"><span class="pre">hex_to_string</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hex_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.hex_to_string"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.hex_to_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decode a string of hex values to a text string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>hex_string</strong> (<em>str</em>) – Hex representation of a string</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>text string (str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode.hex_to_suboptions">
+<span class="sig-name descname"><span class="pre">hex_to_suboptions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hex_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encapsulated</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.hex_to_suboptions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.hex_to_suboptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract the sub-options from the hex data</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode.hex_to_uint">
+<span class="sig-name descname"><span class="pre">hex_to_uint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hex_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.hex_to_uint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.hex_to_uint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encode integer of specified size as unsigned int in hex
+Uses 2’s compliment if supplied with negative number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> (<em>int</em>) – integer value to encode</p></li>
+<li><p><strong>size</strong> (<em>int</em>) – size in bits [8, 16, 32]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>hex encoding as string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode.output_decoded_options">
+<span class="sig-name descname"><span class="pre">output_decoded_options</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">decoded_opts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pprint'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.output_decoded_options"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.output_decoded_options" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode.tests">
+<span class="sig-name descname"><span class="pre">tests</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.tests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.tests" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run through encoding methods and output example results</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.dhcp_decode.validate_ip">
+<span class="sig-name descname"><span class="pre">validate_ip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.validate_ip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.validate_ip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate input data is a valid IP address
+(Supports both IPv4 and IPv6)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ip</strong> (<em>str</em>) – ip address as a string</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Return True for valid and False otherwise</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="dhcp_decode-usage.html" class="btn btn-neutral float-right" title="Usage and Examples for dhcputils (decode)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="dhcp_encode-usage.html" class="btn btn-neutral float-left" title="Usage and Examples for dhcputils (encode)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Chris Marrison.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

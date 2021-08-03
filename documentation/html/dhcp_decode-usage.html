@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Usage and Examples for dhcputils (decode) &mdash; Bloxone API Wrapper 0.7.6 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="DHCP Option Data Class" href="dhcp-option-data-class.html" />
+    <link rel="prev" title="DHCP Decoding Class" href="dhcp_decode-class.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Bloxone API Wrapper
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.7.6
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage and Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="dhcp-utils-classes.html">DHCP Utilities</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dhcp_encode-class.html">DHCP Encoding Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dhcp_encode-usage.html">Usage and Examples for dhcputils (encode)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dhcp_decode-class.html">DHCP Decoding Class</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Usage and Examples for dhcputils (decode)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#decoding-class">Decoding Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dhcp-option-data-class.html">DHCP Option Data Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dhcp-option-data-class-usage.html">DHCP Options Data Class Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Additional Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code.html">Source Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version_history.html">ChangeLog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ackowledgements.html">Authors and acknowledgment</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Bloxone API Wrapper</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="dhcp-utils-classes.html">DHCP Utilities</a> &raquo;</li>
+        
+      <li>Usage and Examples for dhcputils (decode)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/dhcp_decode-usage.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="usage-and-examples-for-dhcputils-decode">
+<h1>Usage and Examples for dhcputils (decode)<a class="headerlink" href="#usage-and-examples-for-dhcputils-decode" title="Permalink to this headline">¶</a></h1>
+<p>The DHCP Utils provides classes to assist with the encoding and decoding of
+DHCP options in to/from hexidecimal. The primary use case is for sub-option
+encoding for custom option spaces, in particular, Option 43 encoding.</p>
+<div class="section" id="decoding-class">
+<h2>Decoding Class<a class="headerlink" href="#decoding-class" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="dhcp_decode-class.html#bloxone.dhcp_decode" title="bloxone.dhcp_decode"><code class="xref py py-class docutils literal notranslate"><span class="pre">bloxone.dhcp_decode()</span></code></a> class provides a set of <em>decode</em> methods
+to attempt to decode a hexideciaml string representation of DHCP sub-options.</p>
+<p>To decode specific data-types a set of <em>hex_to_type</em> methods are provided.
+These take a hexideciaml string representation of the data and apply the
+required decoding methodology and return the decoded data.</p>
+<p>Since and encoded set of DHCP sub-options does not include the data type
+accurate decoding is problematic. Two mechanisms are provided to try and
+address this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">It</span> <span class="ow">is</span> <span class="n">possible</span> <span class="n">to</span> <span class="n">provide</span> <span class="n">a</span> <span class="n">known</span> <span class="n">definition</span> <span class="k">for</span> <span class="n">the</span> <span class="n">sub</span><span class="o">-</span><span class="n">options</span> <span class="ow">and</span>
+<span class="n">use</span> <span class="n">the</span> <span class="n">specified</span> <span class="n">data</span> <span class="n">types</span><span class="o">.</span>
+
+<span class="o">-</span> <span class="n">Allow</span> <span class="n">the</span> <span class="k">class</span> <span class="nc">to</span> <span class="n">make</span> <span class="n">a</span> <span class="n">best</span><span class="o">-</span><span class="n">efforts</span> <span class="o">*</span><span class="n">guess</span><span class="o">*</span> <span class="n">of</span> <span class="n">the</span> <span class="n">data_type</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>In both cases a string decoding is also applied and provided back. A flag,
+<em>guess</em> is used to inform whether or not the data_type was <em>guessed</em> or
+based on a known definition.</p>
+<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">DHCP_OPTION_DEFS</span></code> class can be utilised to extract sub-option
+definitions from a YAML configuration and maintain a vendor database of
+option definitions.</p>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>The core aim of the class is to provide a simpler interface to decode DHCP sub
+options and return this as a list of dictionary definitions detailing the
+decoding.</p>
+<p>To ensure flexibility the decoding is broken down in to two methods:
+<code class="xref py py-func docutils literal notranslate"><span class="pre">decode_dhcp_option()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">decode_data()</span></code>.</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">decode_data()</span></code> takes the hexideciaml string and a data_type and will
+apply the appropriate hex_to_type() decoding method. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bloxone</span>
+<span class="n">de</span> <span class="o">=</span> <span class="n">bloxone</span><span class="o">.</span><span class="n">dhcp_decode</span><span class="p">()</span>
+<span class="n">de</span><span class="o">.</span><span class="n">decode_data</span><span class="p">(</span><span class="s1">&#39;0a0a0a0a&#39;</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="s1">&#39;ipv4_address&#39;</span><span class="p">)</span>
+<span class="c1"># Output: &#39;10.10.10.10&#39;</span>
+
+<span class="c1"># Note this can be shortened to</span>
+<span class="c1"># de.decode_data(&#39;0a0a0a0a&#39;, data_type=&#39;ip&#39;)</span>
+</pre></div>
+</div>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">decode_dhcp_option()</span></code> also takes a hexidecimal string, however, in this
+case it will be enterpreted as an encoded set of sub-options (based on option
+43 encoding). As mentioned due to the fact that this does not contain data
+type information, you can either provide a dictionary containing an option
+definition (of the same format used by the <code class="xref py py-class docutils literal notranslate"><span class="pre">dhcp_encode()</span></code> class),
+or let the function attempt to make a guess. In both cases the string decoding
+will be included in the response.</p>
+<p>The method returns a list of decoded sub-options with a dictionary per sub
+option. This will be of the format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="p">[</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Undefined&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;10.10.10.10,11.11.11.11&#39;</span><span class="p">,</span>
+<span class="s1">&#39;data_length&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s1">&#39;data_str&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="se">\n\n\n\n\x0b\x0b\x0b\x0b</span><span class="s1">&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;guess&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;array_of_ip&#39;</span><span class="p">}</span> <span class="p">]</span>
+</pre></div>
+</div>
+<p>For simple output an <code class="xref py py-func docutils literal notranslate"><span class="pre">output_decoded_options()</span></code> method is provided.</p>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bloxone</span>
+<span class="n">de</span> <span class="o">=</span> <span class="n">bloxone</span><span class="o">.</span><span class="n">dhcp_decode</span><span class="p">()</span>
+
+<span class="c1"># Hex string to attempt to decode</span>
+<span class="n">h</span> <span class="o">=</span> <span class="s1">&#39;01194141424244444343454544442d61616262636364646565666602040a0a0a0a&#39;</span> <span class="o">+</span>
+        <span class="s1">&#39;03080a0a0a0a0b0b0b0b040101050116&#39;</span>
+
+<span class="n">opt_list</span> <span class="o">=</span> <span class="n">de</span><span class="o">.</span><span class="n">decode_dhcp_option</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+<span class="n">de</span><span class="o">.</span><span class="n">output_decoded_options</span><span class="p">(</span><span class="n">opt_list</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will produce the output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span><span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;AABBDDCCEEDD-aabbccddeeff&#39;</span><span class="p">,</span>
+<span class="s1">&#39;data_length&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+<span class="s1">&#39;data_str&#39;</span><span class="p">:</span> <span class="s1">&#39;AABBDDCCEEDD-aabbccddeeff&#39;</span><span class="p">,</span>
+<span class="s1">&#39;guess&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+<span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Undefined&#39;</span><span class="p">,</span>
+<span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">},</span>
+<span class="p">{</span><span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+<span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;10.10.10.10&#39;</span><span class="p">,</span>
+<span class="s1">&#39;data_length&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+<span class="s1">&#39;data_str&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="se">\n\n\n\n</span><span class="s1">&#39;</span><span class="p">,</span>
+<span class="s1">&#39;guess&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+<span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Undefined&#39;</span><span class="p">,</span>
+<span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ip&#39;</span><span class="p">},</span>
+<span class="p">{</span><span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+<span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;10.10.10.10,11.11.11.11&#39;</span><span class="p">,</span>
+<span class="s1">&#39;data_length&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+<span class="s1">&#39;data_str&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="se">\n\n\n\n\x0b\x0b\x0b\x0b</span><span class="s1">&#39;</span><span class="p">,</span>
+<span class="s1">&#39;guess&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+<span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Undefined&#39;</span><span class="p">,</span>
+<span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;array_of_ip&#39;</span><span class="p">},</span>
+<span class="p">{</span><span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+<span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="s1">&#39;data_length&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="s1">&#39;data_str&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="se">\x01</span><span class="s1">&#39;</span><span class="p">,</span>
+<span class="s1">&#39;guess&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+<span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Undefined&#39;</span><span class="p">,</span>
+<span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;int8&#39;</span><span class="p">},</span>
+<span class="p">{</span><span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+<span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span>
+<span class="s1">&#39;data_length&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="s1">&#39;data_str&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="se">\x16</span><span class="s1">&#39;</span><span class="p">,</span>
+<span class="s1">&#39;guess&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+<span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Undefined&#39;</span><span class="p">,</span>
+<span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;int8&#39;</span><span class="p">}]</span>
+</pre></div>
+</div>
+<p>Example providing sub-option definitions using the same hex string:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up the sub-option definitions</span>
+<span class="n">sub1</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Test1&#39;</span><span class="p">,</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">}</span>
+<span class="n">sub2</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Test2&#39;</span><span class="p">,</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ipv4_address&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;array&#39;</span><span class="p">:</span> <span class="kc">False</span> <span class="p">}</span>
+<span class="n">sub3</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Test3&#39;</span><span class="p">,</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ipv4_address&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;array&#39;</span><span class="p">:</span> <span class="kc">True</span> <span class="p">}</span>
+<span class="n">sub4</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Test4&#39;</span><span class="p">,</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;boolean&#39;</span> <span class="p">}</span>
+<span class="n">sub5</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Test5&#39;</span><span class="p">,</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;int8&#39;</span> <span class="p">}</span>
+
+<span class="c1"># Create list of option definitions</span>
+<span class="n">options</span> <span class="o">=</span> <span class="p">[</span> <span class="n">sub1</span><span class="p">,</span> <span class="n">sub2</span><span class="p">,</span> <span class="n">sub3</span><span class="p">,</span> <span class="n">sub4</span><span class="p">,</span> <span class="n">sub5</span> <span class="p">]</span>
+
+<span class="n">opt_list</span> <span class="o">=</span> <span class="n">de</span><span class="o">.</span><span class="n">decode_dhcp_option</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">sub_opt_defs</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+<span class="n">de</span><span class="o">.</span><span class="n">output_decoded_options</span><span class="p">(</span><span class="n">opt_list</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here you can see that the name and data-types are defined from sub-option
+definitions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span><span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;AABBDDCCEEDD-aabbccddeeff&#39;</span><span class="p">,</span>
+<span class="s1">&#39;data_length&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+<span class="s1">&#39;data_str&#39;</span><span class="p">:</span> <span class="s1">&#39;AABBDDCCEEDD-aabbccddeeff&#39;</span><span class="p">,</span>
+<span class="s1">&#39;guess&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+<span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Test1&#39;</span><span class="p">,</span>
+<span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">},</span>
+<span class="p">{</span><span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+<span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;10.10.10.10&#39;</span><span class="p">,</span>
+<span class="s1">&#39;data_length&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+<span class="s1">&#39;data_str&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="se">\n\n\n\n</span><span class="s1">&#39;</span><span class="p">,</span>
+<span class="s1">&#39;guess&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+<span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Test2&#39;</span><span class="p">,</span>
+<span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ipv4_address&#39;</span><span class="p">},</span>
+<span class="p">{</span><span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+<span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;10.10.10.10,11.11.11.11&#39;</span><span class="p">,</span>
+<span class="s1">&#39;data_length&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+<span class="s1">&#39;data_str&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="se">\n\n\n\n\x0b\x0b\x0b\x0b</span><span class="s1">&#39;</span><span class="p">,</span>
+<span class="s1">&#39;guess&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+<span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Test3&#39;</span><span class="p">,</span>
+<span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;array_of_ip&#39;</span><span class="p">},</span>
+<span class="p">{</span><span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+<span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;true&#39;</span><span class="p">,</span>
+<span class="s1">&#39;data_length&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="s1">&#39;data_str&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="se">\x01</span><span class="s1">&#39;</span><span class="p">,</span>
+<span class="s1">&#39;guess&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+<span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Test4&#39;</span><span class="p">,</span>
+<span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;boolean&#39;</span><span class="p">},</span>
+<span class="p">{</span><span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+<span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span>
+<span class="s1">&#39;data_length&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="s1">&#39;data_str&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="se">\x16</span><span class="s1">&#39;</span><span class="p">,</span>
+<span class="s1">&#39;guess&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+<span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Test5&#39;</span><span class="p">,</span>
+<span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;int8&#39;</span><span class="p">}]</span>
+</pre></div>
+</div>
+<p>As mentioned the <code class="xref py py-class docutils literal notranslate"><span class="pre">DHCP_OPTION_DEFS</span></code> class can be utilised to access
+vendor DHCP Option definitions from a YAML configuration an example script
+and example vendor configuration file can be found as part of the
+<a class="reference external" href="https://github.com/ccmarris/dhcp_option_encoding">dhcp_option_encoding</a> project on GitHub.</p>
+<p>A simple example using showing this is shown below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">=</span> <span class="s1">&#39;010c4d532d55432d436c69656e740205687474707303196570736c&#39;</span> <span class="o">+</span>
+        <span class="s1">&#39;796e6330312e657073696c6f6e68712e6c6f63616c040334343305&#39;</span> <span class="o">+</span>
+        <span class="s1">&#39;252f4365727450726f762f4365727450726f766973696f6e696e67&#39;</span> <span class="o">+</span>
+        <span class="s1">&#39;536572766963652e737663&#39;</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">bloxone</span><span class="o">.</span><span class="n">DHCP_OPTION_DEFS</span><span class="p">(</span><span class="s1">&#39;vendor_dict.yaml&#39;</span><span class="p">)</span>
+<span class="n">sub_options</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">sub_options</span><span class="p">(</span><span class="s1">&#39;MS-UC-Client&#39;</span><span class="p">)</span>
+
+<span class="n">opt_list</span> <span class="o">=</span> <span class="n">de</span><span class="o">.</span><span class="n">decode_dhcp_option</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">sub_opt_defs</span><span class="o">=</span><span class="n">sub_options</span><span class="p">)</span>
+<span class="n">de</span><span class="o">.</span><span class="n">output_decoded_options</span><span class="p">(</span><span class="n">opt_list</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As with the <code class="xref py py-class docutils literal notranslate"><span class="pre">dhcp_encode()</span></code> class you can get a list of supported
+decoding data types using the <em>opt_types*</em> attribute:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">bloxone</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">de</span> <span class="o">=</span> <span class="n">bloxone</span><span class="o">.</span><span class="n">dhcp_decode</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">de</span><span class="o">.</span><span class="n">opt_types</span>
+<span class="go">[&#39;string&#39;, &#39;ip&#39;, &#39;array_of_ip&#39;, &#39;ipv4_address&#39;, &#39;ipv6_address&#39;, &#39;boolean&#39;,</span>
+<span class="go">&#39;int8&#39;, &#39;uint8&#39;, &#39;int16&#39;, &#39;uint16&#39;, &#39;int32&#39;, &#39;uint32&#39;, &#39;fqdn&#39;, &#39;binary&#39;,</span>
+<span class="go">&#39;empty&#39;]</span>
+</pre></div>
+</div>
+<p>For decoding purposes the generic <em>ip</em> and <em>array_of_ip</em> types are exposed,
+the respective methods support both IPv4 and IPv6.</p>
+<p>Each of the supported data-types has a specific method of the format
+<em>hex_to_type()</em>. These can be directly access and typically support data both
+in its native format and as a string:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">de</span><span class="o">.</span><span class="n">hex_to_string</span><span class="p">(</span><span class="s1">&#39;48656c6c6f20776f726c64&#39;</span><span class="p">)</span>
+<span class="c1"># &#39;Hello world&#39;</span>
+<span class="n">de</span><span class="o">.</span><span class="n">hex_to_ip</span><span class="p">(</span><span class="s1">&#39;c0a80165&#39;</span><span class="p">)</span>
+<span class="c1"># &#39;192.168.1.101&#39;</span>
+<span class="n">de</span><span class="o">.</span><span class="n">hex_to_fqdn</span><span class="p">(</span><span class="s1">&#39;0377777708696e666f626c6f7803636f6d00&#39;</span><span class="p">)</span>
+<span class="c1"># &#39;www.infoblox.com.&#39;</span>
+<span class="n">de</span><span class="o">.</span><span class="n">hex_to_int8</span><span class="p">(</span><span class="s1">&#39;16&#39;</span><span class="p">)</span>
+<span class="c1"># 22</span>
+
+<span class="n">etc</span>
+</pre></div>
+</div>
+<p>A <code class="xref py py-func docutils literal notranslate"><span class="pre">tests()</span></code> method is also provided that will show example
+encodings/decodings for each data-type and option encodings:</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="dhcp-option-data-class.html" class="btn btn-neutral float-right" title="DHCP Option Data Class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="dhcp_decode-class.html" class="btn btn-neutral float-left" title="DHCP Decoding Class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Chris Marrison.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

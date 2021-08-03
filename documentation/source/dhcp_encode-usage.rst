@@ -1,6 +1,6 @@
-================================
-Usage and Examples for dhcputils
-================================
+=========================================
+Usage and Examples for dhcputils (encode)
+=========================================
 
 The DHCP Utils provides classes to assist with the encoding and decoding of
 DHCP options in to/from hexidecimal. The primary use case is for sub-option
