@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Usage and Examples for dhcputils &mdash; Bloxone API Wrapper 0.7.6 documentation</title>
+  <title>Usage and Examples for dhcputils (encode) &mdash; Bloxone API Wrapper 0.7.6 documentation</title>
   
 
   
@@ -41,8 +41,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="DHCP Option Data Class" href="dhcp-option-data-class.html" />
-    <link rel="prev" title="DHCP Encoding/Decoding Utils" href="dhcp_encode-class.html" /> 
+    <link rel="next" title="DHCP Decoding Class" href="dhcp_decode-class.html" />
+    <link rel="prev" title="DHCP Encoding Class" href="dhcp_encode-class.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -100,12 +100,14 @@
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage and Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classes.html">Classes Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="dhcp-utils-classes.html">DHCP Utilities</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="dhcp_encode-class.html">DHCP Encoding/Decoding Utils</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Usage and Examples for dhcputils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dhcp_encode-class.html">DHCP Encoding Class</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Usage and Examples for dhcputils (encode)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#encoding-class">Encoding Class</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="dhcp_decode-class.html">DHCP Decoding Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dhcp_decode-usage.html">Usage and Examples for dhcputils (decode)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dhcp-option-data-class.html">DHCP Option Data Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dhcp-option-data-class-usage.html">DHCP Options Data Class Usage</a></li>
 </ul>
@@ -164,7 +166,7 @@
         
           <li><a href="dhcp-utils-classes.html">DHCP Utilities</a> &raquo;</li>
         
-      <li>Usage and Examples for dhcputils</li>
+      <li>Usage and Examples for dhcputils (encode)</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -183,11 +185,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="usage-and-examples-for-dhcputils">
-<h1>Usage and Examples for dhcputils<a class="headerlink" href="#usage-and-examples-for-dhcputils" title="Permalink to this headline">¶</a></h1>
-<p>The DHCP Utils provide classes to assist with the encoding of DHCP options
-in to hexidecimal, The primary use case is for sub-option encoding for custom
-option spaces, in particular, Option 43 encoding.</p>
+  <div class="section" id="usage-and-examples-for-dhcputils-encode">
+<h1>Usage and Examples for dhcputils (encode)<a class="headerlink" href="#usage-and-examples-for-dhcputils-encode" title="Permalink to this headline">¶</a></h1>
+<p>The DHCP Utils provides classes to assist with the encoding and decoding of
+DHCP options in to/from hexidecimal. The primary use case is for sub-option
+encoding for custom option spaces, in particular, Option 43 encoding.</p>
 <div class="section" id="encoding-class">
 <h2>Encoding Class<a class="headerlink" href="#encoding-class" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="dhcp_encode-class.html#bloxone.dhcp_encode" title="bloxone.dhcp_encode"><code class="xref py py-class docutils literal notranslate"><span class="pre">bloxone.dhcp_encode()</span></code></a> class provides a set of <em>encode</em> methods
@@ -214,7 +216,7 @@ options defined as a dictionary and provide an encoding.</p>
 </dd>
 </dl>
 </div></blockquote>
-<p>And several optionnal keys:</p>
+<p>And several optional keys:</p>
 <blockquote>
 <div><dl class="simple">
 <dt>‘array’</dt><dd><p>Boolean to indicate whether the data should be encoded as
@@ -341,8 +343,8 @@ for each data-type and option encodings:</p>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="dhcp-option-data-class.html" class="btn btn-neutral float-right" title="DHCP Option Data Class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="dhcp_encode-class.html" class="btn btn-neutral float-left" title="DHCP Encoding/Decoding Utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dhcp_decode-class.html" class="btn btn-neutral float-right" title="DHCP Decoding Class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="dhcp_encode-class.html" class="btn btn-neutral float-left" title="DHCP Encoding Class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

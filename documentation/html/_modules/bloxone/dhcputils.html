@@ -13,6 +13,8 @@
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -86,7 +89,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
@@ -94,6 +97,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage and Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../classes.html">Classes Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dhcp-utils-classes.html">DHCP Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../utils.html">Additional Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../code.html">Source Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../version_history.html">ChangeLog</a></li>
@@ -179,7 +183,7 @@
 
 <span class="sd"> Author: Chris Marrison</span>
 
-<span class="sd"> Date Last Updated: 20210721</span>
+<span class="sd"> Date Last Updated: 20210802</span>
 
 <span class="sd"> Todo:</span>
 
@@ -211,7 +215,7 @@
 
 <span class="sd">------------------------------------------------------------------------</span>
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.3&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.2.2&#39;</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison&#39;</span>
 <span class="n">__author_email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
 
@@ -221,11 +225,12 @@
 <span class="kn">import</span> <span class="nn">yaml</span>
 <span class="kn">import</span> <span class="nn">binascii</span>
 <span class="kn">import</span> <span class="nn">bloxone</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
 <span class="c1"># ** Global Vars **</span>
 <span class="c1"># DHCP Encoding Utils</span>
 
-<div class="viewcode-block" id="dhcp_encode"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.dhcp_encode">[docs]</a><span class="k">class</span> <span class="nc">dhcp_encode</span><span class="p">():</span>
+<div class="viewcode-block" id="dhcp_encode"><a class="viewcode-back" href="../../dhcp_encode-class.html#bloxone.dhcp_encode">[docs]</a><span class="k">class</span> <span class="nc">dhcp_encode</span><span class="p">():</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Class to assist with Hex Encoding of </span>
 <span class="sd">    DHCP Options and sub_options</span>
@@ -249,7 +254,7 @@
         <span class="k">return</span>
 
 
-<div class="viewcode-block" id="dhcp_encode.validate_ip"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.dhcp_encode.validate_ip">[docs]</a>    <span class="k">def</span> <span class="nf">validate_ip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">):</span>
+<div class="viewcode-block" id="dhcp_encode.validate_ip"><a class="viewcode-back" href="../../dhcp_encode-class.html#bloxone.dhcp_encode.validate_ip">[docs]</a>    <span class="k">def</span> <span class="nf">validate_ip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Validate input data is a valid IP address</span>
 <span class="sd">        (Supports both IPv4 and IPv6)</span>
@@ -270,7 +275,7 @@
 
 
     <span class="c1"># IP encondings</span>
-<div class="viewcode-block" id="dhcp_encode.ip_to_hex"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.dhcp_encode.ip_to_hex">[docs]</a>    <span class="k">def</span> <span class="nf">ip_to_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">):</span>
+<div class="viewcode-block" id="dhcp_encode.ip_to_hex"><a class="viewcode-back" href="../../dhcp_encode-class.html#bloxone.dhcp_encode.ip_to_hex">[docs]</a>    <span class="k">def</span> <span class="nf">ip_to_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Encode an IPv4 or IPv6 address to hex</span>
 
@@ -284,12 +289,13 @@
             <span class="n">ip</span> <span class="o">=</span> <span class="n">ipaddress</span><span class="o">.</span><span class="n">ip_address</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
             <span class="n">hex_value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:x}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">hex_value</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ip</span><span class="si">}</span><span class="s1"> not a valid IP&#39;</span><span class="p">)</span>
+            <span class="n">hex_value</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
         <span class="k">return</span> <span class="n">hex_value</span></div>
 
     <span class="c1"># Methods for IPv4 and IPv6</span>
-<div class="viewcode-block" id="dhcp_encode.ipv4_address_to_hex"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.dhcp_encode.ipv4_address_to_hex">[docs]</a>    <span class="k">def</span> <span class="nf">ipv4_address_to_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ipv4</span><span class="p">):</span>
+<div class="viewcode-block" id="dhcp_encode.ipv4_address_to_hex"><a class="viewcode-back" href="../../dhcp_encode-class.html#bloxone.dhcp_encode.ipv4_address_to_hex">[docs]</a>    <span class="k">def</span> <span class="nf">ipv4_address_to_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ipv4</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Encode an IPv4 address to hex</span>
 
@@ -302,7 +308,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ip_to_hex</span><span class="p">(</span><span class="n">ipv4</span><span class="p">)</span></div>
         
     
-<div class="viewcode-block" id="dhcp_encode.ipv6_address_to_hex"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.dhcp_encode.ipv6_address_to_hex">[docs]</a>    <span class="k">def</span> <span class="nf">ipv6_address_to_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ipv6</span><span class="p">):</span>
+<div class="viewcode-block" id="dhcp_encode.ipv6_address_to_hex"><a class="viewcode-back" href="../../dhcp_encode-class.html#bloxone.dhcp_encode.ipv6_address_to_hex">[docs]</a>    <span class="k">def</span> <span class="nf">ipv6_address_to_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ipv6</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Encode an IPv6 address to hex</span>
 
@@ -316,7 +322,7 @@
 
 
     <span class="c1"># String/text encoding</span>
-<div class="viewcode-block" id="dhcp_encode.string_to_hex"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.dhcp_encode.string_to_hex">[docs]</a>    <span class="k">def</span> <span class="nf">string_to_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+<div class="viewcode-block" id="dhcp_encode.string_to_hex"><a class="viewcode-back" href="../../dhcp_encode-class.html#bloxone.dhcp_encode.string_to_hex">[docs]</a>    <span class="k">def</span> <span class="nf">string_to_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Encode a text string to hex</span>
 
@@ -331,7 +337,7 @@
 
 
     <span class="c1"># Boolean encoding</span>
-<div class="viewcode-block" id="dhcp_encode.boolean_to_hex"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.dhcp_encode.boolean_to_hex">[docs]</a>    <span class="k">def</span> <span class="nf">boolean_to_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
+<div class="viewcode-block" id="dhcp_encode.boolean_to_hex"><a class="viewcode-back" href="../../dhcp_encode-class.html#bloxone.dhcp_encode.boolean_to_hex">[docs]</a>    <span class="k">def</span> <span class="nf">boolean_to_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39; </span>
 <span class="sd">        Encode boolean value as single hex byte</span>
 
@@ -361,7 +367,7 @@
 
 
    <span class="c1"># integer encodings </span>
-<div class="viewcode-block" id="dhcp_encode.int_to_hex"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.dhcp_encode.int_to_hex">[docs]</a>    <span class="k">def</span> <span class="nf">int_to_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">8</span><span class="p">):</span>
+<div class="viewcode-block" id="dhcp_encode.int_to_hex"><a class="viewcode-back" href="../../dhcp_encode-class.html#bloxone.dhcp_encode.int_to_hex">[docs]</a>    <span class="k">def</span> <span class="nf">int_to_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">8</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Encode integer of specified size as signed int in hex</span>
 
@@ -389,7 +395,7 @@
         <span class="k">return</span> <span class="n">hex_value</span> </div>
 
 
-<div class="viewcode-block" id="dhcp_encode.uint_to_hex"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.dhcp_encode.uint_to_hex">[docs]</a>    <span class="k">def</span> <span class="nf">uint_to_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">8</span><span class="p">):</span>
+<div class="viewcode-block" id="dhcp_encode.uint_to_hex"><a class="viewcode-back" href="../../dhcp_encode-class.html#bloxone.dhcp_encode.uint_to_hex">[docs]</a>    <span class="k">def</span> <span class="nf">uint_to_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">8</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Encode integer of specified size as unsigned int in hex</span>
 <span class="sd">        Uses 2&#39;s compliment if supplied with negative number</span>
@@ -442,7 +448,7 @@
 
 
     <span class="c1"># FDQN Encoding</span>
-<div class="viewcode-block" id="dhcp_encode.fqdn_to_hex"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.dhcp_encode.fqdn_to_hex">[docs]</a>    <span class="k">def</span> <span class="nf">fqdn_to_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fqdn</span><span class="p">):</span>
+<div class="viewcode-block" id="dhcp_encode.fqdn_to_hex"><a class="viewcode-back" href="../../dhcp_encode-class.html#bloxone.dhcp_encode.fqdn_to_hex">[docs]</a>    <span class="k">def</span> <span class="nf">fqdn_to_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fqdn</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Encode an fdqn in RFC 1035 Section 3.1 formatted hex</span>
 
@@ -476,7 +482,7 @@
 
 
     <span class="c1"># Binary Encoding</span>
-<div class="viewcode-block" id="dhcp_encode.binary_to_hex"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.dhcp_encode.binary_to_hex">[docs]</a>    <span class="k">def</span> <span class="nf">binary_to_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<div class="viewcode-block" id="dhcp_encode.binary_to_hex"><a class="viewcode-back" href="../../dhcp_encode-class.html#bloxone.dhcp_encode.binary_to_hex">[docs]</a>    <span class="k">def</span> <span class="nf">binary_to_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Format hex string of binary/hex encoded data</span>
 
@@ -500,8 +506,15 @@
 
     
     <span class="c1"># Empty Encoding</span>
-<div class="viewcode-block" id="dhcp_encode.empty_to_hex"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.dhcp_encode.empty_to_hex">[docs]</a>    <span class="k">def</span> <span class="nf">empty_to_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<div class="viewcode-block" id="dhcp_encode.empty_to_hex"><a class="viewcode-back" href="../../dhcp_encode-class.html#bloxone.dhcp_encode.empty_to_hex">[docs]</a>    <span class="k">def</span> <span class="nf">empty_to_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Return empyt hex string &#39;&#39;</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            data (str): Data not to encode (should be empty)</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Empty String &#39;&#39;</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -509,23 +522,47 @@
         
 
     <span class="c1"># Code and Length encoding</span>
-<div class="viewcode-block" id="dhcp_encode.optcode_to_hex"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.dhcp_encode.optcode_to_hex">[docs]</a>    <span class="k">def</span> <span class="nf">optcode_to_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optcode</span><span class="p">):</span>
+<div class="viewcode-block" id="dhcp_encode.optcode_to_hex"><a class="viewcode-back" href="../../dhcp_encode-class.html#bloxone.dhcp_encode.optcode_to_hex">[docs]</a>    <span class="k">def</span> <span class="nf">optcode_to_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optcode</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Encode Option Code in hex (1-octet)</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            optcode (str/int): Option Code </span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            hex encoding as string</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">hex_opt</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:02x}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">optcode</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">hex_opt</span></div>
 
 
-<div class="viewcode-block" id="dhcp_encode.hex_length"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.dhcp_encode.hex_length">[docs]</a>    <span class="k">def</span> <span class="nf">hex_length</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hex_string</span><span class="p">):</span>
+<div class="viewcode-block" id="dhcp_encode.hex_length"><a class="viewcode-back" href="../../dhcp_encode-class.html#bloxone.dhcp_encode.hex_length">[docs]</a>    <span class="k">def</span> <span class="nf">hex_length</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hex_string</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Encode Option Length in hex (1-octet)</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            hex_string (str): Octet Encoded Hex String</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Number of Hex Octects as hex encoded string</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">hex_len</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:02x}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hex_string</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">hex_len</span></div>
 
 
     <span class="c1"># Encoding Methods</span>
-<div class="viewcode-block" id="dhcp_encode.encode_data"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.dhcp_encode.encode_data">[docs]</a>    <span class="k">def</span> <span class="nf">encode_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sub_opt</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">pad_bytes</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="viewcode-block" id="dhcp_encode.encode_data"><a class="viewcode-back" href="../../dhcp_encode-class.html#bloxone.dhcp_encode.encode_data">[docs]</a>    <span class="k">def</span> <span class="nf">encode_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sub_opt</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">pad_bytes</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Encode the data section of a sub_option definition</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            sub_opt (dict): Dict containing sub option details</span>
+<span class="sd">                            Must include &#39;data&#39; and &#39;type&#39; keys</span>
+<span class="sd">            padding (bool): Whether extra &#39;null&#39; termination bytes are req.</span>
+<span class="sd">            pad_bytes (int): Number of null bytes to append</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Hex encoded data for specified data-type as string</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">hex_data</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
         <span class="k">if</span> <span class="n">sub_opt</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">opt_types</span><span class="p">:</span>
@@ -544,7 +581,7 @@
             <span class="n">array</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="c1"># Encode data</span>
-        <span class="k">if</span> <span class="n">array</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sub_opt</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">array</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sub_opt</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">):</span>
                 <span class="n">hex_data</span> <span class="o">+=</span> <span class="n">type_to_hex</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -556,11 +593,23 @@
         <span class="k">return</span> <span class="n">hex_data</span></div>
 
 
-<div class="viewcode-block" id="dhcp_encode.encode_sub_option"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.dhcp_encode.encode_sub_option">[docs]</a>    <span class="k">def</span> <span class="nf">encode_sub_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sub_opt</span><span class="p">,</span> 
+<div class="viewcode-block" id="dhcp_encode.encode_sub_option"><a class="viewcode-back" href="../../dhcp_encode-class.html#bloxone.dhcp_encode.encode_sub_option">[docs]</a>    <span class="k">def</span> <span class="nf">encode_sub_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sub_opt</span><span class="p">,</span> 
                           <span class="n">data_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                           <span class="n">padding</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                           <span class="n">pad_bytes</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Encode individual sub option</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            sub_opt (dict): Sub Option Definition, as dict.</span>
+<span class="sd">            data_only (bool): Encode data portion only if True</span>
+<span class="sd">                              (Note the sub_opt dict is also checked for </span>
+<span class="sd">                              the &#39;data-only&#39; key)</span>
+<span class="sd">            padding (bool): Whether extra &#39;null&#39; termination bytes are req.</span>
+<span class="sd">            pad_bytes (int): Number of null bytes to append</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Encoded suboption as a hex string</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c1"># Local variables</span>
         <span class="n">hex_value</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -568,10 +617,13 @@
         <span class="n">hex_len</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
         <span class="n">hex_data</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
-        <span class="k">if</span> <span class="s1">&#39;data-only&#39;</span> <span class="ow">in</span> <span class="n">sub_opt</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">or</span> <span class="n">data_only</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">sub_opt</span><span class="p">[</span><span class="s1">&#39;data_only&#39;</span><span class="p">]:</span>
-                <span class="n">hex_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode_data</span><span class="p">(</span><span class="n">sub_opt</span><span class="p">)</span>
-                <span class="n">hex_value</span> <span class="o">=</span> <span class="n">hex_data</span>
+        <span class="c1"># Check whether &#39;data-only&#39; is defined in sub_option</span>
+        <span class="k">if</span> <span class="s1">&#39;data-only&#39;</span> <span class="ow">in</span> <span class="n">sub_opt</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">data_only</span> <span class="o">=</span> <span class="n">sub_opt</span><span class="p">[</span><span class="s1">&#39;data-only&#39;</span><span class="p">]</span>
+        <span class="c1"># Check whether to encode only the data or whole sub option</span>
+        <span class="k">if</span> <span class="n">data_only</span><span class="p">:</span>
+            <span class="n">hex_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode_data</span><span class="p">(</span><span class="n">sub_opt</span><span class="p">)</span>
+            <span class="n">hex_value</span> <span class="o">=</span> <span class="n">hex_data</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">sub_opt</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">])</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">):</span>
                 <span class="n">hex_opt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">optcode_to_hex</span><span class="p">(</span><span class="n">sub_opt</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">])</span>
@@ -586,13 +638,26 @@
         <span class="k">return</span> <span class="n">hex_value</span></div>
 
 
-<div class="viewcode-block" id="dhcp_encode.encode_dhcp_option"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.dhcp_encode.encode_dhcp_option">[docs]</a>    <span class="k">def</span> <span class="nf">encode_dhcp_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+<div class="viewcode-block" id="dhcp_encode.encode_dhcp_option"><a class="viewcode-back" href="../../dhcp_encode-class.html#bloxone.dhcp_encode.encode_dhcp_option">[docs]</a>    <span class="k">def</span> <span class="nf">encode_dhcp_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
                            <span class="n">sub_opt_defs</span><span class="o">=</span><span class="p">[],</span> 
                            <span class="n">padding</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                            <span class="n">pad_bytes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                            <span class="n">encapsulate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                           <span class="nb">id</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
+                           <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                           <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;&#39;</span> <span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Encode list of DHCP Sub Options to Hex</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            sub_opt_defs (list): List of Sub Option definition dictionaries</span>
+<span class="sd">            padding (bool): Whether extra &#39;null&#39; termination bytes are req.</span>
+<span class="sd">            pad_bytes (int): Number of null bytes to append</span>
+<span class="sd">            encapsulate (bool): Add id and total length as prefix</span>
+<span class="sd">            id (int): option code to prepend</span>
+<span class="sd">            prefix (str): String value to prepend to encoded options</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Encoded suboption as a hex string</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">hex_value</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
@@ -604,16 +669,23 @@
             <span class="n">total_len</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_length</span><span class="p">(</span><span class="nb">hex</span><span class="p">)</span>
             <span class="n">main_opt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">optcode_to_hex</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
             <span class="n">hex_value</span> <span class="o">=</span> <span class="n">main_opt</span> <span class="o">+</span> <span class="n">total_len</span> <span class="o">+</span> <span class="n">hex_value</span>
+        
+        <span class="k">if</span> <span class="n">prefix</span><span class="p">:</span>
+            <span class="n">hex_value</span> <span class="o">+=</span> <span class="n">prefix</span> 
 
         <span class="k">return</span> <span class="n">hex_value</span></div>
 
 
-<div class="viewcode-block" id="dhcp_encode.tests"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.dhcp_encode.tests">[docs]</a>    <span class="k">def</span> <span class="nf">tests</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="dhcp_encode.tests"><a class="viewcode-back" href="../../dhcp_encode-class.html#bloxone.dhcp_encode.tests">[docs]</a>    <span class="k">def</span> <span class="nf">tests</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Run through encoding methods and output example results</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="n">test_data</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;AABBDDCCEEDD-aabbccddeeff&#39;</span> <span class="p">},</span>
-                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ipv4_address&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;10.10.10.10&#39;</span> <span class="p">},</span>
-                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ipv4_address&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;10.10.10.10,11.11.11.11&#39;</span><span class="p">,</span> <span class="s1">&#39;array&#39;</span><span class="p">:</span> <span class="kc">True</span> <span class="p">},</span>
+        <span class="n">test_data</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;AABBDDCCEEDD-aabbccddeeff&#39;</span> <span class="p">},</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ipv4_address&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;10.10.10.10&#39;</span> <span class="p">},</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ipv4_address&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;10.10.10.10,11.11.11.11&#39;</span><span class="p">,</span> <span class="s1">&#39;array&#39;</span><span class="p">:</span> <span class="kc">True</span> <span class="p">},</span>
                       <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;boolean&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="kc">True</span> <span class="p">},</span>
                       <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;int8&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;22&#39;</span> <span class="p">},</span>
                       <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;int8&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;-22&#39;</span> <span class="p">},</span>
@@ -624,15 +696,18 @@
                       <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;10&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;int32&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;44&#39;</span><span class="p">},</span> 
                       <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;11&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;uint32&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;-44&#39;</span><span class="p">},</span> 
                       <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;12&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;uint32&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;44&#39;</span><span class="p">},</span> 
-                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;13&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;fqdn&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;www.infoblox.com&#39;</span> <span class="p">},</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;13&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;fqdn&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;www.infoblox.com&#39;</span> <span class="p">},</span>
                       <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;14&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;binary&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;DEADBEEF&#39;</span> <span class="p">},</span>
                       <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;15&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;empty&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">},</span>
-                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;16&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ipv6_address&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;2001:DB8::1&#39;</span> <span class="p">},</span>
-                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;17&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ipv6_address&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;2001:DB8::1,2001:DB8::2&#39;</span><span class="p">,</span> <span class="s1">&#39;array&#39;</span><span class="p">:</span> <span class="kc">True</span> <span class="p">}</span> <span class="p">]</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;16&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ipv6_address&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;2001:DB8::1&#39;</span> <span class="p">},</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;17&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ipv6_address&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;2001:DB8::1,2001:DB8::2&#39;</span><span class="p">,</span> <span class="s1">&#39;array&#39;</span><span class="p">:</span> <span class="kc">True</span> <span class="p">}</span> <span class="p">]</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Encoding types supported: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">opt_types</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Non-array tests:&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Data tests:&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">data_test</span> <span class="ow">in</span> <span class="n">test_data</span><span class="p">:</span>
             <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode_data</span><span class="p">(</span><span class="n">data_test</span><span class="p">)</span>
             <span class="n">hex_len</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_length</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
@@ -643,11 +718,15 @@
         <span class="c1"># Padding Test</span>
         <span class="n">test_data</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;99&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;AABBCCDD&#39;</span> <span class="p">}</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode_data</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Padding test (1 byte), type string: </span><span class="si">{</span><span class="n">test_data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Padding test (1 byte), type string: </span><span class="si">{</span><span class="n">test_data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span> <span class="o">+</span>
+              <span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="c1"># Full encode test</span>
-        <span class="n">test_data</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;AABBDDCCEEDD-aabbccddeeff&#39;</span> <span class="p">},</span>
-                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ipv4_address&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;10.10.10.10&#39;</span> <span class="p">},</span>
-                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ipv4_address&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;10.10.10.10,11.11.11.11&#39;</span><span class="p">,</span> <span class="s1">&#39;array&#39;</span><span class="p">:</span> <span class="kc">True</span> <span class="p">},</span>
+        <span class="n">test_data</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;AABBDDCCEEDD-aabbccddeeff&#39;</span> <span class="p">},</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ipv4_address&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;10.10.10.10&#39;</span> <span class="p">},</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ipv4_address&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;10.10.10.10,11.11.11.11&#39;</span><span class="p">,</span> <span class="s1">&#39;array&#39;</span><span class="p">:</span> <span class="kc">True</span> <span class="p">},</span>
                       <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;boolean&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="kc">True</span> <span class="p">},</span>
                       <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;int8&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;22&#39;</span> <span class="p">}</span> <span class="p">]</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encode_dhcp_option</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
@@ -657,7 +736,7 @@
                 
 
 <span class="c1"># *** Class to handle Vendor Option Definitions Dictionary in YAML ***</span>
-<div class="viewcode-block" id="DHCP_OPTION_DEFS"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.DHCP_OPTION_DEFS">[docs]</a><span class="k">class</span> <span class="nc">DHCP_OPTION_DEFS</span><span class="p">():</span>
+<div class="viewcode-block" id="DHCP_OPTION_DEFS"><a class="viewcode-back" href="../../dhcp-option-data-class.html#bloxone.DHCP_OPTION_DEFS">[docs]</a><span class="k">class</span> <span class="nc">DHCP_OPTION_DEFS</span><span class="p">():</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Class to load and handle DHCP Option Defs</span>
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -665,6 +744,12 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cfg</span><span class="o">=</span><span class="s1">&#39;vendor_dict.yaml&#39;</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Initialise Class Using YAML config</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            cfg (str): Config file to load, default vendor_dict.yaml</span>
+<span class="sd">        </span>
+<span class="sd">        Raises:</span>
+<span class="sd">            FileNotFoundError is yaml file is not found</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
    
@@ -683,30 +768,45 @@
         <span class="k">return</span>
 
 
-<div class="viewcode-block" id="DHCP_OPTION_DEFS.version"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.DHCP_OPTION_DEFS.version">[docs]</a>    <span class="k">def</span> <span class="nf">version</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DHCP_OPTION_DEFS.version"><a class="viewcode-back" href="../../dhcp-option-data-class.html#bloxone.DHCP_OPTION_DEFS.version">[docs]</a>    <span class="k">def</span> <span class="nf">version</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Returns config file version</span>
+<span class="sd">        Returns:</span>
+<span class="sd">        </span>
+<span class="sd">            str containing config file version or &#39;Version not defined&#39;</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;version&#39;</span><span class="p">]</span></div>
+        <span class="k">if</span> <span class="s1">&#39;version&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;version&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">version</span> <span class="o">=</span> <span class="s1">&#39;Version not defined&#39;</span>
+
+        <span class="k">return</span> <span class="n">version</span></div>
 
 
-<div class="viewcode-block" id="DHCP_OPTION_DEFS.keys"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.DHCP_OPTION_DEFS.keys">[docs]</a>    <span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DHCP_OPTION_DEFS.keys"><a class="viewcode-back" href="../../dhcp-option-data-class.html#bloxone.DHCP_OPTION_DEFS.keys">[docs]</a>    <span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Returns top level keys</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            list of top level keys</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="DHCP_OPTION_DEFS.vendors"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.DHCP_OPTION_DEFS.vendors">[docs]</a>    <span class="k">def</span> <span class="nf">vendors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DHCP_OPTION_DEFS.vendors"><a class="viewcode-back" href="../../dhcp-option-data-class.html#bloxone.DHCP_OPTION_DEFS.vendors">[docs]</a>    <span class="k">def</span> <span class="nf">vendors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Returns list of vendors</span>
+<span class="sd">        Returns:</span>
+<span class="sd">           list of defined vendors</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;vendors&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="DHCP_OPTION_DEFS.vendor_keys"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.DHCP_OPTION_DEFS.vendor_keys">[docs]</a>    <span class="k">def</span> <span class="nf">vendor_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vendor</span><span class="p">):</span>
+<div class="viewcode-block" id="DHCP_OPTION_DEFS.vendor_keys"><a class="viewcode-back" href="../../dhcp-option-data-class.html#bloxone.DHCP_OPTION_DEFS.vendor_keys">[docs]</a>    <span class="k">def</span> <span class="nf">vendor_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vendor</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Returns vendor top level keys</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            vendor (str): Vendor Identifier</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            list of keys defined for a vendor</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">included</span><span class="p">(</span><span class="n">vendor</span><span class="p">):</span>
              <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;vendors&#39;</span><span class="p">][</span><span class="n">vendor</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
@@ -716,16 +816,22 @@
         <span class="k">return</span> <span class="n">response</span></div>
 
 
-<div class="viewcode-block" id="DHCP_OPTION_DEFS.count"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.DHCP_OPTION_DEFS.count">[docs]</a>    <span class="k">def</span> <span class="nf">count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DHCP_OPTION_DEFS.count"><a class="viewcode-back" href="../../dhcp-option-data-class.html#bloxone.DHCP_OPTION_DEFS.count">[docs]</a>    <span class="k">def</span> <span class="nf">count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Returns count of defined vendors</span>
+<span class="sd">        Get numbner of defined vendors</span>
+<span class="sd">    </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            int</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;vendors&#39;</span><span class="p">])</span>  </div>
 
 
-<div class="viewcode-block" id="DHCP_OPTION_DEFS.included"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.DHCP_OPTION_DEFS.included">[docs]</a>    <span class="k">def</span> <span class="nf">included</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vendor</span><span class="p">):</span>
+<div class="viewcode-block" id="DHCP_OPTION_DEFS.included"><a class="viewcode-back" href="../../dhcp-option-data-class.html#bloxone.DHCP_OPTION_DEFS.included">[docs]</a>    <span class="k">def</span> <span class="nf">included</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vendor</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Check whether this vendor is configured</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            vendor (str): Vendor Identifier</span>
 
 <span class="sd">        Returns bool</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -738,9 +844,12 @@
         <span class="k">return</span> <span class="n">status</span></div>
 
 
-<div class="viewcode-block" id="DHCP_OPTION_DEFS.vendor_description"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.DHCP_OPTION_DEFS.vendor_description">[docs]</a>    <span class="k">def</span> <span class="nf">vendor_description</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vendor</span><span class="p">):</span>
+<div class="viewcode-block" id="DHCP_OPTION_DEFS.vendor_description"><a class="viewcode-back" href="../../dhcp-option-data-class.html#bloxone.DHCP_OPTION_DEFS.vendor_description">[docs]</a>    <span class="k">def</span> <span class="nf">vendor_description</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vendor</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        Returns description of vendor</span>
+<span class="sd">        Get description of vendor</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            vendor (str): Vendor Identifier</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">desc</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">included</span><span class="p">(</span><span class="n">vendor</span><span class="p">):</span>
@@ -751,9 +860,33 @@
         <span class="k">return</span> <span class="n">desc</span></div>
 
 
-<div class="viewcode-block" id="DHCP_OPTION_DEFS.option_def"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.DHCP_OPTION_DEFS.option_def">[docs]</a>    <span class="k">def</span> <span class="nf">option_def</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vendor</span><span class="p">):</span>
+<div class="viewcode-block" id="DHCP_OPTION_DEFS.vendor_prefix"><a class="viewcode-back" href="../../dhcp-option-data-class.html#bloxone.DHCP_OPTION_DEFS.vendor_prefix">[docs]</a>    <span class="k">def</span> <span class="nf">vendor_prefix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vendor</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get the prefix is present as a string</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            vendor (str): Vendor Identifier</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            string containing defined prefix or &#39;&#39; if none</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">included</span><span class="p">(</span><span class="n">vendor</span><span class="p">):</span>
+            <span class="k">if</span> <span class="s1">&#39;prefix&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vendor_keys</span><span class="p">(</span><span class="n">vendor</span><span class="p">):</span>
+                <span class="n">prefix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;vendors&#39;</span><span class="p">][</span><span class="n">vendor</span><span class="p">][</span><span class="s1">&#39;prefix&#39;</span><span class="p">]</span>
+        
+        <span class="k">return</span> <span class="n">prefix</span></div>
+
+
+<div class="viewcode-block" id="DHCP_OPTION_DEFS.option_def"><a class="viewcode-back" href="../../dhcp-option-data-class.html#bloxone.DHCP_OPTION_DEFS.option_def">[docs]</a>    <span class="k">def</span> <span class="nf">option_def</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vendor</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Returns option definition as dict</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            vendor (str): Vendor Identifier</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict containing both parent and sub option definitions</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">opt_def</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">included</span><span class="p">(</span><span class="n">vendor</span><span class="p">):</span>
@@ -767,9 +900,15 @@
         <span class="k">return</span> <span class="n">opt_def</span></div>
 
 
-<div class="viewcode-block" id="DHCP_OPTION_DEFS.parent_opt_def"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.DHCP_OPTION_DEFS.parent_opt_def">[docs]</a>    <span class="k">def</span> <span class="nf">parent_opt_def</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vendor</span><span class="p">):</span>
+<div class="viewcode-block" id="DHCP_OPTION_DEFS.parent_opt_def"><a class="viewcode-back" href="../../dhcp-option-data-class.html#bloxone.DHCP_OPTION_DEFS.parent_opt_def">[docs]</a>    <span class="k">def</span> <span class="nf">parent_opt_def</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vendor</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Returns parent-option definition as dict</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            vendor (str): Vendor Identifier</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            dict containing parent option definition</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">opt_def</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">parent_def</span> <span class="o">=</span> <span class="p">{}</span>
@@ -785,9 +924,15 @@
         <span class="k">return</span> <span class="n">parent_def</span></div>
 
 
-<div class="viewcode-block" id="DHCP_OPTION_DEFS.sub_options"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.DHCP_OPTION_DEFS.sub_options">[docs]</a>    <span class="k">def</span> <span class="nf">sub_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vendor</span><span class="p">):</span>
+<div class="viewcode-block" id="DHCP_OPTION_DEFS.sub_options"><a class="viewcode-back" href="../../dhcp-option-data-class.html#bloxone.DHCP_OPTION_DEFS.sub_options">[docs]</a>    <span class="k">def</span> <span class="nf">sub_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vendor</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Returns list of sub-option definitions</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            vendor (str): Vendor Identifier</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            list of dict</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">opt_def</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">sub_opt_defs</span> <span class="o">=</span> <span class="p">[]</span>
@@ -803,15 +948,722 @@
         <span class="k">return</span> <span class="n">sub_opt_defs</span></div>
     
     
-<div class="viewcode-block" id="DHCP_OPTION_DEFS.dump_vendor_def"><a class="viewcode-back" href="../../dhcp_encoding-class.html#bloxone.DHCP_OPTION_DEFS.dump_vendor_def">[docs]</a>    <span class="k">def</span> <span class="nf">dump_vendor_def</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vendor</span><span class="p">):</span>
+<div class="viewcode-block" id="DHCP_OPTION_DEFS.dump_vendor_def"><a class="viewcode-back" href="../../dhcp-option-data-class.html#bloxone.DHCP_OPTION_DEFS.dump_vendor_def">[docs]</a>    <span class="k">def</span> <span class="nf">dump_vendor_def</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vendor</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Returns the vendor definition as a dict</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            vendor (str): Vendor Identifier</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            dict containing vendor definition</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">vendor_def</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">included</span><span class="p">(</span><span class="n">vendor</span><span class="p">):</span>
             <span class="n">vendor_def</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;vendors&#39;</span><span class="p">][</span><span class="n">vendor</span><span class="p">]</span>
         
         <span class="k">return</span> <span class="n">vendor_def</span></div></div>
+
+
+<span class="c1"># DHCP Decoding Utils</span>
+
+<div class="viewcode-block" id="dhcp_decode"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode">[docs]</a><span class="k">class</span> <span class="nc">dhcp_decode</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Class to assist with Hex Encoding of </span>
+<span class="sd">    DHCP Options and sub_options</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opt_types</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> 
+                           <span class="s1">&#39;ip&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;array_of_ip&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;ipv4_address&#39;</span><span class="p">,</span> 
+                           <span class="s1">&#39;ipv6_address&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;boolean&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;int8&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;uint8&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;int16&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;uint16&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;int32&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;uint32&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;fqdn&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;binary&#39;</span><span class="p">,</span>
+                           <span class="s1">&#39;empty&#39;</span> <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fqdn_re</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">url_re</span> <span class="o">=</span> <span class="n">bloxone</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">buildregex</span><span class="p">()</span>
+        <span class="k">return</span>
+
+
+<div class="viewcode-block" id="dhcp_decode.hex_string_to_list"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode.hex_string_to_list">[docs]</a>    <span class="k">def</span> <span class="nf">hex_string_to_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hex_string</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Take a hex string and convert in to a list</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            hex_string (str): Hex represented as string</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list of hex bytes</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">hex_list</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="c1"># Remove colons if present</span>
+        <span class="n">hex_string</span> <span class="o">=</span> <span class="n">hex_string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Turn hex_string into a list</span>
+        <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">hex_string</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="n">hex_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hex_string</span><span class="p">[</span><span class="n">h</span><span class="p">:</span><span class="n">h</span><span class="o">+</span><span class="mi">2</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">hex_list</span></div>
+
+<div class="viewcode-block" id="dhcp_decode.hex_to_suboptions"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode.hex_to_suboptions">[docs]</a>    <span class="k">def</span> <span class="nf">hex_to_suboptions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hex_string</span><span class="p">,</span> <span class="n">encapsulated</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Extract the sub-options from the hex data </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">hex_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">subopt</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">suboptions</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">opt_len</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">opt_data</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">opt_code</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="c1"># Turn hex_string into a list</span>
+        <span class="n">hex_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_string_to_list</span><span class="p">(</span><span class="n">hex_string</span><span class="p">)</span>
+            
+        <span class="c1"># If encapsulated assume first two bytes</span>
+        <span class="k">if</span> <span class="n">encapsulated</span><span class="p">:</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="mi">2</span>
+
+        <span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">hex_list</span><span class="p">):</span>
+            <span class="n">opt_code</span> <span class="o">=</span> <span class="n">hex_list</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+            <span class="n">opt_len</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hex_list</span><span class="p">[</span><span class="n">index</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span>
+            <span class="c1"># Get option data</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="n">opt_len</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)):</span>
+                <span class="n">opt_data</span> <span class="o">+=</span> <span class="n">hex_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            
+            <span class="c1"># Build sub_opt and add to list of suboptions</span>
+            <span class="n">sub_opt</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_to_optcode</span><span class="p">(</span><span class="n">opt_code</span><span class="p">),</span>
+                        <span class="s1">&#39;data_length&#39;</span><span class="p">:</span> <span class="n">opt_len</span><span class="p">,</span>
+                        <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">opt_data</span> <span class="p">}</span>
+            
+            <span class="n">suboptions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sub_opt</span><span class="p">)</span>
+
+            <span class="c1"># Reset opt_data</span>
+            <span class="n">opt_data</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+            <span class="c1"># Move index </span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">index</span> <span class="o">+</span> <span class="n">opt_len</span> <span class="o">+</span> <span class="mi">2</span>
+        
+        <span class="k">return</span> <span class="n">suboptions</span></div>
+
+
+<div class="viewcode-block" id="dhcp_decode.validate_ip"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode.validate_ip">[docs]</a>    <span class="k">def</span> <span class="nf">validate_ip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Validate input data is a valid IP address</span>
+<span class="sd">        (Supports both IPv4 and IPv6)</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            ip (str): ip address as a string</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: Return True for valid and False otherwise</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ipaddress</span><span class="o">.</span><span class="n">ip_address</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+
+    <span class="c1"># IP encondings</span>
+<div class="viewcode-block" id="dhcp_decode.hex_to_ip"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode.hex_to_ip">[docs]</a>    <span class="k">def</span> <span class="nf">hex_to_ip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hex_string</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Decode a 4 or 16 octect hex string to an IPv4 or IPv6 string </span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            hex_string (str): Hex representation of an IPv4 or IPv6 address </span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            IP Address as a string</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">ip</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">hex_string</span> <span class="o">=</span> <span class="n">hex_string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">no_of_octects</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_length</span><span class="p">(</span><span class="n">hex_string</span><span class="p">)</span> 
+
+        <span class="c1"># Check number of octets</span>
+        <span class="k">if</span> <span class="n">no_of_octects</span> <span class="o">==</span> <span class="s1">&#39;04&#39;</span> <span class="ow">or</span> <span class="n">no_of_octects</span> <span class="o">==</span> <span class="s1">&#39;10&#39;</span><span class="p">:</span>
+            <span class="c1"># Assume IPv4 or IPv6</span>
+            <span class="n">int_ip</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hex_string</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_ip</span><span class="p">(</span><span class="n">int_ip</span><span class="p">):</span>
+                <span class="n">ip</span> <span class="o">=</span> <span class="n">ipaddress</span><span class="o">.</span><span class="n">ip_address</span><span class="p">(</span><span class="n">int_ip</span><span class="p">)</span><span class="o">.</span><span class="n">exploded</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">hex_string</span><span class="si">}</span><span class="s1"> not a valid IP Address&#39;</span><span class="p">)</span>
+                <span class="n">ip</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ip</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="k">return</span> <span class="n">ip</span></div>
+
+<div class="viewcode-block" id="dhcp_decode.hex_to_array_of_ip"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode.hex_to_array_of_ip">[docs]</a>    <span class="k">def</span> <span class="nf">hex_to_array_of_ip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hex_string</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Decode array of IPv4 or IPv6 addresses to CSV string </span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            hex_string (str): Hex representation of an array of IPv4 or IPv6</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            IP Addresses in a CSV string</span>
+<span class="sd">        </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">array_of_ip</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        
+        <span class="n">hex_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hex_length</span><span class="p">(</span><span class="n">hex_string</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">hex_length</span> <span class="ow">in</span> <span class="p">[</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">24</span> <span class="p">]:</span>
+            <span class="c1"># Assume IPv4</span>
+            <span class="k">for</span> <span class="n">ip</span> <span class="ow">in</span> <span class="p">[</span><span class="n">hex_string</span><span class="p">[</span><span class="n">n</span><span class="p">:</span><span class="n">n</span><span class="o">+</span><span class="mi">8</span><span class="p">]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">hex_string</span><span class="p">),</span> <span class="mi">8</span><span class="p">)]:</span>
+                <span class="n">dip</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_to_ip</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+                <span class="n">array_of_ip</span> <span class="o">+=</span> <span class="n">dip</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span>
+            
+        <span class="k">elif</span> <span class="n">hex_length</span> <span class="ow">in</span> <span class="p">[</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">64</span> <span class="p">]:</span>
+            <span class="c1"># Assume IPv6</span>
+            <span class="k">for</span> <span class="n">ip</span> <span class="ow">in</span> <span class="p">[</span><span class="n">hex_string</span><span class="p">[</span><span class="n">n</span><span class="p">:</span><span class="n">n</span><span class="o">+</span><span class="mi">32</span><span class="p">]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">hex_string</span><span class="p">),</span> <span class="mi">32</span><span class="p">)]:</span>
+                <span class="n">dip</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_to_ip</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+                <span class="n">array_of_ip</span> <span class="o">+=</span> <span class="n">dip</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">array_of_ip</span> <span class="o">=</span> <span class="s1">&#39;array_of_ip_failed.&#39;</span>
+            
+        <span class="n">array_of_ip</span> <span class="o">=</span> <span class="n">array_of_ip</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            
+        <span class="k">return</span> <span class="n">array_of_ip</span></div>
+
+
+    <span class="c1"># Methods for IPv4 and IPv6</span>
+<div class="viewcode-block" id="dhcp_decode.hex_to_ipv4_address"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode.hex_to_ipv4_address">[docs]</a>    <span class="k">def</span> <span class="nf">hex_to_ipv4_address</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hex_string</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Decode a hex string to an IPv4 Address as a string</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            hex_string (str): Hex representation of an IPv4 address </span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            IPv4 Address as a string</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">hex_string</span> <span class="o">=</span> <span class="n">hex_string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_to_ip</span><span class="p">(</span><span class="n">hex_string</span><span class="p">)</span></div>
+        
+    
+<div class="viewcode-block" id="dhcp_decode.hex_to_ipv6_address"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode.hex_to_ipv6_address">[docs]</a>    <span class="k">def</span> <span class="nf">hex_to_ipv6_address</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hex_string</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Decode a hex string to an IPv6 address as a string </span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            hex_string (str): Hex representation of an IPv6 address </span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            IPv6 Address as a string</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">hex_string</span> <span class="o">=</span> <span class="n">hex_string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_to_ip</span><span class="p">(</span><span class="n">hex_string</span><span class="p">)</span></div>
+
+
+    <span class="c1"># String/text encoding</span>
+<div class="viewcode-block" id="dhcp_decode.hex_to_string"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode.hex_to_string">[docs]</a>    <span class="k">def</span> <span class="nf">hex_to_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hex_string</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Decode a string of hex values to a text string</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            hex_string (str): Hex representation of a string</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            text string (str)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">hex_string</span> <span class="o">=</span> <span class="n">hex_string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">binascii</span><span class="o">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">hex_string</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">s</span></div>
+
+
+    <span class="c1"># Boolean encoding</span>
+<div class="viewcode-block" id="dhcp_decode.hex_to_boolean"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode.hex_to_boolean">[docs]</a>    <span class="k">def</span> <span class="nf">hex_to_boolean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hex_string</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Decode Hex value as a string to &#39;true&#39; or &#39;false&#39;</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            hex_string (str): Hex value as a str</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">           string representation of a boolean</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">hex_string</span> <span class="o">=</span> <span class="n">hex_string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Assume true if not zero i.e. check all bits for non-zero</span>
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">hex_string</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">text_bool</span> <span class="o">=</span> <span class="s1">&#39;false&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">text_bool</span> <span class="o">=</span> <span class="s1">&#39;true&#39;</span>
+        
+        <span class="k">return</span> <span class="n">text_bool</span></div>
+
+
+   <span class="c1"># integer encodings </span>
+<div class="viewcode-block" id="dhcp_decode.hex_to_int"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode.hex_to_int">[docs]</a>    <span class="k">def</span> <span class="nf">hex_to_int</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hex_string</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">8</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Decode hex to signed integer of defined size</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            hex_string (str): hex value as string</span>
+<span class="sd">            size (int): size in bits [8, 16, 32]</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            integer</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">i_sizes</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span> <span class="p">]</span>
+        <span class="n">hex_string</span> <span class="o">=</span> <span class="n">hex_string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hex_string</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">size</span> <span class="ow">in</span> <span class="n">i_sizes</span><span class="p">:</span>
+            <span class="n">max_bits</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">size</span><span class="p">):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">max_bits</span><span class="p">)):</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="o">-</span><span class="nb">abs</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">max_bits</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">i</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1"> is out of range for int</span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s1"> type&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Size must be 8, 16, or 32&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">value</span> </div>
+
+
+<div class="viewcode-block" id="dhcp_decode.hex_to_uint"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode.hex_to_uint">[docs]</a>    <span class="k">def</span> <span class="nf">hex_to_uint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hex_string</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">8</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Encode integer of specified size as unsigned int in hex</span>
+<span class="sd">        Uses 2&#39;s compliment if supplied with negative number</span>
+
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            i (int): integer value to encode</span>
+<span class="sd">            size (int): size in bits [8, 16, 32]</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            hex encoding as string</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">i_sizes</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span> <span class="p">]</span>
+        <span class="n">hex_string</span> <span class="o">=</span> <span class="n">hex_string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hex_string</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">size</span> <span class="ow">in</span> <span class="n">i_sizes</span><span class="p">:</span>
+            <span class="n">max_size</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="n">size</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">max_size</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">i</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1"> is out of range for uint</span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s1"> type&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Size must be 8, 16, or 32&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">value</span> </div>
+
+
+    <span class="c1"># Methods for intX and uintX</span>
+    <span class="k">def</span> <span class="nf">hex_to_int8</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_to_int</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">hex_to_uint8</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_to_uint</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">hex_to_int16</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_to_int</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">hex_to_uint16</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_to_uint</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">hex_to_int32</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_to_int</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">hex_to_uint32</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_to_uint</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+
+
+    <span class="c1"># FDQN Encoding</span>
+<div class="viewcode-block" id="dhcp_decode.hex_to_fqdn"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode.hex_to_fqdn">[docs]</a>    <span class="k">def</span> <span class="nf">hex_to_fqdn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hex_string</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Decode RFC 1035 Section 3.1 formatted hexa to fqdn</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            hex_string (str): hex encoded fqdn</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            fqdn as string</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">hex_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">fqdn</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">label_len</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="c1"># Turn hex_string into a list</span>
+        <span class="n">hex_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_string_to_list</span><span class="p">(</span><span class="n">hex_string</span><span class="p">)</span>
+            
+        <span class="n">label_len</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hex_list</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">label_len</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            
+            <span class="c1"># Build label</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="n">label_len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+                <span class="n">label</span> <span class="o">+=</span> <span class="n">hex_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            
+            <span class="c1"># Build fqdn and reset label</span>
+            <span class="n">fqdn</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_to_string</span><span class="p">(</span><span class="n">label</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+            <span class="c1"># Reset index and check</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">index</span> <span class="o">+</span> <span class="n">label_len</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">hex_list</span><span class="p">):</span>
+                <span class="n">label_len</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">hex_list</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="mi">16</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Reach end before null&#39;</span><span class="p">)</span>
+                <span class="n">label_len</span> <span class="o">=</span> <span class="mi">00</span>
+
+        <span class="k">return</span> <span class="n">fqdn</span></div>
+
+
+    <span class="c1"># Binary Encoding</span>
+<div class="viewcode-block" id="dhcp_decode.hex_to_binary"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode.hex_to_binary">[docs]</a>    <span class="k">def</span> <span class="nf">hex_to_binary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Format hex string of binary/hex encoded data</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            data (str): data to format</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            hex encoding as string</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">hex_value</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="mi">16</span> 
+
+        <span class="c1"># Check for binary</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0b&#39;</span><span class="p">:</span>
+            <span class="n">base</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hex_string</span> <span class="o">=</span> <span class="n">hex_string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Force hex encoding without 0x using base</span>
+        <span class="n">hex_value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:02x}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">base</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">hex_value</span></div>
+
+    
+    <span class="c1"># Empty Encoding</span>
+<div class="viewcode-block" id="dhcp_decode.hex_to_empty"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode.hex_to_empty">[docs]</a>    <span class="k">def</span> <span class="nf">hex_to_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Return empyt hex string &#39;&#39;</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            data (str): Data not to encode (should be empty)</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Empty String &#39;&#39;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">data</span></div>
+        
+
+    <span class="c1"># Code and Length encoding</span>
+<div class="viewcode-block" id="dhcp_decode.hex_to_optcode"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode.hex_to_optcode">[docs]</a>    <span class="k">def</span> <span class="nf">hex_to_optcode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hex_string</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Encode Option Code in hex (1-octet)</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            optcode (str/int): Option Code </span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            hex encoding as string</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">opt_code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_to_int8</span><span class="p">(</span><span class="n">hex_string</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">opt_code</span></div>
+
+
+<div class="viewcode-block" id="dhcp_decode.hex_length"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode.hex_length">[docs]</a>    <span class="k">def</span> <span class="nf">hex_length</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hex_string</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Encode Option Length in hex (1-octet)</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            hex_string (str): Octet Encoded Hex String</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Number of Hex Octects as hex encoded string</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">hex_string</span> <span class="o">=</span> <span class="n">hex_string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">hex_len</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:02x}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hex_string</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">hex_len</span></div>
+
+
+<div class="viewcode-block" id="dhcp_decode.check_data_type"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode.check_data_type">[docs]</a>    <span class="k">def</span> <span class="nf">check_data_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optcode</span><span class="p">,</span> <span class="n">sub_defs</span><span class="o">=</span><span class="p">[],</span> <span class="n">guess</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get data_type for optcode from sub optino definitions</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            optcode (int): Option code to check</span>
+<span class="sd">            sub_defs (list of dict): sub option definitions to cross</span>
+<span class="sd">                    reference</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            data_type as str</span>
+<span class="sd">        </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">data_type</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="k">if</span> <span class="n">sub_defs</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">sub_defs</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">optcode</span> <span class="o">==</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">]:</span>
+                    <span class="n">data_type</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
+                    <span class="c1"># Check for array_of_ip </span>
+                    <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;ip&#39;</span> <span class="ow">in</span> <span class="n">data_type</span><span class="p">)</span> <span class="ow">and</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;array&#39;</span><span class="p">]:</span>
+                        <span class="n">data_type</span> <span class="o">=</span> <span class="s1">&#39;array_of_ip&#39;</span>
+                    <span class="k">break</span>
+        
+        <span class="k">return</span> <span class="n">data_type</span></div>
+ 
+
+<div class="viewcode-block" id="dhcp_decode.get_name"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode.get_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optcode</span><span class="p">,</span> <span class="n">sub_defs</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get data_type for optcode from sub optino definitions</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            optcode (int): Option code to check</span>
+<span class="sd">            sub_defs (list of dict): sub option definitions to cross</span>
+<span class="sd">                    reference</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            name as str</span>
+<span class="sd">        </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="k">if</span> <span class="n">sub_defs</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">sub_defs</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">optcode</span> <span class="o">==</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">]:</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+                    <span class="k">break</span>
+        
+        <span class="k">return</span> <span class="n">name</span></div>
+                            
+
+<div class="viewcode-block" id="dhcp_decode.guess_data_type"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode.guess_data_type">[docs]</a>    <span class="k">def</span> <span class="nf">guess_data_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subopt</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">data_type</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">data_types</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">dl</span> <span class="o">=</span> <span class="n">subopt</span><span class="p">[</span><span class="s1">&#39;data_length&#39;</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">subopt</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Check for 1 byte first</span>
+        <span class="k">if</span> <span class="n">dl</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># int8 or bool (so treat as int8)</span>
+            <span class="c1"># data_types.append(&#39;int8&#39;)</span>
+            <span class="n">data_type</span> <span class="o">=</span> <span class="s1">&#39;int8&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># We know it has more than one byte</span>
+                
+            <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span> <span class="o">==</span> <span class="s1">&#39;00&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">padding</span><span class="p">:</span> 
+                <span class="c1"># Possible FQDN</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Checking fqdn guess&#39;</span><span class="p">)</span>
+                <span class="n">fqdn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_to_fqdn</span><span class="p">(</span><span class="n">subopt</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">])</span>
+                <span class="c1"># Validate FQDN</span>
+                <span class="k">if</span> <span class="n">bloxone</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">validate_fqdn</span><span class="p">(</span><span class="n">fqdn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fqdn_re</span><span class="p">):</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;FQDN verified&#39;</span><span class="p">)</span>
+                    <span class="n">data_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;fqdn&#39;</span><span class="p">)</span>
+                    <span class="n">data_type</span> <span class="o">=</span> <span class="s1">&#39;fqdn&#39;</span>
+
+            <span class="k">if</span> <span class="n">dl</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">16</span><span class="p">]:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;CHecking for type ip&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_to_ip</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+                    <span class="n">data_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;ip&#39;</span><span class="p">)</span>
+                    <span class="n">data_type</span> <span class="o">=</span> <span class="s1">&#39;ip&#39;</span>
+
+            <span class="k">if</span> <span class="n">dl</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">32</span><span class="p">]:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Checking for array of ip&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_to_ip</span><span class="p">(</span><span class="n">data</span><span class="p">[:</span><span class="n">dl</span><span class="p">]):</span>
+                    <span class="n">data_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;ip&#39;</span><span class="p">)</span>
+                    <span class="n">data_type</span> <span class="o">=</span> <span class="s1">&#39;array_of_ip&#39;</span>
+            
+            <span class="k">if</span> <span class="n">data_type</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Default guess of string&#39;</span><span class="p">)</span>
+                <span class="n">data_type</span> <span class="o">=</span> <span class="s1">&#39;string&#39;</span>            
+
+
+        <span class="k">return</span> <span class="n">data_type</span></div>
+        
+    
+<div class="viewcode-block" id="dhcp_decode.decode_data"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode.decode_data">[docs]</a>    <span class="k">def</span> <span class="nf">decode_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">data_type</span><span class="o">=</span><span class="s1">&#39;string&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">decoded</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">data_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">opt_types</span><span class="p">:</span>
+            <span class="n">hex_to_type</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;self.&#39;</span> <span class="o">+</span> <span class="s1">&#39;hex_to_&#39;</span> <span class="o">+</span> <span class="n">data_type</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unsupported Option Type </span><span class="si">{</span><span class="n">data_type</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Unsupported option type, &#39;</span> <span class="o">+</span>
+                         <span class="s1">&#39;attempting to process as string&#39;</span><span class="p">)</span>
+            <span class="n">hex_to_type</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;self.hex_to_string&#39;</span><span class="p">)</span>
+        
+        <span class="n">decoded</span> <span class="o">=</span> <span class="n">hex_to_type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">decoded</span></div>
+        
+
+<div class="viewcode-block" id="dhcp_decode.decode_dhcp_option"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode.decode_dhcp_option">[docs]</a>    <span class="k">def</span> <span class="nf">decode_dhcp_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+                           <span class="n">hex_string</span><span class="p">,</span>
+                           <span class="n">sub_opt_defs</span><span class="o">=</span><span class="p">[],</span>
+                           <span class="n">padding</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                           <span class="n">pad_bytes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                           <span class="n">encapsulated</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                           <span class="nb">id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                           <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Attempt to decode DHCP options from hex representation</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            sub_opt_defs (list): List of Sub Option definition dictionaries</span>
+<span class="sd">            padding (bool): Whether extra &#39;null&#39; termination bytes are req.</span>
+<span class="sd">            pad_bytes (int): Number of null bytes to append</span>
+<span class="sd">            encapsulate (bool): Add id and total length as prefix</span>
+<span class="sd">            id (int): option code to prepend</span>
+<span class="sd">            prefix (str): String value to prepend to encoded options</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Encoded suboption as a hex string</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">str_value</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">suboptions</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">de_sub_opt</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">decoded_opts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">guessed</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">hex_string</span> <span class="o">=</span> <span class="n">hex_string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">encapsulated</span><span class="p">:</span>
+            <span class="n">parent_opt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_to_opcode</span><span class="p">(</span><span class="n">hexstring</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">total_len</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_to_int8</span><span class="p">(</span><span class="n">hexstring</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
+            <span class="n">hex_string</span> <span class="o">=</span> <span class="n">hex_string</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
+
+        <span class="c1"># Break out sub-options</span>
+        <span class="n">suboptions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_to_suboptions</span><span class="p">(</span><span class="n">hex_string</span><span class="p">)</span>
+
+        <span class="c1"># Attempt to decode sub_options</span>
+        <span class="k">for</span> <span class="n">opt</span> <span class="ow">in</span> <span class="n">suboptions</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">sub_opt_defs</span><span class="p">:</span>
+                <span class="n">data_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_data_type</span><span class="p">(</span><span class="n">opt</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">],</span>
+                                                 <span class="n">sub_defs</span><span class="o">=</span><span class="n">sub_opt_defs</span><span class="p">)</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_name</span><span class="p">(</span><span class="n">opt</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">],</span> <span class="n">sub_defs</span><span class="o">=</span><span class="n">sub_opt_defs</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Attempting to guess option type for </span><span class="si">{</span><span class="n">opt</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">data_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">guess_data_type</span><span class="p">(</span><span class="n">opt</span><span class="p">)</span>
+                <span class="n">guessed</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Undefined&#39;</span>
+            
+            <span class="k">if</span> <span class="n">data_type</span><span class="p">:</span> 
+                <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decode_data</span><span class="p">(</span><span class="n">opt</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">],</span> <span class="n">data_type</span><span class="o">=</span><span class="n">data_type</span><span class="p">)</span>
+            
+            <span class="n">str_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decode_data</span><span class="p">(</span><span class="n">opt</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">],</span> <span class="n">data_type</span><span class="o">=</span><span class="s1">&#39;string&#39;</span><span class="p">)</span>
+
+            <span class="n">de_sub_opt</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                           <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="n">opt</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">],</span>
+                           <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="n">data_type</span><span class="p">,</span>
+                           <span class="s1">&#39;data_length&#39;</span><span class="p">:</span> <span class="n">opt</span><span class="p">[</span><span class="s1">&#39;data_length&#39;</span><span class="p">],</span>
+                           <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">,</span>
+                           <span class="s1">&#39;data_str&#39;</span><span class="p">:</span> <span class="n">str_value</span><span class="p">,</span>
+                           <span class="s1">&#39;guess&#39;</span><span class="p">:</span> <span class="n">guessed</span> <span class="p">}</span>
+
+            <span class="n">decoded_opts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">de_sub_opt</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">decoded_opts</span></div>
+
+
+<div class="viewcode-block" id="dhcp_decode.output_decoded_options"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode.output_decoded_options">[docs]</a>    <span class="k">def</span> <span class="nf">output_decoded_options</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">decoded_opts</span><span class="o">=</span><span class="p">[],</span> <span class="n">output</span><span class="o">=</span><span class="s1">&#39;pprint&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">formats</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="s1">&#39;pprint&#39;</span><span class="p">,</span> <span class="s1">&#39;json&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">formats</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="s1">&#39;pprint&#39;</span><span class="p">:</span>
+                <span class="n">pprint</span><span class="p">(</span><span class="n">decoded_opts</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">decoded_opts</span><span class="p">)</span>
+        
+        <span class="k">return</span></div>
+        
+        
+<div class="viewcode-block" id="dhcp_decode.tests"><a class="viewcode-back" href="../../dhcp_decode-class.html#bloxone.dhcp_decode.tests">[docs]</a>    <span class="k">def</span> <span class="nf">tests</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Run through encoding methods and output example results</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">encode</span> <span class="o">=</span> <span class="n">dhcp_encode</span><span class="p">()</span>
+        <span class="n">test_data</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;AABBDDCCEEDD-aabbccddeeff&#39;</span> <span class="p">},</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ipv4_address&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;10.10.10.10&#39;</span> <span class="p">},</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ipv4_address&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;10.10.10.10,11.11.11.11&#39;</span><span class="p">,</span> <span class="s1">&#39;array&#39;</span><span class="p">:</span> <span class="kc">True</span> <span class="p">},</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;boolean&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="kc">True</span> <span class="p">},</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;int8&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;22&#39;</span> <span class="p">},</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;int8&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;-22&#39;</span> <span class="p">},</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;6&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;uint8&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;22&#39;</span> <span class="p">},</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;int16&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;33&#39;</span><span class="p">},</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;8&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;int16&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;33&#39;</span><span class="p">},</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;9&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;uint16&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;33&#39;</span><span class="p">},</span> 
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;10&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;int32&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;44&#39;</span><span class="p">},</span> 
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;11&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;uint32&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;-44&#39;</span><span class="p">},</span> 
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;12&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;uint32&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;44&#39;</span><span class="p">},</span> 
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;13&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;fqdn&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;www.infoblox.com&#39;</span> <span class="p">},</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;14&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;binary&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;DEADBEEF&#39;</span> <span class="p">},</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;15&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;empty&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">},</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;16&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ipv6_address&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;2001:DB8::1&#39;</span> <span class="p">},</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;17&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ipv6_address&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;2001:DB8::1,2001:DB8::2&#39;</span><span class="p">,</span> <span class="s1">&#39;array&#39;</span><span class="p">:</span> <span class="kc">True</span> <span class="p">}</span> <span class="p">]</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Decoding types supported: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">opt_types</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Non-array tests:&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">data_test</span> <span class="ow">in</span> <span class="n">test_data</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">encode</span><span class="o">.</span><span class="n">encode_data</span><span class="p">(</span><span class="n">data_test</span><span class="p">)</span>
+            <span class="n">hex_len</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hex_length</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Type: </span><span class="si">{</span><span class="n">data_test</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">data_test</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">, &#39;</span> <span class="o">+</span>
+                  <span class="sa">f</span><span class="s1">&#39;Encoded: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s1">, Length(hex): </span><span class="si">{</span><span class="n">hex_len</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        
+        <span class="nb">print</span><span class="p">()</span>
+        <span class="c1"># Padding Test</span>
+        <span class="n">test_data</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;99&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;AABBCCDD&#39;</span> <span class="p">}</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">encode</span><span class="o">.</span><span class="n">encode_data</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Padding test (1 byte), type string: </span><span class="si">{</span><span class="n">test_data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span> <span class="o">+</span>
+              <span class="sa">f</span><span class="s1">&#39; </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="c1"># Full encode test</span>
+        <span class="n">test_data</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;AABBDDCCEEDD-aabbccddeeff&#39;</span> <span class="p">},</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ipv4_address&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;10.10.10.10&#39;</span> <span class="p">},</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ipv4_address&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;10.10.10.10,11.11.11.11&#39;</span><span class="p">,</span> <span class="s1">&#39;array&#39;</span><span class="p">:</span> <span class="kc">True</span> <span class="p">},</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;boolean&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="kc">True</span> <span class="p">},</span>
+                      <span class="p">{</span> <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;int8&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="s1">&#39;22&#39;</span> <span class="p">}</span> <span class="p">]</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">encode</span><span class="o">.</span><span class="n">encode_dhcp_option</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Full encoding of sample: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">decode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decode_dhcp_option</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Decoding result:&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_decoded_options</span><span class="p">(</span><span class="n">decode</span><span class="p">)</span>
+
+        <span class="k">return</span></div></div>
 </pre></div>
 
            </div>

@@ -13,7 +13,7 @@
 
  Author: Chris Marrison
 
- Date Last Updated: 20210730
+ Date Last Updated: 20210802
 
  Todo:
 
@@ -45,7 +45,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.2.0'
+__version__ = '0.2.2'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -937,6 +937,14 @@ class dhcp_decode():
 
     def hex_to_array_of_ip(self, hex_string):
         '''
+        Decode array of IPv4 or IPv6 addresses to CSV string 
+
+        Parameters:
+            hex_string (str): Hex representation of an array of IPv4 or IPv6
+        
+        Returns:
+            IP Addresses in a CSV string
+        
         '''
         array_of_ip = ''
         
@@ -1248,10 +1256,37 @@ class dhcp_decode():
             for d in sub_defs:
                 if optcode == d['code']:
                     data_type = d['type']
+                    # Check for array_of_ip 
+                    if ('ip' in data_type) and d['array']:
+                        data_type = 'array_of_ip'
                     break
         
         return data_type
-                
+ 
+
+    def get_name(self, optcode, sub_defs=[]):
+        '''
+        Get data_type for optcode from sub optino definitions
+
+        Parameters:
+            optcode (int): Option code to check
+            sub_defs (list of dict): sub option definitions to cross
+                    reference
+        
+        Returns:
+            name as str
+        
+        '''
+        name = ''
+
+        if sub_defs:
+            for d in sub_defs:
+                if optcode == d['code']:
+                    name = d['name']
+                    break
+        
+        return name
+                            
 
     def guess_data_type(self, subopt, padding=False):
         '''
@@ -1359,17 +1394,21 @@ class dhcp_decode():
             if sub_opt_defs:
                 data_type = self.check_data_type(opt['code'],
                                                  sub_defs=sub_opt_defs)
+                name = self.get_name(opt['code'], sub_defs=sub_opt_defs)
+
             else:
                 logging.debug(f'Attempting to guess option type for {opt}')
                 data_type = self.guess_data_type(opt)
                 guessed = True
+                name = 'Undefined'
             
             if data_type: 
                 value = self.decode_data(opt['data'], data_type=data_type)
             
             str_value = self.decode_data(opt['data'], data_type='string')
 
-            de_sub_opt = { 'code': opt['code'],
+            de_sub_opt = { 'name': name,
+                           'code': opt['code'],
                            'type': data_type,
                            'data_length': opt['data_length'],
                            'data': value,
@@ -1386,7 +1425,7 @@ class dhcp_decode():
         '''
         formats = [ 'csv', 'pprint', 'json']
         if output in formats:
-            if format == 'pprint':
+            if output == 'pprint':
                 pprint(decoded_opts)
         else:
             print(decoded_opts)
@@ -1428,7 +1467,7 @@ class dhcp_decode():
         print()
         print('Non-array tests:')
         for data_test in test_data:
-            result = self.encode_data(data_test)
+            result = encode.encode_data(data_test)
             hex_len = self.hex_length(result)
             print(f'Type: {data_test["type"]}: {data_test["data"]}, ' +
                   f'Encoded: {result}, Length(hex): {hex_len}')
@@ -1436,7 +1475,7 @@ class dhcp_decode():
         print()
         # Padding Test
         test_data = { 'code': '99', 'type': 'string', 'data': 'AABBCCDD' }
-        result = self.encode_data(test_data, padding=True)
+        result = encode.encode_data(test_data, padding=True)
         print(f'Padding test (1 byte), type string: {test_data["data"]}' +
               f' {result}')
         # Full encode test
@@ -1448,7 +1487,10 @@ class dhcp_decode():
                         'data': '10.10.10.10,11.11.11.11', 'array': True },
                       { 'code': '4', 'type': 'boolean', 'data': True },
                       { 'code': '5', 'type': 'int8', 'data': '22' } ]
-        result = self.encode_dhcp_option(test_data)
+        result = encode.encode_dhcp_option(test_data)
         print(f'Full encoding of sample: {result}')
+        decode = self.decode_dhcp_option(result)
+        print(f'Decoding result:')
+        self.output_decoded_options(decode)
 
         return

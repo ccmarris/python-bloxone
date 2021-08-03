@@ -1,6 +1,6 @@
-============================
-DHCP Encoding/Decoding Utils
-============================
+===================
+DHCP Encoding Class
+===================
 
 .. autoclass:: bloxone.dhcp_encode
     :members:
