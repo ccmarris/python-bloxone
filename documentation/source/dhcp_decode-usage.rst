@@ -94,31 +94,122 @@ Examples::
 
 This will produce the output::
 
+	[{'code': 1,
+	'data': 'AABBDDCCEEDD-aabbccddeeff',
+	'data_length': 25,
+	'data_str': 'AABBDDCCEEDD-aabbccddeeff',
+	'guess': True,
+	'name': 'Undefined',
+	'type': 'string'},
+	{'code': 2,
+	'data': '10.10.10.10',
+	'data_length': 4,
+	'data_str': '\n\n\n\n',
+	'guess': True,
+	'name': 'Undefined',
+	'type': 'ip'},
+	{'code': 3,
+	'data': '10.10.10.10,11.11.11.11',
+	'data_length': 8,
+	'data_str': '\n\n\n\n\x0b\x0b\x0b\x0b',
+	'guess': True,
+	'name': 'Undefined',
+	'type': 'array_of_ip'},
+	{'code': 4,
+	'data': 1,
+	'data_length': 1,
+	'data_str': '\x01',
+	'guess': True,
+	'name': 'Undefined',
+	'type': 'int8'},
+	{'code': 5,
+	'data': 22,
+	'data_length': 1,
+	'data_str': '\x16',
+	'guess': True,
+	'name': 'Undefined',
+	'type': 'int8'}]
 
+Example providing sub-option definitions using the same hex string::
 
-Example providing sub-option definitions::
+	# Set up the sub-option definitions
+	sub1 = { 'name': 'Test1', 'code': 1, 'type': 'string', 'data': ''}
+	sub2 = { 'name': 'Test2', 'code': 2, 'type': 'ipv4_address', 
+			'data': '', 'array': False }
+	sub3 = { 'name': 'Test3', 'code': 3, 'type': 'ipv4_address',
+			'data': '', 'array': True }
+	sub4 = { 'name': 'Test4', 'code': 4, 'type': 'boolean' }
+	sub5 = { 'name': 'Test5', 'code': 5, 'type': 'int8' }		 
 
-# Set up the sub-option definitions
-sub1 = { 'name': 'Test1', 'code': 1, 'type': 'string', 'data': ''}
-sub2 = { 'name': 'Test2', 'code': 2, 'type': 'ipv4_address', 
-		'data': '', 'array': False }
-sub3 = { 'name': 'Test3', 'code': 3, 'type': 'ipv4_address',
-		'data': '', 'array': True }
-sub4 = { 'name': 'Test4', 'code': 4, 'type': 'boolean' }
-sub5 = { 'name': 'Test5', 'code': 5, 'type': 'int8' }		 
+	# Create list of option definitions
+	options = [ sub1, sub2, sub3, sub4, sub5 ]
 
-# Create list of option definitions
-options = [ sub1, sub2, sub3, sub4, sub5 ]
-
-opt_list = de.decode_dhcp_option(h, sub_opt_defs=options)
-de.output_decoded_options(opt_list)
+	opt_list = de.decode_dhcp_option(h, sub_opt_defs=options)
+	de.output_decoded_options(opt_list)
 	
 
-This will produce the output::
+Here you can see that the name and data-types are defined from sub-option
+definitions::
+
+	[{'code': 1,
+	'data': 'AABBDDCCEEDD-aabbccddeeff',
+	'data_length': 25,
+	'data_str': 'AABBDDCCEEDD-aabbccddeeff',
+	'guess': False,
+	'name': 'Test1',
+	'type': 'string'},
+	{'code': 2,
+	'data': '10.10.10.10',
+	'data_length': 4,
+	'data_str': '\n\n\n\n',
+	'guess': False,
+	'name': 'Test2',
+	'type': 'ipv4_address'},
+	{'code': 3,
+	'data': '10.10.10.10,11.11.11.11',
+	'data_length': 8,
+	'data_str': '\n\n\n\n\x0b\x0b\x0b\x0b',
+	'guess': False,
+	'name': 'Test3',
+	'type': 'array_of_ip'},
+	{'code': 4,
+	'data': 'true',
+	'data_length': 1,
+	'data_str': '\x01',
+	'guess': False,
+	'name': 'Test4',
+	'type': 'boolean'},
+	{'code': 5,
+	'data': 22,
+	'data_length': 1,
+	'data_str': '\x16',
+	'guess': False,
+	'name': 'Test5',
+	'type': 'int8'}]
 
 
+As mentioned the :class:`DHCP_OPTION_DEFS` class can be utilised to access
+vendor DHCP Option definitions from a YAML configuration an example script
+and example vendor configuration file can be found as part of the 
+`dhcp_option_encoding`_ project on GitHub. 
 
--------
+.. _dhcp_option_encoding: https://github.com/ccmarris/dhcp_option_encoding
+
+A simple example using showing this is shown below::
+
+	h = '010c4d532d55432d436c69656e740205687474707303196570736c' +
+		'796e6330312e657073696c6f6e68712e6c6f63616c040334343305' + 
+		'252f4365727450726f762f4365727450726f766973696f6e696e67' +
+		'536572766963652e737663'
+	v = bloxone.DHCP_OPTION_DEFS('vendor_dict.yaml')
+	sub_options = v.sub_options('MS-UC-Client')
+
+	opt_list = de.decode_dhcp_option(h, sub_opt_defs=sub_options)
+	de.output_decoded_options(opt_list)
+
+
+As with the :class:`dhcp_encode()` class you can get a list of supported 
+decoding data types using the *opt_types** attribute::
 
 	>>> import bloxone
 	>>> de = bloxone.dhcp_decode()
@@ -144,7 +235,6 @@ in its native format and as a string::
 	# 22
 
 	etc
-
 
 A :func:`tests()` method is also provided that will show example 
 encodings/decodings for each data-type and option encodings::

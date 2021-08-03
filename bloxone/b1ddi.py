@@ -9,7 +9,7 @@
 
  Author: Chris Marrison
 
- Date Last Updated: 20200903
+ Date Last Updated: 20210803
 
  Todo:
 
@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.4.4'
+__version__ = '0.4.5'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -71,7 +71,7 @@ class b1ddi(bloxone.b1):
         '''
         # Build url
         url = self.ddi_url + objpath
-        url = self._use_obj_id(url,id=id)
+        url = self._use_obj_id(url, id=id, action=action)
         url = self._add_params(url, **params)
         logging.debug("URL: {}".format(url))
 
@@ -79,6 +79,29 @@ class b1ddi(bloxone.b1):
 
         return response
 
+
+    def post(self, objpath, id="", action="", body="", **params):
+        '''
+        Generic POST object wrapper for ddi objects
+
+        Parameters:
+            objpath (str):  Swagger object path
+            id (str):       Optional Object ID
+            action (str):   Optional object action, e.g. "nextavailableip"
+            body (str):     JSON formatted data payload
+        
+        Returns:
+            response object: Requests response object
+        '''
+        # Build url
+        url = self.ddi_url + objpath
+        url = self._use_obj_id(url, id=id, action=action)
+        url = self._add_params(url, **params)
+        logging.debug("URL: {}".format(url))
+
+        response = self._apipost(url, body)
+
+        return response
 
 
     def create(self, objpath, body=""):

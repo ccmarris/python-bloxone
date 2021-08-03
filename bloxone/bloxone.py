@@ -49,7 +49,7 @@ import re
 import json
 
 # ** Global Vars **
-__version__ = '0.7.4'
+__version__ = '0.7.9'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -334,7 +334,7 @@ class b1:
         
         Parameters:
             id (str): Bloxone Object id
-            nextip (bool): use nextavailableip
+            action (str): e.g. nextavailableip
 
         Returns:
             string : Updated url
@@ -347,7 +347,7 @@ class b1:
         else:
             if action:
                 logging.debug("Action {} not supported without " 
-                              "a specified ovject id.")
+                              "a specified object id.")
         
         return url
 
@@ -366,11 +366,33 @@ class b1:
             response object: Requests response object
         '''
         # Build url
-        url = self._use_obj_id(url,id=id)
+        url = self._use_obj_id(url, id=id, action=action)
         url = self._add_params(url, **params)
         logging.debug("URL: {}".format(url))
 
         response = self._apiget(url)
+
+        return response
+
+
+    def post(self, url, id="", action="", body="", **params):
+        '''
+        Generic Post object wrapper 
+
+        Parameters:
+            url (str):      Full URL
+            id (str):       Optional Object ID
+            action (str):   Optional object action, e.g. "nextavailableip"
+        
+        Returns:
+            response object: Requests response object
+        '''
+        # Build url
+        url = self._use_obj_id(url, id=id, action=action)
+        url = self._add_params(url, **params)
+        logging.debug("URL: {}".format(url))
+
+        response = self._apipost(url, body)
 
         return response
 

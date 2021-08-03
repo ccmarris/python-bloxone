@@ -2,10 +2,9 @@
 Usage and Examples for dhcputils
 ================================
 
-The DHCP Utils provide classes to assist with the encoding of DHCP options
-in to hexidecimal, The primary use case is for sub-option encoding for custom
-option spaces, in particular, Option 43 encoding.
-
+The DHCP Utils provides classes to assist with the encoding and decoding of
+DHCP options in to/from hexidecimal. The primary use case is for sub-option
+encoding for custom option spaces, in particular, Option 43 encoding.
 
 
 Encoding Class
@@ -38,7 +37,7 @@ Sub-options are defined as a dictionary, with three required keys:
 	'data'
 		the data to encode using the specified type
 
-And several optionnal keys:
+And several optional keys:
 
 	'array'
 		Boolean to indicate whether the data should be encoded as

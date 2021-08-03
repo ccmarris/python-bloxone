@@ -13,7 +13,7 @@
 
  Author: Chris Marrison
 
- Date Last Updated: 20210730
+ Date Last Updated: 20210802
 
  Todo:
 
@@ -45,7 +45,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.2.1'
+__version__ = '0.2.2'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -937,6 +937,14 @@ class dhcp_decode():
 
     def hex_to_array_of_ip(self, hex_string):
         '''
+        Decode array of IPv4 or IPv6 addresses to CSV string 
+
+        Parameters:
+            hex_string (str): Hex representation of an array of IPv4 or IPv6
+        
+        Returns:
+            IP Addresses in a CSV string
+        
         '''
         array_of_ip = ''
         
@@ -1248,10 +1256,37 @@ class dhcp_decode():
             for d in sub_defs:
                 if optcode == d['code']:
                     data_type = d['type']
+                    # Check for array_of_ip 
+                    if ('ip' in data_type) and d['array']:
+                        data_type = 'array_of_ip'
                     break
         
         return data_type
-                
+ 
+
+    def get_name(self, optcode, sub_defs=[]):
+        '''
+        Get data_type for optcode from sub optino definitions
+
+        Parameters:
+            optcode (int): Option code to check
+            sub_defs (list of dict): sub option definitions to cross
+                    reference
+        
+        Returns:
+            name as str
+        
+        '''
+        name = ''
+
+        if sub_defs:
+            for d in sub_defs:
+                if optcode == d['code']:
+                    name = d['name']
+                    break
+        
+        return name
+                            
 
     def guess_data_type(self, subopt, padding=False):
         '''
@@ -1359,17 +1394,21 @@ class dhcp_decode():
             if sub_opt_defs:
                 data_type = self.check_data_type(opt['code'],
                                                  sub_defs=sub_opt_defs)
+                name = self.get_name(opt['code'], sub_defs=sub_opt_defs)
+
             else:
                 logging.debug(f'Attempting to guess option type for {opt}')
                 data_type = self.guess_data_type(opt)
                 guessed = True
+                name = 'Undefined'
             
             if data_type: 
                 value = self.decode_data(opt['data'], data_type=data_type)
             
             str_value = self.decode_data(opt['data'], data_type='string')
 
-            de_sub_opt = { 'code': opt['code'],
+            de_sub_opt = { 'name': name,
+                           'code': opt['code'],
                            'type': data_type,
                            'data_length': opt['data_length'],
                            'data': value,

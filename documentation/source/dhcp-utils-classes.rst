@@ -7,5 +7,7 @@ DHCP Utilities
 
     dhcp_encode-class
     dhcp_encode-usage
+    dhcp_encode-class
+    dhcp_encode-usage
     dhcp-option-data-class
     dhcp-option-data-class-usage
