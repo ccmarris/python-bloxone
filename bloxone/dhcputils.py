@@ -13,7 +13,7 @@
 
  Author: Chris Marrison
 
- Date Last Updated: 20210802
+ Date Last Updated: 20210804
 
  Todo:
 
@@ -45,7 +45,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.2.2'
+__version__ = '0.2.5'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -1386,6 +1386,7 @@ class dhcp_decode():
         suboptions = []
         de_sub_opt = {}
         decoded_opts = []
+        parent = {}
         guessed = False
         hex_string = hex_string.replace(':','')
 
@@ -1393,6 +1394,8 @@ class dhcp_decode():
             parent_opt = self.hex_to_opcode(hexstring[:2])
             total_len = self.hex_to_int8(hexstring[2:4])
             hex_string = hex_string[4:]
+            parent = {'parent': parent_opt, 'total_len': total_len }
+            decoded_opts.append(parent)
 
         # Break out sub-options
         suboptions = self.hex_to_suboptions(hex_string)
@@ -1430,13 +1433,59 @@ class dhcp_decode():
 
     def output_decoded_options(self, decoded_opts=[], output='pprint'):
         '''
+        Simple output for decode_dhcp_options() data
+
+        Parameters:
+            decoded_opts (list): List of dict
+            output (str): specify format [pprint, csv, yaml]
+        
         '''
-        formats = [ 'csv', 'pprint', 'json']
-        if output in formats:
-            if output == 'pprint':
-                pprint(decoded_opts)
+        formats = [ 'csv', 'pprint', 'yaml']
+        header = ''
+        head_printed = False
+        line = ''
+        
+        if len(decoded_opts):
+            if output in formats:
+                # Output simply with pprint
+                if output == 'pprint':
+                    pprint(decoded_opts)
+                # Output to CSV
+                if output == 'csv':
+                    for item in decoded_opts: 
+                        if 'parent' in item.keys():
+                            header = 'Parent, Total Length'
+                            pprint(header)
+                            pprint(f'{item["parent"]}, ' +
+                                  f'{item["total_len"]}')
+                        elif not head_printed:
+                            header = ''
+                            for key in item.keys():
+                                header += key + ','
+                            header = header[:-1]
+
+                            pprint(header)
+                            head_printed = True
+                        else:
+                            for key in item.keys():
+                                line += repr(item[key]) + ','
+                            line += line[:-1]
+                            pprint(line)
+                            line = ''
+                # Output to normalised YAML
+                if output == 'yaml':
+                    try:
+                        y = yaml.safe_dump(decoded_opts)
+                        print(y)
+                    except:
+                        print('Could not convert to yaml')
+
+            else:
+                print(f'{output} not supported for output')
+                print(f'Suported formats include: {formats}')
+                print(decoded_opts)
         else:
-            print(decoded_opts)
+            print('No option data')
         
         return
         
