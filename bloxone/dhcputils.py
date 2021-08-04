@@ -242,14 +242,16 @@ class dhcp_encode():
         i_sizes = [ 8, 16, 32 ]
         if size in i_sizes:
             max_size = 2**size
-            no_bytes = size // 4
-            fmt = f'{{:0{no_bytes}x}}'
-            if i < max_size:
-                hex = fmt.format(i + (2**size))
+            no_octets = size // 4
+            fmt = f'{{:0{no_octets}x}}'
+            if i < 0 and abs(i) < max_size:
+                hex_str = fmt.format(i + (2**size))
+            elif i < max_size:
+                hex_str = fmt.format(i)
             else:
                 raise TypeError(f'{i} is out of range for uint{size} type')
 
-        return hex 
+        return hex_str 
 
 
     # Methods for intX and uintX
@@ -1030,15 +1032,15 @@ class dhcp_decode():
 
         # Assume true if not zero i.e. check all bits for non-zero
         if int(hex_string, 16) == 0:
-            text_bool = 'false'
+            text_bool = 'False'
         else:
-            text_bool = 'true'
+            text_bool = 'True'
         
         return text_bool
 
 
    # integer encodings 
-    def hex_to_int(self, hex_string, size = 8):
+    def hex_to_int(self, hex_string, size=8):
         '''
         Decode hex to signed integer of defined size
 
@@ -1069,7 +1071,7 @@ class dhcp_decode():
         return value 
 
 
-    def hex_to_uint(self, hex_string, size = 8):
+    def hex_to_uint(self, hex_string, size=8):
         '''
         Encode integer of specified size as unsigned int in hex
         Uses 2's compliment if supplied with negative number
@@ -1183,7 +1185,7 @@ class dhcp_decode():
         if data[:2] == '0b':
             base = 2
         else:
-            hex_string = hex_string.replace(':','')
+            hex_string = data.replace(':','')
 
         # Force hex encoding without 0x using base
         hex_value = '{:02x}'.format(int(data, base))
@@ -1237,7 +1239,7 @@ class dhcp_decode():
         return hex_len
 
 
-    def check_data_type(self, optcode, sub_defs=[], guess=False):
+    def check_data_type(self, optcode, sub_defs=[]):
         '''
         Get data_type for optcode from sub optino definitions
 
@@ -1254,11 +1256,12 @@ class dhcp_decode():
 
         if sub_defs:
             for d in sub_defs:
-                if optcode == d['code']:
+                if int(optcode) == int(d['code']):
                     data_type = d['type']
                     # Check for array_of_ip 
-                    if ('ip' in data_type) and d['array']:
-                        data_type = 'array_of_ip'
+                    if 'array' in d.keys():
+                        if ('ip' in data_type) and d['array']:
+                            data_type = 'array_of_ip'
                     break
         
         return data_type
@@ -1334,11 +1337,16 @@ class dhcp_decode():
         return data_type
         
     
-    def decode_data(self, data, data_type='string'):
+    def decode_data(self, data, data_type='string', 
+                    padding=False,
+                    pad_bytes=1,
+                    array=False):
         '''
         '''
         decoded = ''
         if data_type in self.opt_types:
+            if 'ip' in data_type and array:
+                data_type = 'array_of_ip'
             hex_to_type = eval('self.' + 'hex_to_' + data_type)
         else:
             logging.error(f'Unsupported Option Type {data_type}')
@@ -1437,7 +1445,7 @@ class dhcp_decode():
         '''
         Run through encoding methods and output example results
         '''
-        encode = dhcp_encode()
+        encode = bloxone.dhcp_encode()
         test_data = [ { 'code': '1', 'type': 'string',
                         'data': 'AABBDDCCEEDD-aabbccddeeff' },
                       { 'code': '2', 'type': 'ipv4_address',
@@ -1467,17 +1475,24 @@ class dhcp_decode():
         print()
         print('Non-array tests:')
         for data_test in test_data:
-            result = encode.encode_data(data_test)
-            hex_len = self.hex_length(result)
-            print(f'Type: {data_test["type"]}: {data_test["data"]}, ' +
-                  f'Encoded: {result}, Length(hex): {hex_len}')
+            enc_str = encode.encode_data(data_test)
+            if 'array' in data_test.keys():
+                array = data_test['array']
+            else:
+                array=False
+
+            dec_str = self.decode_data(enc_str, 
+                                       data_type=data_test['type'],
+                                       array=array)
+            print(f'Type: {data_test["type"]}, Hex: {enc_str}, ' +
+                  f'Decoded: {dec_str}, Original: {data_test["data"]}')
         
         print()
         # Padding Test
-        test_data = { 'code': '99', 'type': 'string', 'data': 'AABBCCDD' }
-        result = encode.encode_data(test_data, padding=True)
-        print(f'Padding test (1 byte), type string: {test_data["data"]}' +
-              f' {result}')
+        # test_data = { 'code': '99', 'type': 'string', 'data': 'AABBCCDD' }
+        # result = encode.encode_data(test_data, padding=True)
+       #  print(f'Padding test (1 byte), type string: {test_data["data"]}' +
+        #       f' {result}')
         # Full encode test
         test_data = [ { 'code': '1', 'type': 'string',
                         'data': 'AABBDDCCEEDD-aabbccddeeff' },
@@ -1488,8 +1503,8 @@ class dhcp_decode():
                       { 'code': '4', 'type': 'boolean', 'data': True },
                       { 'code': '5', 'type': 'int8', 'data': '22' } ]
         result = encode.encode_dhcp_option(test_data)
-        print(f'Full encoding of sample: {result}')
-        decode = self.decode_dhcp_option(result)
+        print(f'Full encoding of sample Hex: {result}')
+        decode = self.decode_dhcp_option(result, sub_opt_defs=test_data)
         print(f'Decoding result:')
         self.output_decoded_options(decode)
 
