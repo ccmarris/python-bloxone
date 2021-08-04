@@ -67,6 +67,8 @@ documentation/doctrees/code.doctree
 documentation/doctrees/dhcp-option-data-class-usage.doctree
 documentation/doctrees/dhcp-option-data-class.doctree
 documentation/doctrees/dhcp-utils-classes.doctree
+documentation/doctrees/dhcp_decode-class.doctree
+documentation/doctrees/dhcp_decode-usage.doctree
 documentation/doctrees/dhcp_encode-class.doctree
 documentation/doctrees/dhcp_encode-usage.doctree
 documentation/doctrees/dhcp_encoding-class.doctree
@@ -118,6 +120,8 @@ documentation/html/code.html
 documentation/html/dhcp-option-data-class-usage.html
 documentation/html/dhcp-option-data-class.html
 documentation/html/dhcp-utils-classes.html
+documentation/html/dhcp_decode-class.html
+documentation/html/dhcp_decode-usage.html
 documentation/html/dhcp_encode-class.html
 documentation/html/dhcp_encode-usage.html
 documentation/html/dhcp_encoding-class.html
@@ -190,6 +194,8 @@ documentation/html/_sources/code.rst.txt
 documentation/html/_sources/dhcp-option-data-class-usage.rst.txt
 documentation/html/_sources/dhcp-option-data-class.rst.txt
 documentation/html/_sources/dhcp-utils-classes.rst.txt
+documentation/html/_sources/dhcp_decode-class.rst.txt
+documentation/html/_sources/dhcp_decode-usage.rst.txt
 documentation/html/_sources/dhcp_encode-class.rst.txt
 documentation/html/_sources/dhcp_encode-usage.rst.txt
 documentation/html/_sources/dhcp_encoding-class.rst.txt
@@ -202,6 +208,7 @@ documentation/html/_sources/usage.rst.txt
 documentation/html/_sources/utils-usage.rst.txt
 documentation/html/_sources/utils.rst.txt
 documentation/html/_sources/version_history.rst.txt
+documentation/html/_static/.DS_Store
 documentation/html/_static/ajax-loader.gif
 documentation/html/_static/basic.css
 documentation/html/_static/comment-bright.png
@@ -212,8 +219,6 @@ documentation/html/_static/documentation_options.js
 documentation/html/_static/down-pressed.png
 documentation/html/_static/down.png
 documentation/html/_static/file.png
-documentation/html/_static/jquery-3.2.1.js
-documentation/html/_static/jquery-3.4.1.js
 documentation/html/_static/jquery-3.5.1.js
 documentation/html/_static/jquery.js
 documentation/html/_static/language_data.js
@@ -221,8 +226,6 @@ documentation/html/_static/minus.png
 documentation/html/_static/plus.png
 documentation/html/_static/pygments.css
 documentation/html/_static/searchtools.js
-documentation/html/_static/underscore-1.12.0.js
-documentation/html/_static/underscore-1.13.1.js
 documentation/html/_static/underscore-1.3.1.js
 documentation/html/_static/underscore.js
 documentation/html/_static/up-pressed.png
@@ -321,6 +324,8 @@ documentation/source/conf.py
 documentation/source/dhcp-option-data-class-usage.rst
 documentation/source/dhcp-option-data-class.rst
 documentation/source/dhcp-utils-classes.rst
+documentation/source/dhcp_decode-class.rst
+documentation/source/dhcp_decode-usage.rst
 documentation/source/dhcp_encode-class.rst
 documentation/source/dhcp_encode-usage.rst
 documentation/source/index.rst

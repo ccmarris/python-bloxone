@@ -45,7 +45,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.2.5'
+__version__ = '0.2.6'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -870,7 +870,11 @@ class dhcp_decode():
             opt_len = int(hex_list[index+1], 16)
             # Get option data
             for i in range(index + 2, (index + opt_len + 2)):
-                opt_data += hex_list[i]
+                if i >= len(hex_list):
+                    logging.error(f'Data encoding error, non-standard format')
+                    break    
+                else:
+                    opt_data += hex_list[i]
             
             # Build sub_opt and add to list of suboptions
             sub_opt = { 'code': self.hex_to_optcode(opt_code),
