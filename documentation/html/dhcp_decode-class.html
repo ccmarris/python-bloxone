@@ -190,7 +190,7 @@
 DHCP Options and sub_options</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="bloxone.dhcp_decode.check_data_type">
-<span class="sig-name descname"><span class="pre">check_data_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optcode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub_defs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">guess</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.check_data_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.check_data_type" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_data_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optcode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sub_defs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.check_data_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.check_data_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get data_type for optcode from sub optino definitions</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -208,7 +208,7 @@ reference</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="bloxone.dhcp_decode.decode_data">
-<span class="sig-name descname"><span class="pre">decode_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'string'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.decode_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.decode_data" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">decode_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'string'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_bytes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">array</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.decode_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.decode_data" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -467,7 +467,16 @@ Uses 2’s compliment if supplied with negative number</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="bloxone.dhcp_decode.output_decoded_options">
 <span class="sig-name descname"><span class="pre">output_decoded_options</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">decoded_opts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pprint'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/dhcputils.html#dhcp_decode.output_decoded_options"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.dhcp_decode.output_decoded_options" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Simple output for decode_dhcp_options() data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>decoded_opts</strong> (<em>list</em>) – List of dict</p></li>
+<li><p><strong>output</strong> (<em>str</em>) – specify format [pprint, csv, yaml]</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="bloxone.dhcp_decode.tests">
