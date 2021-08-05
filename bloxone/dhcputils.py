@@ -45,7 +45,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.2.6'
+__version__ = '0.2.7'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -865,7 +865,7 @@ class dhcp_decode():
         if encapsulated:
             index = 2
 
-        while index < len(hex_list):
+        while index <= (len(hex_list) - 2 ):
             opt_code = hex_list[index]
             opt_len = int(hex_list[index+1], 16)
             # Get option data
@@ -1394,43 +1394,46 @@ class dhcp_decode():
         guessed = False
         hex_string = hex_string.replace(':','')
 
-        if encapsulated:
-            parent_opt = self.hex_to_opcode(hexstring[:2])
-            total_len = self.hex_to_int8(hexstring[2:4])
-            hex_string = hex_string[4:]
-            parent = {'parent': parent_opt, 'total_len': total_len }
-            decoded_opts.append(parent)
+        if (len(hex_string) % 2) == 0:
+            if encapsulated:
+                parent_opt = self.hex_to_opcode(hexstring[:2])
+                total_len = self.hex_to_int8(hexstring[2:4])
+                hex_string = hex_string[4:]
+                parent = {'parent': parent_opt, 'total_len': total_len }
+                decoded_opts.append(parent)
 
-        # Break out sub-options
-        suboptions = self.hex_to_suboptions(hex_string)
+            # Break out sub-options
+            suboptions = self.hex_to_suboptions(hex_string)
 
-        # Attempt to decode sub_options
-        for opt in suboptions:
-            if sub_opt_defs:
-                data_type = self.check_data_type(opt['code'],
-                                                 sub_defs=sub_opt_defs)
-                name = self.get_name(opt['code'], sub_defs=sub_opt_defs)
+            # Attempt to decode sub_options
+            for opt in suboptions:
+                if sub_opt_defs:
+                    data_type = self.check_data_type(opt['code'],
+                                                    sub_defs=sub_opt_defs)
+                    name = self.get_name(opt['code'], sub_defs=sub_opt_defs)
 
-            else:
-                logging.debug(f'Attempting to guess option type for {opt}')
-                data_type = self.guess_data_type(opt)
-                guessed = True
-                name = 'Undefined'
-            
-            if data_type: 
-                value = self.decode_data(opt['data'], data_type=data_type)
-            
-            str_value = self.decode_data(opt['data'], data_type='string')
+                else:
+                    logging.debug(f'Attempting to guess option type for {opt}')
+                    data_type = self.guess_data_type(opt)
+                    guessed = True
+                    name = 'Undefined'
+                
+                if data_type: 
+                    value = self.decode_data(opt['data'], data_type=data_type)
+                
+                str_value = self.decode_data(opt['data'], data_type='string')
 
-            de_sub_opt = { 'name': name,
-                           'code': opt['code'],
-                           'type': data_type,
-                           'data_length': opt['data_length'],
-                           'data': value,
-                           'data_str': str_value,
-                           'guess': guessed }
+                de_sub_opt = { 'name': name,
+                            'code': opt['code'],
+                            'type': data_type,
+                            'data_length': opt['data_length'],
+                            'data': value,
+                            'data_str': str_value,
+                            'guess': guessed }
 
-            decoded_opts.append(de_sub_opt)
+                decoded_opts.append(de_sub_opt)
+        else:
+            logging.error('Hex string contains incomplete octets')
 
         return decoded_opts
 

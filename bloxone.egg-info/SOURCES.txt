@@ -226,6 +226,7 @@ documentation/html/_static/minus.png
 documentation/html/_static/plus.png
 documentation/html/_static/pygments.css
 documentation/html/_static/searchtools.js
+documentation/html/_static/underscore-1.13.1.js
 documentation/html/_static/underscore-1.3.1.js
 documentation/html/_static/underscore.js
 documentation/html/_static/up-pressed.png
