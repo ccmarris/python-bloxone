@@ -139,6 +139,28 @@ class b1tdc(bloxone.b1):
 
         return response
 
+       
+    def put(self, objpath, id="", body=""):
+        '''
+        Generic put object wrapper for Threat Defense Cloud
+
+        Parameters:
+            objpath (str):  Swagger object path
+            id (str):       Object id to update
+            body (str):     JSON formatted data payload
+
+        Returns:
+            response object: Requests response object
+        '''
+        # Build url
+        url = self.tdc_url + objpath
+        url = self._use_obj_id(url, id=id)
+
+        # Make API Call
+        response = self._apiput(url, body)
+
+        return response
+
 
     def update(self, objpath, id="", body=""):
         '''
