@@ -177,7 +177,7 @@
 
 <span class="sd"> Module to provide class hierachy to simplify access to the BloxOne APIs</span>
 
-<span class="sd"> Date Last Updated: 20210215</span>
+<span class="sd"> Date Last Updated: 20211028</span>
 
 <span class="sd"> Todo:</span>
 
@@ -209,13 +209,14 @@
 
 <span class="sd">------------------------------------------------------------------------</span>
 <span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">stat_result</span>
 <span class="kn">import</span> <span class="nn">bloxone</span>
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">collections</span>
 
 <span class="c1"># ** Global Vars **</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.5&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.7&#39;</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison&#39;</span>
 <span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
 <span class="vm">__doc__</span> <span class="o">=</span> <span class="s1">&#39;https://python-bloxone.readthedocs.io/en/latest/&#39;</span>
@@ -226,6 +227,52 @@
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Class to simplify access to the BloxOne Platform APIs</span>
 <span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cfg_file</span><span class="o">=</span><span class="s1">&#39;config.ini&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Call base __init__ and extend</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">cfg_file</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">OPH_COMPOSITE_STATUS</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="s1">&#39;Review Details&#39;</span><span class="p">,</span> 
+                                      <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="s1">&#39;Online&#39;</span><span class="p">,</span>
+                                      <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="s1">&#39;Unknown&#39;</span><span class="p">,</span>
+                                      <span class="s1">&#39;3&#39;</span><span class="p">:</span> <span class="s1">&#39;Pending&#39;</span><span class="p">,</span>
+                                      <span class="s1">&#39;4&#39;</span><span class="p">:</span> <span class="s1">&#39;Awaiting approval&#39;</span> <span class="p">}</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">OPH_PLATFORM_STATES</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="s1">&#39;Offline&#39;</span><span class="p">,</span>
+                                     <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="s1">&#39;Online&#39;</span><span class="p">,</span>
+                                     <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="s1">&#39;Error&#39;</span><span class="p">,</span>
+                                     <span class="s1">&#39;3&#39;</span><span class="p">:</span> <span class="s1">&#39;Waiting (pending)&#39;</span> <span class="p">}</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">OPH_HOST_TYPES</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="s1">&#39;Not Available&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="s1">&#39;Unknown&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="s1">&#39;Unknown&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;3&#39;</span><span class="p">:</span> <span class="s1">&#39;BloxOne VM&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;4&#39;</span><span class="p">:</span> <span class="s1">&#39;BloxOne Appliance - B105&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;5&#39;</span><span class="p">:</span> <span class="s1">&#39;BloxOne Container&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;6&#39;</span><span class="p">:</span> <span class="s1">&#39;CNIOS&#39;</span> <span class="p">}</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">OPH_APP_MGT</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="s1">&#39;Inactive&#39;</span><span class="p">,</span>
+                             <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="s1">&#39;Active&#39;</span><span class="p">,</span>
+                             <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="s1">&#39;Error&#39;</span><span class="p">,</span>
+                             <span class="s1">&#39;3&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span> <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">OPH_APPS</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;AppName&#39;</span><span class="p">:</span> <span class="s1">&#39;DFP&#39;</span><span class="p">,</span> <span class="s1">&#39;StatusSpace&#39;</span><span class="p">:</span> <span class="s1">&#39;9&#39;</span> <span class="p">},</span>
+                          <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;AppName&#39;</span><span class="p">:</span> <span class="s1">&#39;DNS&#39;</span><span class="p">,</span> <span class="s1">&#39;StatusSpace&#39;</span><span class="p">:</span> <span class="s1">&#39;12&#39;</span> <span class="p">},</span>
+                          <span class="s1">&#39;3&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;AppName&#39;</span><span class="p">:</span> <span class="s1">&#39;DHCP&#39;</span><span class="p">,</span> <span class="s1">&#39;StatusSpace&#39;</span><span class="p">:</span> <span class="s1">&#39;15&#39;</span> <span class="p">},</span>
+                          <span class="s1">&#39;7&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;AppName&#39;</span><span class="p">:</span> <span class="s1">&#39;CDC&#39;</span><span class="p">,</span> <span class="s1">&#39;StatusSpace&#39;</span><span class="p">:</span> <span class="s1">&#39;24&#39;</span> <span class="p">},</span>
+                          <span class="s1">&#39;9&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;AppName&#39;</span><span class="p">:</span> <span class="s1">&#39;Anycast&#39;</span><span class="p">,</span> <span class="s1">&#39;StatusSpace&#39;</span><span class="p">:</span> <span class="s1">&#39;30&#39;</span> <span class="p">},</span>
+                          <span class="s1">&#39;10&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;AppName&#39;</span><span class="p">:</span> <span class="s1">&#39;NGC&#39;</span><span class="p">,</span> <span class="s1">&#39;StatusSpace&#39;</span><span class="p">:</span> <span class="s1">&#39;34&#39;</span> <span class="p">},</span>
+                          <span class="s1">&#39;14&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;AppName&#39;</span><span class="p">:</span> <span class="s1">&#39;Edge_Services_FW&#39;</span><span class="p">,</span> <span class="s1">&#39;StatusSpace&#39;</span><span class="p">:</span> <span class="s1">&#39;46&#39;</span> <span class="p">},</span>
+                          <span class="s1">&#39;15&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;AppName&#39;</span><span class="p">:</span> <span class="s1">&#39;Edge_Services_Router&#39;</span><span class="p">,</span> <span class="s1">&#39;StatusSpace&#39;</span><span class="p">:</span> <span class="s1">&#39;49&#39;</span> <span class="p">},</span>
+                          <span class="s1">&#39;16&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;AppName&#39;</span><span class="p">:</span> <span class="s1">&#39;Site-to-Site_VPN&#39;</span><span class="p">,</span> <span class="s1">&#39;StatusSpace&#39;</span><span class="p">:</span> <span class="s1">&#39;52&#39;</span> <span class="p">},</span>
+                          <span class="s1">&#39;18&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;AppName&#39;</span><span class="p">:</span> <span class="s1">&#39;DNS_Assured_Forwarding&#39;</span><span class="p">,</span> <span class="s1">&#39;StatusSpace&#39;</span><span class="p">:</span> <span class="s1">&#39;58&#39;</span> <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">APP_STATUS</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="s1">&#39;inactive&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="s1">&#39;active&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="s1">&#39;stopped&#39;</span> <span class="p">}</span>
+
+        <span class="k">return</span>
+
 
 <div class="viewcode-block" id="b1oph.get"><a class="viewcode-back" href="../../b1oph-class.html#bloxone.b1oph.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
@@ -390,12 +437,20 @@
         <span class="c1"># Process response</span>
         <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
             <span class="n">obj</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-            <span class="c1"># Look for results</span>
+            <span class="c1"># Look for results or result</span>
             <span class="k">if</span> <span class="s2">&quot;results&quot;</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span>
+                <span class="n">result_text</span> <span class="o">=</span> <span class="s2">&quot;results&quot;</span>
+            <span class="k">elif</span> <span class="s2">&quot;result&quot;</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">result_text</span> <span class="o">=</span> <span class="s2">&quot;result&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">result_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            
+            <span class="c1"># Get result if available</span>
+            <span class="k">if</span> <span class="n">result_text</span><span class="p">:</span>
+                <span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="n">result_text</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">obj</span><span class="p">:</span>
                     <span class="nb">id</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
-                    <span class="k">if</span> <span class="ow">not</span> <span class="n">include_path</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">include_path</span> <span class="ow">and</span> <span class="s2">&quot;/&quot;</span> <span class="ow">in</span> <span class="nb">id</span><span class="p">:</span>
                         <span class="nb">id</span> <span class="o">=</span> <span class="nb">id</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Key </span><span class="si">{}</span><span class="s2"> with value </span><span class="si">{}</span><span class="s2"> not found.&quot;</span>
@@ -488,7 +543,195 @@
                 <span class="c1"># Update object</span>
                 <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s1">&#39;/on_prem_hosts&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
 
-        <span class="k">return</span> <span class="n">response</span></div></div>
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="b1oph.oph_status_summary"><a class="viewcode-back" href="../../b1oph-class.html#bloxone.b1oph.oph_status_summary">[docs]</a>    <span class="k">def</span> <span class="nf">oph_status_summary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get OPH status information for one or more OPHs</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            name (ste): Display name of OPH</span>
+<span class="sd">            id (str): id of a specific OPH</span>
+<span class="sd">            tags (bool): include tags in report</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            rpt: Dict of translated status elements</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">rpt</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Get OPH Data</span>
+        <span class="k">if</span> <span class="n">name</span><span class="p">:</span>
+            <span class="n">name_filter</span> <span class="o">=</span> <span class="s1">&#39;display_name==&quot;&#39;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/on_prem_hosts&#39;</span><span class="p">,</span> <span class="n">_filter</span><span class="o">=</span><span class="n">name_filter</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">id</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/on_prem_hosts&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/on_prem_hosts&#39;</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
+            <span class="n">rpt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">oph_status_rpt</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">(),</span> <span class="n">tags</span><span class="o">=</span><span class="n">tags</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Response code: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s1">, Data: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">rpt</span> <span class="o">=</span> <span class="kc">None</span>
+    
+        <span class="k">return</span> <span class="n">rpt</span></div>
+
+
+<div class="viewcode-block" id="b1oph.oph_status"><a class="viewcode-back" href="../../b1oph-class.html#bloxone.b1oph.oph_status">[docs]</a>    <span class="k">def</span> <span class="nf">oph_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oph_data</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Translate status info in JSON data for an OPH</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            oph_data (dict): Data for individual OPH</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            oph_status: Dict of translated status elements</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">oph_status</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">oph_comp_state</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">oph_plat_state</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">oph_plat_msg</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">oph_app_mgt</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">oph_app_msg</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="k">if</span> <span class="s1">&#39;composite_status&#39;</span> <span class="ow">in</span> <span class="n">oph_data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">oph_comp_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">OPH_COMPOSITE_STATUS</span><span class="p">[</span><span class="n">oph_data</span><span class="p">[</span><span class="s1">&#39;composite_status&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">oph_comp_state</span> <span class="o">=</span> <span class="s1">&#39;No state information&#39;</span>
+                        
+        <span class="k">if</span> <span class="s1">&#39;state&#39;</span> <span class="ow">in</span> <span class="n">oph_data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">oph_plat_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">OPH_PLATFORM_STATES</span><span class="p">[</span><span class="n">oph_data</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;current_state&#39;</span><span class="p">)]</span>
+            <span class="k">if</span> <span class="s1">&#39;message&#39;</span> <span class="ow">in</span> <span class="n">oph_data</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">oph_plat_state</span> <span class="o">=</span> <span class="n">oph_data</span><span class="p">[</span><span class="s1">&#39;state&#39;</span><span class="p">][</span><span class="s1">&#39;message&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">oph_plat_state</span> <span class="o">=</span> <span class="s2">&quot;Platform status unavailable&quot;</span>
+        
+        <span class="k">if</span> <span class="s1">&#39;status&#39;</span> <span class="ow">in</span> <span class="n">oph_data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">oph_app_mgt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">OPH_PLATFORM_STATES</span><span class="p">[</span><span class="n">oph_data</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">)]</span>
+            <span class="k">if</span> <span class="s1">&#39;message&#39;</span> <span class="ow">in</span> <span class="n">oph_data</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">oph_app_msg</span> <span class="o">=</span> <span class="n">oph_data</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">][</span><span class="s1">&#39;message&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">oph_app_mgt</span> <span class="o">=</span> <span class="s2">&quot;Application Management status unavailable&quot;</span>
+
+        <span class="n">oph_status</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;OPH State&#39;</span><span class="p">:</span> <span class="n">oph_comp_state</span><span class="p">,</span>
+                       <span class="s1">&#39;Platform Management&#39;</span><span class="p">:</span> <span class="n">oph_plat_state</span><span class="p">,</span>
+                       <span class="s1">&#39;Application Management&#39;</span><span class="p">:</span> <span class="n">oph_app_mgt</span> <span class="p">}</span>
+        
+        <span class="k">if</span> <span class="n">oph_plat_msg</span><span class="p">:</span>
+            <span class="n">oph_status</span><span class="o">.</span><span class="n">update</span><span class="p">(</span> <span class="p">{</span><span class="s1">&#39;Platform Message&#39;</span><span class="p">:</span> <span class="n">oph_plat_msg</span> <span class="p">})</span>
+        <span class="k">if</span> <span class="n">oph_app_msg</span><span class="p">:</span>
+            <span class="n">oph_status</span><span class="o">.</span><span class="n">update</span><span class="p">(</span> <span class="p">{</span><span class="s1">&#39;App Mgt Message&#39;</span><span class="p">:</span> <span class="n">oph_app_msg</span> <span class="p">})</span>
+        
+        <span class="k">return</span> <span class="n">oph_status</span></div>
+    
+
+<div class="viewcode-block" id="b1oph.oph_app_status"><a class="viewcode-back" href="../../b1oph-class.html#bloxone.b1oph.oph_app_status">[docs]</a>    <span class="k">def</span> <span class="nf">oph_app_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oph_data</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Translate App status info in JSON data for an OPH</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            oph_data (dict): Data for individual OPH</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            oph_apps: Dict of translated status elements</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">oph_apps</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">app_id</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">app_name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">ver_name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">app_version</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Check for application status data</span>
+        <span class="k">if</span> <span class="s1">&#39;applications&#39;</span> <span class="ow">in</span> <span class="n">oph_data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">app</span> <span class="ow">in</span> <span class="n">oph_data</span><span class="p">[</span><span class="s1">&#39;applications&#39;</span><span class="p">]:</span>
+                <span class="n">app_id</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;application_type&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">app_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">OPH_APPS</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">app_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">OPH_APPS</span><span class="p">[</span><span class="n">app_id</span><span class="p">][</span><span class="s1">&#39;AppName&#39;</span><span class="p">]</span>
+                    <span class="n">ver_name</span> <span class="o">=</span> <span class="n">app_name</span> <span class="o">+</span> <span class="s1">&#39;_version&#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">app_name</span> <span class="o">=</span> <span class="s1">&#39;Unknown, AppID: &#39;</span> <span class="o">+</span> <span class="n">app_id</span>
+
+                <span class="c1"># Check whether app is enabled</span>
+                <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;disabled&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+                    <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP_STATUS</span><span class="p">[</span><span class="n">app</span><span class="p">[</span><span class="s1">&#39;composite_status&#39;</span><span class="p">][</span><span class="s1">&#39;status&#39;</span><span class="p">]]</span>
+                    <span class="n">app_version</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;current_version&#39;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;disabled&#39;</span>
+                    <span class="n">app_version</span> <span class="o">=</span> <span class="kc">None</span>
+
+                <span class="c1"># Add version info if available</span>
+                <span class="k">if</span> <span class="n">app_version</span><span class="p">:</span>
+                    <span class="n">oph_apps</span><span class="o">.</span><span class="n">update</span><span class="p">(</span> <span class="p">{</span> <span class="n">app_name</span><span class="p">:</span> <span class="n">status</span><span class="p">,</span>
+                                        <span class="n">ver_name</span><span class="p">:</span> <span class="n">app_version</span> <span class="p">}</span> <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">oph_apps</span><span class="o">.</span><span class="n">update</span><span class="p">(</span> <span class="p">{</span> <span class="n">app_name</span><span class="p">:</span> <span class="n">status</span> <span class="p">}</span> <span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">oph_apps</span> <span class="o">=</span> <span class="p">{}</span>
+        
+        <span class="k">return</span> <span class="n">oph_apps</span></div>
+   
+
+<div class="viewcode-block" id="b1oph.oph_status_rpt"><a class="viewcode-back" href="../../b1oph-class.html#bloxone.b1oph.oph_status_rpt">[docs]</a>    <span class="k">def</span> <span class="nf">oph_status_rpt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">json_data</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Build  status report from GET /on_prem_hosts data</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            json_data (json): API JSON data for On Prem Hosts call</span>
+<span class="sd">            tags (bool): Include tags in response, default False</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            rpt: Dict of status elements</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">rpt</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">on_prem_host</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">oph_status</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">oph_apps</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">if</span> <span class="n">json_data</span><span class="p">:</span>
+            <span class="n">results</span> <span class="o">=</span> <span class="n">json_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;result&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">results</span> <span class="o">=</span> <span class="p">[</span> <span class="n">results</span> <span class="p">]</span>
+            <span class="c1"># Build report </span>
+            <span class="k">for</span> <span class="n">oph</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+                <span class="n">oph_apps</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">on_prem_host</span> <span class="o">=</span> <span class="n">oph</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;display_name&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">on_prem_host</span><span class="p">:</span>
+                    <span class="n">oph_status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">oph_status</span><span class="p">(</span><span class="n">oph</span><span class="p">)</span>
+                    <span class="n">oph_apps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">oph_app_status</span><span class="p">(</span><span class="n">oph</span><span class="p">)</span>
+
+                    <span class="n">rpt</span><span class="o">.</span><span class="n">update</span><span class="p">(</span> <span class="p">{</span> <span class="n">on_prem_host</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">oph_status</span><span class="p">,</span>
+                                          <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">oph</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">),</span>
+                                          <span class="s1">&#39;host_type&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">OPH_HOST_TYPES</span><span class="p">[</span><span class="n">oph</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;host_type&#39;</span><span class="p">)],</span>
+                                          <span class="s1">&#39;ip_address&#39;</span><span class="p">:</span> <span class="n">oph</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ip_address&#39;</span><span class="p">),</span> 
+                                          <span class="s1">&#39;nat_ip&#39;</span><span class="p">:</span> <span class="n">oph</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nat_ip&#39;</span><span class="p">),</span>
+                                          <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="n">oph</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;current_version&#39;</span><span class="p">),</span>
+                                          <span class="s1">&#39;last_seen&#39;</span><span class="p">:</span> <span class="n">oph</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;last_seen&#39;</span><span class="p">),</span>
+                                          <span class="s1">&#39;applications&#39;</span><span class="p">:</span> <span class="n">oph_apps</span> <span class="p">}</span>
+                                <span class="p">}</span> <span class="p">)</span>
+                <span class="k">if</span> <span class="n">tags</span><span class="p">:</span>
+                    <span class="n">rpt</span><span class="p">[</span><span class="n">on_prem_host</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;tags&#39;</span><span class="p">:</span> <span class="n">oph</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tags&#39;</span><span class="p">)})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rpt</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">rpt</span></div>
+
+    
+<div class="viewcode-block" id="b1oph.oph_uptime"><a class="viewcode-back" href="../../b1oph-class.html#bloxone.b1oph.oph_uptime">[docs]</a>    <span class="k">def</span> <span class="nf">oph_uptime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">uptime</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">ophid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ophid</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://csp.infoblox.com/atlas-status-service/v1/getsummary&#39;</span>
+        <span class="n">body</span> <span class="o">=</span> <span class="s1">&#39;{&quot;objectID&quot;:[&quot;&#39;</span> <span class="o">+</span> <span class="n">ophid</span> <span class="o">+</span><span class="s1">&#39;&quot;],&quot;objectType&quot;:[&quot;Onprem Host ID&quot;],&quot;event_key&quot;:[&quot;health-collector/heartbeat/&quot;]}&#39;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apipost</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
+            <span class="n">uptime</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;results&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;metadata&#39;</span><span class="p">][</span><span class="s1">&#39;hostUptime&#39;</span><span class="p">]</span>
+        
+        <span class="k">return</span> <span class="n">uptime</span></div></div>
+
 </pre></div>
 
            </div>
