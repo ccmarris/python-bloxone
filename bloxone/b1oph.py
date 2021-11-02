@@ -7,7 +7,7 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20210215
+ Date Last Updated: 20211028
 
  Todo:
 
@@ -39,13 +39,14 @@
 
 ------------------------------------------------------------------------
 '''
+from os import stat_result
 import bloxone
 import logging
-import requests
 import json
+import collections
 
 # ** Global Vars **
-__version__ = '0.1.5'
+__version__ = '0.1.7'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -56,6 +57,52 @@ class b1oph(bloxone.b1):
     '''
     Class to simplify access to the BloxOne Platform APIs
     '''
+
+    def __init__(self, cfg_file='config.ini'):
+        '''
+        Call base __init__ and extend
+        '''
+        super().__init__(cfg_file)
+
+        self.OPH_COMPOSITE_STATUS = { '0': 'Review Details', 
+                                      '1': 'Online',
+                                      '2': 'Unknown',
+                                      '3': 'Pending',
+                                      '4': 'Awaiting approval' }
+        
+        self.OPH_PLATFORM_STATES = { '0': 'Offline',
+                                     '1': 'Online',
+                                     '2': 'Error',
+                                     '3': 'Waiting (pending)' }
+        
+        self.OPH_HOST_TYPES = { '0': 'Not Available',
+                                '1': 'Unknown',
+                                '2': 'Unknown',
+                                '3': 'BloxOne VM',
+                                '4': 'BloxOne Appliance - B105',
+                                '5': 'BloxOne Container',
+                                '6': 'CNIOS' }
+        
+        self.OPH_APP_MGT = { '0': 'Inactive',
+                             '1': 'Active',
+                             '2': 'Error',
+                             '3': '' }
+
+        self.OPH_APPS = { '1': { 'AppName': 'DFP', 'StatusSpace': '9' },
+                          '2': { 'AppName': 'DNS', 'StatusSpace': '12' },
+                          '3': { 'AppName': 'DHCP', 'StatusSpace': '15' },
+                          '7': { 'AppName': 'CDC', 'StatusSpace': '24' },
+                          '9': { 'AppName': 'Anycast', 'StatusSpace': '30' },
+                          '10': { 'AppName': 'NGC', 'StatusSpace': '34' },
+                          '14': { 'AppName': 'Edge_Services_FW', 'StatusSpace': '46' },
+                          '15': { 'AppName': 'Edge_Services_Router', 'StatusSpace': '49' },
+                          '16': { 'AppName': 'Site-to-Site_VPN', 'StatusSpace': '52' },
+                          '18': { 'AppName': 'DNS_Assured_Forwarding', 'StatusSpace': '58' }
+        }
+        self.APP_STATUS = { '0': 'inactive', '1': 'active', '2': 'stopped' }
+
+        return
+
 
     def get(self, objpath, id="", action="", **params):
         '''
@@ -220,12 +267,20 @@ class b1oph(bloxone.b1):
         # Process response
         if response.status_code in self.return_codes_ok:
             obj = response.json()
-            # Look for results
+            # Look for results or result
             if "results" in obj.keys():
-                obj = obj['results']
+                result_text = "results"
+            elif "result" in obj.keys():
+                result_text = "result"
+            else:
+                result_text = ""
+            
+            # Get result if available
+            if result_text:
+                obj = obj[result_text]
                 if obj:
                     id = obj[0]['id']
-                    if not include_path:
+                    if not include_path and "/" in id:
                         id = id.rsplit('/',1)[1]
                 else:
                     logging.debug("Key {} with value {} not found."
@@ -319,3 +374,191 @@ class b1oph(bloxone.b1):
                 response = self.update('/on_prem_hosts', id=id, body=json.dumps(data))
 
         return response
+
+
+    def oph_status_summary(self, name="", id="", tags=False):
+        '''
+        Get OPH status information for one or more OPHs
+
+        Parameters:
+            name (ste): Display name of OPH
+            id (str): id of a specific OPH
+            tags (bool): include tags in report
+        
+        Returns:
+            rpt: Dict of translated status elements
+        '''
+        rpt = None
+
+        # Get OPH Data
+        if name:
+            name_filter = 'display_name=="' + name + '"'
+            response = self.get('/on_prem_hosts', _filter=name_filter)
+        elif id:
+            response = self.get('/on_prem_hosts', id=id)
+        else:
+            response = self.get('/on_prem_hosts')
+        
+        if response.status_code in self.return_codes_ok:
+            rpt = self.oph_status_rpt(response.json(), tags=tags)
+        else:
+            logging.error(f'Response code: {response.status_code}, Data: {response.text}')
+            rpt = None
+    
+        return rpt
+
+
+    def oph_status(self, oph_data):
+        '''
+        Translate status info in JSON data for an OPH
+
+        Parameters:
+            oph_data (dict): Data for individual OPH
+        
+        Returns:
+            oph_status: Dict of translated status elements
+        '''
+        oph_status = {}
+        oph_comp_state = ''
+        oph_plat_state = ''
+        oph_plat_msg = ''
+        oph_app_mgt = ''
+        oph_app_msg = ''
+
+        if 'composite_status' in oph_data.keys():
+            oph_comp_state = self.OPH_COMPOSITE_STATUS[oph_data['composite_status'].get('status')]
+        else:
+            oph_comp_state = 'No state information'
+                        
+        if 'state' in oph_data.keys():
+            oph_plat_state = self.OPH_PLATFORM_STATES[oph_data['state'].get('current_state')]
+            if 'message' in oph_data['state'].keys():
+                oph_plat_state = oph_data['state']['message']
+        else:
+            oph_plat_state = "Platform status unavailable"
+        
+        if 'status' in oph_data.keys():
+            oph_app_mgt = self.OPH_PLATFORM_STATES[oph_data['status'].get('status')]
+            if 'message' in oph_data['status'].keys():
+                oph_app_msg = oph_data['status']['message']
+        else:
+            oph_app_mgt = "Application Management status unavailable"
+
+        oph_status = { 'OPH State': oph_comp_state,
+                       'Platform Management': oph_plat_state,
+                       'Application Management': oph_app_mgt }
+        
+        if oph_plat_msg:
+            oph_status.update( {'Platform Message': oph_plat_msg })
+        if oph_app_msg:
+            oph_status.update( {'App Mgt Message': oph_app_msg })
+        
+        return oph_status
+    
+
+    def oph_app_status(self, oph_data):
+        '''
+        Translate App status info in JSON data for an OPH
+
+        Parameters:
+            oph_data (dict): Data for individual OPH
+        
+        Returns:
+            oph_apps: Dict of translated status elements
+        '''
+        oph_apps = {}
+        app_id = ''
+        app_name = ''
+        ver_name = ''
+        status = ''
+        app_version = None
+
+        # Check for application status data
+        if 'applications' in oph_data.keys():
+            for app in oph_data['applications']:
+                app_id = app.get('application_type')
+                if app_id in self.OPH_APPS.keys():
+                    app_name = self.OPH_APPS[app_id]['AppName']
+                    ver_name = app_name + '_version'
+                else:
+                    app_name = 'Unknown, AppID: ' + app_id
+
+                # Check whether app is enabled
+                if app.get('disabled') == '0':
+                    status = self.APP_STATUS[app['composite_status']['status']]
+                    app_version = app.get('current_version')
+                else:
+                    status = 'disabled'
+                    app_version = None
+
+                # Add version info if available
+                if app_version:
+                    oph_apps.update( { app_name: status,
+                                        ver_name: app_version } )
+                else:
+                    oph_apps.update( { app_name: status } )
+
+        else:
+            oph_apps = {}
+        
+        return oph_apps
+   
+
+    def oph_status_rpt(self, json_data, tags=False):
+        '''
+        Build  status report from GET /on_prem_hosts data
+
+        Parameters:
+            json_data (json): API JSON data for On Prem Hosts call
+            tags (bool): Include tags in response, default False
+        
+        Returns:
+            rpt: Dict of status elements
+        '''
+        rpt = {}
+        on_prem_host = ""
+        oph_status = {}
+        oph_apps = {}
+
+        if json_data:
+            results = json_data.get('result')
+            if not isinstance(results, list):
+                results = [ results ]
+            # Build report 
+            for oph in results:
+                oph_apps = {}
+                on_prem_host = oph.get('display_name')
+                if on_prem_host:
+                    oph_status = self.oph_status(oph)
+                    oph_apps = self.oph_app_status(oph)
+
+                    rpt.update( { on_prem_host: { 'status': oph_status,
+                                          'id': oph.get('id'),
+                                          'host_type': self.OPH_HOST_TYPES[oph.get('host_type')],
+                                          'ip_address': oph.get('ip_address'), 
+                                          'nat_ip': oph.get('nat_ip'),
+                                          'version': oph.get('current_version'),
+                                          'last_seen': oph.get('last_seen'),
+                                          'applications': oph_apps }
+                                } )
+                if tags:
+                    rpt[on_prem_host].update({'tags': oph.get('tags')})
+        else:
+            rpt = None
+
+        return rpt
+
+    
+    def oph_uptime(self, name=""):
+        '''
+        '''
+        uptime = None
+        ophid = self.get_ophid(name=name)
+        url = 'https://csp.infoblox.com/atlas-status-service/v1/getsummary'
+        body = '{"objectID":["' + ophid +'"],"objectType":["Onprem Host ID"],"event_key":["health-collector/heartbeat/"]}'
+        response = self._apipost(url, body=body)
+        if response.status_code in self.return_codes_ok:
+            uptime = response.json()['results'][0]['metadata']['hostUptime']
+        
+        return uptime
+

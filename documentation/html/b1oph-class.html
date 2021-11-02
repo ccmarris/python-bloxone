@@ -368,6 +368,23 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="bloxone.b1oph.oph_app_status">
+<span class="sig-name descname"><span class="pre">oph_app_status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oph_data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1oph.html#b1oph.oph_app_status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1oph.oph_app_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate App status info in JSON data for an OPH</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>oph_data</strong> (<em>dict</em>) – Data for individual OPH</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dict of translated status elements</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>oph_apps</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="bloxone.b1oph.oph_delete_tag">
 <span class="sig-name descname"><span class="pre">oph_delete_tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tagname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1oph.html#b1oph.oph_delete_tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1oph.oph_delete_tag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to delete a tag from an existing On Prem Host</p>
@@ -386,6 +403,69 @@
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.b1oph.oph_status">
+<span class="sig-name descname"><span class="pre">oph_status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oph_data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1oph.html#b1oph.oph_status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1oph.oph_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate status info in JSON data for an OPH</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>oph_data</strong> (<em>dict</em>) – Data for individual OPH</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dict of translated status elements</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>oph_status</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.b1oph.oph_status_rpt">
+<span class="sig-name descname"><span class="pre">oph_status_rpt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1oph.html#b1oph.oph_status_rpt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1oph.oph_status_rpt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build  status report from GET /on_prem_hosts data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>json_data</strong> (<em>json</em>) – API JSON data for On Prem Hosts call</p></li>
+<li><p><strong>tags</strong> (<em>bool</em>) – Include tags in response, default False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dict of status elements</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>rpt</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.b1oph.oph_status_summary">
+<span class="sig-name descname"><span class="pre">oph_status_summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1oph.html#b1oph.oph_status_summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1oph.oph_status_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get OPH status information for one or more OPHs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>ste</em>) – Display name of OPH</p></li>
+<li><p><strong>id</strong> (<em>str</em>) – id of a specific OPH</p></li>
+<li><p><strong>tags</strong> (<em>bool</em>) – include tags in report</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dict of translated status elements</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>rpt</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.b1oph.oph_uptime">
+<span class="sig-name descname"><span class="pre">oph_uptime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1oph.html#b1oph.oph_uptime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1oph.oph_uptime" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="bloxone.b1oph.update">
