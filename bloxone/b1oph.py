@@ -40,6 +40,7 @@
 ------------------------------------------------------------------------
 '''
 from os import stat_result
+from re import I
 import bloxone
 import logging
 import json
@@ -99,6 +100,14 @@ class b1oph(bloxone.b1):
                           '16': { 'AppName': 'Site-to-Site_VPN', 'StatusSpace': '52' },
                           '18': { 'AppName': 'DNS_Assured_Forwarding', 'StatusSpace': '58' }
         }
+
+        self.OPH_APP_NAMES = { 'DFP': '1',
+                               'DNS': '2',
+                               'DHCP': '3',
+                               'CDC': '7',
+                               'Anycast': '9',
+                               'NGC': '10' }
+
         self.APP_STATUS = { '0': 'inactive', '1': 'active', '2': 'stopped' }
 
         return
@@ -189,6 +198,28 @@ class b1oph(bloxone.b1):
 
         # Make API Call
         response = self._apiput(url, body)
+
+        return response
+
+
+    def patch(self, objpath, id="", body=""):
+        '''
+        Generic create object wrapper for ddi objects
+
+        Parameters:
+            objpath (str):  Swagger object path
+            body (str):     JSON formatted data payload
+
+        Returns:
+            response object: Requests response object
+        '''
+        # Build url
+        url = self.host_url + objpath
+        url = self._use_obj_id(url, id=id)
+        logging.debug("URL: {}".format(url))
+
+        # Make API Call
+        response = self._apipatch(url, body)
 
         return response
 
@@ -562,3 +593,77 @@ class b1oph(bloxone.b1):
         
         return uptime
 
+
+    def get_app_state(self, json_data):
+        '''
+        '''
+        return
+
+    def manage_app(self, name="", app="", action="status"):
+        '''
+        '''
+        actions = [ 'status', 'disable', 'enable', 'stop', 'start' ]
+
+        if action in actions:
+           if action == "status":
+               result = self.app_status(name=name, app=app) 
+           elif action == "disable":
+               result = self.disable_app(name=name, app=app) 
+           elif action == "enable":
+               result = self.enable_app(name=name, app=app) 
+           else:
+               logging.error(f'Action: {action} not implemented')
+        else:
+                logging.error(f'Action: {action} not supported')
+                logging.info(f'Supported actions: {actions}')
+
+        return result
+
+
+    def disable_app(self, name="", app=""):
+        '''
+        '''
+        status = False
+        app_type = ''
+
+        # Check app supported and get Get application_type
+        if app in self.OPH_APP_NAMES.keys():
+            app_type = self.OPH_APP_NAMES[app]
+        elif app in self.OPH_APPS.keys():
+            app_type = app
+
+        if app_type:
+            # Get id of OPH
+            filter = f'display_name=="{name}"'
+            response = self.get('/on_prem_hosts', 
+                                _filter=filter)
+            if response.status_code in self.return_codes_ok:
+                oph_data = response.json()['result']
+                id = oph_data[0]['id']
+                logging.debug(f'On Prem Host id = {id}')
+
+                # Build body
+                body = { 'display_name': name, 
+                         'applications': [ { 'application_type': app_type,
+                                             'disabled': '1', 
+                                             'state': { 'desired_state': '0' } 
+                                           } ] } 
+                
+                # Update desired OPH
+                response = self.update('/on_prem_hosts',
+                                       id=id,
+                                       body=json.dumps(body))
+                if response.status_code in self.return_codes_ok:
+                    logging.debug(f'OPH: {name}, App: {app}, App_type: {app_type}')
+                    status = True
+                else:
+                    logging.error(f'{response.status_code}: {response.text}')
+
+            else:
+                logging.error(f'OPH {name} not found.')
+                status = False
+        else:
+            logging.error(f'App {app} not supported.')
+            status = False
+        
+        return status
