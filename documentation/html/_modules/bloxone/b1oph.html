@@ -177,7 +177,7 @@
 
 <span class="sd"> Module to provide class hierachy to simplify access to the BloxOne APIs</span>
 
-<span class="sd"> Date Last Updated: 20211028</span>
+<span class="sd"> Date Last Updated: 20211104</span>
 
 <span class="sd"> Todo:</span>
 
@@ -210,13 +210,14 @@
 <span class="sd">------------------------------------------------------------------------</span>
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">stat_result</span>
+<span class="kn">from</span> <span class="nn">re</span> <span class="kn">import</span> <span class="n">I</span>
 <span class="kn">import</span> <span class="nn">bloxone</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">collections</span>
 
 <span class="c1"># ** Global Vars **</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.7&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.2.0&#39;</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison&#39;</span>
 <span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
 <span class="vm">__doc__</span> <span class="o">=</span> <span class="s1">&#39;https://python-bloxone.readthedocs.io/en/latest/&#39;</span>
@@ -269,6 +270,14 @@
                           <span class="s1">&#39;16&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;AppName&#39;</span><span class="p">:</span> <span class="s1">&#39;Site-to-Site_VPN&#39;</span><span class="p">,</span> <span class="s1">&#39;StatusSpace&#39;</span><span class="p">:</span> <span class="s1">&#39;52&#39;</span> <span class="p">},</span>
                           <span class="s1">&#39;18&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;AppName&#39;</span><span class="p">:</span> <span class="s1">&#39;DNS_Assured_Forwarding&#39;</span><span class="p">,</span> <span class="s1">&#39;StatusSpace&#39;</span><span class="p">:</span> <span class="s1">&#39;58&#39;</span> <span class="p">}</span>
         <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">OPH_APP_NAMES</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;DFP&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+                               <span class="s1">&#39;DNS&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
+                               <span class="s1">&#39;DHCP&#39;</span><span class="p">:</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span>
+                               <span class="s1">&#39;CDC&#39;</span><span class="p">:</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span>
+                               <span class="s1">&#39;Anycast&#39;</span><span class="p">:</span> <span class="s1">&#39;9&#39;</span><span class="p">,</span>
+                               <span class="s1">&#39;NGC&#39;</span><span class="p">:</span> <span class="s1">&#39;10&#39;</span> <span class="p">}</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">APP_STATUS</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="s1">&#39;inactive&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="s1">&#39;active&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">:</span> <span class="s1">&#39;stopped&#39;</span> <span class="p">}</span>
 
         <span class="k">return</span>
@@ -359,6 +368,28 @@
 
         <span class="c1"># Make API Call</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiput</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="b1oph.patch"><a class="viewcode-back" href="../../b1oph-class.html#bloxone.b1oph.patch">[docs]</a>    <span class="k">def</span> <span class="nf">patch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Generic create object wrapper for ddi objects</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            objpath (str):  Swagger object path</span>
+<span class="sd">            body (str):     JSON formatted data payload</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Build url</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">host_url</span> <span class="o">+</span> <span class="n">objpath</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_obj_id</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;URL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+
+        <span class="c1"># Make API Call</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apipatch</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">response</span></div>
 
@@ -654,12 +685,11 @@
                     <span class="n">app_name</span> <span class="o">=</span> <span class="s1">&#39;Unknown, AppID: &#39;</span> <span class="o">+</span> <span class="n">app_id</span>
 
                 <span class="c1"># Check whether app is enabled</span>
-                <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;disabled&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
-                    <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP_STATUS</span><span class="p">[</span><span class="n">app</span><span class="p">[</span><span class="s1">&#39;composite_status&#39;</span><span class="p">][</span><span class="s1">&#39;status&#39;</span><span class="p">]]</span>
-                    <span class="n">app_version</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;current_version&#39;</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;disabled&#39;</span>
-                    <span class="n">app_version</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">APP_STATUS</span><span class="p">[</span><span class="n">app</span><span class="p">[</span><span class="s1">&#39;composite_status&#39;</span><span class="p">][</span><span class="s1">&#39;status&#39;</span><span class="p">]]</span>
+                <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;disabled&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+                    <span class="n">status</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;disabled - </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s1">&#39;</span>
+
+                <span class="n">app_version</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;current_version&#39;</span><span class="p">)</span>
 
                 <span class="c1"># Add version info if available</span>
                 <span class="k">if</span> <span class="n">app_version</span><span class="p">:</span>
@@ -730,8 +760,262 @@
         <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
             <span class="n">uptime</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;results&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;metadata&#39;</span><span class="p">][</span><span class="s1">&#39;hostUptime&#39;</span><span class="p">]</span>
         
-        <span class="k">return</span> <span class="n">uptime</span></div></div>
+        <span class="k">return</span> <span class="n">uptime</span></div>
 
+
+<div class="viewcode-block" id="b1oph.get_app_state"><a class="viewcode-back" href="../../b1oph-class.html#bloxone.b1oph.get_app_state">[docs]</a>    <span class="k">def</span> <span class="nf">get_app_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get status of application for an OPH</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            name (str): display_name of OPH</span>
+<span class="sd">            app (str): App Name, e.g. DNS</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            app_status (str): Status or error msg as text</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">status_data</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">app_status</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="n">status_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">oph_status_summary</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">status_data</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;applications&#39;</span> <span class="ow">in</span> <span class="n">status_data</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">app_status</span> <span class="o">=</span> <span class="n">status_data</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s1">&#39;applications&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">app_status</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;App: </span><span class="si">{</span><span class="n">app</span><span class="si">}</span><span class="s1"> not found for OPH: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">app_status</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;App: </span><span class="si">{</span><span class="n">app</span><span class="si">}</span><span class="s1"> not found for OPH: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;No application data for OPH: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">app_status</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;No application data for OPH: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;OPH: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> not found&#39;</span><span class="p">)</span>
+            <span class="n">app_status</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;OPH: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> not found&#39;</span>
+
+        <span class="k">return</span> <span class="n">app_status</span></div>
+
+
+<div class="viewcode-block" id="b1oph.manage_app"><a class="viewcode-back" href="../../b1oph-class.html#bloxone.b1oph.manage_app">[docs]</a>    <span class="k">def</span> <span class="nf">manage_app</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;status&quot;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Perform action on named OPH for specified app</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            name (str): display_name of OPH</span>
+<span class="sd">            app (str): App Name, e.g. DNS</span>
+<span class="sd">            action (str): action to perform for app</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            bool</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="s1">&#39;disable&#39;</span><span class="p">,</span> <span class="s1">&#39;enable&#39;</span><span class="p">,</span> <span class="s1">&#39;stop&#39;</span><span class="p">,</span> <span class="s1">&#39;start&#39;</span> <span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+           <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span>
+               <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_app_status</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">)</span> 
+           <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;disable&quot;</span><span class="p">:</span>
+               <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">disable_app</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">)</span> 
+           <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;enable&quot;</span><span class="p">:</span>
+               <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">enable_app</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">)</span> 
+           <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span>
+               <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app_process_control</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> 
+                                                 <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> 
+                                                 <span class="n">action</span><span class="o">=</span><span class="s2">&quot;start&quot;</span><span class="p">)</span> 
+           <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;stop&quot;</span><span class="p">:</span>
+               <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app_process_control</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> 
+                                                 <span class="n">app</span><span class="o">=</span><span class="n">app</span><span class="p">,</span> 
+                                                 <span class="n">action</span><span class="o">=</span><span class="s2">&quot;stop&quot;</span><span class="p">)</span> 
+           <span class="k">else</span><span class="p">:</span>
+               <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Action: </span><span class="si">{</span><span class="n">action</span><span class="si">}</span><span class="s1"> not implemented&#39;</span><span class="p">)</span>
+               <span class="n">result</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Action: </span><span class="si">{</span><span class="n">action</span><span class="si">}</span><span class="s1"> not supported&#39;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Supported actions: </span><span class="si">{</span><span class="n">actions</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="b1oph.disable_app"><a class="viewcode-back" href="../../b1oph-class.html#bloxone.b1oph.disable_app">[docs]</a>    <span class="k">def</span> <span class="nf">disable_app</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Disable specified app on named OPH</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            name (str): display_name of OPH</span>
+<span class="sd">            app (str): App Name, e.g. DNS</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            bool</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">app_type</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="c1"># Check app supported and get Get application_type</span>
+        <span class="k">if</span> <span class="n">app</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">OPH_APP_NAMES</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">app_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">OPH_APP_NAMES</span><span class="p">[</span><span class="n">app</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">app</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">OPH_APPS</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">app_type</span> <span class="o">=</span> <span class="n">app</span>
+
+        <span class="k">if</span> <span class="n">app_type</span><span class="p">:</span>
+            <span class="c1"># Get id of OPH</span>
+            <span class="nb">filter</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;display_name==&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/on_prem_hosts&#39;</span><span class="p">,</span> 
+                                <span class="n">_filter</span><span class="o">=</span><span class="nb">filter</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
+                <span class="n">oph_data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
+                <span class="nb">id</span> <span class="o">=</span> <span class="n">oph_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;On Prem Host id = </span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+                <span class="c1"># Build body</span>
+                <span class="n">body</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;display_name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> 
+                         <span class="s1">&#39;applications&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="p">{</span> <span class="s1">&#39;application_type&#39;</span><span class="p">:</span> <span class="n">app_type</span><span class="p">,</span>
+                                             <span class="s1">&#39;disabled&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> 
+                                             <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;desired_state&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span> <span class="p">}</span> 
+                                           <span class="p">}</span> <span class="p">]</span> <span class="p">}</span> 
+                
+                <span class="c1"># Update desired OPH</span>
+                <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s1">&#39;/on_prem_hosts&#39;</span><span class="p">,</span>
+                                       <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">,</span>
+                                       <span class="n">body</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;OPH: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">, App: </span><span class="si">{</span><span class="n">app</span><span class="si">}</span><span class="s1">, App_type: </span><span class="si">{</span><span class="n">app_type</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">status</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;OPH </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> not found.&#39;</span><span class="p">)</span>
+                <span class="n">status</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;App </span><span class="si">{</span><span class="n">app</span><span class="si">}</span><span class="s1"> not supported.&#39;</span><span class="p">)</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="kc">False</span>
+        
+        <span class="k">return</span> <span class="n">status</span></div>
+
+
+<div class="viewcode-block" id="b1oph.enable_app"><a class="viewcode-back" href="../../b1oph-class.html#bloxone.b1oph.enable_app">[docs]</a>    <span class="k">def</span> <span class="nf">enable_app</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Enable specified app on named OPH</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            name (str): display_name of OPH</span>
+<span class="sd">            app (str): App Name, e.g. DNS</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            bool</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">app_type</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="c1"># Check app supported and get Get application_type</span>
+        <span class="k">if</span> <span class="n">app</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">OPH_APP_NAMES</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">app_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">OPH_APP_NAMES</span><span class="p">[</span><span class="n">app</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">app</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">OPH_APPS</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">app_type</span> <span class="o">=</span> <span class="n">app</span>
+
+        <span class="k">if</span> <span class="n">app_type</span><span class="p">:</span>
+            <span class="c1"># Get id of OPH</span>
+            <span class="nb">filter</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;display_name==&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/on_prem_hosts&#39;</span><span class="p">,</span> 
+                                <span class="n">_filter</span><span class="o">=</span><span class="nb">filter</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
+                <span class="n">oph_data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
+                <span class="nb">id</span> <span class="o">=</span> <span class="n">oph_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;On Prem Host id = </span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+                <span class="c1"># Build body</span>
+                <span class="n">body</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;display_name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> 
+                         <span class="s1">&#39;applications&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="p">{</span> <span class="s1">&#39;application_type&#39;</span><span class="p">:</span> <span class="n">app_type</span><span class="p">,</span>
+                                             <span class="s1">&#39;disabled&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span> 
+                                             <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;desired_state&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span> <span class="p">}</span> 
+                                           <span class="p">}</span> <span class="p">]</span> <span class="p">}</span> 
+                
+                <span class="c1"># Update desired OPH</span>
+                <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s1">&#39;/on_prem_hosts&#39;</span><span class="p">,</span>
+                                       <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">,</span>
+                                       <span class="n">body</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;OPH: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">, App: </span><span class="si">{</span><span class="n">app</span><span class="si">}</span><span class="s1">, App_type: </span><span class="si">{</span><span class="n">app_type</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">status</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;OPH </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> not found.&#39;</span><span class="p">)</span>
+                <span class="n">status</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;App </span><span class="si">{</span><span class="n">app</span><span class="si">}</span><span class="s1"> not supported.&#39;</span><span class="p">)</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="kc">False</span>
+        
+        <span class="k">return</span> <span class="n">status</span></div>
+    
+
+<div class="viewcode-block" id="b1oph.app_process_control"><a class="viewcode-back" href="../../b1oph-class.html#bloxone.b1oph.app_process_control">[docs]</a>    <span class="k">def</span> <span class="nf">app_process_control</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span> 
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Start or stop an application process</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            name (str): display_name of OPH</span>
+<span class="sd">            app (str): App Name, e.g. DNS</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            bool </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">app_type</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s2">&quot;stop&quot;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span> <span class="p">}</span>
+
+        <span class="k">if</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+
+            <span class="c1"># Check app supported and get Get application_type</span>
+            <span class="k">if</span> <span class="n">app</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">OPH_APP_NAMES</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">app_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">OPH_APP_NAMES</span><span class="p">[</span><span class="n">app</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">app</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">OPH_APPS</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">app_type</span> <span class="o">=</span> <span class="n">app</span>
+
+            <span class="k">if</span> <span class="n">app_type</span><span class="p">:</span>
+                <span class="c1"># Get id of OPH</span>
+                <span class="n">oph_status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">oph_status_summary</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">oph_status</span><span class="p">:</span>
+                    <span class="nb">id</span> <span class="o">=</span> <span class="n">oph_status</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;On Prem Host id = </span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="n">app_status</span> <span class="o">=</span> <span class="n">oph_status</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="s1">&#39;applications&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;App status: </span><span class="si">{</span><span class="n">app</span><span class="si">}</span><span class="s1"> app is </span><span class="si">{</span><span class="n">app_status</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="c1"># Check whether app is disabled</span>
+                    <span class="k">if</span> <span class="s1">&#39;disabled&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">app_status</span><span class="p">:</span>
+                        <span class="c1"># Build body</span>
+                        <span class="n">body</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;display_name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> 
+                                <span class="s1">&#39;applications&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="p">{</span> <span class="s1">&#39;application_type&#39;</span><span class="p">:</span> <span class="n">app_type</span><span class="p">,</span>
+                                                    <span class="s1">&#39;disabled&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span> 
+                                                    <span class="s1">&#39;state&#39;</span><span class="p">:</span> 
+                                                        <span class="p">{</span> <span class="s1">&#39;desired_state&#39;</span><span class="p">:</span> <span class="n">actions</span><span class="p">[</span><span class="n">action</span><span class="p">]</span> <span class="p">}</span> 
+                                                <span class="p">}</span> <span class="p">]</span> <span class="p">}</span> 
+                        
+                        <span class="c1"># Update desired OPH</span>
+                        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s1">&#39;/on_prem_hosts&#39;</span><span class="p">,</span>
+                                            <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">,</span>
+                                            <span class="n">body</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+                        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
+                            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;OPH: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">, App: </span><span class="si">{</span><span class="n">app</span><span class="si">}</span><span class="s1">, App_type: </span><span class="si">{</span><span class="n">app_type</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                            <span class="n">status</span> <span class="o">=</span> <span class="kc">True</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                            <span class="n">status</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;App: </span><span class="si">{</span><span class="n">app</span><span class="si">}</span><span class="s1"> on OPH: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">app_status</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                        <span class="n">status</span> <span class="o">=</span> <span class="kc">False</span>
+
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;OPH </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> not found.&#39;</span><span class="p">)</span>
+                    <span class="n">status</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;App </span><span class="si">{</span><span class="n">app</span><span class="si">}</span><span class="s1"> not supported.&#39;</span><span class="p">)</span>
+                <span class="n">status</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Action: </span><span class="si">{</span><span class="n">action</span><span class="si">}</span><span class="s1"> not supported&#39;</span><span class="p">)</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">return</span> <span class="n">status</span></div></div>
 </pre></div>
 
            </div>

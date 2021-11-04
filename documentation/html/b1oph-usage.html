@@ -198,12 +198,11 @@
   <div class="section" id="b1oph-usage">
 <h1>b1oph Usage<a class="headerlink" href="#b1oph-usage" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">b1oph</span></code> provides generic calls to manage API calls for OPH
-management. Additional ‘helper’ methods such as get_ophid().</p>
+management. Additional ‘helper’ methods such as get_ophid(), and the
+ability to see the status of OPHs, Apps, and provide App control.</p>
 <div class="admonition-todo admonition" id="id1">
 <p class="admonition-title">Todo</p>
-<p>Service status
-Service management
-Rename OPH</p>
+<p>Rename OPH</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
@@ -220,6 +219,65 @@ documentation is on the todo.</p>
 
 <span class="c1"># Get the ophid</span>
 <span class="n">ophid</span> <span class="o">=</span> <span class="n">b1oph</span><span class="o">.</span><span class="n">get_ophid</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;youroph-name&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># Get status for all OPHs</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">b1oph</span><span class="o">.</span><span class="n">oph_status_summary</span><span class="p">())</span>
+<span class="c1"># Get status for specific OPH</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">b1oph</span><span class="o">.</span><span class="n">oph_status_summary</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-oph-name&quot;</span><span class="p">))</span>
+<span class="p">{</span><span class="s1">&#39;my-oph-name&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;applications&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Anycast&#39;</span><span class="p">:</span> <span class="s1">&#39;disabled - stopped&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;CDC&#39;</span><span class="p">:</span> <span class="s1">&#39;disabled - stopped&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;CDC_version&#39;</span><span class="p">:</span> <span class="s1">&#39;v2.1.3&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;DFP&#39;</span><span class="p">:</span> <span class="s1">&#39;disabled - stopped&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;DFP_version&#39;</span><span class="p">:</span> <span class="s1">&#39;v2.1.5&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;DHCP&#39;</span><span class="p">:</span> <span class="s1">&#39;active&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;DHCP_version&#39;</span><span class="p">:</span> <span class="s1">&#39;v3.1.8&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;DNS&#39;</span><span class="p">:</span> <span class="s1">&#39;active&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;DNS_version&#39;</span><span class="p">:</span> <span class="s1">&#39;v3.1.4&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;NGC&#39;</span><span class="p">:</span> <span class="s1">&#39;disabled - stopped&#39;</span><span class="p">},</span>
+                    <span class="s1">&#39;host_type&#39;</span><span class="p">:</span> <span class="s1">&#39;BloxOne Appliance - B105&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;97310&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;ip_address&#39;</span><span class="p">:</span> <span class="s1">&#39;192.168.1.102&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;last_seen&#39;</span><span class="p">:</span> <span class="s1">&#39;2021-11-04T19:46:55.942540Z&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;nat_ip&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                    <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Application Management&#39;</span><span class="p">:</span> <span class="s1">&#39;Online&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;OPH State&#39;</span><span class="p">:</span> <span class="s1">&#39;Online&#39;</span><span class="p">,</span>
+                                <span class="s1">&#39;Platform Management&#39;</span><span class="p">:</span> <span class="s1">&#39;Online&#39;</span><span class="p">},</span>
+                    <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;v4.3.6&#39;</span><span class="p">}}</span>
+
+<span class="c1"># Get status for individual app on specified OPH</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b1oph</span><span class="o">.</span><span class="n">get_app_state</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-oph-name&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">&quot;DNS&quot;</span><span class="p">)</span>
+<span class="s1">&#39;active&#39;</span>
+<span class="c1"># Get status for individual app on specified OPH</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b1oph</span><span class="o">.</span><span class="n">get_app_state</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-oph-name&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">&quot;CDC&quot;</span><span class="p">)</span>
+<span class="s1">&#39;disabled - stopped&#39;</span>
+
+<span class="c1"># Perform an action on a an App for specified OPH</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b1oph</span><span class="o">.</span><span class="n">manage_app</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-oph-name&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">&quot;CDC&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;start&quot;</span><span class="p">)</span>
+<span class="kc">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b1oph</span><span class="o">.</span><span class="n">manage_app</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-oph-name&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">&quot;CDC&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;enable&quot;</span><span class="p">)</span>
+<span class="kc">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b1oph</span><span class="o">.</span><span class="n">get_app_state</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;non-existant-oph&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">&quot;DNS&quot;</span><span class="p">)</span>
+<span class="n">ERROR</span><span class="p">:</span><span class="n">root</span><span class="p">:</span><span class="n">OPH</span><span class="p">:</span> <span class="n">non</span><span class="o">-</span><span class="n">existant</span><span class="o">-</span><span class="n">oph</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="s1">&#39;OPH: jsteele-dns3-cnios not found&#39;</span>
+
+<span class="c1"># Specific methods can also be directly called</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b1oph</span><span class="o">.</span><span class="n">get_app_state</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-oph-name&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">&quot;CDC&quot;</span><span class="p">)</span>
+<span class="s1">&#39;stopped&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b1oph</span><span class="o">.</span><span class="n">get_app_state</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-oph-name&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">&quot;CDC&quot;</span><span class="p">)</span>
+<span class="s1">&#39;stopped&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b1oph</span><span class="o">.</span><span class="n">manage_app</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-oph-name&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">&quot;CDC&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;disable&quot;</span><span class="p">)</span>
+<span class="kc">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b1oph</span><span class="o">.</span><span class="n">get_app_state</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-oph-name&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">&quot;CDC&quot;</span><span class="p">)</span>
+<span class="s1">&#39;disabled - stopped&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b1oph</span><span class="o">.</span><span class="n">enable_app</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-oph-name&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">&quot;CDC&quot;</span><span class="p">)</span>
+<span class="kc">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b1oph</span><span class="o">.</span><span class="n">disable_app</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-oph-name&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">&quot;CDC&quot;</span><span class="p">)</span>
+<span class="kc">True</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b1oph</span><span class="o">.</span><span class="n">manage_app</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-oph-name&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">&quot;CDC&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;blah&quot;</span><span class="p">)</span>
+<span class="n">ERROR</span><span class="p">:</span><span class="n">root</span><span class="p">:</span><span class="n">Action</span><span class="p">:</span> <span class="n">blah</span> <span class="ow">not</span> <span class="n">supported</span>
+<span class="kc">False</span>
 </pre></div>
 </div>
 </div>
