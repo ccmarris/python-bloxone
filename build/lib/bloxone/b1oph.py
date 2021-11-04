@@ -7,7 +7,7 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20211028
+ Date Last Updated: 20211104
 
  Todo:
 
@@ -47,7 +47,7 @@ import json
 import collections
 
 # ** Global Vars **
-__version__ = '0.1.7'
+__version__ = '0.2.0'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -515,12 +515,11 @@ class b1oph(bloxone.b1):
                     app_name = 'Unknown, AppID: ' + app_id
 
                 # Check whether app is enabled
-                if app.get('disabled') == '0':
-                    status = self.APP_STATUS[app['composite_status']['status']]
-                    app_version = app.get('current_version')
-                else:
-                    status = 'disabled'
-                    app_version = None
+                status = self.APP_STATUS[app['composite_status']['status']]
+                if app.get('disabled') == '1':
+                    status = f'disabled - {status}'
+
+                app_version = app.get('current_version')
 
                 # Add version info if available
                 if app_version:
@@ -594,34 +593,89 @@ class b1oph(bloxone.b1):
         return uptime
 
 
-    def get_app_state(self, json_data):
+    def get_app_state(self, name="", app=""):
         '''
+        Get status of application for an OPH
+
+        Parameters:
+            name (str): display_name of OPH
+            app (str): App Name, e.g. DNS
+        
+        Returns:
+            app_status (str): Status or error msg as text
         '''
-        return
+        status_data = ''
+        app_status = ''
+
+        status_data = self.oph_status_summary(name=name)
+        if status_data:
+            if 'applications' in status_data[name].keys():
+                app_status = status_data[name]['applications'].get(app)
+                if not app_status:
+                    logging.error(f'App: {app} not found for OPH: {name}')
+                    app_status = f'App: {app} not found for OPH: {name}'
+            else:
+                logging.error(f'No application data for OPH: {name}')
+                app_status = f'No application data for OPH: {name}'
+
+        else:
+            logging.error(f'OPH: {name} not found')
+            app_status = f'OPH: {name} not found'
+
+        return app_status
+
 
     def manage_app(self, name="", app="", action="status"):
         '''
+        Perform action on named OPH for specified app
+
+        Parameters:
+            name (str): display_name of OPH
+            app (str): App Name, e.g. DNS
+            action (str): action to perform for app
+        
+        Returns:
+            bool
         '''
+        result = False
         actions = [ 'status', 'disable', 'enable', 'stop', 'start' ]
 
         if action in actions:
            if action == "status":
-               result = self.app_status(name=name, app=app) 
+               result = self.get_app_status(name=name, app=app) 
            elif action == "disable":
                result = self.disable_app(name=name, app=app) 
            elif action == "enable":
                result = self.enable_app(name=name, app=app) 
+           elif action == "start":
+               result = self.app_process_control(name=name, 
+                                                 app=app, 
+                                                 action="start") 
+           elif action == "stop":
+               result = self.app_process_control(name=name, 
+                                                 app=app, 
+                                                 action="stop") 
            else:
                logging.error(f'Action: {action} not implemented')
+               result = False
         else:
-                logging.error(f'Action: {action} not supported')
-                logging.info(f'Supported actions: {actions}')
+            logging.error(f'Action: {action} not supported')
+            logging.info(f'Supported actions: {actions}')
+            result = False
 
         return result
 
 
     def disable_app(self, name="", app=""):
         '''
+        Disable specified app on named OPH
+
+        Parameters:
+            name (str): display_name of OPH
+            app (str): App Name, e.g. DNS
+        
+        Returns:
+            bool
         '''
         status = False
         app_type = ''
@@ -666,4 +720,129 @@ class b1oph(bloxone.b1):
             logging.error(f'App {app} not supported.')
             status = False
         
+        return status
+
+
+    def enable_app(self, name="", app=""):
+        '''
+        Enable specified app on named OPH
+
+        Parameters:
+            name (str): display_name of OPH
+            app (str): App Name, e.g. DNS
+        
+        Returns:
+            bool
+        '''
+        status = False
+        app_type = ''
+
+        # Check app supported and get Get application_type
+        if app in self.OPH_APP_NAMES.keys():
+            app_type = self.OPH_APP_NAMES[app]
+        elif app in self.OPH_APPS.keys():
+            app_type = app
+
+        if app_type:
+            # Get id of OPH
+            filter = f'display_name=="{name}"'
+            response = self.get('/on_prem_hosts', 
+                                _filter=filter)
+            if response.status_code in self.return_codes_ok:
+                oph_data = response.json()['result']
+                id = oph_data[0]['id']
+                logging.debug(f'On Prem Host id = {id}')
+
+                # Build body
+                body = { 'display_name': name, 
+                         'applications': [ { 'application_type': app_type,
+                                             'disabled': '0', 
+                                             'state': { 'desired_state': '1' } 
+                                           } ] } 
+                
+                # Update desired OPH
+                response = self.update('/on_prem_hosts',
+                                       id=id,
+                                       body=json.dumps(body))
+                if response.status_code in self.return_codes_ok:
+                    logging.debug(f'OPH: {name}, App: {app}, App_type: {app_type}')
+                    status = True
+                else:
+                    logging.error(f'{response.status_code}: {response.text}')
+
+            else:
+                logging.error(f'OPH {name} not found.')
+                status = False
+        else:
+            logging.error(f'App {app} not supported.')
+            status = False
+        
+        return status
+    
+
+    def app_process_control(self, name="", app="", action=""): 
+        '''
+        Start or stop an application process
+
+        Parameters:
+            name (str): display_name of OPH
+            app (str): App Name, e.g. DNS
+        
+        Returns:
+            bool 
+        '''
+        app_type = ''
+        status = False
+        actions = { "start": '1', "stop": '0' }
+
+        if action in actions.keys():
+
+            # Check app supported and get Get application_type
+            if app in self.OPH_APP_NAMES.keys():
+                app_type = self.OPH_APP_NAMES[app]
+            elif app in self.OPH_APPS.keys():
+                app_type = app
+
+            if app_type:
+                # Get id of OPH
+                oph_status = self.oph_status_summary(name=name)
+                if oph_status:
+                    id = oph_status.get('id')
+                    logging.debug(f'On Prem Host id = {id}')
+                    app_status = oph_status[name]['applications'].get(app)
+                    logging.debug(f'App status: {app} app is {app_status}')
+                    # Check whether app is disabled
+                    if 'disabled' not in app_status:
+                        # Build body
+                        body = { 'display_name': name, 
+                                'applications': [ { 'application_type': app_type,
+                                                    'disabled': '0', 
+                                                    'state': 
+                                                        { 'desired_state': actions[action] } 
+                                                } ] } 
+                        
+                        # Update desired OPH
+                        response = self.update('/on_prem_hosts',
+                                            id=id,
+                                            body=json.dumps(body))
+                        if response.status_code in self.return_codes_ok:
+                            logging.debug(f'OPH: {name}, App: {app}, App_type: {app_type}')
+                            status = True
+                        else:
+                            logging.error(f'{response.status_code}: {response.text}')
+                            status = False
+                    else:
+                        logging.info(f'App: {app} on OPH: {name} {app_status}')
+                        status = False
+
+                else:
+                    logging.error(f'OPH {name} not found.')
+                    status = False
+            else:
+                logging.error(f'App {app} not supported.')
+                status = False
+        else:
+            logging.error(f'Action: {action} not supported')
+            status = False
+
         return status
