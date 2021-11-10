@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>bloxone.b1 Class &mdash; Bloxone API Wrapper 0.7.6 documentation</title>
+  <title>bloxone.b1 Class &mdash; Bloxone API Wrapper 0.8.6 documentation</title>
   
 
   
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                0.7.6
+                0.8.6
               </div>
             
           
@@ -103,18 +103,18 @@
 <li class="toctree-l2"><a class="reference internal" href="b1anycast-class.html">b1anycast Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1authn-class.html">b1authn Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1bootstrap-class.html">b1bootstrap Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="b1cdc-class.html">b1cdc Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1ddi-class.html">b1ddi Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1diagnostics-class.html">b1diagnostics Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1cdc-class.html">b1cdc Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1oph-class.html">b1oph Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1platform-class.html">b1platform Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1sw-class.html">b1dw Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="b1ztp-class.html">b1ztp Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1td-class.html">b1td Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1tdc-class.html">b1tdc Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1tdep-class.html">b1tdep Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1tddfp-class.html">b1tddfp Class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="b1tdlad-class.html">b1tdlad Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="b1ztp-class.html">b1ztp Class</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="dhcp-utils-classes.html">DHCP Utilities</a></li>
@@ -348,112 +348,6 @@ Can also be used to genericallly access the API</p>
 <dt class="sig sig-object py" id="bloxone.APIKeyFormatError">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">bloxone.</span></span><span class="sig-name descname"><span class="pre">APIKeyFormatError</span></span><a class="reference internal" href="_modules/bloxone/bloxone.html#APIKeyFormatError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.APIKeyFormatError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exception for API key format mismatch</p>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="bloxone.b1platform">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">bloxone.</span></span><span class="sig-name descname"><span class="pre">b1platform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'config.ini'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class now reused for BloxOne Platform Methods, e.g. Audit Log
-Management of BloxOne On Prem Hosts is via the b1oph Class
-b1oph class  is inherited here for compatibility</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="bloxone.b1platform.audit_users">
-<span class="sig-name descname"><span class="pre">audit_users</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domains</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.audit_users"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.audit_users" title="Permalink to this definition">¶</a></dt>
-<dd><p>Audit User Data for non compliant email domains</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>domain</strong> (<em>list</em>) – List of valid email domains</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>List of User Data (json)</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bloxone.b1platform.auditlog">
-<span class="sig-name descname"><span class="pre">auditlog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.auditlog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.auditlog" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the audit log</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>**params</strong> (<em>dict</em>) – Generic API parameters</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>audit_log (list); list of dict</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bloxone.b1platform.get_current_tenant">
-<span class="sig-name descname"><span class="pre">get_current_tenant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.get_current_tenant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.get_current_tenant" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get name of current tenant</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>**params</strong> (<em>dict</em>) – Generic API parameters</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>string containing name of tenant or ‘’ on failure</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bloxone.b1platform.get_current_user">
-<span class="sig-name descname"><span class="pre">get_current_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.get_current_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.get_current_user" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get Current User Data</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>**params</strong> (<em>dict</em>) – Generic API parameters</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bloxone.b1platform.get_current_user_accounts">
-<span class="sig-name descname"><span class="pre">get_current_user_accounts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.get_current_user_accounts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.get_current_user_accounts" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get Current Users Accounts Data</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>**params</strong> (<em>dict</em>) – Generic API parameters</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bloxone.b1platform.get_full_auditlog">
-<span class="sig-name descname"><span class="pre">get_full_auditlog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.get_full_auditlog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.get_full_auditlog" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="bloxone.b1platform.get_users">
-<span class="sig-name descname"><span class="pre">get_users</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1platform.html#b1platform.get_users"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1platform.get_users" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get User Data</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>**params</strong> (<em>dict</em>) – Generic API parameters</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Requests response object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>response object</p>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 </div>
