@@ -13,6 +13,3 @@ bloxone.b1 Class
 
 .. autoclass:: bloxone.APIKeyFormatError
     :members:
-
-.. autoclass:: bloxone.b1platform
-    :members:

@@ -80,7 +80,8 @@ The specific API 'trees' are then split in to subclasses of :class:`b1`:
 
     :class:`b1oph` 
         Access to the BloxOne On Prem Host API with generic
-        *get*, *create*, *delete* and *update* methods plus specific task 
+        *get*, *create*, *delete* and *update* methods plus specific tasks
+        to allow simple status reporting, App control, etc. 
 
     :class:`b1platform` 
         Methods to provide access to users and audit log information
