@@ -593,7 +593,7 @@ class b1oph(bloxone.b1):
         return uptime
 
 
-    def get_app_state(self, name="", app=""):
+    def get_app_state(self, name, app):
         '''
         Get status of application for an OPH
 
