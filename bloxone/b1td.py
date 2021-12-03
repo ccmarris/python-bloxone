@@ -9,11 +9,11 @@
 
  Author: Chris Marrison
 
- Date Last Updated: 20210713
+ Date Last Updated: 20211203
 
  Todo:
 
- Copyright (c) 2020 Chris Marrison / Infoblox
+ Copyright (c) 2020-2021 Chris Marrison / Infoblox
 
  Redistribution and use in source and binary forms,
  with or without modification, are permitted provided
@@ -41,13 +41,12 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.2.6'
+__version__ = '0.2.7'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
 import bloxone
 import logging
-import json
 import datetime
 
 # ** Global Vars **
@@ -360,7 +359,8 @@ class b1td(bloxone.b1):
         Returns:
             response object: Requests response object
         '''
-        url = self.dossier_url + '/jobs?wait=' + wait
+
+        url = self.dossier_url + '/jobs?wait=' + str(wait)
         # Create body
         if sources == "all":
             response = self.dossier_sources()
@@ -371,8 +371,9 @@ class b1td(bloxone.b1):
                         sources.append(source)
                 logging.debug("Sources retrieved: {}".format(sources))
             else:
-                sources = ['atp', 'dns', 'geo', 'pdns', 'ptr', 'rwhois',
-                           'whopis', 'inforank', 'rpz_feeds', 'custom_lists',
+                sources = ['atp', 'activity', 'dns', 'geo', 'pdns', 'ptr', 
+                           'rwhois', 'whopis', 'inforank', 'rpz_feeds', 
+                           'ssl_cert', 'infoblox_web_cat', 'custom_lists',
                            'whitelist']
                 logging.debug("Failed to retrieve sources, using " 
                               + "limited list {}".format(sources))

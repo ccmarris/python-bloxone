@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 __author__ = 'Chris Marrison/Krishna Vasudevan'
 __author_email__ = 'chris@infoblox.com'
 
@@ -216,7 +216,7 @@ class b1tdc(bloxone.b1):
                 for obj in objs['results']:
                     if obj[key] == value:
                         id = obj['id']
-                        if not include_path:
+                        if not include_path and "/" in str(id):
                             id = id.rsplit('/',1)[1]
                 if not id:
                     logging.debug("Key {} with value {} not found."
