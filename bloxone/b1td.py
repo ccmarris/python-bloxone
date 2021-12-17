@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.3.0'
+__version__ = '0.3.1'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -427,9 +427,10 @@ class b1td(bloxone.b1):
                 logging.debug("Failed to retrieve sources, using " 
                               + "limited list {}".format(sources))
         else:
-            source_list = []
-            source_list.append(sources) 
-            sources = source_list
+            if not isinstance(sources, list):
+                source_list = []
+                source_list.append(sources) 
+                sources = source_list
 
         # Check for group of queries
         if isinstance(query, list): 

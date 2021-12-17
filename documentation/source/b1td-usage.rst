@@ -22,5 +22,7 @@ Examples
     t.threat_properties(threatclass="malwareC2").json()
     t.threat_properties(threatclass="malwareC2").json()
     t.dossierquery("eicar.co").json()
+    t.dossierquery([ "eicar.co", "pwn.af" ]).json()
+    t.dossierquery([ "eicar.co", "pwn.af" ], sources="atp").json()
     t.expand_mitre_vector('DGA').json()
     t.threat_actor('APT1').json()
