@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.1.2'
+__version__ = '0.1.3'
 __author__ = 'Chris Marrison/Krishna Vasudevan'
 __author_email__ = 'chris@infoblox.com'
 
@@ -126,16 +126,18 @@ class b1tdc(bloxone.b1):
         Parameters:
             objpath (str):  Swagger object path
             id (str):       Object id to delete
+            body (str):     JSON formatted data payload
 
         Returns:
             response object: Requests response object
         '''
         # Build url
         url = self.tdc_url + objpath
-        url = self._use_obj_id(url,id=id)
+        if id:
+            url = self._use_obj_id(url, id=id)
 
         # Make API Call
-        response = self._apidelete(url,body)
+        response = self._apidelete(url, body)
 
         return response
 
