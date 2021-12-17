@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>bloxone.bloxone &mdash; Bloxone API Wrapper 0.7.6 documentation</title>
+  <title>bloxone.bloxone &mdash; Bloxone API Wrapper 0.8.6 documentation</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.7.6
+                0.8.6
               </div>
             
           
@@ -89,7 +89,7 @@
               
             
             
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
@@ -219,7 +219,7 @@
 <span class="kn">import</span> <span class="nn">json</span>
 
 <span class="c1"># ** Global Vars **</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.7.9&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.8.5&#39;</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison&#39;</span>
 <span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
 <span class="vm">__doc__</span> <span class="o">=</span> <span class="s1">&#39;https://python-bloxone.readthedocs.io/en/latest/&#39;</span>
@@ -365,6 +365,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">api_version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;api_version&#39;</span><span class="p">]</span>
 
+        <span class="c1"># B1 &amp; B1DDI URLs</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">anycast_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/api/anycast/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;api_version&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">authn_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/api/authn/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;api_version&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bootstrap_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/bootstrap-app/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;api_version&#39;</span><span class="p">]</span>
@@ -376,6 +377,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">sw_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/api/upgrade_policy/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;api_version&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ztp_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/atlas-host-activation/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;api_version&#39;</span><span class="p">]</span>
         
+        <span class="c1"># B1TD URLs</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tdc_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/api/atcfw/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;api_version&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tdep_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/api/atcep/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;api_version&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tddfp_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/api/atcdfp/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;api_version&#39;</span><span class="p">]</span>
@@ -384,6 +386,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">dossier_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/tide/api/services/intel/lookup&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">threat_enrichment_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/tide/threat-enrichment&#39;</span>
 
+        <span class="c1"># Reporting URLs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ti_reports_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/api/ti-reports/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;api_version&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aggr_reports_url</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ti_reports_url</span> <span class="o">+</span> <span class="s1">&#39;/activity/aggregations&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">insights_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">aggr_reports_url</span> <span class="o">+</span> <span class="s1">&#39;/insight&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sec_act_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/api/ti-reports/v1/activity/hits&#39;</span>
 
         <span class="c1"># List of successful return codes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span> <span class="o">=</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">204</span><span class="p">]</span>
@@ -587,23 +594,25 @@
         <span class="k">return</span> <span class="n">response</span></div>
 
 
-<div class="viewcode-block" id="b1.delete"><a class="viewcode-back" href="../../code.html#bloxone.b1.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="b1.delete"><a class="viewcode-back" href="../../code.html#bloxone.b1.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Generic delete object wrapper</span>
 
 <span class="sd">        Parameters:</span>
 <span class="sd">            url (str):  Full URL</span>
 <span class="sd">            id (str):   Object id to delete</span>
+<span class="sd">            body (str):     JSON formatted data payload</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c1"># Build url</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_obj_id</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">id</span><span class="p">:</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_obj_id</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;URL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
 
         <span class="c1"># Make API Call</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apidelete</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apidelete</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">response</span></div>
 

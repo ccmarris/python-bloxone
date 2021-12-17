@@ -91,7 +91,7 @@
               
             
             
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
@@ -199,6 +199,11 @@
 <dd><p>BloxOne ThreatDefence API Wrapper
 Covers TIDE and Dossier</p>
 <dl class="py method">
+<dt class="sig sig-object py" id="bloxone.b1td.default_ttl">
+<span class="sig-name descname"><span class="pre">default_ttl</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.default_ttl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1td.default_ttl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="bloxone.b1td.dossier_sources">
 <span class="sig-name descname"><span class="pre">dossier_sources</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.dossier_sources"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1td.dossier_sources" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get Sources for Dossier</p>
@@ -213,13 +218,44 @@ Covers TIDE and Dossier</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="bloxone.b1td.dossier_target_sources">
+<span class="sig-name descname"><span class="pre">dossier_target_sources</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'host'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.dossier_target_sources"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1td.dossier_target_sources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get supported target types for Dossier</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>type</strong> (<em>str</em>) – target type</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Request response object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>response object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.b1td.dossier_target_types">
+<span class="sig-name descname"><span class="pre">dossier_target_types</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.dossier_target_types"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1td.dossier_target_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get supported target types for Dossier</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Request response object</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>response object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="bloxone.b1td.dossierquery">
 <span class="sig-name descname"><span class="pre">dossierquery</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'host'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sources</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'all'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.dossierquery"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1td.dossierquery" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simple Dossier Query</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>query</strong> (<em>str</em>) – query data</p></li>
+<li><p><strong>query</strong> (<em>str</em><em> or </em><em>list</em>) – single query or list of same type</p></li>
 <li><p><strong>type</strong> (<em>str</em>) – “host”, “ip” or “url”</p></li>
 <li><p><strong>sources</strong> (<em>str</em>) – set of sources or “all”</p></li>
 </ul>
@@ -266,6 +302,20 @@ Covers TIDE and Dossier</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>response object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.b1td.historical_threat_counts">
+<span class="sig-name descname"><span class="pre">historical_threat_counts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.historical_threat_counts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1td.historical_threat_counts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query Infoblox TIDE for historical threat counts</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Requests response object</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>response object</p>
 </dd>
 </dl>
 </dd></dl>
@@ -374,6 +424,20 @@ i.e. threat data that has not expired at time of call</p>
 <span class="sig-name descname"><span class="pre">threat_classes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.threat_classes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1td.threat_classes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get list of threat classes</p>
 <p>Parameters:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Requests response object</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>response object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.b1td.threat_counts">
+<span class="sig-name descname"><span class="pre">threat_counts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.threat_counts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1td.threat_counts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query Infoblox TIDE for active threat counts</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Requests response object</p>

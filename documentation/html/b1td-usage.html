@@ -91,7 +91,7 @@
               
             
             
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
@@ -214,7 +214,16 @@ the todo.</p>
 <span class="n">t</span><span class="o">.</span><span class="n">threat_properties</span><span class="p">()</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 <span class="n">t</span><span class="o">.</span><span class="n">threat_properties</span><span class="p">(</span><span class="n">threatclass</span><span class="o">=</span><span class="s2">&quot;malwareC2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 <span class="n">t</span><span class="o">.</span><span class="n">threat_properties</span><span class="p">(</span><span class="n">threatclass</span><span class="o">=</span><span class="s2">&quot;malwareC2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">threat_counts</span><span class="p">()</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">historical_threat_counts</span><span class="p">()</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">default_ttl</span><span class="p">()</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">dossier_target_types</span><span class="p">()</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">dossier_sources</span><span class="p">()</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">dossier_target_sources</span><span class="p">()</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 <span class="n">t</span><span class="o">.</span><span class="n">dossierquery</span><span class="p">(</span><span class="s2">&quot;eicar.co&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">dossierquery</span><span class="p">([</span> <span class="s2">&quot;eicar.co&quot;</span><span class="p">,</span> <span class="s2">&quot;pwn.af&quot;</span> <span class="p">])</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">dossierquery</span><span class="p">([</span> <span class="s2">&quot;eicar.co&quot;</span><span class="p">,</span> <span class="s2">&quot;pwn.af&quot;</span> <span class="p">],</span> <span class="n">sources</span><span class="o">=</span><span class="s2">&quot;atp&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">dossierquery</span><span class="p">([</span> <span class="s2">&quot;eicar.co&quot;</span><span class="p">,</span> <span class="s2">&quot;pwn.af&quot;</span> <span class="p">],</span> <span class="n">sources</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;atp&quot;</span><span class="p">,</span><span class="s2">&quot;whois&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 <span class="n">t</span><span class="o">.</span><span class="n">expand_mitre_vector</span><span class="p">(</span><span class="s1">&#39;DGA&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 <span class="n">t</span><span class="o">.</span><span class="n">threat_actor</span><span class="p">(</span><span class="s1">&#39;APT1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </pre></div>

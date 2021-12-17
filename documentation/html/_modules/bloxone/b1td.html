@@ -7,12 +7,14 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>bloxone.b1td &mdash; Bloxone API Wrapper 0.7.6 documentation</title>
+  <title>bloxone.b1td &mdash; Bloxone API Wrapper 0.8.6 documentation</title>
   
 
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +31,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
@@ -61,7 +64,7 @@
             
             
               <div class="version">
-                0.7.6
+                0.8.6
               </div>
             
           
@@ -94,6 +97,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage and Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../classes.html">Classes Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dhcp-utils-classes.html">DHCP Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../utils.html">Additional Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../code.html">Source Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../version_history.html">ChangeLog</a></li>
@@ -175,11 +179,11 @@
 
 <span class="sd"> Author: Chris Marrison</span>
 
-<span class="sd"> Date Last Updated: 20210713</span>
+<span class="sd"> Date Last Updated: 20211203</span>
 
 <span class="sd"> Todo:</span>
 
-<span class="sd"> Copyright (c) 2020 Chris Marrison / Infoblox</span>
+<span class="sd"> Copyright (c) 2020-2021 Chris Marrison / Infoblox</span>
 
 <span class="sd"> Redistribution and use in source and binary forms,</span>
 <span class="sd"> with or without modification, are permitted provided</span>
@@ -207,14 +211,14 @@
 
 <span class="sd">------------------------------------------------------------------------</span>
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.2.6&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.3.1&#39;</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison&#39;</span>
 <span class="n">__author_email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
 
 <span class="kn">import</span> <span class="nn">bloxone</span>
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">json</span>
 
 <span class="c1"># ** Global Vars **</span>
 
@@ -244,7 +248,6 @@
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">response</span></div>
-
 
 
 <div class="viewcode-block" id="b1td.post"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.post">[docs]</a>    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
@@ -315,30 +318,46 @@
 
         <span class="k">return</span> <span class="n">response</span></div>
 
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    (Currently not implemented)</span>
-<span class="sd">    def threat_stats(self, period=&quot;daily&quot;, **paramas):</span>
-<span class="sd">        &#39;&#39;&#39;</span>
-<span class="sd">        Query Infoblox TIDE for threat class stats</span>
-
-<span class="sd">        Parameters:</span>
-<span class="sd">            period (str): one of [&#39;daily&#39;, &#39;weekly&#39;, &#39;monthly&#39;]</span>
+<div class="viewcode-block" id="b1td.threat_counts"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.threat_counts">[docs]</a>    <span class="k">def</span> <span class="nf">threat_counts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Query Infoblox TIDE for active threat counts</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-<span class="sd">        objpath = &#39;/data/dashboard/&#39;</span>
+        <span class="c1"># Build URL</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tide_url</span> <span class="o">+</span> <span class="s1">&#39;/data/threat/counts&#39;</span>
 
-<span class="sd">        # Build URL</span>
-<span class="sd">        url = self.tide_url + objpath</span>
-<span class="sd">        url = url + period </span>
-<span class="sd">        # url = url + period + &#39;_threats_by_class&#39;</span>
+        <span class="c1"># Make API Call</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
-<span class="sd">        # Make API Call</span>
-<span class="sd">        response = self._apiget(url)</span>
+        <span class="k">return</span> <span class="n">response</span></div>
 
-<span class="sd">        return response</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="b1td.historical_threat_counts"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.historical_threat_counts">[docs]</a>    <span class="k">def</span> <span class="nf">historical_threat_counts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Query Infoblox TIDE for historical threat counts</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Build URL</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tide_url</span> <span class="o">+</span> <span class="s1">&#39;/data/threat/counts/historical&#39;</span>
+
+        <span class="c1"># Make API Call</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="b1td.default_ttl"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.default_ttl">[docs]</a>    <span class="k">def</span> <span class="nf">default_ttl</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tide_url</span> <span class="o">+</span> <span class="s1">&#39;/data/default/ttl&#39;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
 
 <div class="viewcode-block" id="b1td.querytide"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.querytide">[docs]</a>    <span class="k">def</span> <span class="nf">querytide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
@@ -363,6 +382,7 @@
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">response</span></div>
+
 
 <div class="viewcode-block" id="b1td.querytideactive"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.querytideactive">[docs]</a>    <span class="k">def</span> <span class="nf">querytideactive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datatype</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
@@ -508,7 +528,35 @@
 <span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dossier_url</span> <span class="o">+</span> <span class="s1">&#39;/sources&#39;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="b1td.dossier_target_sources"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.dossier_target_sources">[docs]</a>    <span class="k">def</span> <span class="nf">dossier_target_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;host&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get supported target types for Dossier </span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            type (str): target type</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Request response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dossier_url</span> <span class="o">+</span> <span class="s1">&#39;/sources/target/&#39;</span> <span class="o">+</span> <span class="nb">type</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="b1td.dossier_target_types"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.dossier_target_types">[docs]</a>    <span class="k">def</span> <span class="nf">dossier_target_types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get supported target types for Dossier </span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Request response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dossier_url</span> <span class="o">+</span> <span class="s1">&#39;/targets&#39;</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">response</span></div>
@@ -519,17 +567,22 @@
 <span class="sd">        Simple Dossier Query</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters:</span>
-<span class="sd">            query (str): query data</span>
+<span class="sd">            query (str or list): single query or list of same type</span>
 <span class="sd">            type (str): &quot;host&quot;, &quot;ip&quot; or &quot;url&quot;</span>
 <span class="sd">            sources (str): set of sources or &quot;all&quot;</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">wait</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span> <span class="ow">and</span> <span class="n">wait</span><span class="p">:</span>
+            <span class="n">wait</span> <span class="o">=</span> <span class="s1">&#39;true&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">wait</span> <span class="o">=</span> <span class="s1">&#39;false&#39;</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dossier_url</span> <span class="o">+</span> <span class="s1">&#39;/jobs?wait=&#39;</span> <span class="o">+</span> <span class="n">wait</span>
         <span class="c1"># Create body</span>
         <span class="k">if</span> <span class="n">sources</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span><span class="p">:</span>
-            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dossier_sources</span><span class="p">()</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dossier_target_sources</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">type</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
                 <span class="n">sources</span> <span class="o">=</span> <span class="p">[]</span>
                 <span class="k">for</span> <span class="n">source</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
@@ -537,21 +590,29 @@
                         <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
                 <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Sources retrieved: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sources</span><span class="p">))</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">sources</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;atp&#39;</span><span class="p">,</span> <span class="s1">&#39;dns&#39;</span><span class="p">,</span> <span class="s1">&#39;geo&#39;</span><span class="p">,</span> <span class="s1">&#39;pdns&#39;</span><span class="p">,</span> <span class="s1">&#39;ptr&#39;</span><span class="p">,</span> <span class="s1">&#39;rwhois&#39;</span><span class="p">,</span>
-                           <span class="s1">&#39;whopis&#39;</span><span class="p">,</span> <span class="s1">&#39;inforank&#39;</span><span class="p">,</span> <span class="s1">&#39;rpz_feeds&#39;</span><span class="p">,</span> <span class="s1">&#39;custom_lists&#39;</span><span class="p">,</span>
+                <span class="n">sources</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;atp&#39;</span><span class="p">,</span> <span class="s1">&#39;activity&#39;</span><span class="p">,</span> <span class="s1">&#39;dns&#39;</span><span class="p">,</span> <span class="s1">&#39;geo&#39;</span><span class="p">,</span> <span class="s1">&#39;pdns&#39;</span><span class="p">,</span> <span class="s1">&#39;ptr&#39;</span><span class="p">,</span> 
+                           <span class="s1">&#39;rwhois&#39;</span><span class="p">,</span> <span class="s1">&#39;whopis&#39;</span><span class="p">,</span> <span class="s1">&#39;inforank&#39;</span><span class="p">,</span> <span class="s1">&#39;rpz_feeds&#39;</span><span class="p">,</span> 
+                           <span class="s1">&#39;ssl_cert&#39;</span><span class="p">,</span> <span class="s1">&#39;infoblox_web_cat&#39;</span><span class="p">,</span> <span class="s1">&#39;custom_lists&#39;</span><span class="p">,</span>
                            <span class="s1">&#39;whitelist&#39;</span><span class="p">]</span>
                 <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Failed to retrieve sources, using &quot;</span> 
                               <span class="o">+</span> <span class="s2">&quot;limited list </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sources</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">source_list</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="n">source_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span> 
-            <span class="n">sources</span> <span class="o">=</span> <span class="n">source_list</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sources</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">source_list</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">source_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span> 
+                <span class="n">sources</span> <span class="o">=</span> <span class="n">source_list</span>
 
-        <span class="n">body</span> <span class="o">=</span> <span class="p">(</span> <span class="s1">&#39;{&quot;target&quot;: {&quot;one&quot;: {&quot;type&quot;: &quot;&#39;</span> <span class="o">+</span> <span class="nb">type</span> <span class="o">+</span> <span class="s1">&#39;&quot;, &#39;</span>
-                <span class="o">+</span> <span class="s1">&#39;&quot;sources&quot;: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span>
-                <span class="o">+</span> <span class="s1">&#39;&quot;target&quot;: &quot;&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">query</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;&quot; } } }&#39;</span> <span class="p">)</span>
-        <span class="c1"># body = json.dumps(body)</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Body: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+        <span class="c1"># Check for group of queries</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span> 
+            <span class="n">body</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;group&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span>
+                    <span class="s2">&quot;sources&quot;</span><span class="p">:</span> <span class="n">sources</span><span class="p">,</span>
+                    <span class="s2">&quot;targets&quot;</span><span class="p">:</span> <span class="n">query</span>  <span class="p">}</span> <span class="p">}</span> <span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">body</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;one&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span>
+                    <span class="s2">&quot;sources&quot;</span><span class="p">:</span> <span class="n">sources</span><span class="p">,</span> <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="n">query</span>  <span class="p">}</span> <span class="p">}</span> <span class="p">}</span>
+
+        <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Body: </span><span class="si">{</span><span class="n">body</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apipost</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span>
 
