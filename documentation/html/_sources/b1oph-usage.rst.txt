@@ -66,9 +66,9 @@ Examples
     False
     >>> b1oph.manage_app(name="my-oph-name", app="CDC", action="enable")
     True
-    >>> b1oph.get_app_state(name="non-existant-oph", app="DNS")
+    >>> b1oph.get_app_state(name="non-existent-oph", app="DNS")
     ERROR:root:OPH: non-existant-oph not found
-    'OPH: jsteele-dns3-cnios not found'
+    'OPH: non-existent-oph not found'
 
     # Specific methods can also be directly called
     >>> b1oph.get_app_state(name="my-oph-name", app="CDC")

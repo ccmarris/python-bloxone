@@ -91,7 +91,7 @@
               
             
             
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
@@ -257,9 +257,9 @@ documentation is on the todo.</p>
 <span class="kc">False</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">b1oph</span><span class="o">.</span><span class="n">manage_app</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-oph-name&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">&quot;CDC&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;enable&quot;</span><span class="p">)</span>
 <span class="kc">True</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">b1oph</span><span class="o">.</span><span class="n">get_app_state</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;non-existant-oph&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">&quot;DNS&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b1oph</span><span class="o">.</span><span class="n">get_app_state</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;non-existent-oph&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">&quot;DNS&quot;</span><span class="p">)</span>
 <span class="n">ERROR</span><span class="p">:</span><span class="n">root</span><span class="p">:</span><span class="n">OPH</span><span class="p">:</span> <span class="n">non</span><span class="o">-</span><span class="n">existant</span><span class="o">-</span><span class="n">oph</span> <span class="ow">not</span> <span class="n">found</span>
-<span class="s1">&#39;OPH: jsteele-dns3-cnios not found&#39;</span>
+<span class="s1">&#39;OPH: non-existent-oph not found&#39;</span>
 
 <span class="c1"># Specific methods can also be directly called</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">b1oph</span><span class="o">.</span><span class="n">get_app_state</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-oph-name&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">&quot;CDC&quot;</span><span class="p">)</span>

@@ -237,6 +237,6 @@ in its native format and as a string::
 	etc
 
 A :func:`tests()` method is also provided that will show example 
-encodings/decodings for each data-type and option encodings::
+encodings/decodings for each data-type and option encodings.
 
 

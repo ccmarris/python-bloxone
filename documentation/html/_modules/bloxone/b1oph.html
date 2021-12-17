@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>bloxone.b1oph &mdash; Bloxone API Wrapper 0.7.6 documentation</title>
+  <title>bloxone.b1oph &mdash; Bloxone API Wrapper 0.8.6 documentation</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.7.6
+                0.8.6
               </div>
             
           
@@ -89,7 +89,7 @@
               
             
             
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
@@ -481,7 +481,7 @@
                 <span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="n">result_text</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">obj</span><span class="p">:</span>
                     <span class="nb">id</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
-                    <span class="k">if</span> <span class="ow">not</span> <span class="n">include_path</span> <span class="ow">and</span> <span class="s2">&quot;/&quot;</span> <span class="ow">in</span> <span class="nb">id</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">include_path</span> <span class="ow">and</span> <span class="s2">&quot;/&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
                         <span class="nb">id</span> <span class="o">=</span> <span class="nb">id</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Key </span><span class="si">{}</span><span class="s2"> with value </span><span class="si">{}</span><span class="s2"> not found.&quot;</span>
@@ -763,7 +763,7 @@
         <span class="k">return</span> <span class="n">uptime</span></div>
 
 
-<div class="viewcode-block" id="b1oph.get_app_state"><a class="viewcode-back" href="../../b1oph-class.html#bloxone.b1oph.get_app_state">[docs]</a>    <span class="k">def</span> <span class="nf">get_app_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="b1oph.get_app_state"><a class="viewcode-back" href="../../b1oph-class.html#bloxone.b1oph.get_app_state">[docs]</a>    <span class="k">def</span> <span class="nf">get_app_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Get status of application for an OPH</span>
 
