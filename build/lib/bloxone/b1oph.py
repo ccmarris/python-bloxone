@@ -311,7 +311,7 @@ class b1oph(bloxone.b1):
                 obj = obj[result_text]
                 if obj:
                     id = obj[0]['id']
-                    if not include_path and "/" in id:
+                    if not include_path and "/" in str(id):
                         id = id.rsplit('/',1)[1]
                 else:
                     logging.debug("Key {} with value {} not found."
@@ -593,7 +593,7 @@ class b1oph(bloxone.b1):
         return uptime
 
 
-    def get_app_state(self, name="", app=""):
+    def get_app_state(self, name, app):
         '''
         Get status of application for an OPH
 

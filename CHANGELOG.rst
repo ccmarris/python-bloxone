@@ -2,8 +2,10 @@
 ChangeLog
 *********
 
-|	20211104 	v0.8.4 	App control for OPHs
-| 	2021102 	v0.8.3 	Added OPH status reporting methods
+|	20211217 	v0.8.6 	Udate documentation and PyPy release version no.
+|	20211217 	v0.8.5 	Support list of sources for b1td.dossierquery()
+|	20211204 	v0.8.4 	App control for OPHs
+| 	20211102 	v0.8.3 	Added OPH status reporting methods
 | 	20210805 	v0.8.2 	Improved error protection
 | 	20210805 	v0.8.1 	Added requirements.txt for yaml
 |	20210804 	v0.8.0 	Added output csv and yaml output

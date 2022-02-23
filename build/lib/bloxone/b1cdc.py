@@ -80,7 +80,6 @@ class b1cdc(bloxone.b1):
         return response
 
 
-
     def create(self, objpath, body=""):
         '''
         Generic create object wrapper for ddi objects

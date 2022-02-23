@@ -9,11 +9,11 @@
 
  Author: Chris Marrison
 
- Date Last Updated: 20210713
+ Date Last Updated: 20211203
 
  Todo:
 
- Copyright (c) 2020 Chris Marrison / Infoblox
+ Copyright (c) 2020-2021 Chris Marrison / Infoblox
 
  Redistribution and use in source and binary forms,
  with or without modification, are permitted provided
@@ -41,14 +41,14 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.2.6'
+__version__ = '0.3.1'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
 import bloxone
 import logging
-import json
 import datetime
+import json
 
 # ** Global Vars **
 
@@ -78,7 +78,6 @@ class b1td(bloxone.b1):
         response = self._apiget(url)
 
         return response
-
 
 
     def post(self, objpath, body=""):
@@ -149,30 +148,46 @@ class b1td(bloxone.b1):
 
         return response
 
-    """
-    (Currently not implemented)
-    def threat_stats(self, period="daily", **paramas):
+    def threat_counts(self):
         '''
-        Query Infoblox TIDE for threat class stats
-
-        Parameters:
-            period (str): one of ['daily', 'weekly', 'monthly']
+        Query Infoblox TIDE for active threat counts
 
         Returns:
             response object: Requests response object
         '''
-        objpath = '/data/dashboard/'
-
         # Build URL
-        url = self.tide_url + objpath
-        url = url + period 
-        # url = url + period + '_threats_by_class'
+        url = self.tide_url + '/data/threat/counts'
 
         # Make API Call
         response = self._apiget(url)
 
         return response
-    """
+
+
+    def historical_threat_counts(self):
+        '''
+        Query Infoblox TIDE for historical threat counts
+
+        Returns:
+            response object: Requests response object
+        '''
+        # Build URL
+        url = self.tide_url + '/data/threat/counts/historical'
+
+        # Make API Call
+        response = self._apiget(url)
+
+        return response
+
+
+    def default_ttl(self):
+        '''
+        '''
+        url = self.tide_url + '/data/default/ttl'
+        response = self._apiget(url)
+
+        return response
+
 
     def querytide(self, datatype, query, **params):
         '''
@@ -197,6 +212,7 @@ class b1td(bloxone.b1):
         response = self._apiget(url)
 
         return response
+
 
     def querytideactive(self, datatype, query, **params):
         '''
@@ -342,7 +358,35 @@ class b1td(bloxone.b1):
             response object: Requests response object
         '''
         url = self.dossier_url + '/sources'
+        response = self._apiget(url)
 
+        return response
+
+
+    def dossier_target_sources(self, type='host'):
+        '''
+        Get supported target types for Dossier 
+
+        Parameters:
+            type (str): target type
+
+        Returns:
+            response object: Request response object
+        '''
+        url = self.dossier_url + '/sources/target/' + type
+        response = self._apiget(url)
+
+        return response
+
+
+    def dossier_target_types(self):
+        '''
+        Get supported target types for Dossier 
+
+        Returns:
+            response object: Request response object
+        '''
+        url = self.dossier_url + '/targets'
         response = self._apiget(url)
 
         return response
@@ -353,17 +397,22 @@ class b1td(bloxone.b1):
         Simple Dossier Query
         
         Parameters:
-            query (str): query data
+            query (str or list): single query or list of same type
             type (str): "host", "ip" or "url"
             sources (str): set of sources or "all"
 
         Returns:
             response object: Requests response object
         '''
+
+        if isinstance(wait, bool) and wait:
+            wait = 'true'
+        else:
+            wait = 'false'
         url = self.dossier_url + '/jobs?wait=' + wait
         # Create body
         if sources == "all":
-            response = self.dossier_sources()
+            response = self.dossier_target_sources(type=type)
             if response.status_code in self.return_codes_ok:
                 sources = []
                 for source in response.json().keys():
@@ -371,21 +420,29 @@ class b1td(bloxone.b1):
                         sources.append(source)
                 logging.debug("Sources retrieved: {}".format(sources))
             else:
-                sources = ['atp', 'dns', 'geo', 'pdns', 'ptr', 'rwhois',
-                           'whopis', 'inforank', 'rpz_feeds', 'custom_lists',
+                sources = ['atp', 'activity', 'dns', 'geo', 'pdns', 'ptr', 
+                           'rwhois', 'whopis', 'inforank', 'rpz_feeds', 
+                           'ssl_cert', 'infoblox_web_cat', 'custom_lists',
                            'whitelist']
                 logging.debug("Failed to retrieve sources, using " 
                               + "limited list {}".format(sources))
         else:
-            source_list = []
-            source_list.append(sources) 
-            sources = source_list
+            if not isinstance(sources, list):
+                source_list = []
+                source_list.append(sources) 
+                sources = source_list
 
-        body = ( '{"target": {"one": {"type": "' + type + '", '
-                + '"sources": ' + str(sources).replace("'",'"') + ', '
-                + '"target": "' + str(query) + '" } } }' )
-        # body = json.dumps(body)
-        logging.debug("Body: {}".format(body))
+        # Check for group of queries
+        if isinstance(query, list): 
+            body = {"target": {"group": {"type": type,
+                    "sources": sources,
+                    "targets": query  } } }
+        else:
+            body = {"target": {"one": {"type": type,
+                    "sources": sources, "target": query  } } }
+
+        body = json.dumps(body)
+        logging.debug(f'Body: {body}')
 
         response = self._apipost(url, body)
 

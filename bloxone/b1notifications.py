@@ -52,7 +52,7 @@ __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
 __license__ = 'BSD'
 
 
-class b1sw(bloxone.b1):
+class b1notifications(bloxone.b1):
     '''
     Class to simplify access to the BloxOne Platform APIs
     '''
@@ -71,7 +71,7 @@ class b1sw(bloxone.b1):
         '''
 
         # Build url
-        url = self.sw_url + objpath
+        url = self.notifications_url + objpath
         url = self._use_obj_id(url,id=id)
         url = self._add_params(url, **params)
         logging.debug("URL: {}".format(url))
@@ -93,7 +93,7 @@ class b1sw(bloxone.b1):
             response object: Requests response object
         '''
         # Build url
-        url = self.sw_url + objpath
+        url = self.notifications_url + objpath
         logging.debug("URL: {}".format(url))
 
         # Make API Call
@@ -114,7 +114,7 @@ class b1sw(bloxone.b1):
             response object: Requests response object
         '''
         # Build url
-        url = self.sw_url + objpath
+        url = self.notifications_url + objpath
         url = self._use_obj_id(url, id=id)
         logging.debug("URL: {}".format(url))
 
@@ -136,7 +136,7 @@ class b1sw(bloxone.b1):
             response object: Requests response object
         '''
         # Build url
-        url = self.sw_url + objpath
+        url = self.notifications_url + objpath
         url = self._use_obj_id(url, id=id)
         logging.debug("URL: {}".format(url))
 
