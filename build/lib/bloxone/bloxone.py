@@ -49,7 +49,7 @@ import re
 import json
 
 # ** Global Vars **
-__version__ = '0.7.4'
+__version__ = '0.8.5'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -195,6 +195,7 @@ class b1:
         self.base_url = self.cfg['url']
         self.api_version = self.cfg['api_version']
 
+        # B1 & B1DDI URLs
         self.anycast_url = self.base_url + '/api/anycast/' + self.cfg['api_version']
         self.authn_url = self.base_url + '/api/authn/' + self.cfg['api_version']
         self.bootstrap_url = self.base_url + '/bootstrap-app/' + self.cfg['api_version']
@@ -206,6 +207,7 @@ class b1:
         self.sw_url = self.base_url + '/api/upgrade_policy/' + self.cfg['api_version']
         self.ztp_url = self.base_url + '/atlas-host-activation/' + self.cfg['api_version']
         
+        # B1TD URLs
         self.tdc_url = self.base_url + '/api/atcfw/' + self.cfg['api_version']
         self.tdep_url = self.base_url + '/api/atcep/' + self.cfg['api_version']
         self.tddfp_url = self.base_url + '/api/atcdfp/' + self.cfg['api_version']
@@ -214,6 +216,11 @@ class b1:
         self.dossier_url = self.base_url + '/tide/api/services/intel/lookup'
         self.threat_enrichment_url = self.base_url + '/tide/threat-enrichment'
 
+        # Reporting URLs
+        self.ti_reports_url = self.base_url + '/api/ti-reports/' + self.cfg['api_version']
+        self.aggr_reports_url  = self.ti_reports_url + '/activity/aggregations'
+        self.insights_url = self.aggr_reports_url + '/insight'
+        self.sec_act_url = self.base_url + '/api/ti-reports/v1/activity/hits'
 
         # List of successful return codes
         self.return_codes_ok = [200, 201, 204]
@@ -334,7 +341,7 @@ class b1:
         
         Parameters:
             id (str): Bloxone Object id
-            nextip (bool): use nextavailableip
+            action (str): e.g. nextavailableip
 
         Returns:
             string : Updated url
@@ -347,7 +354,7 @@ class b1:
         else:
             if action:
                 logging.debug("Action {} not supported without " 
-                              "a specified ovject id.")
+                              "a specified object id.")
         
         return url
 
@@ -366,11 +373,33 @@ class b1:
             response object: Requests response object
         '''
         # Build url
-        url = self._use_obj_id(url,id=id)
+        url = self._use_obj_id(url, id=id, action=action)
         url = self._add_params(url, **params)
         logging.debug("URL: {}".format(url))
 
         response = self._apiget(url)
+
+        return response
+
+
+    def post(self, url, id="", action="", body="", **params):
+        '''
+        Generic Post object wrapper 
+
+        Parameters:
+            url (str):      Full URL
+            id (str):       Optional Object ID
+            action (str):   Optional object action, e.g. "nextavailableip"
+        
+        Returns:
+            response object: Requests response object
+        '''
+        # Build url
+        url = self._use_obj_id(url, id=id, action=action)
+        url = self._add_params(url, **params)
+        logging.debug("URL: {}".format(url))
+
+        response = self._apipost(url, body)
 
         return response
 
@@ -395,23 +424,25 @@ class b1:
         return response
 
 
-    def delete(self, url, id=""):
+    def delete(self, url, id="", body=""):
         '''
         Generic delete object wrapper
 
         Parameters:
             url (str):  Full URL
             id (str):   Object id to delete
+            body (str):     JSON formatted data payload
 
         Returns:
             response object: Requests response object
         '''
         # Build url
-        url = self._use_obj_id(url,id=id)
+        if id:
+            url = self._use_obj_id(url,id=id)
         logging.debug("URL: {}".format(url))
 
         # Make API Call
-        response = self._apidelete(url)
+        response = self._apidelete(url, body)
 
         return response
 

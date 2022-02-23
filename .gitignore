@@ -1,3 +1,4 @@
+*.pyc
 __pycache__/*
 documentation/doctrees/classes.doctree
 documentation/doctrees/code.doctree
