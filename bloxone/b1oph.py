@@ -7,7 +7,7 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20211104
+ Date Last Updated: 20220310
 
  Todo:
 
@@ -47,7 +47,7 @@ import json
 import collections
 
 # ** Global Vars **
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -642,7 +642,7 @@ class b1oph(bloxone.b1):
 
         if action in actions:
            if action == "status":
-               result = self.get_app_status(name=name, app=app) 
+               result = self.get_app_state(name=name, app=app) 
            elif action == "disable":
                result = self.disable_app(name=name, app=app) 
            elif action == "enable":
