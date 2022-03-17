@@ -50,8 +50,16 @@ import logging
 import datetime
 import json
 
-# ** Global Vars **
+# ** Exceptions **
 
+class CountryISOCodeNotFound(Exception):
+    '''
+    ISO Code for Country not found
+    '''
+    pass
+
+
+# b1td class
 class b1td(bloxone.b1):
     '''
     BloxOne ThreatDefence API Wrapper
@@ -518,7 +526,7 @@ class b1td(bloxone.b1):
         if response.status_code in self.return_codes_ok:
             country_codes = response.json()['country']
             country_record = next((c for c in country_codes if c['name'] == country),
-                            None )
+                            {} )
             isocode = country_record.get('iso_code')
 
         else:
@@ -536,7 +544,10 @@ class b1td(bloxone.b1):
             country: Country or Country Code to retrieve
         
         Returns:
-            dict of country_ip
+            response object: Requests response object
+        
+        Raises:
+            CountryISOCodeNotFound
         '''
         iso_code = ''
         url = self.tide_url + '/data/set/countryip'
@@ -548,7 +559,10 @@ class b1td(bloxone.b1):
             else:
                 # Assume country name
                 iso_code = self.get_country_isocode(country=country)
-            url = self._add_params(url, first_param=True, country=iso_code)
+            if iso_code:
+                url = self._add_params(url, first_param=True, country=iso_code)
+            else:
+                raise CountryISOCodeNotFound(f'No match for country: {country}')
 
         return self._apiget(url)
 

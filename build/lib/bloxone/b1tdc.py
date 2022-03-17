@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.1.3'
+__version__ = '0.2.0'
 __author__ = 'Chris Marrison/Krishna Vasudevan'
 __author_email__ = 'chris@infoblox.com'
 
@@ -247,3 +247,79 @@ class b1tdc(bloxone.b1):
             id (str):   object id or ""
         '''
         return self.get(objpath, id=self.get_id(objpath, key=key, value=value))
+
+
+    def get_custom_lists(self, **params):
+        '''
+        Get custom lists
+
+        Parameters:
+            Additional parameters per API documentation
+             
+        Returns:
+            response object: Requests response object
+        '''
+        url = self.tdc_url + '/named_lists'
+        url = self._add_params(url, **params)
+
+        # Make API Call
+        response = self._apiget(url)
+
+        return response
+
+
+    def create_custom_list(self, name='', confidence='HIGH', items=[]):
+        '''
+        Create deny custom lists
+
+        Parameters:
+            name (str): Name of custom list
+            confidence (str): Confidence level
+            items (list): List of indicators
+
+        Returns:
+            response object: Requests response object
+        '''
+        # Check it doesn't exist
+        if not b1tdc.get_id('/named_lists', key="name", value=name):
+            body = { "name": name,
+                        "type": "custom_list",
+                        "confidence_level": confidence,
+                        "items": items }
+            logging.debug("Body:{}".format(body))
+
+            response = b1tdc.create('/named_lists', body=json.dumps(body))
+        else:
+            logging.warning(f'Custom list {name} already exists')
+            response = None
+
+        return response
+
+
+    def delete_custom_lists(self, names=[]):
+        '''
+        Delete custom list
+            
+        Parameters:
+            name (list): List of names(str) to delete
+        
+        Returns:
+            response object: Requests response object or None
+        '''
+        ids = []
+        for name in names:
+            id = self.get_id('/named_lists', key="name", value=name)
+            if id:
+                logging.debug(f'Custom list: {name} with id {id} found.')
+                ids.append(str(id))
+            else:
+                logging.debug(f'Custom list: {name} not found.')
+        if ids:
+            body = { 'ids': ids }
+            logging.debug("Body:{}".format(body))
+            response = b1tdc.delete('/named_lists', body=json.dumps(body))
+        else:
+            logging.warning('No custom lists found')
+            response = None
+        
+        return response
