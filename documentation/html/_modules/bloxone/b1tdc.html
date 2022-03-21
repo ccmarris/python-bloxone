@@ -211,14 +211,14 @@
 
 <span class="sd">------------------------------------------------------------------------</span>
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.3&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.2.1&#39;</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison/Krishna Vasudevan&#39;</span>
 <span class="n">__author_email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
 
 <span class="kn">import</span> <span class="nn">bloxone</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">requests.models</span> <span class="kn">import</span> <span class="n">Response</span>
 
 <span class="c1"># ** Global Vars **</span>
 
@@ -228,7 +228,7 @@
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="c1"># Generic Methods</span>
-<div class="viewcode-block" id="b1tdc.get"><a class="viewcode-back" href="../../b1tdc-class.html#bloxone.b1tdc.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+<div class="viewcode-block" id="b1tdc.get"><a class="viewcode-back" href="../../b1tdc-class.html#bloxone.b1tdc.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objpath</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Generic get object wrapper for Threat Defense Cloud</span>
 
@@ -241,6 +241,8 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="c1"># Build url</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tdc_url</span> <span class="o">+</span> <span class="n">objpath</span>
+        <span class="k">if</span> <span class="nb">id</span><span class="p">:</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_obj_id</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_params</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;URL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
 
@@ -416,7 +418,99 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            id (str):   object id or &quot;&quot;</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">objpath</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_id</span><span class="p">(</span><span class="n">objpath</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">objpath</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_id</span><span class="p">(</span><span class="n">objpath</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="b1tdc.get_custom_lists"><a class="viewcode-back" href="../../b1tdc-class.html#bloxone.b1tdc.get_custom_lists">[docs]</a>    <span class="k">def</span> <span class="nf">get_custom_lists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get custom lists</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            Additional parameters per API documentation</span>
+<span class="sd">             </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tdc_url</span> <span class="o">+</span> <span class="s1">&#39;/named_lists&#39;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_params</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+
+        <span class="c1"># Make API Call</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="b1tdc.get_custom_list"><a class="viewcode-back" href="../../b1tdc-class.html#bloxone.b1tdc.get_custom_list">[docs]</a>    <span class="k">def</span> <span class="nf">get_custom_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get the named custom list</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            name (str): Name of custom list</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_id</span><span class="p">(</span><span class="s1">&#39;/named_lists&#39;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">id</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Custom list: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> with id </span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s1"> found.&#39;</span><span class="p">)</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/named_lists&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Custom list: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> not found.&#39;</span><span class="p">)</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_not_found_resonse</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="b1tdc.create_custom_list"><a class="viewcode-back" href="../../b1tdc-class.html#bloxone.b1tdc.create_custom_list">[docs]</a>    <span class="k">def</span> <span class="nf">create_custom_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="s1">&#39;HIGH&#39;</span><span class="p">,</span> <span class="n">items</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Create deny custom lists</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            name (str): Name of custom list</span>
+<span class="sd">            confidence (str): Confidence level</span>
+<span class="sd">            items (list): List of indicators</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">body</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;custom_list&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;confidence_level&quot;</span><span class="p">:</span> <span class="n">confidence</span><span class="p">,</span>
+                    <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="n">items</span> <span class="p">}</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Body:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">b1tdc</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;/named_lists&#39;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="b1tdc.delete_custom_lists"><a class="viewcode-back" href="../../b1tdc-class.html#bloxone.b1tdc.delete_custom_lists">[docs]</a>    <span class="k">def</span> <span class="nf">delete_custom_lists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Delete custom list</span>
+<span class="sd">            </span>
+<span class="sd">        Parameters:</span>
+<span class="sd">            name (list): List of names(str) to delete</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object or None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">ids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_id</span><span class="p">(</span><span class="s1">&#39;/named_lists&#39;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">id</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Custom list: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> with id </span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s1"> found.&#39;</span><span class="p">)</span>
+                <span class="n">ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">id</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Custom list: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> not found.&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ids</span><span class="p">:</span>
+            <span class="n">body</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;ids&#39;</span><span class="p">:</span> <span class="n">ids</span> <span class="p">}</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Body:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">b1tdc</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;/named_lists&#39;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;No custom lists found&#39;</span><span class="p">)</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_not_found_resonse</span><span class="p">()</span>
+        
+        <span class="k">return</span> <span class="n">response</span></div></div>
 </pre></div>
 
            </div>

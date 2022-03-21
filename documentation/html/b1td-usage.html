@@ -226,6 +226,14 @@ the todo.</p>
 <span class="n">t</span><span class="o">.</span><span class="n">dossierquery</span><span class="p">([</span> <span class="s2">&quot;eicar.co&quot;</span><span class="p">,</span> <span class="s2">&quot;pwn.af&quot;</span> <span class="p">],</span> <span class="n">sources</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;atp&quot;</span><span class="p">,</span><span class="s2">&quot;whois&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 <span class="n">t</span><span class="o">.</span><span class="n">expand_mitre_vector</span><span class="p">(</span><span class="s1">&#39;DGA&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 <span class="n">t</span><span class="o">.</span><span class="n">threat_actor</span><span class="p">(</span><span class="s1">&#39;APT1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="c1"># Get Countries and ISO Codes</span>
+<span class="n">t</span><span class="o">.</span><span class="n">get_countries</span><span class="p">()</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="c1"># Get the ISO Code for a specific country</span>
+<span class="n">t</span><span class="o">.</span><span class="n">get_country_isocode</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s1">&#39;Somalia)</span>
+<span class="c1"># You can get the IP networks for a country using either the ISO country</span>
+<span class="c1"># Code or the Country name e.g.</span>
+<span class="n">t</span><span class="o">.</span><span class="n">get_country_ips</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s2">&quot;SO&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">t</span><span class="o">.</span><span class="n">get_country_ips</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s2">&quot;Somalia&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>

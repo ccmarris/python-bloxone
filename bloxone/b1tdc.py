@@ -41,14 +41,14 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 __author__ = 'Chris Marrison/Krishna Vasudevan'
 __author_email__ = 'chris@infoblox.com'
 
 import bloxone
 import logging
 import json
-import datetime
+from requests.models import Response
 
 # ** Global Vars **
 
@@ -58,7 +58,7 @@ class b1tdc(bloxone.b1):
     '''
 
     # Generic Methods
-    def get(self, objpath, action="", **params):
+    def get(self, objpath, id="", action="", **params):
         '''
         Generic get object wrapper for Threat Defense Cloud
 
@@ -71,6 +71,8 @@ class b1tdc(bloxone.b1):
         '''
         # Build url
         url = self.tdc_url + objpath
+        if id:
+            url = self._use_obj_id(url, id=id)
         url = self._add_params(url, **params)
         logging.debug("URL: {}".format(url))
 
@@ -268,6 +270,27 @@ class b1tdc(bloxone.b1):
         return response
 
 
+    def get_custom_list(self, name='', **params):
+        '''
+        Get the named custom list
+
+        Parameters:
+            name (str): Name of custom list
+        
+        Returns:
+            response object: Requests response object
+        '''
+        id = self.get_id('/named_lists', key='name', value=name)
+        if id:
+            logging.debug(f'Custom list: {name} with id {id} found.')
+            response = self.get('/named_lists', id=id, **params)
+        else:
+            logging.debug(f'Custom list: {name} not found.')
+            response = self._not_found_resonse()
+
+        return response
+
+
     def create_custom_list(self, name='', confidence='HIGH', items=[]):
         '''
         Create deny custom lists
@@ -280,18 +303,13 @@ class b1tdc(bloxone.b1):
         Returns:
             response object: Requests response object
         '''
-        # Check it doesn't exist
-        if not b1tdc.get_id('/named_lists', key="name", value=name):
-            body = { "name": name,
-                        "type": "custom_list",
-                        "confidence_level": confidence,
-                        "items": items }
-            logging.debug("Body:{}".format(body))
+        body = { "name": name,
+                    "type": "custom_list",
+                    "confidence_level": confidence,
+                    "items": items }
+        logging.debug("Body:{}".format(body))
 
-            response = b1tdc.create('/named_lists', body=json.dumps(body))
-        else:
-            logging.warning(f'Custom list {name} already exists')
-            response = None
+        response = b1tdc.create('/named_lists', body=json.dumps(body))
 
         return response
 
@@ -320,6 +338,6 @@ class b1tdc(bloxone.b1):
             response = b1tdc.delete('/named_lists', body=json.dumps(body))
         else:
             logging.warning('No custom lists found')
-            response = None
+            response = self._not_found_resonse()
         
         return response

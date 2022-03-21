@@ -307,6 +307,60 @@ Covers TIDE and Dossier</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="bloxone.b1td.get_countries">
+<span class="sig-name descname"><span class="pre">get_countries</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.get_countries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1td.get_countries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Countries and Country Code Data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Requests response object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>response object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.b1td.get_country_ips">
+<span class="sig-name descname"><span class="pre">get_country_ips</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.get_country_ips"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1td.get_country_ips" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get IPs for specified countries or complete dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>country</strong> – Country or Country Code to retrieve</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Requests response object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>response object</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>CountryISOCodeNotFound</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="bloxone.b1td.get_country_isocode">
+<span class="sig-name descname"><span class="pre">get_country_isocode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.get_country_isocode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1td.get_country_isocode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get ISO Code for specified country</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>country</strong> (<em>str</em>) – Name of Country</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>ISO Code of Country or None if no match</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>isocode (str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="bloxone.b1td.historical_threat_counts">
 <span class="sig-name descname"><span class="pre">historical_threat_counts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/bloxone/b1td.html#b1td.historical_threat_counts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#bloxone.b1td.historical_threat_counts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query Infoblox TIDE for historical threat counts</p>
