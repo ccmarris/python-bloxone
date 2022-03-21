@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.3.2'
+__version__ = '0.3.3'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -525,8 +525,9 @@ class b1td(bloxone.b1):
         response = self.get_countries()
         if response.status_code in self.return_codes_ok:
             country_codes = response.json()['country']
-            country_record = next((c for c in country_codes if c['name'] == country),
-                            {} )
+            country_record = next((c for c in country_codes 
+                                if c['name'].casefold() == country.casefold()), 
+                                {} )
             isocode = country_record.get('iso_code')
 
         else:

@@ -1,5 +1,6 @@
 *.pyc
 __pycache__/*
+dist/*
 documentation/doctrees/classes.doctree
 documentation/doctrees/code.doctree
 documentation/doctrees/environment.pickle

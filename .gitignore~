@@ -1,0 +1,13 @@
+*.pyc
+__pycache__/*
+documentation/doctrees/classes.doctree
+documentation/doctrees/code.doctree
+documentation/doctrees/environment.pickle
+documentation/doctrees/index.doctree
+documentation/doctrees/installation.doctree
+documentation/doctrees/intro.doctree
+documentation/doctrees/license.doctree
+documentation/doctrees/requirements.doctree
+documentation/doctrees/usage.doctree
+documentation/doctrees/version_history.doctree
+.DS_Store
