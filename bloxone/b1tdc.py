@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.2.1'
+__version__ = '0.2.2'
 __author__ = 'Chris Marrison/Krishna Vasudevan'
 __author_email__ = 'chris@infoblox.com'
 
@@ -286,7 +286,7 @@ class b1tdc(bloxone.b1):
             response = self.get('/named_lists', id=id, **params)
         else:
             logging.debug(f'Custom list: {name} not found.')
-            response = self._not_found_resonse()
+            response = self._not_found_response()
 
         return response
 
@@ -338,6 +338,6 @@ class b1tdc(bloxone.b1):
             response = b1tdc.delete('/named_lists', body=json.dumps(body))
         else:
             logging.warning('No custom lists found')
-            response = self._not_found_resonse()
+            response = self._not_found_response()
         
         return response

@@ -49,7 +49,7 @@ import re
 import json
 
 # ** Global Vars **
-__version__ = '0.8.81'
+__version__ = '0.8.9'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -359,7 +359,7 @@ class b1:
         return url
     
     
-    def _not_found_resonse(self):
+    def _not_found_response(self):
         '''
         Generate a response object without an API call
 
