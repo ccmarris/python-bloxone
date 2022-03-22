@@ -93,7 +93,6 @@ bloxone/__pycache__/tide.cpython-38.pyc
 bloxone/__pycache__/utils.cpython-36.pyc
 bloxone/__pycache__/utils.cpython-38.pyc
 bloxone/__pycache__/utils.cpython-39.pyc
-<<<<<<< HEAD
 dist/bloxone-0.5.4 2.tar.gz
 dist/bloxone-0.5.4.tar.gz
 dist/bloxone-0.5.4a0.tar.gz
@@ -108,22 +107,6 @@ dist/bloxone-0.6.1 2.tar.gz
 dist/bloxone-0.6.1.tar.gz
 dist/bloxone-0.6.2.tar.gz
 dist/bloxone-0.6.7.tar.gz
-=======
-dist/.bloxone-0.5.4 2.tar.gz.icloud
-dist/.bloxone-0.5.4.tar.gz.icloud
-dist/.bloxone-0.5.4a0.tar.gz.icloud
-dist/.bloxone-0.5.5.tar.gz.icloud
-dist/.bloxone-0.5.6.tar.gz.icloud
-dist/.bloxone-0.5.7.tar.gz.icloud
-dist/.bloxone-0.5.8.tar.gz.icloud
-dist/.bloxone-0.5.9 2.tar.gz.icloud
-dist/.bloxone-0.5.9.tar.gz.icloud
-dist/.bloxone-0.6.0.tar.gz.icloud
-dist/.bloxone-0.6.1 2.tar.gz.icloud
-dist/.bloxone-0.6.1.tar.gz.icloud
-dist/.bloxone-0.6.2.tar.gz.icloud
-dist/.bloxone-0.6.7.tar.gz.icloud
->>>>>>> aaf81631735a5771c29f6a6cbd91bc6b21db303a
 dist/bloxone-0.7.0-py3-none-any.whl
 dist/bloxone-0.7.1-py3-none-any.whl
 dist/bloxone-0.7.2-py3-none-any.whl
@@ -134,11 +117,8 @@ dist/bloxone-0.7.7-py3-none-any.whl
 dist/bloxone-0.7.8-py3-none-any.whl
 dist/bloxone-0.8.0-py3-none-any.whl
 dist/bloxone-0.8.1-py3-none-any.whl
-<<<<<<< HEAD
 dist/bloxone-0.8.5-py3-none-any.whl
 dist/bloxone-0.8.5.tar.gz
-=======
->>>>>>> aaf81631735a5771c29f6a6cbd91bc6b21db303a
 documentation/Makefile
 documentation/make.bat
 documentation/doctrees/ackowledgements.doctree
