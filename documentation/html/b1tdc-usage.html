@@ -210,6 +210,13 @@ the todo.</p>
 <span class="n">tdc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/cert_download_urls&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 <span class="n">tdc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/content_categories&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 <span class="n">tdc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/threat_feeds&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="c1"># Custom list methods</span>
+<span class="n">tdc</span><span class="o">.</span><span class="n">get_custom_lists</span><span class="p">()</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">tdc</span><span class="o">.</span><span class="n">get_custom_list</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;listname&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">tdc</span><span class="o">.</span><span class="n">create_custom_list</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;mylist&#39;</span><span class="p">,</span>
+                       <span class="n">confidence</span><span class="o">=</span><span class="s1">&#39;HIGH&#39;</span><span class="p">,</span>
+                       <span class="n">items</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;facebook.com&#39;</span><span class="p">,</span> <span class="s1">&#39;instagram.com&#39;</span><span class="p">])</span>
+<span class="n">tdc</span><span class="o">.</span><span class="n">delete_custom_list</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mylist&#39;</span><span class="p">,</span><span class="s1">&#39;mylist2&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>

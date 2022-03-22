@@ -2,6 +2,9 @@
 ChangeLog
 *********
 
+|	20220314 	v0.8.8 	Added custom list methods to b1tdc
+|	20220309 	v0.8.8 	Added country/countryip methods to b1td class
+|	20220224 	v0.8.7 	Fixed b1notifications class and doc update
 |	20211217 	v0.8.6 	Udate documentation and PyPy release version no.
 |	20211217 	v0.8.5 	Support list of sources for b1td.dossierquery()
 |	20211204 	v0.8.4 	App control for OPHs

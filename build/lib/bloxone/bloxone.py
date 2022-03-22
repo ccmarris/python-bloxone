@@ -49,7 +49,7 @@ import re
 import json
 
 # ** Global Vars **
-__version__ = '0.8.5'
+__version__ = '0.8.81'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -348,7 +348,7 @@ class b1:
         '''
         # Check for id and next available IP
         if id:
-            url = url + '/' + id
+            url = url + '/' + str(id)
             if action:
                 url = url + '/' + action
         else:
@@ -357,6 +357,21 @@ class b1:
                               "a specified object id.")
         
         return url
+    
+    
+    def _not_found_resonse(self):
+        '''
+        Generate a response object without an API call
+
+        Returns:
+            requests response object
+        
+        '''
+        response = requests.Response()
+        response.status_code = 400
+        response._content = b'{"error":[{"message":"named_list not found"]}'
+
+        return response
 
 
     # Public Generic Methods
@@ -442,7 +457,7 @@ class b1:
         logging.debug("URL: {}".format(url))
 
         # Make API Call
-        response = self._apidelete(url, body)
+        response = self._apidelete(url, body=body)
 
         return response
 

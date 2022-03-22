@@ -211,7 +211,7 @@
 
 <span class="sd">------------------------------------------------------------------------</span>
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.3.1&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.3.3&#39;</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison&#39;</span>
 <span class="n">__author_email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
 
@@ -220,8 +220,8 @@
 <span class="kn">import</span> <span class="nn">datetime</span>
 <span class="kn">import</span> <span class="nn">json</span>
 
-<span class="c1"># ** Global Vars **</span>
 
+<span class="c1"># b1td class</span>
 <div class="viewcode-block" id="b1td"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td">[docs]</a><span class="k">class</span> <span class="nc">b1td</span><span class="p">(</span><span class="n">bloxone</span><span class="o">.</span><span class="n">b1</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    BloxOne ThreatDefence API Wrapper</span>
@@ -654,7 +654,81 @@
         <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;URL: </span><span class="si">{}</span><span class="s2">, Body: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">body</span><span class="p">))</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apipost</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">response</span></div></div>
+        <span class="k">return</span> <span class="n">response</span></div>
+
+<div class="viewcode-block" id="b1td.get_countries"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.get_countries">[docs]</a>    <span class="k">def</span> <span class="nf">get_countries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get Countries and Country Code Data</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            None</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tide_url</span> <span class="o">+</span> <span class="s1">&#39;/data/set/countries&#39;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;URL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="b1td.get_country_isocode"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.get_country_isocode">[docs]</a>    <span class="k">def</span> <span class="nf">get_country_isocode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">country</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get ISO Code for specified country</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            country (str): Name of Country</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            isocode (str): ISO Code of Country or None if no match </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">isocode</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_countries</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
+            <span class="n">country_codes</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;country&#39;</span><span class="p">]</span>
+            <span class="n">country_record</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">country_codes</span> 
+                                <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">casefold</span><span class="p">()</span> <span class="o">==</span> <span class="n">country</span><span class="o">.</span><span class="n">casefold</span><span class="p">()),</span> 
+                                <span class="p">{}</span> <span class="p">)</span>
+            <span class="n">isocode</span> <span class="o">=</span> <span class="n">country_record</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;iso_code&#39;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unable to retrieve country list&#39;</span><span class="p">)</span>
+            <span class="n">isocode</span> <span class="o">=</span> <span class="kc">None</span>
+        
+        <span class="k">return</span> <span class="n">isocode</span></div>
+            
+
+<div class="viewcode-block" id="b1td.get_country_ips"><a class="viewcode-back" href="../../b1td-class.html#bloxone.b1td.get_country_ips">[docs]</a>    <span class="k">def</span> <span class="nf">get_country_ips</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">country</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get IPs for specified countries or complete dataset</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            country: Country or Country Code to retrieve</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
+<span class="sd">        </span>
+<span class="sd">        Raises:</span>
+<span class="sd">            CountryISOCodeNotFound</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">iso_code</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tide_url</span> <span class="o">+</span> <span class="s1">&#39;/data/set/countryip&#39;</span>
+        
+        <span class="k">if</span> <span class="n">country</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">country</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="c1"># Assume country isocode</span>
+                <span class="n">iso_code</span> <span class="o">=</span> <span class="n">country</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Assume country name</span>
+                <span class="n">iso_code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_country_isocode</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="n">country</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">iso_code</span><span class="p">:</span>
+                <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_params</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">first_param</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">country</span><span class="o">=</span><span class="n">iso_code</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">CountryISOCodeNotFound</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;No match for country: </span><span class="si">{</span><span class="n">country</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div></div>
+
 
 </pre></div>
 

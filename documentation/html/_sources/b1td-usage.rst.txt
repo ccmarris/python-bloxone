@@ -33,3 +33,11 @@ Examples
     t.dossierquery([ "eicar.co", "pwn.af" ], sources=["atp","whois"]).json()
     t.expand_mitre_vector('DGA').json()
     t.threat_actor('APT1').json()
+    # Get Countries and ISO Codes
+    t.get_countries().json()
+    # Get the ISO Code for a specific country
+    t.get_country_isocode(country='Somalia)
+    # You can get the IP networks for a country using either the ISO country
+    # Code or the Country name e.g.
+    t.get_country_ips(country="SO").json()
+    t.get_country_ips(country="Somalia").json()

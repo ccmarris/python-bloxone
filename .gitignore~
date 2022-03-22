@@ -1,6 +1,5 @@
 *.pyc
-*/__pycache__/*
-dist/*
+__pycache__/*
 documentation/doctrees/classes.doctree
 documentation/doctrees/code.doctree
 documentation/doctrees/environment.pickle
@@ -12,6 +11,3 @@ documentation/doctrees/requirements.doctree
 documentation/doctrees/usage.doctree
 documentation/doctrees/version_history.doctree
 .DS_Store
-bloxone/__pycache__/b1td.cpython-39.pyc
-bloxone/__pycache__/b1tdc.cpython-39.pyc
-bloxone/__pycache__/bloxone.cpython-39.pyc

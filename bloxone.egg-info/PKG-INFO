@@ -1,6 +1,10 @@
 Metadata-Version: 2.1
 Name: bloxone
+<<<<<<< HEAD
+Version: 0.8.8
+=======
 Version: 0.8.5
+>>>>>>> aaf81631735a5771c29f6a6cbd91bc6b21db303a
 Summary: BloxOne API Wrapper Module
 Home-page: https://github.com/ccmarris/python-bloxone
 Author: Chris Marrison

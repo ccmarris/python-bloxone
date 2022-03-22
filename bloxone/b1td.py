@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.3.1'
+__version__ = '0.3.3'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -50,8 +50,8 @@ import logging
 import datetime
 import json
 
-# ** Global Vars **
 
+# b1td class
 class b1td(bloxone.b1):
     '''
     BloxOne ThreatDefence API Wrapper
@@ -485,4 +485,78 @@ class b1td(bloxone.b1):
         response = self._apipost(url, body)
 
         return response
+
+    def get_countries(self):
+        '''
+        Get Countries and Country Code Data
+
+        Parameters:
+            None
+        
+        Returns:
+            response object: Requests response object
+        '''
+        url = self.tide_url + '/data/set/countries'
+        logging.debug("URL: {}".format(url))
+
+        return self._apiget(url)
+
+
+    def get_country_isocode(self, country=""):
+        '''
+        Get ISO Code for specified country
+
+        Parameters:
+            country (str): Name of Country
+        
+        Returns:
+            isocode (str): ISO Code of Country or None if no match 
+        '''
+        isocode = ''
+
+        response = self.get_countries()
+        if response.status_code in self.return_codes_ok:
+            country_codes = response.json()['country']
+            country_record = next((c for c in country_codes 
+                                if c['name'].casefold() == country.casefold()), 
+                                {} )
+            isocode = country_record.get('iso_code')
+
+        else:
+            logging.error(f'Unable to retrieve country list')
+            isocode = None
+        
+        return isocode
+            
+
+    def get_country_ips(self, country='', **params):
+        '''
+        Get IPs for specified countries or complete dataset
+
+        Parameters:
+            country: Country or Country Code to retrieve
+        
+        Returns:
+            response object: Requests response object
+        
+        Raises:
+            CountryISOCodeNotFound
+        '''
+        iso_code = ''
+        url = self.tide_url + '/data/set/countryip'
+        
+        if country:
+            if len(country) == 2:
+                # Assume country isocode
+                iso_code = country
+            else:
+                # Assume country name
+                iso_code = self.get_country_isocode(country=country)
+            if iso_code:
+                url = self._add_params(url, first_param=True, country=iso_code)
+            else:
+                raise self.CountryISOCodeNotFound(f'No match for country: {country}')
+
+        return self._apiget(url)
+
 
