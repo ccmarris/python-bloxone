@@ -50,14 +50,6 @@ import logging
 import datetime
 import json
 
-# ** Exceptions **
-
-class CountryISOCodeNotFound(Exception):
-    '''
-    ISO Code for Country not found
-    '''
-    pass
-
 
 # b1td class
 class b1td(bloxone.b1):
@@ -563,7 +555,7 @@ class b1td(bloxone.b1):
             if iso_code:
                 url = self._add_params(url, first_param=True, country=iso_code)
             else:
-                raise CountryISOCodeNotFound(f'No match for country: {country}')
+                raise self.CountryISOCodeNotFound(f'No match for country: {country}')
 
         return self._apiget(url)
 
