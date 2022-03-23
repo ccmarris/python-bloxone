@@ -342,7 +342,7 @@ class b1tdc(bloxone.b1):
             items_described (list): List of {"description": "", "item": ""}
         
         Note: 
-            For updates both items and items_descibed can be included.
+            For updates both items and items_described can be included.
 
         Returns:
             response object: Requests response object
@@ -378,7 +378,7 @@ class b1tdc(bloxone.b1):
             items_described (list): List of {"description": "", "item": ""}
         
         Note: 
-            For updates both items and items_descibed can be included.
+            For updates both items and items_described can be included.
 
         Returns:
             response object: Requests response object
