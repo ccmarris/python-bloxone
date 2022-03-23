@@ -2,6 +2,7 @@
 ChangeLog
 *********
 
+|	20220322 	v0.8.9  Publish recent changes
 |	20220314 	v0.8.8 	Added custom list methods to b1tdc
 |	20220309 	v0.8.8 	Added country/countryip methods to b1td class
 |	20220224 	v0.8.7 	Fixed b1notifications class and doc update
