@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.2.3'
+__version__ = '0.2.4'
 __author__ = 'Chris Marrison/Krishna Vasudevan'
 __author_email__ = 'chris@infoblox.com'
 
@@ -291,7 +291,10 @@ class b1tdc(bloxone.b1):
         return response
 
 
-    def create_custom_list(self, name='', confidence='HIGH', items=[], items_described=[]):
+    def create_custom_list(self, name='', 
+                                 confidence='HIGH', 
+                                 items=[], 
+                                 items_described=[]):
         '''
         Create deny custom lists
 
@@ -313,19 +316,18 @@ class b1tdc(bloxone.b1):
                      "type": "custom_list",
                      "confidence_level": confidence,
                      "items": items }
-            logging.debug("Body:{}".format(body))
         elif items_described:
             body = { "name": name,
                      "type": "custom_list",
                      "confidence_level": confidence,
-                     "items_descibed": items_described }
-            logging.debug("Body:{}".format(body))
+                     "items_described": items_described }
         else:
             body = { "name": name,
                      "type": "custom_list",
                      "confidence_level": confidence }
 
-        response = b1tdc.create('/named_lists', body=json.dumps(body))
+        logging.debug("Body:{}".format(body))
+        response = self.create('/named_lists', body=json.dumps(body))
 
         return response
 
@@ -353,10 +355,10 @@ class b1tdc(bloxone.b1):
             if items:
                 body = { "items": items }
             if items_described:
-                body.update( { "items_descibed": items_described } )
+                body.update( { "items_described": items_described } )
 
             logging.debug("Body:{}".format(body))
-            response = b1tdc.post(request, body=json.dumps(body))
+            response = self.post(request, body=json.dumps(body))
         else:
             logging.debug(f'Custom list: {name} not found.')
             response = self._not_found_response()
@@ -389,7 +391,7 @@ class b1tdc(bloxone.b1):
             if items:
                 body = { "items": items }
             if items_described:
-                body.update( { "items_descibed": items_described } )
+                body.update( { "items_described": items_described } )
 
             logging.debug("Body:{}".format(body))
             response = b1tdc.delete(request, body=json.dumps(body))
@@ -421,7 +423,7 @@ class b1tdc(bloxone.b1):
         if ids:
             body = { 'ids': ids }
             logging.debug("Body:{}".format(body))
-            response = b1tdc.delete('/named_lists', body=json.dumps(body))
+            response = self.delete('/named_lists', body=json.dumps(body))
         else:
             logging.warning('No custom lists found')
             response = self._not_found_response()

@@ -9,7 +9,7 @@
 
  Author: Chris Marrison
 
- Date Last Updated: 20200818
+ Date Last Updated: 20220323
 
  Todo:
 
@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.2.2'
+__version__ = '0.2.3'
 __author__ = 'Chris Marrison/Krishna Vasudevan'
 __author_email__ = 'chris@infoblox.com'
 
@@ -291,7 +291,10 @@ class b1tdc(bloxone.b1):
         return response
 
 
-    def create_custom_list(self, name='', confidence='HIGH', items=[]):
+    def create_custom_list(self, name='', 
+                                 confidence='HIGH', 
+                                 items=[], 
+                                 items_described=[]):
         '''
         Create deny custom lists
 
@@ -299,21 +302,106 @@ class b1tdc(bloxone.b1):
             name (str): Name of custom list
             confidence (str): Confidence level
             items (list): List of indicators
+            items_described (list): List of {"description": "", "item": ""}
+        
+        Note: 
+            if items and items_described are both included items_described 
+            will take precidence.
 
         Returns:
             response object: Requests response object
         '''
-        body = { "name": name,
-                    "type": "custom_list",
-                    "confidence_level": confidence,
-                    "items": items }
-        logging.debug("Body:{}".format(body))
+        if items:
+            body = { "name": name,
+                     "type": "custom_list",
+                     "confidence_level": confidence,
+                     "items": items }
+        elif items_described:
+            body = { "name": name,
+                     "type": "custom_list",
+                     "confidence_level": confidence,
+                     "items_described": items_described }
+        else:
+            body = { "name": name,
+                     "type": "custom_list",
+                     "confidence_level": confidence }
 
-        response = b1tdc.create('/named_lists', body=json.dumps(body))
+        logging.debug("Body:{}".format(body))
+        response = self.create('/named_lists', body=json.dumps(body))
 
         return response
 
 
+    def add_items_to_custom_list(self, name='', items=[], items_described=[]):
+        '''
+        Add items to an existing custom list
+
+        Parameters:
+            name (str): Name of custom list
+            items (list): List of indicators
+            items_described (list): List of {"description": "", "item": ""}
+        
+        Note: 
+            For updates both items and items_descibed can be included.
+
+        Returns:
+            response object: Requests response object
+        '''
+        body = {}
+        id = self.get_id('/named_lists', key='name', value=name)
+        if id:
+            logging.debug(f'Custom list: {name} with id {id} found.')
+            request = f'/named_lists/{id}/items'
+            if items:
+                body = { "items": items }
+            if items_described:
+                body.update( { "items_descibed": items_described } )
+
+            logging.debug("Body:{}".format(body))
+            response = self.post(request, body=json.dumps(body))
+        else:
+            logging.debug(f'Custom list: {name} not found.')
+            response = self._not_found_response()
+
+        return response
+
+
+    def delete_items_from_custom_list(self, name='', 
+                                            items=[], 
+                                            items_described=[]):
+        '''
+        Delete items to an existing custom list
+
+        Parameters:
+            name (str): Name of custom list
+            items (list): List of indicators
+            items_described (list): List of {"description": "", "item": ""}
+        
+        Note: 
+            For updates both items and items_descibed can be included.
+
+        Returns:
+            response object: Requests response object
+        '''
+        body = {}
+        id = self.get_id('/named_lists', key='name', value=name)
+        if id:
+            logging.debug(f'Custom list: {name} with id {id} found.')
+            request = f'/named_lists/{id}/items'
+            if items:
+                body = { "items": items }
+            if items_described:
+                body.update( { "items_descibed": items_described } )
+
+            logging.debug("Body:{}".format(body))
+            response = b1tdc.delete(request, body=json.dumps(body))
+        else:
+            logging.debug(f'Custom list: {name} not found.')
+            response = self._not_found_response()
+
+        return response
+
+ 
     def delete_custom_lists(self, names=[]):
         '''
         Delete custom list
@@ -335,7 +423,7 @@ class b1tdc(bloxone.b1):
         if ids:
             body = { 'ids': ids }
             logging.debug("Body:{}".format(body))
-            response = b1tdc.delete('/named_lists', body=json.dumps(body))
+            response = self.delete('/named_lists', body=json.dumps(body))
         else:
             logging.warning('No custom lists found')
             response = self._not_found_response()
