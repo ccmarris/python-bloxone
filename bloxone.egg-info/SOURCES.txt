@@ -1,4 +1,5 @@
 .gitignore
+.gitignore~
 CHANGELOG.rst
 LICENSE
 MANIFEST.in
@@ -93,20 +94,6 @@ bloxone/__pycache__/tide.cpython-38.pyc
 bloxone/__pycache__/utils.cpython-36.pyc
 bloxone/__pycache__/utils.cpython-38.pyc
 bloxone/__pycache__/utils.cpython-39.pyc
-dist/bloxone-0.5.4 2.tar.gz
-dist/bloxone-0.5.4.tar.gz
-dist/bloxone-0.5.4a0.tar.gz
-dist/bloxone-0.5.5.tar.gz
-dist/bloxone-0.5.6.tar.gz
-dist/bloxone-0.5.7.tar.gz
-dist/bloxone-0.5.8.tar.gz
-dist/bloxone-0.5.9 2.tar.gz
-dist/bloxone-0.5.9.tar.gz
-dist/bloxone-0.6.0.tar.gz
-dist/bloxone-0.6.1 2.tar.gz
-dist/bloxone-0.6.1.tar.gz
-dist/bloxone-0.6.2.tar.gz
-dist/bloxone-0.6.7.tar.gz
 dist/bloxone-0.7.0-py3-none-any.whl
 dist/bloxone-0.7.1-py3-none-any.whl
 dist/bloxone-0.7.2-py3-none-any.whl
@@ -118,7 +105,7 @@ dist/bloxone-0.7.8-py3-none-any.whl
 dist/bloxone-0.8.0-py3-none-any.whl
 dist/bloxone-0.8.1-py3-none-any.whl
 dist/bloxone-0.8.5-py3-none-any.whl
-dist/bloxone-0.8.5.tar.gz
+dist/bloxone-0.8.8-py3-none-any.whl
 documentation/Makefile
 documentation/make.bat
 documentation/doctrees/ackowledgements.doctree

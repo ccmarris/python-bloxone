@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.2.3'
+__version__ = '0.2.4'
 __author__ = 'Chris Marrison/Krishna Vasudevan'
 __author_email__ = 'chris@infoblox.com'
 
@@ -342,7 +342,7 @@ class b1tdc(bloxone.b1):
             items_described (list): List of {"description": "", "item": ""}
         
         Note: 
-            For updates both items and items_descibed can be included.
+            For updates both items and items_described can be included.
 
         Returns:
             response object: Requests response object
@@ -355,7 +355,7 @@ class b1tdc(bloxone.b1):
             if items:
                 body = { "items": items }
             if items_described:
-                body.update( { "items_descibed": items_described } )
+                body.update( { "items_described": items_described } )
 
             logging.debug("Body:{}".format(body))
             response = self.post(request, body=json.dumps(body))
@@ -378,7 +378,7 @@ class b1tdc(bloxone.b1):
             items_described (list): List of {"description": "", "item": ""}
         
         Note: 
-            For updates both items and items_descibed can be included.
+            For updates both items and items_described can be included.
 
         Returns:
             response object: Requests response object
@@ -391,7 +391,7 @@ class b1tdc(bloxone.b1):
             if items:
                 body = { "items": items }
             if items_described:
-                body.update( { "items_descibed": items_described } )
+                body.update( { "items_described": items_described } )
 
             logging.debug("Body:{}".format(body))
             response = b1tdc.delete(request, body=json.dumps(body))

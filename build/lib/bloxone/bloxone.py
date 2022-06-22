@@ -7,7 +7,7 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20210713
+ Date Last Updated: 20220323
 
  Todo:
 
@@ -49,7 +49,7 @@ import re
 import json
 
 # ** Global Vars **
-__version__ = '0.8.9'
+__version__ = '0.8.11'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'

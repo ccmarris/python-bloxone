@@ -2,6 +2,8 @@
 ChangeLog
 *********
 
+|	20220323 	v0.8.11 Fix typo in b1tdc class
+|	20220323 	v0.8.10 Add/delete items to custom list methods (b1tdc)
 |	20220322 	v0.8.9  Publish recent changes
 |	20220314 	v0.8.8 	Added custom list methods to b1tdc
 |	20220309 	v0.8.8 	Added country/countryip methods to b1td class
