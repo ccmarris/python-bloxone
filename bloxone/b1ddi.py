@@ -9,7 +9,7 @@
 
  Author: Chris Marrison
 
- Date Last Updated: 20210803
+ Date Last Updated: 20220819
 
  Todo:
 
@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.4.5'
+__version__ = '0.4.6'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -363,15 +363,19 @@ class b1ddi(bloxone.b1):
         '''
         response = self.get(objpath, id=id, _fields='tags')
         if response.status_code in self.return_codes_ok:
-            data = response.json()['result']
+            if 'result' in response.json().keys():
+                data = response.json()['result']
+            elif 'results' in response.json().keys():
+                data = response.json()['results']
+            logging.debug("Existing tags: {}".format(data.get('tags')))
         else:
             data = {}
-        logging.debug("Existing tags: {}".format(data['tags']))
+
         if data:
             # Add new tag to data
             if tagname:
                 data['tags'].update({tagname: tagvalue})
-                logging.debug("New tags: {}".format(data['tags']))
+                logging.debug("New tags: {}".format(data.get('tags')))
             # Update object
             response = self.replace(objpath, id=id, body=json.dumps(data))
         else:

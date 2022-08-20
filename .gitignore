@@ -16,3 +16,5 @@ bloxone.egg-info/SOURCES.txt
 build/lib/bloxone/__init__.py
 build/lib/bloxone/b1tdc.py
 build/lib/bloxone/bloxone.py
+bloxone/__pycache__/bloxone.cpython-39.pyc
+bloxone/__pycache__/bloxone.cpython-39.pyc
