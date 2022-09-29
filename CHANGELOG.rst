@@ -2,6 +2,8 @@
 ChangeLog
 *********
 
+|	20220929 	v0.8.13 Suppport direct use of api_key instead of inifile
+|	20220901 	v0.8.12 Update to b1oph to support unknown app codes
 |	20220323 	v0.8.11 Fix typo in b1tdc class
 |	20220323 	v0.8.10 Add/delete items to custom list methods (b1tdc)
 |	20220322 	v0.8.9  Publish recent changes

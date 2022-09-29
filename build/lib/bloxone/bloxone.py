@@ -7,13 +7,13 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20220323
+ Date Last Updated: 20220929
 
  Todo:
 
     api_key format verification upon inifile read.
 
- Copyright (c) 2020 Chris Marrison / Infoblox
+ Copyright (c) 2020-2022 Chris Marrison / Infoblox
 
  Redistribution and use in source and binary forms,
  with or without modification, are permitted provided
@@ -41,16 +41,14 @@
 
 ------------------------------------------------------------------------
 '''
-from encodings import utf_8
 import logging
 import configparser
 import requests
 import os
 import re
-import json
 
 # ** Global Vars **
-__version__ = '0.8.12'
+__version__ = '0.8.13'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -173,52 +171,66 @@ class b1:
         FileNotFoundError
     '''
 
-    def __init__(self, cfg_file='config.ini'):
+    def __init__(self, cfg_file='config.ini', 
+                       api_key='', 
+                       url='https://csp.infoblox.com', 
+                       api_version='v1'):
         '''
         Read ini file and set attributes
 
         Parametrers:
             cfg_file (str): Override default ini filename
+            api_key (str): Use API Key instead of ini
+            url (str): Override URL, applies only if api_key specified
+            api_version (str): API version, applies only if api_key specified
 
         '''
 
         self.cfg = {}
 
-        # Read ini file
-        self.cfg = read_b1_ini(cfg_file)
+        if api_key:
+            self.api_key = api_key
+            # Create base URLs
+            self.base_url = url
+            self.api_version = api_version
+
+        else:
+            # Read ini file
+            self.cfg = read_b1_ini(cfg_file)
+            self.api_key = self.cfg['api_key']
+        
+            # Create base URLs
+            self.base_url = self.cfg['url']
+            self.api_version = self.cfg['api_version']
 
         # Define generic header
-        self.api_key = self.cfg['api_key']
         self.headers = ( {'content-type': 'application/json',
                         'Authorization': 'Token ' + self.api_key} )
         
-        # Create base URLs
-        self.base_url = self.cfg['url']
-        self.api_version = self.cfg['api_version']
 
         # B1 & B1DDI URLs
-        self.anycast_url = self.base_url + '/api/anycast/' + self.cfg['api_version']
-        self.authn_url = self.base_url + '/api/authn/' + self.cfg['api_version']
-        self.bootstrap_url = self.base_url + '/bootstrap-app/' + self.cfg['api_version']
+        self.anycast_url = self.base_url + '/api/anycast/' + self.api_version
+        self.authn_url = self.base_url + '/api/authn/' + self.api_version
+        self.bootstrap_url = self.base_url + '/bootstrap-app/' + self.api_version
         self.cdc_url = self.base_url + '/api/cdc-flow/' + self.api_version
         self.diagnostics_url = self.base_url + '/diagnostic-service/' + self.api_version
         self.ddi_url = self.base_url + '/api/ddi/' + self.api_version
-        self.host_url = self.base_url + '/api/host_app/' + self.cfg['api_version']
+        self.host_url = self.base_url + '/api/host_app/' + self.api_version
         self.notifications_url = self.base_url + '/atlas-notifications-config/'+ self.api_version
-        self.sw_url = self.base_url + '/api/upgrade_policy/' + self.cfg['api_version']
-        self.ztp_url = self.base_url + '/atlas-host-activation/' + self.cfg['api_version']
+        self.sw_url = self.base_url + '/api/upgrade_policy/' + self.api_version
+        self.ztp_url = self.base_url + '/atlas-host-activation/' + self.api_version
         
         # B1TD URLs
-        self.tdc_url = self.base_url + '/api/atcfw/' + self.cfg['api_version']
-        self.tdep_url = self.base_url + '/api/atcep/' + self.cfg['api_version']
-        self.tddfp_url = self.base_url + '/api/atcdfp/' + self.cfg['api_version']
-        self.tdlad_url = self.base_url + '/api/atclad/' + self.cfg['api_version']
+        self.tdc_url = self.base_url + '/api/atcfw/' + self.api_version
+        self.tdep_url = self.base_url + '/api/atcep/' + self.api_version
+        self.tddfp_url = self.base_url + '/api/atcdfp/' + self.api_version
+        self.tdlad_url = self.base_url + '/api/atclad/' + self.api_version
         self.tide_url = self.base_url + '/tide/api' 
         self.dossier_url = self.base_url + '/tide/api/services/intel/lookup'
         self.threat_enrichment_url = self.base_url + '/tide/threat-enrichment'
 
         # Reporting URLs
-        self.ti_reports_url = self.base_url + '/api/ti-reports/' + self.cfg['api_version']
+        self.ti_reports_url = self.base_url + '/api/ti-reports/' + self.api_version
         self.aggr_reports_url  = self.ti_reports_url + '/activity/aggregations'
         self.insights_url = self.aggr_reports_url + '/insight'
         self.sec_act_url = self.base_url + '/api/ti-reports/v1/activity/hits'
