@@ -89,7 +89,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
@@ -179,7 +179,7 @@
 
 <span class="sd"> Author: Chris Marrison</span>
 
-<span class="sd"> Date Last Updated: 20200818</span>
+<span class="sd"> Date Last Updated: 20220323</span>
 
 <span class="sd"> Todo:</span>
 
@@ -211,7 +211,7 @@
 
 <span class="sd">------------------------------------------------------------------------</span>
 <span class="sd">&#39;&#39;&#39;</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.2.1&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.2.5&#39;</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison/Krishna Vasudevan&#39;</span>
 <span class="n">__author_email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
 
@@ -456,12 +456,15 @@
             <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/named_lists&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Custom list: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> not found.&#39;</span><span class="p">)</span>
-            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_not_found_resonse</span><span class="p">()</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_not_found_response</span><span class="p">(</span><span class="s1">&#39;named_list&#39;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">response</span></div>
 
 
-<div class="viewcode-block" id="b1tdc.create_custom_list"><a class="viewcode-back" href="../../b1tdc-class.html#bloxone.b1tdc.create_custom_list">[docs]</a>    <span class="k">def</span> <span class="nf">create_custom_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="s1">&#39;HIGH&#39;</span><span class="p">,</span> <span class="n">items</span><span class="o">=</span><span class="p">[]):</span>
+<div class="viewcode-block" id="b1tdc.create_custom_list"><a class="viewcode-back" href="../../b1tdc-class.html#bloxone.b1tdc.create_custom_list">[docs]</a>    <span class="k">def</span> <span class="nf">create_custom_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
+                                 <span class="n">confidence</span><span class="o">=</span><span class="s1">&#39;HIGH&#39;</span><span class="p">,</span> 
+                                 <span class="n">items</span><span class="o">=</span><span class="p">[],</span> 
+                                 <span class="n">items_described</span><span class="o">=</span><span class="p">[]):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Create deny custom lists</span>
 
@@ -469,21 +472,106 @@
 <span class="sd">            name (str): Name of custom list</span>
 <span class="sd">            confidence (str): Confidence level</span>
 <span class="sd">            items (list): List of indicators</span>
+<span class="sd">            items_described (list): List of {&quot;description&quot;: &quot;&quot;, &quot;item&quot;: &quot;&quot;}</span>
+<span class="sd">        </span>
+<span class="sd">        Note: </span>
+<span class="sd">            if items and items_described are both included items_described </span>
+<span class="sd">            will take precidence.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            response object: Requests response object</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="n">body</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
-                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;custom_list&quot;</span><span class="p">,</span>
-                    <span class="s2">&quot;confidence_level&quot;</span><span class="p">:</span> <span class="n">confidence</span><span class="p">,</span>
-                    <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="n">items</span> <span class="p">}</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Body:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">items</span><span class="p">:</span>
+            <span class="n">body</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                     <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;custom_list&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;confidence_level&quot;</span><span class="p">:</span> <span class="n">confidence</span><span class="p">,</span>
+                     <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="n">items</span> <span class="p">}</span>
+        <span class="k">elif</span> <span class="n">items_described</span><span class="p">:</span>
+            <span class="n">body</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                     <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;custom_list&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;confidence_level&quot;</span><span class="p">:</span> <span class="n">confidence</span><span class="p">,</span>
+                     <span class="s2">&quot;items_described&quot;</span><span class="p">:</span> <span class="n">items_described</span> <span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">body</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                     <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;custom_list&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;confidence_level&quot;</span><span class="p">:</span> <span class="n">confidence</span> <span class="p">}</span>
 
-        <span class="n">response</span> <span class="o">=</span> <span class="n">b1tdc</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;/named_lists&#39;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Body:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;/named_lists&#39;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="n">response</span></div>
 
 
+<div class="viewcode-block" id="b1tdc.add_items_to_custom_list"><a class="viewcode-back" href="../../b1tdc-class.html#bloxone.b1tdc.add_items_to_custom_list">[docs]</a>    <span class="k">def</span> <span class="nf">add_items_to_custom_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">items</span><span class="o">=</span><span class="p">[],</span> <span class="n">items_described</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Add items to an existing custom list</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            name (str): Name of custom list</span>
+<span class="sd">            items (list): List of indicators</span>
+<span class="sd">            items_described (list): List of {&quot;description&quot;: &quot;&quot;, &quot;item&quot;: &quot;&quot;}</span>
+<span class="sd">        </span>
+<span class="sd">        Note: </span>
+<span class="sd">            For updates both items and items_described can be included.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">body</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_id</span><span class="p">(</span><span class="s1">&#39;/named_lists&#39;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">id</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Custom list: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> with id </span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s1"> found.&#39;</span><span class="p">)</span>
+            <span class="n">request</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;/named_lists/</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s1">/items&#39;</span>
+            <span class="k">if</span> <span class="n">items</span><span class="p">:</span>
+                <span class="n">body</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="n">items</span> <span class="p">}</span>
+            <span class="k">if</span> <span class="n">items_described</span><span class="p">:</span>
+                <span class="n">body</span><span class="o">.</span><span class="n">update</span><span class="p">(</span> <span class="p">{</span> <span class="s2">&quot;items_described&quot;</span><span class="p">:</span> <span class="n">items_described</span> <span class="p">}</span> <span class="p">)</span>
+
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Body:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Custom list: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> not found.&#39;</span><span class="p">)</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_not_found_response</span><span class="p">(</span><span class="s1">&#39;named_list&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="b1tdc.delete_items_from_custom_list"><a class="viewcode-back" href="../../b1tdc-class.html#bloxone.b1tdc.delete_items_from_custom_list">[docs]</a>    <span class="k">def</span> <span class="nf">delete_items_from_custom_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
+                                            <span class="n">items</span><span class="o">=</span><span class="p">[],</span> 
+                                            <span class="n">items_described</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Delete items to an existing custom list</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            name (str): Name of custom list</span>
+<span class="sd">            items (list): List of indicators</span>
+<span class="sd">            items_described (list): List of {&quot;description&quot;: &quot;&quot;, &quot;item&quot;: &quot;&quot;}</span>
+<span class="sd">        </span>
+<span class="sd">        Note: </span>
+<span class="sd">            For updates both items and items_described can be included.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">body</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_id</span><span class="p">(</span><span class="s1">&#39;/named_lists&#39;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">id</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Custom list: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> with id </span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s1"> found.&#39;</span><span class="p">)</span>
+            <span class="n">request</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;/named_lists/</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s1">/items&#39;</span>
+            <span class="k">if</span> <span class="n">items</span><span class="p">:</span>
+                <span class="n">body</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="n">items</span> <span class="p">}</span>
+            <span class="k">if</span> <span class="n">items_described</span><span class="p">:</span>
+                <span class="n">body</span><span class="o">.</span><span class="n">update</span><span class="p">(</span> <span class="p">{</span> <span class="s2">&quot;items_described&quot;</span><span class="p">:</span> <span class="n">items_described</span> <span class="p">}</span> <span class="p">)</span>
+
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Body:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="n">b1tdc</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Custom list: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> not found.&#39;</span><span class="p">)</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_not_found_response</span><span class="p">(</span><span class="s1">&#39;named_list&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+ 
 <div class="viewcode-block" id="b1tdc.delete_custom_lists"><a class="viewcode-back" href="../../b1tdc-class.html#bloxone.b1tdc.delete_custom_lists">[docs]</a>    <span class="k">def</span> <span class="nf">delete_custom_lists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[]):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Delete custom list</span>
@@ -505,10 +593,10 @@
         <span class="k">if</span> <span class="n">ids</span><span class="p">:</span>
             <span class="n">body</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;ids&#39;</span><span class="p">:</span> <span class="n">ids</span> <span class="p">}</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Body:</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
-            <span class="n">response</span> <span class="o">=</span> <span class="n">b1tdc</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;/named_lists&#39;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;/named_lists&#39;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;No custom lists found&#39;</span><span class="p">)</span>
-            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_not_found_resonse</span><span class="p">()</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_not_found_response</span><span class="p">(</span><span class="s1">&#39;named_list&#39;</span><span class="p">)</span>
         
         <span class="k">return</span> <span class="n">response</span></div></div>
 </pre></div>

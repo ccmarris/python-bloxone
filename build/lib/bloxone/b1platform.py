@@ -7,7 +7,7 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20210719
+ Date Last Updated: 20220815
 
  Todo:
 
@@ -45,7 +45,7 @@ import requests
 import json
 
 # ** Global Vars **
-__version__ = '0.7.3'
+__version__ = '0.8.0'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -234,3 +234,169 @@ class b1platform(bloxone.b1oph):
                 users.append(user)
         
         return users
+    
+
+    def get_user_id(self, email="", include_path=False):
+        '''
+        Get object id using key/value pair
+
+        Parameters:
+            email (str):    email address of user account
+            include_path (bool): Include path to object id
+
+        Returns:
+            id (str):   object id or ""
+        '''
+
+        # Local Variables
+        id = ""
+
+        # Make API Call
+        response = self.get_users()
+
+        # Process response
+        if response.status_code in self.return_codes_ok:
+            users = response.json().get('results')
+            if users:
+                for user in users:
+                    if email == user.get('email'):
+                        id = user.get('id')
+                        if not include_path:
+                            id = id.rsplit('/',1)[1]
+                        break 
+                else:
+                    logging.debug("User account {} not found."
+                                  .format(email))
+            else:
+                id = ""
+                logging.debug("No results found.")
+        else:
+            id=""
+            logging.debug("HTTP Error occured. {}".format(response.status_code))
+
+        logging.debug("id: {}".format(id)) 
+
+        return id
+
+
+
+    def create_user(self, name='', 
+                          email='', 
+                          type='interactive',
+                          authenticator='IDP',
+                          groups=['user', 'act_admin'],
+                          **params):
+        '''
+        Create User Account
+
+        Parameters:
+            **params (dict): Generic API parameters
+        
+        Returns:
+            response object: Requests response object
+        '''
+        # Build URL
+        url = self.base_url + '/v2/users'
+        url = self._add_params(url, **params)
+        logging.debug("URL: {}".format(url))
+
+        groups = self.get_group_ids(groups=groups)
+
+        body = { 'name': name,
+                 'email': email,
+                 'type': type,
+                 'authenticator': authenticator,
+                 'groups': groups 
+               }
+
+        # Make API Call
+        response = self._apipost(url, body=json.dumps(body))
+
+        return response
+
+
+    def delete_user(self, email='', **params):
+        '''
+        Create User Account
+
+        Parameters:
+            **params (dict): Generic API parameters
+        
+        Returns:
+            response object: Requests response object
+        '''
+        # Build URL
+        url = self.base_url + '/v2/users'
+        url = self._add_params(url, **params)
+        logging.debug("URL: {}".format(url))
+
+        user_id = self.get_id(url, key='email', 
+                              value=email, 
+                              include_path=False)
+        
+        logging.debug("ID: {}".format(user_id))
+
+        if user_id:
+            url = url + '/' + user_id
+            # Make API Call
+            response = self.delete(url)
+
+        else:
+            response = self._not_found_response
+
+        return response
+
+
+    def get_groups(self, **params):
+        '''
+        Get User Groups
+
+        Parameters:
+            **params (dict): Generic API parameters
+        
+        Returns:
+            response object: Requests response object
+        '''
+        # Build URL
+        url = self.base_url + '/v2/groups'
+        url = self._add_params(url, **params)
+        logging.debug("URL: {}".format(url))
+
+        # Make API Call
+        response = self._apiget(url)
+
+        return response
+
+
+    def get_group_ids(self, groups=['user'], **params):
+        '''
+        Get User Group IDs
+
+        Parameters:
+            groups (list): List of group names
+            **params (dict): Generic API parameters
+        
+        Returns:
+            response object: Requests response object
+        '''
+        group_ids = []
+        
+        # Make API Call
+        response = self.get_groups(_fields='name,id')
+        if response.status_code in self.return_codes_ok:
+            grps = response.json().get('results') 
+            group_ids = [ grps[x].get('id') for x in range(len(grps)) 
+                            if grps[x].get('name') in groups ]
+            '''
+            for grp in grps:
+                if grp.get('name') in groups:
+                    group_ids.append(grp.get('id'))
+                    logging.debug(f'Found id for group {grp.get("name")}')
+            '''
+        else:
+            logging.error('Failed to get User Groups API reponded with')
+            logging.error(f'HTTP code: {response.status_code} ')
+            logging.error(f'Response: {response.text}')
+            group_ids = []
+
+        return group_ids

@@ -19,7 +19,7 @@ setuptools.setup(
         },
     url="https://github.com/ccmarris/python-bloxone",
     packages=['bloxone'],
-    license='BSD-2-Clause'
+    license='BSD-2-Clause',
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: BSD License",

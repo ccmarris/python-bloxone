@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>bloxone.b1platform &mdash; Bloxone API Wrapper 0.7.6 documentation</title>
+  <title>bloxone.b1platform &mdash; Bloxone API Wrapper 0.8.6 documentation</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.7.6
+                0.8.6
               </div>
             
           
@@ -177,7 +177,7 @@
 
 <span class="sd"> Module to provide class hierachy to simplify access to the BloxOne APIs</span>
 
-<span class="sd"> Date Last Updated: 20210719</span>
+<span class="sd"> Date Last Updated: 20220815</span>
 
 <span class="sd"> Todo:</span>
 
@@ -215,21 +215,21 @@
 <span class="kn">import</span> <span class="nn">json</span>
 
 <span class="c1"># ** Global Vars **</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.7.3&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.8.0&#39;</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison&#39;</span>
 <span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
 <span class="vm">__doc__</span> <span class="o">=</span> <span class="s1">&#39;https://python-bloxone.readthedocs.io/en/latest/&#39;</span>
 <span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;BSD&#39;</span>
 
 
-<div class="viewcode-block" id="b1platform"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.b1platform">[docs]</a><span class="k">class</span> <span class="nc">b1platform</span><span class="p">(</span><span class="n">bloxone</span><span class="o">.</span><span class="n">b1oph</span><span class="p">):</span>
+<div class="viewcode-block" id="b1platform"><a class="viewcode-back" href="../../b1platform-class.html#bloxone.b1platform">[docs]</a><span class="k">class</span> <span class="nc">b1platform</span><span class="p">(</span><span class="n">bloxone</span><span class="o">.</span><span class="n">b1oph</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Class now reused for BloxOne Platform Methods, e.g. Audit Log</span>
 <span class="sd">    Management of BloxOne On Prem Hosts is via the b1oph Class </span>
 <span class="sd">    b1oph class  is inherited here for compatibility</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
-<div class="viewcode-block" id="b1platform.auditlog"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.b1platform.auditlog">[docs]</a>    <span class="k">def</span> <span class="nf">auditlog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+<div class="viewcode-block" id="b1platform.auditlog"><a class="viewcode-back" href="../../b1platform-class.html#bloxone.b1platform.auditlog">[docs]</a>    <span class="k">def</span> <span class="nf">auditlog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Get the audit log</span>
 
@@ -258,7 +258,7 @@
         <span class="k">return</span> <span class="n">audit_log</span></div>
 
 
-<div class="viewcode-block" id="b1platform.get_full_auditlog"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.b1platform.get_full_auditlog">[docs]</a>    <span class="k">def</span> <span class="nf">get_full_auditlog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+<div class="viewcode-block" id="b1platform.get_full_auditlog"><a class="viewcode-back" href="../../b1platform-class.html#bloxone.b1platform.get_full_auditlog">[docs]</a>    <span class="k">def</span> <span class="nf">get_full_auditlog</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">all_logs</span> <span class="o">=</span> <span class="p">[]</span>
@@ -277,7 +277,7 @@
     
     <span class="c1"># Methods for undocumented API Calls - use at own risk</span>
 
-<div class="viewcode-block" id="b1platform.get_current_user"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.b1platform.get_current_user">[docs]</a>    <span class="k">def</span> <span class="nf">get_current_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+<div class="viewcode-block" id="b1platform.get_current_user"><a class="viewcode-back" href="../../b1platform-class.html#bloxone.b1platform.get_current_user">[docs]</a>    <span class="k">def</span> <span class="nf">get_current_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Get Current User Data</span>
 
@@ -298,7 +298,7 @@
         <span class="k">return</span> <span class="n">response</span></div>
 
 
-<div class="viewcode-block" id="b1platform.get_current_user_accounts"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.b1platform.get_current_user_accounts">[docs]</a>    <span class="k">def</span> <span class="nf">get_current_user_accounts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+<div class="viewcode-block" id="b1platform.get_current_user_accounts"><a class="viewcode-back" href="../../b1platform-class.html#bloxone.b1platform.get_current_user_accounts">[docs]</a>    <span class="k">def</span> <span class="nf">get_current_user_accounts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Get Current Users Accounts Data</span>
 
@@ -319,7 +319,7 @@
         <span class="k">return</span> <span class="n">response</span></div>
 
 
-<div class="viewcode-block" id="b1platform.get_current_tenant"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.b1platform.get_current_tenant">[docs]</a>    <span class="k">def</span> <span class="nf">get_current_tenant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+<div class="viewcode-block" id="b1platform.get_current_tenant"><a class="viewcode-back" href="../../b1platform-class.html#bloxone.b1platform.get_current_tenant">[docs]</a>    <span class="k">def</span> <span class="nf">get_current_tenant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Get name of current tenant</span>
 
@@ -348,7 +348,7 @@
         <span class="k">return</span> <span class="n">tenant_name</span></div>
 
     
-<div class="viewcode-block" id="b1platform.get_users"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.b1platform.get_users">[docs]</a>    <span class="k">def</span> <span class="nf">get_users</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+<div class="viewcode-block" id="b1platform.get_users"><a class="viewcode-back" href="../../b1platform-class.html#bloxone.b1platform.get_users">[docs]</a>    <span class="k">def</span> <span class="nf">get_users</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Get User Data</span>
 
@@ -369,7 +369,7 @@
         <span class="k">return</span> <span class="n">response</span></div>
 
 
-<div class="viewcode-block" id="b1platform.audit_users"><a class="viewcode-back" href="../../bloxone-class.html#bloxone.b1platform.audit_users">[docs]</a>    <span class="k">def</span> <span class="nf">audit_users</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domains</span><span class="o">=</span><span class="p">[]):</span>
+<div class="viewcode-block" id="b1platform.audit_users"><a class="viewcode-back" href="../../b1platform-class.html#bloxone.b1platform.audit_users">[docs]</a>    <span class="k">def</span> <span class="nf">audit_users</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domains</span><span class="o">=</span><span class="p">[]):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Audit User Data for non compliant email domains</span>
 
@@ -403,7 +403,173 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="n">valid</span><span class="p">:</span>
                 <span class="n">users</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
         
-        <span class="k">return</span> <span class="n">users</span></div></div>
+        <span class="k">return</span> <span class="n">users</span></div>
+    
+
+<div class="viewcode-block" id="b1platform.get_user_id"><a class="viewcode-back" href="../../b1platform-class.html#bloxone.b1platform.get_user_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_user_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">include_path</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get object id using key/value pair</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            email (str):    email address of user account</span>
+<span class="sd">            include_path (bool): Include path to object id</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            id (str):   object id or &quot;&quot;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="c1"># Local Variables</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="c1"># Make API Call</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_users</span><span class="p">()</span>
+
+        <span class="c1"># Process response</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
+            <span class="n">users</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;results&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">users</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">email</span> <span class="o">==</span> <span class="n">user</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">):</span>
+                        <span class="nb">id</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">include_path</span><span class="p">:</span>
+                            <span class="nb">id</span> <span class="o">=</span> <span class="nb">id</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+                        <span class="k">break</span> 
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;User account </span><span class="si">{}</span><span class="s2"> not found.&quot;</span>
+                                  <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">email</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">id</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;No results found.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;HTTP Error occured. </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">))</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;id: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">id</span><span class="p">))</span> 
+
+        <span class="k">return</span> <span class="nb">id</span></div>
+
+
+
+<div class="viewcode-block" id="b1platform.create_user"><a class="viewcode-back" href="../../b1platform-class.html#bloxone.b1platform.create_user">[docs]</a>    <span class="k">def</span> <span class="nf">create_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
+                          <span class="n">email</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
+                          <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;interactive&#39;</span><span class="p">,</span>
+                          <span class="n">authenticator</span><span class="o">=</span><span class="s1">&#39;IDP&#39;</span><span class="p">,</span>
+                          <span class="n">groups</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;act_admin&#39;</span><span class="p">],</span>
+                          <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Create User Account</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            **params (dict): Generic API parameters</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Build URL</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/v2/users&#39;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_params</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;URL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+
+        <span class="n">groups</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_group_ids</span><span class="p">(</span><span class="n">groups</span><span class="o">=</span><span class="n">groups</span><span class="p">)</span>
+
+        <span class="n">body</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                 <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="n">email</span><span class="p">,</span>
+                 <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="nb">type</span><span class="p">,</span>
+                 <span class="s1">&#39;authenticator&#39;</span><span class="p">:</span> <span class="n">authenticator</span><span class="p">,</span>
+                 <span class="s1">&#39;groups&#39;</span><span class="p">:</span> <span class="n">groups</span> 
+               <span class="p">}</span>
+
+        <span class="c1"># Make API Call</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apipost</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="b1platform.delete_user"><a class="viewcode-back" href="../../b1platform-class.html#bloxone.b1platform.delete_user">[docs]</a>    <span class="k">def</span> <span class="nf">delete_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Create User Account</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            **params (dict): Generic API parameters</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Build URL</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/v2/users&#39;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_params</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;URL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+
+        <span class="n">user_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_id</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> 
+                              <span class="n">value</span><span class="o">=</span><span class="n">email</span><span class="p">,</span> 
+                              <span class="n">include_path</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;ID: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user_id</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">user_id</span><span class="p">:</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">user_id</span>
+            <span class="c1"># Make API Call</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_not_found_response</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="b1platform.get_groups"><a class="viewcode-back" href="../../b1platform-class.html#bloxone.b1platform.get_groups">[docs]</a>    <span class="k">def</span> <span class="nf">get_groups</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get User Groups</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            **params (dict): Generic API parameters</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Build URL</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/v2/groups&#39;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_params</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;URL: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+
+        <span class="c1"># Make API Call</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apiget</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="b1platform.get_group_ids"><a class="viewcode-back" href="../../b1platform-class.html#bloxone.b1platform.get_group_ids">[docs]</a>    <span class="k">def</span> <span class="nf">get_group_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">],</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get User Group IDs</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            groups (list): List of group names</span>
+<span class="sd">            **params (dict): Generic API parameters</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            response object: Requests response object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">group_ids</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="c1"># Make API Call</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_groups</span><span class="p">(</span><span class="n">_fields</span><span class="o">=</span><span class="s1">&#39;name,id&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
+            <span class="n">grps</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;results&#39;</span><span class="p">)</span> 
+            <span class="n">group_ids</span> <span class="o">=</span> <span class="p">[</span> <span class="n">grps</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">grps</span><span class="p">))</span> 
+                            <span class="k">if</span> <span class="n">grps</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">groups</span> <span class="p">]</span>
+            <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            for grp in grps:</span>
+<span class="sd">                if grp.get(&#39;name&#39;) in groups:</span>
+<span class="sd">                    group_ids.append(grp.get(&#39;id&#39;))</span>
+<span class="sd">                    logging.debug(f&#39;Found id for group {grp.get(&quot;name&quot;)}&#39;)</span>
+<span class="sd">            &#39;&#39;&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Failed to get User Groups API reponded with&#39;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;HTTP code: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s1"> &#39;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Response: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">group_ids</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">return</span> <span class="n">group_ids</span></div></div>
 </pre></div>
 
            </div>

@@ -41,6 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
+from encodings import utf_8
 import logging
 import configparser
 import requests
@@ -49,7 +50,7 @@ import re
 import json
 
 # ** Global Vars **
-__version__ = '0.8.11'
+__version__ = '0.8.12'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -359,17 +360,21 @@ class b1:
         return url
     
     
-    def _not_found_response(self):
+    def _not_found_response(self, b1object='object'):
         '''
         Generate a response object without an API call
+
+		Parameters:
+            b1object (str): Name of object to use in error
 
         Returns:
             requests response object
         
         '''
+        err_msg = f'{{"error":[{{"message":"{b1object} not found"}}]}}'
         response = requests.Response()
         response.status_code = 400
-        response._content = b'{"error":[{"message":"named_list not found"]}'
+        response._content = str.encode(err_msg)
 
         return response
 

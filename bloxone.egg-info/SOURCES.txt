@@ -106,6 +106,7 @@ dist/bloxone-0.8.0-py3-none-any.whl
 dist/bloxone-0.8.1-py3-none-any.whl
 dist/bloxone-0.8.5-py3-none-any.whl
 dist/bloxone-0.8.8-py3-none-any.whl
+documentation/.DS_Store
 documentation/Makefile
 documentation/make.bat
 documentation/doctrees/ackowledgements.doctree
@@ -158,6 +159,7 @@ documentation/doctrees/usage.doctree
 documentation/doctrees/utils-usage.doctree
 documentation/doctrees/utils.doctree
 documentation/doctrees/version_history.doctree
+documentation/html/.DS_Store
 documentation/html/.buildinfo
 documentation/html/.nojekyll
 documentation/html/ackowledgements.html
@@ -283,6 +285,7 @@ documentation/html/_sources/usage.rst.txt
 documentation/html/_sources/utils-usage.rst.txt
 documentation/html/_sources/utils.rst.txt
 documentation/html/_sources/version_history.rst.txt
+documentation/html/_static/.DS_Store
 documentation/html/_static/ajax-loader.gif
 documentation/html/_static/basic.css
 documentation/html/_static/comment-bright.png
@@ -369,6 +372,7 @@ documentation/html/_static/js/theme.js
 documentation/latex/Makefile
 documentation/latex/latexmkjarc
 documentation/latex/latexmkrc
+documentation/source/.DS_Store
 documentation/source/ackowledgements.rst
 documentation/source/b1anycast-class.rst
 documentation/source/b1authn-class.rst

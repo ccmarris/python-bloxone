@@ -7,7 +7,7 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20220310
+ Date Last Updated: 20220929
 
  Todo:
 
@@ -39,15 +39,12 @@
 
 ------------------------------------------------------------------------
 '''
-from os import stat_result
-from re import I
 import bloxone
 import logging
 import json
-import collections
 
 # ** Global Vars **
-__version__ = '0.2.1'
+__version__ = '0.2.2'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -74,7 +71,8 @@ class b1oph(bloxone.b1):
         self.OPH_PLATFORM_STATES = { '0': 'Offline',
                                      '1': 'Online',
                                      '2': 'Error',
-                                     '3': 'Waiting (pending)' }
+                                     '3': 'Waiting (pending)',
+                                     '4': 'Unknown' }
         
         self.OPH_HOST_TYPES = { '0': 'Not Available',
                                 '1': 'Unknown',
@@ -462,9 +460,14 @@ class b1oph(bloxone.b1):
             oph_comp_state = 'No state information'
                         
         if 'state' in oph_data.keys():
-            oph_plat_state = self.OPH_PLATFORM_STATES[oph_data['state'].get('current_state')]
+            if oph_data['state'].get('current_state') in self.OPH_PLATFORM_STATES.keys():
+                oph_plat_state = self.OPH_PLATFORM_STATES[oph_data['state'].get('current_state')]
+            else:
+                oph_plat_state = f"Unknown state: {oph_data['state'].get('current_state')}"
+
             if 'message' in oph_data['state'].keys():
                 oph_plat_state = oph_data['state']['message']
+
         else:
             oph_plat_state = "Platform status unavailable"
         
