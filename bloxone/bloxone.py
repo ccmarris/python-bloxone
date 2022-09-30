@@ -126,15 +126,6 @@ def read_b1_ini(ini_filename):
             raise IniFileSectionError('No [BloxOne] section found in ini file {}'
                                      .format(ini_filename))
         
-        # Verify format of API Key
-        if verify_api_key(config['api_key']):
-            logging.debug('API Key passed format verification')
-        else:
-            logging.debug('API Key {} failed format verification'
-                          .format(config['api_key']))
-            raise APIKeyFormatError('API Key {} failed format verification'
-                                    .format(config['api_key']))
-
     else:
         raise FileNotFoundError('ini file "{}" not found.'.format(ini_filename))
 
@@ -202,6 +193,15 @@ class b1:
             # Create base URLs
             self.base_url = self.cfg['url']
             self.api_version = self.cfg['api_version']
+
+        # Verify format of API Key
+        if verify_api_key(self.api_key):
+            logging.debug('API Key passed format verification')
+        else:
+            logging.debug('API Key {} failed format verification'
+                          .format(self.api_key))
+            raise APIKeyFormatError('API Key {} failed format verification'
+                                    .format(self.api_key))
 
         # Define generic header
         self.headers = ( {'content-type': 'application/json',
