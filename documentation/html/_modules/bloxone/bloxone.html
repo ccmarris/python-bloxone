@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>bloxone.bloxone &mdash; Bloxone API Wrapper 0.8.6 documentation</title>
+  <title>bloxone.bloxone &mdash; Bloxone API Wrapper 0.8.12 documentation</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.8.6
+                0.8.12
               </div>
             
           
@@ -218,7 +218,7 @@
 <span class="kn">import</span> <span class="nn">re</span>
 
 <span class="c1"># ** Global Vars **</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.8.12&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.8.13&#39;</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison&#39;</span>
 <span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
 <span class="vm">__doc__</span> <span class="o">=</span> <span class="s1">&#39;https://python-bloxone.readthedocs.io/en/latest/&#39;</span>
@@ -296,15 +296,6 @@
             <span class="k">raise</span> <span class="n">IniFileSectionError</span><span class="p">(</span><span class="s1">&#39;No [BloxOne] section found in ini file </span><span class="si">{}</span><span class="s1">&#39;</span>
                                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ini_filename</span><span class="p">))</span>
         
-        <span class="c1"># Verify format of API Key</span>
-        <span class="k">if</span> <span class="n">verify_api_key</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;api_key&#39;</span><span class="p">]):</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;API Key passed format verification&#39;</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;API Key </span><span class="si">{}</span><span class="s1"> failed format verification&#39;</span>
-                          <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;api_key&#39;</span><span class="p">]))</span>
-            <span class="k">raise</span> <span class="n">APIKeyFormatError</span><span class="p">(</span><span class="s1">&#39;API Key </span><span class="si">{}</span><span class="s1"> failed format verification&#39;</span>
-                                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;api_key&#39;</span><span class="p">]))</span>
-
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s1">&#39;ini file &quot;</span><span class="si">{}</span><span class="s1">&quot; not found.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ini_filename</span><span class="p">))</span>
 
@@ -372,6 +363,15 @@
             <span class="c1"># Create base URLs</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">api_version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cfg</span><span class="p">[</span><span class="s1">&#39;api_version&#39;</span><span class="p">]</span>
+
+        <span class="c1"># Verify format of API Key</span>
+        <span class="k">if</span> <span class="n">verify_api_key</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">api_key</span><span class="p">):</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;API Key passed format verification&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;API Key </span><span class="si">{}</span><span class="s1"> failed format verification&#39;</span>
+                          <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">api_key</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="n">APIKeyFormatError</span><span class="p">(</span><span class="s1">&#39;API Key </span><span class="si">{}</span><span class="s1"> failed format verification&#39;</span>
+                                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">api_key</span><span class="p">))</span>
 
         <span class="c1"># Define generic header</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="p">(</span> <span class="p">{</span><span class="s1">&#39;content-type&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
