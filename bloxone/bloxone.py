@@ -48,7 +48,7 @@ import os
 import re
 
 # ** Global Vars **
-__version__ = '0.8.13'
+__version__ = '0.8.14'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'

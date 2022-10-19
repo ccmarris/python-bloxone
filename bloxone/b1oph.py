@@ -7,7 +7,7 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20220929
+ Date Last Updated: 20221019
 
  Todo:
 
@@ -44,7 +44,7 @@ import logging
 import json
 
 # ** Global Vars **
-__version__ = '0.2.2'
+__version__ = '0.2.3'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -93,10 +93,12 @@ class b1oph(bloxone.b1):
                           '7': { 'AppName': 'CDC', 'StatusSpace': '24' },
                           '9': { 'AppName': 'Anycast', 'StatusSpace': '30' },
                           '10': { 'AppName': 'NGC', 'StatusSpace': '34' },
+                          '12': { 'AppName': 'MS AD Collector', 'StatusSpace': '40' },
                           '14': { 'AppName': 'Edge_Services_FW', 'StatusSpace': '46' },
                           '15': { 'AppName': 'Edge_Services_Router', 'StatusSpace': '49' },
                           '16': { 'AppName': 'Site-to-Site_VPN', 'StatusSpace': '52' },
-                          '18': { 'AppName': 'DNS_Assured_Forwarding', 'StatusSpace': '58' }
+                          '18': { 'AppName': 'DNS_Assured_Forwarding', 'StatusSpace': '58' },
+                          '20': { 'AppName': 'NTP', 'StatusSpace': '64' }
         }
 
         self.OPH_APP_NAMES = { 'DFP': '1',
