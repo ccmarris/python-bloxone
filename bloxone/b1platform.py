@@ -7,7 +7,7 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20220815
+ Date Last Updated: 20221219
 
  Todo:
 
@@ -45,7 +45,7 @@ import requests
 import json
 
 # ** Global Vars **
-__version__ = '0.8.0'
+__version__ = '0.8.1'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -400,3 +400,74 @@ class b1platform(bloxone.b1oph):
             group_ids = []
 
         return group_ids
+    
+
+    def global_search_version(self):
+        '''
+        Get the global search version information
+
+        Returns:
+            response object: Requests response object
+
+        '''
+        url = f'{self.base_url}/atlas-search-api/v1/version'
+        return self.get(url)
+
+
+    def global_search(self, query='', limit=None, filters=[], offset=0, **params):
+        '''
+        Perform a global search
+
+        Parameters:
+            query (str): Search term
+            limit (int): Max number of records to match
+            filters (list): list of filter definitions
+            offset (int): record offset
+            **params: Additional parameters
+        
+        Returns:
+            response object: Requests response object
+
+        '''
+        body = {}
+        url = f'{self.base_url}/atlas-search-api/v1/search'
+        body['query'] = query
+        body['filters'] = filters
+        if limit:
+            body['limit'] = limit
+        if offset > 0:
+            body['offset'] = offset
+        if params:
+            body.update(params)
+        
+        return self.post(url, body=json.dumps(body))
+
+
+    def simple_global_search(self, query=''):
+        '''
+        Simple form of global_search() returning list of objects with ids
+
+        Parameters:
+            query (str): Search term
+        
+        Returns:
+            result (list): List of dict of object ids and metadata
+                           [ { '_id': id, 'metadata': dict of metadata } ]
+
+        '''
+        result = []
+        response = self.global_search(query=query)
+        if response.status_code in self.return_codes_ok:
+            hits = response.json()['hits']['hits']
+            if hits:
+                for obj in hits:
+                    result.append({ '_id': obj.get('_id'),
+                                    'metadata': obj.get('_source').get('metadata') })
+            else:
+                result = []
+        else:
+            logging.error('Global Search Failed')
+            logging.error(f'HTTP code: {response.status_code} ')
+            logging.error(f'Response: {response.text}')
+
+        return result
