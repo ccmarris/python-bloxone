@@ -533,8 +533,3 @@ documentation/text/requirements.txt
 documentation/text/usage.txt
 documentation/text/utils.txt
 documentation/text/version_history.txt
-ibtidelib.egg-info/PKG-INFO
-ibtidelib.egg-info/SOURCES.txt
-ibtidelib.egg-info/dependency_links.txt
-ibtidelib.egg-info/requires.txt
-ibtidelib.egg-info/top_level.txt
