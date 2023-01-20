@@ -7,7 +7,7 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20221219
+ Date Last Updated: 20230119
 
  Todo:
 
@@ -45,7 +45,7 @@ import requests
 import json
 
 # ** Global Vars **
-__version__ = '0.8.1'
+__version__ = '0.8.2'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -279,7 +279,6 @@ class b1platform(bloxone.b1oph):
         return id
 
 
-
     def create_user(self, name='', 
                           email='', 
                           type='interactive',
@@ -462,6 +461,8 @@ class b1platform(bloxone.b1oph):
             if hits:
                 for obj in hits:
                     result.append({ '_id': obj.get('_id'),
+                                    'name': obj.get('_source').get('doc').get('name'),
+                                    'summary': obj.get('_source').get('doc').get('summary'),
                                     'metadata': obj.get('_source').get('metadata') })
             else:
                 result = []
