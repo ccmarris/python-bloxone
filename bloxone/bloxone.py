@@ -7,13 +7,13 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20220929
+ Date Last Updated: 20230127
 
  Todo:
 
     api_key format verification upon inifile read.
 
- Copyright (c) 2020-2022 Chris Marrison / Infoblox
+ Copyright (c) 2020-2023 Chris Marrison / Infoblox
 
  Redistribution and use in source and binary forms,
  with or without modification, are permitted provided
@@ -48,7 +48,7 @@ import os
 import re
 
 # ** Global Vars **
-__version__ = '0.8.14'
+__version__ = '0.9.0'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
