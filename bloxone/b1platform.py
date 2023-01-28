@@ -7,7 +7,7 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20230119
+ Date Last Updated: 20230127
 
  Todo:
 
@@ -41,11 +41,10 @@
 '''
 import bloxone
 import logging
-import requests
 import json
 
 # ** Global Vars **
-__version__ = '0.8.2'
+__version__ = '0.9.0'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -462,6 +461,7 @@ class b1platform(bloxone.b1oph):
                 for obj in hits:
                     result.append({ '_id': obj.get('_id'),
                                     'name': obj.get('_source').get('doc').get('name'),
+                                    'tags': obj.get('_source').get('doc').get('tags'),
                                     'summary': obj.get('_source').get('doc').get('summary'),
                                     'metadata': obj.get('_source').get('metadata') })
             else:
@@ -472,3 +472,118 @@ class b1platform(bloxone.b1oph):
             logging.error(f'Response: {response.text}')
 
         return result
+
+
+    def get_join_token(self, name='', **params):
+        '''
+        Get Join Tokens
+
+        Parameters:
+            name (str): Optional name of JT
+
+        Returns:
+            response object: Requests response object
+        '''
+        url = f'{self.ztp_url}/jointoken'
+        if name:
+            url = self._add_params(url, _filter=f'name=="{name}"')
+            url = self._add_params(url, first_param=False, **params)
+        else:
+            url = self._add_params(url, **params)
+
+        return self._apiget(url)
+    
+
+    def get_join_token_id(self, name=''):
+        '''
+        Get the ID of a Join Token by name
+
+        Parameters:
+            name (str): Name of the JT
+        
+        Returns:
+            id (str): id of the join token or ""
+        '''
+        response = self.get_join_token(name=name)
+        if response.status_code in self.return_codes_ok:
+            results = response.json().get('results')
+            if results:
+                id = results[0].get('id')
+                id = id.rsplit('/',1)[1]
+            else:
+                id = ""
+                logging.warning("No results found.")
+        else:
+            id=""
+            logging.debug("HTTP Error occured. {}".format(response.status_code))
+
+        logging.debug("id: {}".format(id)) 
+
+        return id
+
+
+    def create_join_token(self, name='', desc='', tags={}):
+        '''
+        Create a new join token
+
+        Parameters:
+            name (str): Name of JT
+            desc (str): Description
+            tages (dict): Dictionary of tags to add
+
+        Returns:
+            response object: Requests response object
+        '''
+        body = {}
+        url = f'{self.ztp_url}/jointoken'
+        body = { 'name': name,
+                 'description': desc }
+        if tags:
+            body['tags'] = tags
+
+        logging.debug(f'Request body: {body}')
+
+        return self._apipost(url, body=json.dumps(body))
+
+
+    def revoke_join_token(self, name=''):
+        '''
+        Revoke a join token by name
+
+        Parameters:
+            name (str): Name of JT
+        
+        Returns:
+            response object: Requests response object
+        '''
+        id = self.get_join_token_id(name=name)
+        if id:
+            url = f'{self.ztp_url}/jointoken/{id}'
+            response = self._apidelete(url)
+        else:
+            response = self._not_found_response()
+
+        return response
+
+
+    def revoke_join_tokens(self, id_list=[]):
+        '''
+        Revoke a set of join tokens
+
+        Parameters:
+            id_list (list): list of JT ids
+        
+        Returns:
+            response object: Requests response object
+        '''
+        body = {}
+
+        if isinstance(id_list, list):
+            url = f'{self.ztp_url}/jointokens'
+            body = { "ids": id_list }
+            response = self._apidelete(url, body=json.dumps(body))
+        else:
+            logging.warning('id_list was not a list')
+            response = self._not_found_response()
+
+        return response
