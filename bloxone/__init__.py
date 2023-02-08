@@ -9,13 +9,14 @@ from .b1notifications import *
 from .b1oph import *
 from .b1platform import *
 from .b1sw import *
-from .b1ztp import *
+from .b1ntp import *
 from .b1td import *
 from .b1tdc import *
 from .b1tdep import *
 from .b1tddfp import *
 from .b1tdlad import *
 from .b1user import *
+from .b1ztp import *
 from .utils import *
 from .dhcputils import *
 
