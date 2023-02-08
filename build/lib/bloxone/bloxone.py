@@ -7,7 +7,7 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20230120
+ Date Last Updated: 20230207
 
  Todo:
 
@@ -48,7 +48,7 @@ import os
 import re
 
 # ** Global Vars **
-__version__ = '0.8.15'
+__version__ = '0.9.0'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -217,6 +217,7 @@ class b1:
         self.ddi_url = self.base_url + '/api/ddi/' + self.api_version
         self.host_url = self.base_url + '/api/host_app/' + self.api_version
         self.notifications_url = self.base_url + '/atlas-notifications-config/'+ self.api_version
+        self.ntp_url = self.base_url + '/api/ntp/' + self.api_version
         self.sw_url = self.base_url + '/api/upgrade_policy/' + self.api_version
         self.ztp_url = self.base_url + '/atlas-host-activation/' + self.api_version
         

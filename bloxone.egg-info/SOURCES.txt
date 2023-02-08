@@ -18,6 +18,7 @@ bloxone/b1cdc.py
 bloxone/b1ddi.py
 bloxone/b1diagnostics.py
 bloxone/b1notifications.py
+bloxone/b1ntp.py
 bloxone/b1oph.py
 bloxone/b1platform.py
 bloxone/b1sw.py
@@ -26,6 +27,7 @@ bloxone/b1tdc.py
 bloxone/b1tddfp.py
 bloxone/b1tdep.py
 bloxone/b1tdlad.py
+bloxone/b1user.py
 bloxone/b1ztp.py
 bloxone/bloxone.py
 bloxone/dhcputils.py
@@ -397,6 +399,8 @@ documentation/source/b1tdep-class.rst
 documentation/source/b1tdep-usage.rst
 documentation/source/b1tdlad-class.rst
 documentation/source/b1tdlad-usage.rst
+documentation/source/b1user-class.rst
+documentation/source/b1user-usage.rst
 documentation/source/b1ztp-class.rst
 documentation/source/bloxone-class.rst
 documentation/source/classes.rst
