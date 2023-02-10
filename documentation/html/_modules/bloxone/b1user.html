@@ -1,0 +1,502 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>bloxone.b1user &mdash; Bloxone API Wrapper 0.8.12 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Bloxone API Wrapper
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8.12
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../requirements.html">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage and Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../classes.html">Classes Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dhcp-utils-classes.html">DHCP Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils.html">Additional Utilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code.html">Source Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../version_history.html">ChangeLog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ackowledgements.html">Authors and acknowledgment</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Bloxone API Wrapper</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>bloxone.b1user</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for bloxone.b1user</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1">#vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="sd"> Description:</span>
+
+<span class="sd">    BloxOne b1user class providing an simple data interface for user info </span>
+
+<span class="sd"> Requirements:</span>
+<span class="sd">   Python3 with re, ipaddress, requests and sqlite3 modules</span>
+
+<span class="sd"> Author: Chris Marrison</span>
+
+<span class="sd"> Date Last Updated: 20230127</span>
+
+<span class="sd"> Todo:</span>
+
+<span class="sd"> Copyright (c) 2023 Chris Marrison / Infoblox</span>
+
+<span class="sd"> Redistribution and use in source and binary forms,</span>
+<span class="sd"> with or without modification, are permitted provided</span>
+<span class="sd"> that the following conditions are met:</span>
+
+<span class="sd"> 1. Redistributions of source code must retain the above copyright</span>
+<span class="sd"> notice, this list of conditions and the following disclaimer.</span>
+
+<span class="sd"> 2. Redistributions in binary form must reproduce the above copyright</span>
+<span class="sd"> notice, this list of conditions and the following disclaimer in the</span>
+<span class="sd"> documentation and/or other materials provided with the distribution.</span>
+
+<span class="sd"> THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</span>
+<span class="sd"> &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</span>
+<span class="sd"> LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS</span>
+<span class="sd"> FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE</span>
+<span class="sd"> COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,</span>
+<span class="sd"> INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,</span>
+<span class="sd"> BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;</span>
+<span class="sd"> LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span>
+<span class="sd"> CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT</span>
+<span class="sd"> LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN</span>
+<span class="sd"> ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
+<span class="sd"> POSSIBILITY OF SUCH DAMAGE.</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.0&#39;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison&#39;</span>
+<span class="n">__author_email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
+
+<span class="kn">import</span> <span class="nn">bloxone</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+
+<div class="viewcode-block" id="b1user"><a class="viewcode-back" href="../../b1user-class.html#bloxone.b1user">[docs]</a><span class="k">class</span> <span class="nc">b1user</span><span class="p">(</span><span class="n">bloxone</span><span class="o">.</span><span class="n">b1platform</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">username</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> 
+                 <span class="n">email_domain</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;infoblox.com&#39;</span><span class="p">,</span>
+                 <span class="n">b1org</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> 
+                 <span class="n">delete</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> 
+                 <span class="n">cfg_file</span><span class="o">=</span><span class="s1">&#39;config.ini&#39;</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Initialise class</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            username (str): Username or email address</span>
+<span class="sd">            email_domain (str): email domain of user</span>
+<span class="sd">            b1org (str): Name of org </span>
+<span class="sd">            delete (bool): Delete data and user or report only</span>
+<span class="sd">            cfgfile (str): inifile to user for bloxone module</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">cfg_file</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">username</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">email_domain</span> <span class="o">=</span> <span class="n">email_domain</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b1org</span> <span class="o">=</span> <span class="n">b1org</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">delete</span> <span class="o">=</span> <span class="n">delete</span>
+        
+        <span class="n">user_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_username</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">owner</span> <span class="o">=</span> <span class="n">user_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;owner&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">user_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_org</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_current_tenant</span><span class="p">()</span>
+
+        <span class="k">return</span>
+
+
+<div class="viewcode-block" id="b1user.convert_username"><a class="viewcode-back" href="../../b1user-class.html#bloxone.b1user.convert_username">[docs]</a>    <span class="k">def</span> <span class="nf">convert_username</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">user_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">username</span><span class="o">.</span><span class="n">casefold</span><span class="p">()</span>
+        <span class="k">if</span> <span class="s1">&#39;@&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">username</span><span class="p">:</span>
+            <span class="n">user</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;@&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">email</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">username</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">user</span> <span class="o">=</span> <span class="n">u</span>
+            <span class="n">email</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">u</span><span class="si">}</span><span class="s1">@</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">email_domain</span><span class="si">}</span><span class="s1">&#39;</span>
+        
+        <span class="n">user_dict</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;owner&#39;</span><span class="p">:</span> <span class="n">user</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="n">email</span> <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">user_dict</span></div>
+
+
+<div class="viewcode-block" id="b1user.check_tenant"><a class="viewcode-back" href="../../b1user-class.html#bloxone.b1user.check_tenant">[docs]</a>    <span class="k">def</span> <span class="nf">check_tenant</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Check Org</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_org</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">b1org</span></div>
+
+
+<div class="viewcode-block" id="b1user.user_exists"><a class="viewcode-back" href="../../b1user-class.html#bloxone.b1user.user_exists">[docs]</a>    <span class="k">def</span> <span class="nf">user_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">user_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_user_id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">user_id</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">return</span> <span class="n">status</span></div>
+
+
+<div class="viewcode-block" id="b1user.is_current_user"><a class="viewcode-back" href="../../b1user-class.html#bloxone.b1user.is_current_user">[docs]</a>    <span class="k">def</span> <span class="nf">is_current_user</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_current_user</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
+            <span class="n">current_user</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;result&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">==</span> <span class="n">current_user</span><span class="p">:</span>
+                <span class="n">status</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">status</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Could not determine current user.&#39;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;HTTP code: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s1"> &#39;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Response: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">raise</span>
+
+        <span class="k">return</span> <span class="n">status</span></div>
+
+        
+<div class="viewcode-block" id="b1user.find_user_objects"><a class="viewcode-back" href="../../b1user-class.html#bloxone.b1user.find_user_objects">[docs]</a>    <span class="k">def</span> <span class="nf">find_user_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">simple_global_search</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">owner</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="b1user.find_join_tokens"><a class="viewcode-back" href="../../b1user-class.html#bloxone.b1user.find_join_tokens">[docs]</a>    <span class="k">def</span> <span class="nf">find_join_tokens</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="nb">filter</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;name~&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">username</span><span class="si">}</span><span class="s1">*.&quot;&#39;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_join_token</span><span class="p">(</span><span class="n">_filter</span><span class="o">=</span><span class="nb">filter</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;results&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;HTTP code: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s1"> &#39;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Response: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="b1user.find_ophs"><a class="viewcode-back" href="../../b1user-class.html#bloxone.b1user.find_ophs">[docs]</a>    <span class="k">def</span> <span class="nf">find_ophs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="nb">filter</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;display_name~&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">owner</span><span class="si">}</span><span class="s1">*.&quot;&#39;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_prem_hosts</span><span class="p">(</span><span class="n">_filter</span><span class="o">=</span><span class="nb">filter</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">return_codes_ok</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;result&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;HTTP code: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s1"> &#39;</span><span class="p">)</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Response: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="b1user.data_report"><a class="viewcode-back" href="../../b1user-class.html#bloxone.b1user.data_report">[docs]</a>    <span class="k">def</span> <span class="nf">data_report</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">search</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_user_objects</span><span class="p">()</span>
+        <span class="n">jts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_join_tokens</span><span class="p">()</span>
+        <span class="n">ophs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_ophs</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">search</span> <span class="ow">or</span> <span class="n">jts</span> <span class="ow">or</span> <span class="n">ophs</span><span class="p">:</span>
+            <span class="c1"># We found something</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="n">search</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Data objects:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">search</span><span class="p">:</span>
+                    <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="sa">f</span><span class="s1">&#39;Name: </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">, &#39;</span> <span class="o">+</span>
+                                  <span class="sa">f</span><span class="s1">&#39;Resource: </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;metadata&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;resource&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">, &#39;</span> <span class="o">+</span>
+                                  <span class="sa">f</span><span class="s1">&#39;Tags: </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tags&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span> <span class="p">)</span>
+                <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No data objects found.&#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">jts</span><span class="p">:</span>
+                <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">jts</span><span class="p">:</span>
+                    <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="sa">f</span><span class="s1">&#39;Name: </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">, &#39;</span> <span class="o">+</span>
+                                  <span class="sa">f</span><span class="s1">&#39;Status: </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">, &#39;</span> <span class="o">+</span>
+                                  <span class="sa">f</span><span class="s1">&#39;Use-counter: </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;use_counter&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span> <span class="o">+</span>
+                                  <span class="sa">f</span><span class="s1">&#39;Tags: </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tags&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span> <span class="p">)</span>
+                <span class="c1"># Print results</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Join Tokens:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No join tokens found.&#39;</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">ophs</span><span class="p">:</span>
+                <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">ophs</span><span class="p">:</span>
+                    <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="sa">f</span><span class="s1">&#39;Name: </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;display_name&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">, &#39;</span> <span class="o">+</span>
+                                  <span class="sa">f</span><span class="s1">&#39;Last seen: </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;last_seen&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">, &#39;</span> <span class="o">+</span>
+                                  <span class="sa">f</span><span class="s1">&#39;Tags: </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tags&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span> <span class="p">)</span>
+                <span class="c1"># Print results</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">On Prem Hosts:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No OPHs found.&#39;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Nothing found</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">return</span> <span class="n">status</span></div></div>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            # Check current user</span>
+<span class="sd">            if delete:</span>
+<span class="sd">                # Check current user</span>
+<span class="sd">                response = b1p.get_current_user()</span>
+<span class="sd">                if response.status_code in b1p.return_codes_ok:</span>
+<span class="sd">                    current_user = response.json().get(&#39;email&#39;)</span>
+<span class="sd">                    if current_user == user[&#39;email&#39;]:</span>
+<span class="sd">                        logging.error(&#39;Attempting to delete current user!&#39;)</span>
+<span class="sd">                        exitcode = 1</span>
+<span class="sd">                        raise exit(exitcode)</span>
+<span class="sd">                else:</span>
+<span class="sd">                    logging.error(&#39;Could not determine current user.&#39;)</span>
+<span class="sd">                    logging.error(f&#39;Response code: {response.status_code}&#39;)</span>
+<span class="sd">                    logging.error(f&#39;Message: {response.text}&#39;)</span>
+<span class="sd">                    exitcode = 2</span>
+<span class="sd">                    raise exit(exitcode)</span>
+<span class="sd">            </span>
+<span class="sd">            # Collect</span>
+
+<span class="sd">                </span>
+<span class="sd">            &#39;&#39;&#39;</span>
+<span class="sd">            Input: Username and Org</span>
+<span class="sd">            - Check for correct Org</span>
+<span class="sd">            - Determine username</span>
+<span class="sd">                - Does user exist</span>
+<span class="sd">            - Find objects</span>
+<span class="sd">            - Process object list</span>
+<span class="sd">                - Determine Objecname and Owner tags</span>
+<span class="sd">                - Check against username</span>
+<span class="sd">                - Report</span>
+<span class="sd">            - Delete process</span>
+<span class="sd">                - order of deletion</span>
+<span class="sd">                - delete objects</span>
+
+<span class="sd">            &#39;&#39;&#39;</span>
+
+<span class="sd">        </span>
+<span class="sd">        else:</span>
+<span class="sd">            logging.error(f&#39;Running against wrong BloxOne Org.&#39;)</span>
+<span class="sd">            logging.info(f&#39;Current Org: {org}&#39;)</span>
+<span class="sd">            exitcode = 1</span>
+
+<span class="sd">        return status</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1">### Main ###</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1">## End Main ###</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Chris Marrison.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

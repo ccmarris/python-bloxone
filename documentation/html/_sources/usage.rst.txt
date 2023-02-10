@@ -78,6 +78,10 @@ The specific API 'trees' are then split in to subclasses of :class:`b1`:
     :class:`b1diagnostics` 
         Allows the user to execute remote commands on an OPH via the API
 
+    :class:`b1ntp` 
+        Access to the BloxOne NTP configuration with generic
+        *get*, *create*, *delete* and *update* methods. Inherits b1platform.
+
     :class:`b1oph` 
         Access to the BloxOne On Prem Host API with generic
         *get*, *create*, *delete* and *update* methods plus specific tasks
@@ -88,11 +92,15 @@ The specific API 'trees' are then split in to subclasses of :class:`b1`:
 
     :class:`b1sw` 
         Access to the BloxOne Software Upgrade Scheduling API with generic
-        *get*, *create*, *delete* and *update* methods plus specific task 
+        *get*, *create*, *delete* and *update* methods.
+
+    :class:`b1user` 
+        A utility class to provide a simple interface to access information
+        about a specified username and domain. Inherits b1platform.
 
     :class:`b1ztp` 
         Access to the BloxOne On Prem Host Host Activation API with generic
-        *get*, *create*, *delete* and *update* methods plus specific task 
+        *get*, *create*, *delete* and *update* methods.
 
 In addition to the API interfaces a set of data handling functions is provided
 in the :mod:`utils` sub-module.
@@ -160,8 +168,10 @@ in more detail in the following documents, as well as the usage of :mod:`utils`:
     b1tdep-usage
     b1tddfp-usage
     b1tdlad-usage
+    b1ntp-usage
     b1oph-usage
     b1platform-usage
+    b1user-usage
     utils-usage
 
 The remaining classes generally provide generic interfaces for *get*, *create*, *update* and *delete*.

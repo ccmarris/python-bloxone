@@ -12,6 +12,7 @@ Classes Documentation
     b1cdc-class
     b1ddi-class
     b1diagnostics-class
+    b1ntp-class
     b1oph-class
     b1platform-class
     b1sw-class
@@ -20,4 +21,5 @@ Classes Documentation
     b1tdep-class
     b1tddfp-class
     b1tdlad-class
+    b1user-class
     b1ztp-class

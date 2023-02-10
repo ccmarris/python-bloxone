@@ -177,13 +177,13 @@
 
 <span class="sd"> Module to provide class hierachy to simplify access to the BloxOne APIs</span>
 
-<span class="sd"> Date Last Updated: 20220929</span>
+<span class="sd"> Date Last Updated: 20230207</span>
 
 <span class="sd"> Todo:</span>
 
 <span class="sd">    api_key format verification upon inifile read.</span>
 
-<span class="sd"> Copyright (c) 2020-2022 Chris Marrison / Infoblox</span>
+<span class="sd"> Copyright (c) 2020-2023 Chris Marrison / Infoblox</span>
 
 <span class="sd"> Redistribution and use in source and binary forms,</span>
 <span class="sd"> with or without modification, are permitted provided</span>
@@ -218,7 +218,7 @@
 <span class="kn">import</span> <span class="nn">re</span>
 
 <span class="c1"># ** Global Vars **</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.8.13&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.9.0&#39;</span>
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Chris Marrison&#39;</span>
 <span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;chris@infoblox.com&#39;</span>
 <span class="vm">__doc__</span> <span class="o">=</span> <span class="s1">&#39;https://python-bloxone.readthedocs.io/en/latest/&#39;</span>
@@ -387,6 +387,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ddi_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/api/ddi/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_version</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">host_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/api/host_app/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_version</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notifications_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/atlas-notifications-config/&#39;</span><span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_version</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ntp_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/api/ntp/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_version</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sw_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/api/upgrade_policy/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_version</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ztp_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/atlas-host-activation/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_version</span>
         
