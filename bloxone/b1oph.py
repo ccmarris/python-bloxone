@@ -7,11 +7,11 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20221019
+ Date Last Updated: 20230222
 
  Todo:
 
- Copyright (c) 2021 Chris Marrison / Infoblox
+ Copyright (c) 2021-2023 Chris Marrison / Infoblox
 
  Redistribution and use in source and binary forms,
  with or without modification, are permitted provided
@@ -44,7 +44,7 @@ import logging
 import json
 
 # ** Global Vars **
-__version__ = '0.2.3'
+__version__ = '0.2.4'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -94,6 +94,7 @@ class b1oph(bloxone.b1):
                           '9': { 'AppName': 'Anycast', 'StatusSpace': '30' },
                           '10': { 'AppName': 'NGC', 'StatusSpace': '34' },
                           '12': { 'AppName': 'MS AD Collector', 'StatusSpace': '40' },
+                          '13': { 'AppName': 'Access Authentication', 'StatusSpace': '43' },
                           '14': { 'AppName': 'Edge_Services_FW', 'StatusSpace': '46' },
                           '15': { 'AppName': 'Edge_Services_Router', 'StatusSpace': '49' },
                           '16': { 'AppName': 'Site-to-Site_VPN', 'StatusSpace': '52' },
