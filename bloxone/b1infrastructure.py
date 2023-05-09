@@ -62,19 +62,19 @@ class b1infra(bloxone.b1):
         '''
         super().__init__(cfg_file)
 
-        self.OPH_COMPOSITE_STATUS = { '0': 'Review Details', 
+        self.b1host_COMPOSITE_STATUS = { '0': 'Review Details', 
                                       '1': 'Online',
                                       '2': 'Unknown',
                                       '3': 'Pending',
                                       '4': 'Awaiting approval' }
         
-        self.OPH_PLATFORM_STATES = { '0': 'Offline',
+        self.b1host_PLATFORM_STATES = { '0': 'Offline',
                                      '1': 'Online',
                                      '2': 'Error',
                                      '3': 'Waiting (pending)',
                                      '4': 'Unknown' }
         
-        self.OPH_HOST_TYPES = { '0': 'Not Available',
+        self.b1host_HOST_TYPES = { '0': 'Not Available',
                                 '1': 'Unknown',
                                 '2': 'Unknown',
                                 '3': 'BloxOne VM',
@@ -82,12 +82,12 @@ class b1infra(bloxone.b1):
                                 '5': 'BloxOne Container',
                                 '6': 'CNIOS' }
         
-        self.OPH_APP_MGT = { '0': 'Inactive',
+        self.b1host_APP_MGT = { '0': 'Inactive',
                              '1': 'Active',
                              '2': 'Error',
                              '3': '' }
 
-        self.OPH_APPS = { '1': { 'AppName': 'DFP', 'StatusSpace': '9' },
+        self.b1host_APPS = { '1': { 'AppName': 'DFP', 'StatusSpace': '9' },
                           '2': { 'AppName': 'DNS', 'StatusSpace': '12' },
                           '3': { 'AppName': 'DHCP', 'StatusSpace': '15' },
                           '7': { 'AppName': 'CDC', 'StatusSpace': '24' },
@@ -102,7 +102,7 @@ class b1infra(bloxone.b1):
                           '20': { 'AppName': 'NTP', 'StatusSpace': '64' }
         }
 
-        self.OPH_APP_NAMES = { 'DFP': '1',
+        self.b1host_APP_NAMES = { 'DFP': '1',
                                'DNS': '2',
                                'DHCP': '3',
                                'CDC': '7',
@@ -253,7 +253,7 @@ class b1infra(bloxone.b1):
         return tags
 
 
-    # *** Platform API Requests *** 
+    # *** B1 Host/Service API Requests *** 
 
     def b1_hosts(self, **params):
         '''
@@ -268,6 +268,24 @@ class b1infra(bloxone.b1):
 
         # Call BloxOne API
         response = self.get('/hosts', **params)
+
+        # Return response object
+        return response 
+
+
+    def b1_detail_hosts(self, **params):
+        '''
+        Method to retrieve BloxOne Hosts
+
+        Parameters:
+            **params (dict): Generic API parameters
+
+        Returns:
+            response object: Requests response object
+        '''
+
+        # Call BloxOne API
+        response = self.get('/detail_hosts', **params)
 
         # Return response object
         return response 
@@ -333,10 +351,10 @@ class b1infra(bloxone.b1):
         Return the id of named BloxOne Host
 
         Parameters:
-            name (str): display name of OPH
+            name (str): display name of b1host
         
         Returns:
-            ophid(str): ophid of the specified OPH
+            b1hostid(str): b1hostid of the specified b1host
         '''
 
         return self.get_id('/hosts', key="display_name", value=name, include_path=False)
@@ -398,13 +416,13 @@ class b1infra(bloxone.b1):
         return response
 
 
-    def oph_status_summary(self, name="", id="", tags=False):
+    def b1host_status_summary(self, name="", id="", tags=False):
         '''
-        Get OPH status information for one or more OPHs
+        Get B1 Hosts status information for one or more Hosts
 
         Parameters:
-            name (ste): Display name of OPH
-            id (str): id of a specific OPH
+            name (ste): Display name of Host
+            id (str): id of a specific Host
             tags (bool): include tags in report
         
         Returns:
@@ -412,17 +430,17 @@ class b1infra(bloxone.b1):
         '''
         rpt = None
 
-        # Get OPH Data
+        # Get b1host Data
         if name:
             name_filter = 'display_name=="' + name + '"'
-            response = self.get('/on_prem_hosts', _filter=name_filter)
+            response = self.get('/detail_hosts', _filter=name_filter)
         elif id:
-            response = self.get('/on_prem_hosts', id=id)
+            response = self.get('/detail_hosts', id=id)
         else:
-            response = self.get('/on_prem_hosts')
+            response = self.get('/detail_hosts')
         
         if response.status_code in self.return_codes_ok:
-            rpt = self.oph_status_rpt(response.json(), tags=tags)
+            rpt = self.b1host_status_rpt(response.json(), tags=tags)
         else:
             logging.error(f'Response code: {response.status_code}, Data: {response.text}')
             rpt = None
@@ -430,70 +448,69 @@ class b1infra(bloxone.b1):
         return rpt
 
 
-    def oph_status(self, oph_data):
+    def b1host_status(self, b1host_data):
         '''
-        Translate status info in JSON data for an OPH
+        Translate status info in JSON data for an b1host
 
         Parameters:
-            oph_data (dict): Data for individual OPH
+            b1host_data (dict): Data for individual b1host
         
         Returns:
-            oph_status: Dict of translated status elements
+            b1host_status: Dict of translated status elements
         '''
-        oph_status = {}
-        oph_comp_state = ''
-        oph_plat_state = ''
-        oph_plat_msg = ''
-        oph_app_mgt = ''
-        oph_app_msg = ''
+        b1host_status = {}
+        b1host_comp_state = ''
+        b1host_plat_state = ''
+        b1host_plat_msg = ''
+        b1host_app_mgt = ''
+        b1host_app_msg = ''
 
-        if 'composite_status' in oph_data.keys():
-            oph_comp_state = self.OPH_COMPOSITE_STATUS[oph_data['composite_status'].get('status')]
-        else:
-            oph_comp_state = 'No state information'
+        b1host_comp_state = b1host_data.get('composite_status')
+        if not b1host_comp_state:
+            b1host_comp_state = 'No state information'
                         
-        if 'state' in oph_data.keys():
-            if oph_data['state'].get('current_state') in self.OPH_PLATFORM_STATES.keys():
-                oph_plat_state = self.OPH_PLATFORM_STATES[oph_data['state'].get('current_state')]
+        if 'state' in b1host_data.keys():
+            if b1host_data['state'].get('current_state') in self.b1host_PLATFORM_STATES.keys():
+                b1host_plat_state = self.b1host_PLATFORM_STATES[b1host_data['state'].get('current_state')]
             else:
-                oph_plat_state = f"Unknown state: {oph_data['state'].get('current_state')}"
+                b1host_plat_state = f"Unknown state: {b1host_data['state'].get('current_state')}"
 
-            if 'message' in oph_data['state'].keys():
-                oph_plat_state = oph_data['state']['message']
+            if 'message' in b1host_data['state'].keys():
+                b1host_plat_state = b1host_data['state']['message']
 
         else:
-            oph_plat_state = "Platform status unavailable"
+            b1host_plat_state = "Platform status unavailable"
         
-        if 'status' in oph_data.keys():
-            oph_app_mgt = self.OPH_PLATFORM_STATES[oph_data['status'].get('status')]
-            if 'message' in oph_data['status'].keys():
-                oph_app_msg = oph_data['status']['message']
+        if 'status' in b1host_data.keys():
+            b1host_app_mgt = self.b1host_PLATFORM_STATES[b1host_data['status'].get('status')]
+            if 'message' in b1host_data['status'].keys():
+                b1host_app_msg = b1host_data['status']['message']
         else:
-            oph_app_mgt = "Application Management status unavailable"
+            b1host_app_mgt = "Application Management status unavailable"
 
-        oph_status = { 'OPH State': oph_comp_state,
-                       'Platform Management': oph_plat_state,
-                       'Application Management': oph_app_mgt }
+        b1host_status = { 'b1host State': b1host_comp_state,
+                       'Platform Management': b1host_plat_state,
+                       'Application Management': b1host_app_mgt }
         
-        if oph_plat_msg:
-            oph_status.update( {'Platform Message': oph_plat_msg })
-        if oph_app_msg:
-            oph_status.update( {'App Mgt Message': oph_app_msg })
+        if b1host_plat_msg:
+            b1host_status.update( {'Platform Message': b1host_plat_msg })
+        if b1host_app_msg:
+            b1host_status.update( {'App Mgt Message': b1host_app_msg })
         
-        return oph_status
+        return b1host_status
     
 
-    def oph_app_status(self, oph_data):
+    def b1host_app_status(self, b1host_data):
         '''
-        Translate App status info in JSON data for an OPH
+        Translate App status info in JSON data for an b1host
 
         Parameters:
-            oph_data (dict): Data for individual OPH
+            b1host_data (dict): Data for individual b1host
         
         Returns:
-            oph_apps: Dict of translated status elements
+            b1host_apps: Dict of translated status elements
         '''
-        oph_apps = {}
+        b1host_apps = {}
         app_id = ''
         app_name = ''
         ver_name = ''
@@ -501,11 +518,11 @@ class b1infra(bloxone.b1):
         app_version = None
 
         # Check for application status data
-        if 'applications' in oph_data.keys():
-            for app in oph_data['applications']:
+        if 'applications' in b1host_data.keys():
+            for app in b1host_data['applications']:
                 app_id = app.get('application_type')
-                if app_id in self.OPH_APPS.keys():
-                    app_name = self.OPH_APPS[app_id]['AppName']
+                if app_id in self.b1host_APPS.keys():
+                    app_name = self.b1host_APPS[app_id]['AppName']
                     ver_name = app_name + '_version'
                 else:
                     app_name = 'Unknown, AppID: ' + app_id
@@ -519,69 +536,69 @@ class b1infra(bloxone.b1):
 
                 # Add version info if available
                 if app_version:
-                    oph_apps.update( { app_name: status,
+                    b1host_apps.update( { app_name: status,
                                         ver_name: app_version } )
                 else:
-                    oph_apps.update( { app_name: status } )
+                    b1host_apps.update( { app_name: status } )
 
         else:
-            oph_apps = {}
+            b1host_apps = {}
         
-        return oph_apps
+        return b1host_apps
    
 
-    def oph_status_rpt(self, json_data, tags=False):
+    def b1host_status_rpt(self, json_data, tags=False):
         '''
-        Build  status report from GET /on_prem_hosts data
+        Build  status report from GET /detail_hosts data
 
         Parameters:
-            json_data (json): API JSON data for On Prem Hosts call
+            json_data (json): API JSON data for B1 Hosts call
             tags (bool): Include tags in response, default False
         
         Returns:
             rpt: Dict of status elements
         '''
         rpt = {}
-        on_prem_host = ""
-        oph_status = {}
-        oph_apps = {}
+        b1host_name = ""
+        b1host_status = {}
+        b1host_apps = {}
 
         if json_data:
             results = json_data.get('result')
             if not isinstance(results, list):
                 results = [ results ]
             # Build report 
-            for oph in results:
-                oph_apps = {}
-                on_prem_host = oph.get('display_name')
-                if on_prem_host:
-                    oph_status = self.oph_status(oph)
-                    oph_apps = self.oph_app_status(oph)
+            for b1host in results:
+                b1host_apps = {}
+                b1host_name = b1host.get('display_name')
+                if b1host_name:
+                    b1host_status = self.b1host_status(b1host)
+                    b1host_apps = self.b1host_app_status(b1host)
 
-                    rpt.update( { on_prem_host: { 'status': oph_status,
-                                          'id': oph.get('id'),
-                                          'host_type': self.OPH_HOST_TYPES[oph.get('host_type')],
-                                          'ip_address': oph.get('ip_address'), 
-                                          'nat_ip': oph.get('nat_ip'),
-                                          'version': oph.get('current_version'),
-                                          'last_seen': oph.get('last_seen'),
-                                          'applications': oph_apps }
+                    rpt.update( { b1host_name: { 'status': b1host_status,
+                                          'id': b1host.get('id'),
+                                          'host_type': self.b1host_HOST_TYPES[b1host.get('host_type')],
+                                          'ip_address': b1host.get('ip_address'), 
+                                          'nat_ip': b1host.get('nat_ip'),
+                                          'version': b1host.get('current_version'),
+                                          'last_seen': b1host.get('last_seen'),
+                                          'applications': b1host_apps }
                                 } )
                 if tags:
-                    rpt[on_prem_host].update({'tags': oph.get('tags')})
+                    rpt[b1host_name].update({'tags': b1host.get('tags')})
         else:
             rpt = None
 
         return rpt
 
     
-    def oph_uptime(self, name=""):
+    def b1host_uptime(self, name=""):
         '''
         '''
         uptime = None
-        ophid = self.get_ophid(name=name)
+        b1hostid = self.get_b1hostid(name=name)
         url = 'https://csp.infoblox.com/atlas-status-service/v1/getsummary'
-        body = '{"objectID":["' + ophid +'"],"objectType":["Onprem Host ID"],"event_key":["health-collector/heartbeat/"]}'
+        body = '{"objectID":["' + b1hostid +'"],"objectType":["Onprem Host ID"],"event_key":["health-collector/heartbeat/"]}'
         response = self._apipost(url, body=body)
         if response.status_code in self.return_codes_ok:
             uptime = response.json()['results'][0]['metadata']['hostUptime']
@@ -589,12 +606,12 @@ class b1infra(bloxone.b1):
         return uptime
 
 
-    def get_app_state(self, name, app):
+    def get_service_state(self, name, app):
         '''
-        Get status of application for an OPH
+        Get status of application for an b1host
 
         Parameters:
-            name (str): display_name of OPH
+            name (str): display_name of b1host
             app (str): App Name, e.g. DNS
         
         Returns:
@@ -603,30 +620,30 @@ class b1infra(bloxone.b1):
         status_data = ''
         app_status = ''
 
-        status_data = self.oph_status_summary(name=name)
+        status_data = self.b1host_status_summary(name=name)
         if status_data:
             if 'applications' in status_data[name].keys():
                 app_status = status_data[name]['applications'].get(app)
                 if not app_status:
-                    logging.error(f'App: {app} not found for OPH: {name}')
-                    app_status = f'App: {app} not found for OPH: {name}'
+                    logging.error(f'App: {app} not found for b1host: {name}')
+                    app_status = f'App: {app} not found for b1host: {name}'
             else:
-                logging.error(f'No application data for OPH: {name}')
-                app_status = f'No application data for OPH: {name}'
+                logging.error(f'No application data for b1host: {name}')
+                app_status = f'No application data for b1host: {name}'
 
         else:
-            logging.error(f'OPH: {name} not found')
-            app_status = f'OPH: {name} not found'
+            logging.error(f'b1host: {name} not found')
+            app_status = f'b1host: {name} not found'
 
         return app_status
 
 
-    def manage_app(self, name="", app="", action="status"):
+    def manage_service(self, name="", app="", action="status"):
         '''
-        Perform action on named OPH for specified app
+        Perform action on named b1host for specified app
 
         Parameters:
-            name (str): display_name of OPH
+            name (str): display_name of b1host
             app (str): App Name, e.g. DNS
             action (str): action to perform for app
         
@@ -664,10 +681,10 @@ class b1infra(bloxone.b1):
 
     def disable_app(self, name="", app=""):
         '''
-        Disable specified app on named OPH
+        Disable specified app on named b1host
 
         Parameters:
-            name (str): display_name of OPH
+            name (str): display_name of b1host
             app (str): App Name, e.g. DNS
         
         Returns:
@@ -677,19 +694,19 @@ class b1infra(bloxone.b1):
         app_type = ''
 
         # Check app supported and get Get application_type
-        if app in self.OPH_APP_NAMES.keys():
-            app_type = self.OPH_APP_NAMES[app]
-        elif app in self.OPH_APPS.keys():
+        if app in self.b1host_APP_NAMES.keys():
+            app_type = self.b1host_APP_NAMES[app]
+        elif app in self.b1host_APPS.keys():
             app_type = app
 
         if app_type:
-            # Get id of OPH
+            # Get id of b1host
             filter = f'display_name=="{name}"'
             response = self.get('/on_prem_hosts', 
                                 _filter=filter)
             if response.status_code in self.return_codes_ok:
-                oph_data = response.json()['result']
-                id = oph_data[0]['id']
+                b1host_data = response.json()['result']
+                id = b1host_data[0]['id']
                 logging.debug(f'On Prem Host id = {id}')
 
                 # Build body
@@ -699,18 +716,18 @@ class b1infra(bloxone.b1):
                                              'state': { 'desired_state': '0' } 
                                            } ] } 
                 
-                # Update desired OPH
+                # Update desired b1host
                 response = self.update('/on_prem_hosts',
                                        id=id,
                                        body=json.dumps(body))
                 if response.status_code in self.return_codes_ok:
-                    logging.debug(f'OPH: {name}, App: {app}, App_type: {app_type}')
+                    logging.debug(f'b1host: {name}, App: {app}, App_type: {app_type}')
                     status = True
                 else:
                     logging.error(f'{response.status_code}: {response.text}')
 
             else:
-                logging.error(f'OPH {name} not found.')
+                logging.error(f'b1host {name} not found.')
                 status = False
         else:
             logging.error(f'App {app} not supported.')
@@ -721,10 +738,10 @@ class b1infra(bloxone.b1):
 
     def enable_app(self, name="", app=""):
         '''
-        Enable specified app on named OPH
+        Enable specified app on named b1host
 
         Parameters:
-            name (str): display_name of OPH
+            name (str): display_name of b1host
             app (str): App Name, e.g. DNS
         
         Returns:
@@ -734,19 +751,19 @@ class b1infra(bloxone.b1):
         app_type = ''
 
         # Check app supported and get Get application_type
-        if app in self.OPH_APP_NAMES.keys():
-            app_type = self.OPH_APP_NAMES[app]
-        elif app in self.OPH_APPS.keys():
+        if app in self.b1host_APP_NAMES.keys():
+            app_type = self.b1host_APP_NAMES[app]
+        elif app in self.b1host_APPS.keys():
             app_type = app
 
         if app_type:
-            # Get id of OPH
+            # Get id of b1host
             filter = f'display_name=="{name}"'
             response = self.get('/on_prem_hosts', 
                                 _filter=filter)
             if response.status_code in self.return_codes_ok:
-                oph_data = response.json()['result']
-                id = oph_data[0]['id']
+                b1host_data = response.json()['result']
+                id = b1host_data[0]['id']
                 logging.debug(f'On Prem Host id = {id}')
 
                 # Build body
@@ -756,18 +773,18 @@ class b1infra(bloxone.b1):
                                              'state': { 'desired_state': '1' } 
                                            } ] } 
                 
-                # Update desired OPH
+                # Update desired b1host
                 response = self.update('/on_prem_hosts',
                                        id=id,
                                        body=json.dumps(body))
                 if response.status_code in self.return_codes_ok:
-                    logging.debug(f'OPH: {name}, App: {app}, App_type: {app_type}')
+                    logging.debug(f'b1host: {name}, App: {app}, App_type: {app_type}')
                     status = True
                 else:
                     logging.error(f'{response.status_code}: {response.text}')
 
             else:
-                logging.error(f'OPH {name} not found.')
+                logging.error(f'b1host {name} not found.')
                 status = False
         else:
             logging.error(f'App {app} not supported.')
@@ -781,7 +798,7 @@ class b1infra(bloxone.b1):
         Start or stop an application process
 
         Parameters:
-            name (str): display_name of OPH
+            name (str): display_name of b1host
             app (str): App Name, e.g. DNS
         
         Returns:
@@ -794,18 +811,18 @@ class b1infra(bloxone.b1):
         if action in actions.keys():
 
             # Check app supported and get Get application_type
-            if app in self.OPH_APP_NAMES.keys():
-                app_type = self.OPH_APP_NAMES[app]
-            elif app in self.OPH_APPS.keys():
+            if app in self.b1host_APP_NAMES.keys():
+                app_type = self.b1host_APP_NAMES[app]
+            elif app in self.b1host_APPS.keys():
                 app_type = app
 
             if app_type:
-                # Get id of OPH
-                oph_status = self.oph_status_summary(name=name)
-                if oph_status:
-                    id = oph_status.get('id')
+                # Get id of b1host
+                b1host_status = self.b1host_status_summary(name=name)
+                if b1host_status:
+                    id = b1host_status.get('id')
                     logging.debug(f'On Prem Host id = {id}')
-                    app_status = oph_status[name]['applications'].get(app)
+                    app_status = b1host_status[name]['applications'].get(app)
                     logging.debug(f'App status: {app} app is {app_status}')
                     # Check whether app is disabled
                     if 'disabled' not in app_status:
@@ -817,22 +834,22 @@ class b1infra(bloxone.b1):
                                                         { 'desired_state': actions[action] } 
                                                 } ] } 
                         
-                        # Update desired OPH
+                        # Update desired b1host
                         response = self.update('/on_prem_hosts',
                                             id=id,
                                             body=json.dumps(body))
                         if response.status_code in self.return_codes_ok:
-                            logging.debug(f'OPH: {name}, App: {app}, App_type: {app_type}')
+                            logging.debug(f'b1host: {name}, App: {app}, App_type: {app_type}')
                             status = True
                         else:
                             logging.error(f'{response.status_code}: {response.text}')
                             status = False
                     else:
-                        logging.info(f'App: {app} on OPH: {name} {app_status}')
+                        logging.info(f'App: {app} on b1host: {name} {app_status}')
                         status = False
 
                 else:
-                    logging.error(f'OPH {name} not found.')
+                    logging.error(f'b1host {name} not found.')
                     status = False
             else:
                 logging.error(f'App {app} not supported.')

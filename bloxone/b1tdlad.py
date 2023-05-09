@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.1.0'
+__version__ = '0.2.0'
 __author__ = 'Chris Marrison/Krishna Vasudeva'
 __author_email__ = 'chris@infoblox.com'
 
@@ -72,5 +72,27 @@ class b1tdlad(bloxone.b1):
         logging.debug("URL: {}".format(url))
 
         response = self._apiget(url)
+
+        return response
+
+
+    def update(self, objpath, id="", body=""):
+        '''
+        Generic create object wrapper 
+
+        Parameters:
+            objpath (str):  Swagger object path
+            body (str): JSON formatted data payload
+
+        Returns:
+            response object: Requests response object
+        '''
+        # Build url if needed
+        url = self.tdlad_url + objpath
+        url = self._use_obj_id(url, id=id)
+        logging.debug("URL: {}".format(url))
+
+        # Make API Call
+        response = self._apiput(url, body)
 
         return response

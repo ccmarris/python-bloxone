@@ -6,8 +6,7 @@ Examples
 --------
 
 .. todo::
-    These examples are placeholders, useful, but actual example set here is on 
-    the todo.
+    These are simple examples to show basic syntax.
 
 .. code-block:: python
 
