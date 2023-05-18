@@ -6,6 +6,7 @@ from .b1ddi import *
 from .b1diagnostics import *
 from .b1cdc import *
 from .b1notifications import *
+from .b1infrastructure import *
 from .b1oph import *
 from .b1platform import *
 from .b1sw import *

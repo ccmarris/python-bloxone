@@ -44,7 +44,7 @@ import logging
 import json
 
 # ** Global Vars **
-__version__ = '0.2.4'
+__version__ = '0.2.5'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -110,6 +110,8 @@ class b1oph(bloxone.b1):
                                'NGC': '10' }
 
         self.APP_STATUS = { '0': 'inactive', '1': 'active', '2': 'stopped' }
+
+        logging.warning('The b1oph class is being deprecated, please see b1infrastructure class')
 
         return
 

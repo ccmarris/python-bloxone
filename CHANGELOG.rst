@@ -2,7 +2,10 @@
 ChangeLog
 *********
 
-|	20230929 	v0.9.0 Changes to b1, b1platform, added b1user and b1ntp
+|	20230929 	v0.9.0  Updates and fixes to b1, b1platform, b1tdc classes
+|                       Addition of update method to b1tdlad class
+|                       New b1user and b1ntp classes
+|                       New b1infrastructure class to support new API structure
 |	20230120 	v0.8.15 Added global search to b1platform
 |	20220929 	v0.8.13 Suppport direct use of api_key instead of inifile
 |	20220901 	v0.8.12 Update to b1oph to support unknown app codes
