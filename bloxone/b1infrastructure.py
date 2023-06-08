@@ -7,9 +7,11 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20230309
+ Date Last Updated: 20230608
 
  Todo:
+
+    Complete the service control methods
 
  Copyright (c) 2021-2023 Chris Marrison / Infoblox
 
@@ -44,7 +46,7 @@ import logging
 import json
 
 # ** Global Vars **
-__version__ = '0.0.5'
+__version__ = '0.0.6'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -54,6 +56,7 @@ __license__ = 'BSD'
 class b1infra(bloxone.b1):
     '''
     Class to simplify access to the BloxOne Platform APIs
+    This class replaces the deprecated b1oph class
     '''
 
     def __init__(self, cfg_file='config.ini'):
@@ -248,6 +251,8 @@ class b1infra(bloxone.b1):
             tags = json.loads(response.text)
             tags = tags['result']
         else:
+            logging.debug(f'HTTP Error occured. {response.status_code}')
+            logging.debug(f'Body: {response.content}')
             tags = {}
         
         return tags
@@ -401,6 +406,7 @@ class b1infra(bloxone.b1):
 
         return id
 
+
     def get_b1host_id(self, name="", ophid=False):
         '''
         Return the id of named BloxOne Host
@@ -471,6 +477,9 @@ class b1infra(bloxone.b1):
                 logging.debug("New tags: {}".format(data))
                 # Update object
                 response = self.update('/hosts', id=id, body=json.dumps(data))
+        else:
+            logging.debug(f'HTTP Error occured. {response.status_code}')
+            logging.debug(f'Body: {response.content}')
 
         return response
 
@@ -636,7 +645,8 @@ class b1infra(bloxone.b1):
         '''
         Get the uptime for a b1host
 
-        Note: this currently uses the ophid
+        Note: this currently uses the ophid, if set to False this may
+              generate an error
 
         Parameters:
             name (str): Display Name of b1host
@@ -648,7 +658,10 @@ class b1infra(bloxone.b1):
         uptime = None
         b1hostid = self.get_b1host_id(name=name, ophid=ophid)
         url = 'https://csp.infoblox.com/atlas-status-service/v1/getsummary'
-        body = '{"objectID":["' + b1hostid +'"],"objectType":["Onprem Host ID"],"event_key":["health-collector/heartbeat/"]}'
+        if ophid:
+            body = '{"objectID":["' + b1hostid +'"],"objectType":["Onprem Host ID"],"event_key":["health-collector/heartbeat/"]}'
+        else:
+            body = '{"objectID":["' + b1hostid +'"],"objectType":["Host ID"],"event_key":["health-collector/heartbeat/"]}'
         response = self._apipost(url, body=body)
         if response.status_code in self.return_codes_ok:
             uptime = response.json()['results'][0]['metadata']['hostUptime']
@@ -656,7 +669,7 @@ class b1infra(bloxone.b1):
         return uptime
 
 
-    def get_service_state(self, service_name):
+    def get_service_state(self, service_name=''):
         '''
         Get status of a service
 
@@ -664,59 +677,61 @@ class b1infra(bloxone.b1):
             service (str): Service Name
         
         Returns:
-            service_status (str): Status or error msg as text
+            requests response object
         '''
-        status_data = ''
         service_status = ''
 
-        status_data = self.b1host_status_summary(name=name)
-        if status_data:
-            if 'servicelications' in status_data[name].keys():
-                service_status = status_data[name]['servicelications'].get(service)
-                if not service_status:
-                    logging.error(f'service: {service} not found for b1host: {name}')
-                    service_status = f'service: {service} not found for b1host: {name}'
-            else:
-                logging.error(f'No servicelication data for b1host: {name}')
-                service_status = f'No servicelication data for b1host: {name}'
-
+		# Filter on service_name if provided
+        if service_name:
+            filter = f'name=="{service_name}"'
+            logging.debug(f'Applying filter: {filter}')
+            response = self.get('/services', _filter=filter)
         else:
-            logging.error(f'b1host: {name} not found')
-            service_status = f'b1host: {name} not found'
+            response = self.get('/services')
 
+        # Check repsone
+        if response.status_code in self.return_codes_ok:
+            service_status = response.json()
+        else:
+            logging.debug(f'HTTP Error occured. {response.status_code}')
+            logging.debug(f'Body: {response.content}')
+        
         return service_status
 
 
-    def manage_service(self, name="", service="", action="status"):
+    def manage_service(self, service_name="", action="status"):
         '''
         Perform action on named b1host for specified service
 
         Parameters:
-            name (str): display_name of b1host
-            service (str): service Name, e.g. DNS
+            service_name (str): service Name
             action (str): action to perform for service
         
         Returns:
             bool
         '''
         result = False
-        actions = [ 'status', 'disable', 'enable', 'stop', 'start' ]
+        actions = [ 'status' ]
+        # actions = [ 'status', 'disable', 'enable', 'stop', 'start' ]
 
         if action in actions:
            if action == "status":
-               result = self.get_service_state(name=name, service=service) 
+                response = self.get_service_state(service_name=service_name)
+                if response:
+                    result = response
+                else:
+                    logging.error(f'Service: {service_name} not found')
+                    result = False
            elif action == "disable":
-               result = self.disable_service(name=name, service=service) 
+               result = self.disable_service(service_name=service_name)
            elif action == "enable":
-               result = self.enable_service(name=name, service=service) 
+               result = self.enable_service(service_name=service_name)
            elif action == "start":
-               result = self.service_process_control(name=name, 
-                                                 service=service, 
-                                                 action="start") 
+               result = self.service_process_control(service_name=service_name,
+                                                     action="start") 
            elif action == "stop":
-               result = self.service_process_control(name=name, 
-                                                 service=service, 
-                                                 action="stop") 
+               result = self.service_process_control(service_name=service_name, 
+                                                     action="stop") 
            else:
                logging.error(f'Action: {action} not implemented')
                result = False
@@ -727,8 +742,9 @@ class b1infra(bloxone.b1):
 
         return result
 
+    """
 
-    def disable_service(self, name="", service=""):
+    def disable_service(self, service_name=''):
         '''
         Disable specified service on named b1host
 
@@ -743,9 +759,9 @@ class b1infra(bloxone.b1):
         service_type = ''
 
         # Check service supported and get Get servicelication_type
-        if service in self.b1host_service_NAMES.keys():
+        if service_name in self.b1host_service_NAMES.keys():
             service_type = self.b1host_service_NAMES[service]
-        elif service in self.b1host_services.keys():
+        elif service_name in self.b1host_services.keys():
             service_type = service
 
         if service_type:
@@ -842,64 +858,64 @@ class b1infra(bloxone.b1):
         return status
     
 
-    def service_process_control(self, name="", service="", action=""): 
+    def service_process_control(self, service_name="", action=""): 
         '''
-        Start or stop an servicelication process
+        Start or stop a service
 
         Parameters:
-            name (str): display_name of b1host
-            service (str): service Name, e.g. DNS
+            service_name (str): Name of service
         
         Returns:
             bool 
         '''
-        service_type = ''
         status = False
-        actions = { "start": '1', "stop": '0' }
-
-        if action in actions.keys():
-
-            # Check service supported and get Get servicelication_type
-            if service in self.b1host_service_NAMES.keys():
-                service_type = self.b1host_service_NAMES[service]
-            elif service in self.b1host_services.keys():
-                service_type = service
-
-            if service_type:
-                # Get id of b1host
-                b1host_status = self.b1host_status_summary(name=name)
-                if b1host_status:
-                    id = b1host_status.get('id')
-                    logging.debug(f'B1 Host id = {id}')
-                    service_status = b1host_status[name]['servicelications'].get(service)
-                    logging.debug(f'service status: {service} service is {service_status}')
-                    # Check whether service is disabled
-                    if 'disabled' not in service_status:
-                        # Build body
-                        body = { 'display_name': name, 
-                                'servicelications': [ { 'servicelication_type': service_type,
-                                                    'disabled': '0', 
-                                                    'state': 
-                                                        { 'desired_state': actions[action] } 
-                                                } ] } 
-                        
-                        # Update desired b1host
-                        response = self.update('/hosts',
-                                            id=id,
-                                            body=json.dumps(body))
-                        if response.status_code in self.return_codes_ok:
-                            logging.debug(f'b1host: {name}, service: {service}, service_type: {service_type}')
-                            status = True
-                        else:
-                            logging.error(f'{response.status_code}: {response.text}')
-                            status = False
-                    else:
-                        logging.info(f'service: {service} on b1host: {name} {service_status}')
-                        status = False
-
+        actions = [ 'start', 'stop' ]
+        service_status = {}
+        id = ''
+        pool_id = ''
+        service_type = ''
+        current_state = ''
+        desired_state = ''
+        
+        if action.lower() in actions:
+            # Get required service elements
+            service_status = self.b1host_service_status(service_name=service_name)
+            if service_status:
+                currrent_state = service_status.get('composite_status')
+                desired_state = service_status.get('desired_status')
+                if desired_state == action.lower():
+                    logging.info(f'Service {service_name} already set to {desired_state}')
+                    logging.info(f'Current state: {current_state}')
+                    status = True
                 else:
-                    logging.error(f'b1host {name} not found.')
+                    id = service_status.get('id')
+                    service_type = service_status.get('service_type')
+                    logging.debug(f'Service id = {id}')
+                    logging.debug(f'service status: {service_name} service is {current_state}')
+                    # Check whether service is disabled
+                if 'disabled' not in service_status:
+                    # Build body
+                    body = { 'display_name': service_name, 
+                            'servicelications': [ { 'servicelication_type': service_type,
+                                                'disabled': '0', 
+                                                'state': 
+                                                    { 'desired_state': actions[action] } 
+                                            } ] } 
+                    
+                    # Update desired b1host
+                    response = self.update('/hosts',
+                                        id=id,
+                                        body=json.dumps(body))
+                    if response.status_code in self.return_codes_ok:
+                        logging.debug(f'b1host: {service_name}, service: {service}, service_type: {service_type}')
+                        status = True
+                    else:
+                        logging.error(f'{response.status_code}: {response.text}')
+                        status = False
+                else:
+                    logging.info(f'service: {service} on b1host: {name} {service_status}')
                     status = False
+
             else:
                 logging.error(f'service {service} not supported.')
                 status = False
@@ -908,3 +924,5 @@ class b1infra(bloxone.b1):
             status = False
 
         return status
+    
+    """

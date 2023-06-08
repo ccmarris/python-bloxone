@@ -216,6 +216,8 @@ class b1:
         self.diagnostics_url = self.base_url + '/diagnostic-service/' + self.api_version
         self.ddi_url = self.base_url + '/api/ddi/' + self.api_version
         self.host_url = self.base_url + '/api/host_app/' + self.api_version
+        self.infra_url = self.base_url + '/api/infra/' + self.api_version
+        self.monitoring_url = self.base_url + '/api/monitoring/' + self.api_version
         self.notifications_url = self.base_url + '/atlas-notifications-config/'+ self.api_version
         self.ntp_url = self.base_url + '/api/ntp/' + self.api_version
         self.sw_url = self.base_url + '/api/upgrade_policy/' + self.api_version
@@ -225,7 +227,7 @@ class b1:
         self.tdc_url = self.base_url + '/api/atcfw/' + self.api_version
         self.tdep_url = self.base_url + '/api/atcep/' + self.api_version
         self.tddfp_url = self.base_url + '/api/atcdfp/' + self.api_version
-        self.tdlad_url = self.base_url + '/api/atclad/' + self.api_version
+        self.tdlad_url = self.base_url + '/api/tdlad/' + self.api_version
         self.tide_url = self.base_url + '/tide/api' 
         self.dossier_url = self.base_url + '/tide/api/services/intel/lookup'
         self.threat_enrichment_url = self.base_url + '/tide/threat-enrichment'
