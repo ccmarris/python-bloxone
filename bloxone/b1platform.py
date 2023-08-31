@@ -7,7 +7,7 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20230127
+ Date Last Updated: 20230830
 
  Todo:
 
@@ -44,7 +44,7 @@ import logging
 import json
 
 # ** Global Vars **
-__version__ = '0.9.0'
+__version__ = '0.9.1'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -198,7 +198,7 @@ class b1platform(bloxone.b1oph):
         return response
 
 
-    def audit_users(self, domains=[]):
+    def audit_users(self, domains=[], ignore_service_accounts=True):
         '''
         Audit User Data for non compliant email domains
 
@@ -225,10 +225,15 @@ class b1platform(bloxone.b1oph):
         user_data = response.json()['results']
         for user in user_data:
             valid = False
-            for domain in domains:
-                if domain in user['email']:
-                    valid = True
-                    break
+            if ignore_service_accounts and user['type'] == 'service':
+                valid = True
+            else:
+                # Iterate through domains to check validity
+                for domain in domains:
+                    if domain in user['email']:
+                        valid = True
+                        break
+            # Build list of exceptions
             if not valid:
                 users.append(user)
         
