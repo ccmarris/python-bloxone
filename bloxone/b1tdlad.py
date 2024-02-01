@@ -9,11 +9,11 @@
 
  Author: Chris Marrison
 
- Date Last Updated: 20230509
+ Date Last Updated: 20240201
 
  Todo:
 
- Copyright (c) 2020 - 2023 Chris Marrison / Infoblox
+ Copyright (c) 2020 - 2024 Chris Marrison / Infoblox
 
  Redistribution and use in source and binary forms,
  with or without modification, are permitted provided
@@ -41,13 +41,12 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 __author__ = 'Chris Marrison/Krishna Vasudeva'
 __author_email__ = 'chris@infoblox.com'
 
 import bloxone
 import logging
-import json
 
 # ** Global Vars **
 
@@ -96,3 +95,24 @@ class b1tdlad(bloxone.b1):
         response = self._apiput(url, body)
 
         return response
+    
+
+    def get_lookalikes(self, target_domain='', format='json', **params):
+        '''
+        '''
+        result = None
+
+        url = f'{self.tdlad_url}/lookalikes'
+        if target_domain:
+            filter = f'targetdomain=="{target_domain}"'
+            url = self._add_params(url, _filter=filter)
+            url = self._add_params(url, first_param=False, **params)
+        else:
+            url = self._add_params(url, **params)
+        
+        response = self._apiget(url)
+        if response.status_code in self.return_codes_ok:
+            result = response.json()
+        
+        return result
+

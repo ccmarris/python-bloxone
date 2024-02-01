@@ -25,7 +25,7 @@ setuptools.setup(
         "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.7',
+    python_requires='>=3.8',
     install_requires=[ 'requests', 'pyyaml' ],
     package_data={'bloxone':['documentation/*', 'README.rst', 'LICENSE', 'config.ini', 'CHANGELOG.rst']},
     # data_files=['CHANGELOG.rst','README.rst','LICENSE'],

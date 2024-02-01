@@ -9,7 +9,7 @@
 
  Author: Chris Marrison
 
- Date Last Updated: 20220819
+ Date Last Updated: 20231213
 
  Todo:
 
@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.4.6'
+__version__ = '0.4.7'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -125,7 +125,7 @@ class b1ddi(bloxone.b1):
         return response
 
 
-    def delete(self, objpath, id=""):
+    def delete(self, objpath, id="", recursive_delete=False, **params):
         '''
         Generic delete object wrapper for ddi objects
 
@@ -139,6 +139,12 @@ class b1ddi(bloxone.b1):
         # Build url
         url = self.ddi_url + objpath
         url = self._use_obj_id(url,id=id)
+        if recursive_delete:
+            options = { '_options': 'recurse=true' }
+            url = self._add_params(url, **options)
+            url = self._add_params(url, first_param=False, **params)
+        else:
+            url = self._add_params(url, **params)
         logging.debug("URL: {}".format(url))
 
         # Make API Call

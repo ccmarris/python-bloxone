@@ -7,7 +7,7 @@
 
  Module to provide class hierachy to simplify access to the BloxOne APIs
 
- Date Last Updated: 20230207
+ Date Last Updated: 20240201
 
  Todo:
 
@@ -48,7 +48,7 @@ import os
 import re
 
 # ** Global Vars **
-__version__ = '0.9.0'
+__version__ = '0.9.1'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -231,11 +231,11 @@ class b1:
         self.tide_url = self.base_url + '/tide/api' 
         self.dossier_url = self.base_url + '/tide/api/services/intel/lookup'
         self.threat_enrichment_url = self.base_url + '/tide/threat-enrichment'
+        self.insights_url = self.base_url + '/api/' + self.api_version
 
-        # Reporting URLs
-        self.ti_reports_url = self.base_url + '/api/ti-reports/' + self.api_version
+        # Reporting URLs (undocumented - subject to change)
+        self.ti_reports_url = self.base_url + '/api/reports/' + self.api_version
         self.aggr_reports_url  = self.ti_reports_url + '/activity/aggregations'
-        self.insights_url = self.aggr_reports_url + '/insight'
         self.sec_act_url = self.base_url + '/api/ti-reports/v1/activity/hits'
 
         # List of successful return codes
@@ -253,7 +253,7 @@ class b1:
                    first_param = False
                else:
                    url = url + '&'
-               url = url + param + '=' + params[param]
+               url = url + param + '=' + str(params[param])
         
         return url
 
