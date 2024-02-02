@@ -179,11 +179,16 @@ class b1tdlad(bloxone.b1td):
                     for r in results:
                         src = r.get('params').get('source')
                         data = r.get('data')
+                        # Check data source
                         if src == 'whois':
                             if data.get('response'):
                                 pw = data.get('response').get('parsed_whois')
-                                registrar = pw.get('registrar').get('name')
-                                udate = pw.get('updated_date')
+                                if pw:
+                                    registrar = pw.get('registrar').get('name')
+                                    udate = pw.get('updated_date')
+                                else:
+                                    registrar = None
+                                    udate = None
                             else:
                                 registrar = None
                                 udate = None
@@ -194,7 +199,7 @@ class b1tdlad(bloxone.b1td):
                             ci = data.get('issuer')
                             ssl_chain = data.get('ssl_cert_chain')
                             if ssl_chain:
-                                cert_exp = ssl_chain.get('expires')
+                                cert_exp = ssl_chain[0].get('expires')
                             else:
                                 cert_exp = None
 
