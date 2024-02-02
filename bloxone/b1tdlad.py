@@ -180,15 +180,23 @@ class b1tdlad(bloxone.b1td):
                         src = r.get('params').get('source')
                         data = r.get('data')
                         if src == 'whois':
-                            pw = data.get('response').get('parsed_whois')
-                            registrar = pw.get('registrar').get('name')
-                            udate = pw.get('updated_date')
+                            if data.get('response'):
+                                pw = data.get('response').get('parsed_whois')
+                                registrar = pw.get('registrar').get('name')
+                                udate = pw.get('updated_date')
+                            else:
+                                registrar = None
+                                udate = None
                         elif src == 'geo':
                             country = data.get('country_name')
                             region = data.get('region')
                         elif src == "ssl_cert":
                             ci = data.get('issuer')
-                            cert_exp = data.get('ssl_cert_chain')[0].get('expires')
+                            ssl_chain = data.get('ssl_cert_chain')
+                            if ssl_chain:
+                                cert_exp = ssl_chain.get('expires')
+                            else:
+                                cert_exp = None
 
                     # Update record
                     enrichment = { 'registrar': registrar,
