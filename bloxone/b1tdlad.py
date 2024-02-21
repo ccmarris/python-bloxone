@@ -49,10 +49,6 @@ import bloxone
 import logging
 import csv
 import sys
-try:
-    from rich import print
-except ImportError:
-    logging.debug('Failed to import print from rich module.')
 
 # ** Global Vars **
 
@@ -218,3 +214,10 @@ class b1tdlad(bloxone.b1td):
             logging.error('No lookalike found in record')
 
         return record
+
+
+    def obfiscate_domains(self, data: list, fields: list):
+        '''
+        '''
+
+        return
