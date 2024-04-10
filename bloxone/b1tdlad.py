@@ -215,9 +215,10 @@ class b1tdlad(bloxone.b1td):
 
         return record
 
-
+"""
     def obfiscate_domains(self, data: list, fields: list):
         '''
         '''
 
         return
+"""
