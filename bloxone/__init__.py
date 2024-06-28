@@ -24,4 +24,4 @@ from .dhcputils import *
 
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
-__version__ = '0.9.0'
+__version__ = '0.9.0rc2'

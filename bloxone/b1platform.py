@@ -44,7 +44,7 @@ import logging
 import json
 
 # ** Global Vars **
-__version__ = '0.9.1'
+__version__ = '0.9.2'
 __author__ = 'Chris Marrison'
 __email__ = 'chris@infoblox.com'
 __doc__ = 'https://python-bloxone.readthedocs.io/en/latest/'
@@ -98,7 +98,7 @@ class b1platform(bloxone.b1oph):
                                   _limit=str(limit), **params)
         while isinstance(audit_log, list) and len(audit_log):
             all_logs += audit_log
-            offset += limit + 1
+            offset += limit 
             audit_log = self.auditlog(_offset=str(offset), 
                                       _limit=str(limit), **params)
 
