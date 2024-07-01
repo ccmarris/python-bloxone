@@ -9,7 +9,7 @@
 
  Author: Chris Marrison
 
- Date Last Updated: 20231213
+ Date Last Updated: 20240701
 
  Todo:
 
@@ -41,7 +41,7 @@
 
 ------------------------------------------------------------------------
 '''
-__version__ = '0.4.7'
+__version__ = '0.4.8'
 __author__ = 'Chris Marrison'
 __author_email__ = 'chris@infoblox.com'
 
@@ -262,6 +262,7 @@ class b1ddi(bloxone.b1):
         '''
 
         # Process response
+        id = ""
         if response.status_code in self.return_codes_ok:
             objs = json.loads(response.text)
             # Look for results
@@ -297,7 +298,14 @@ class b1ddi(bloxone.b1):
         Returns:
             id (str):   object id or ""
         '''
-        return self.get(objpath, id=self.get_id(objpath, key=key, value=value))
+        response = None
+        id=self.get_id(objpath, key=key, value=value)
+        if id:
+           response = self.get(objpath, id=id) 
+        else:
+            response = self._not_found_response
+
+        return response
 
 
     def get_option_ids(self, option_space=""):
