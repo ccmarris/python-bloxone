@@ -423,7 +423,7 @@ class b1tdc(bloxone.b1):
         if ids:
             body = { 'ids': ids }
             logging.debug("Body:{}".format(body))
-            response = self.delete('/named_lists', body=json.dumps(body))
+            response = self.delete('/named_lists', id, body=json.dumps(body))
         else:
             logging.warning('No custom lists found')
             response = self._not_found_response('named_list')
